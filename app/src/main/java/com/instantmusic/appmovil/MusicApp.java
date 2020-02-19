@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil.;
+package com.instantmusic.appmovil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -44,7 +43,6 @@ public class MusicApp extends AppCompatActivity {
        // mDbHelper.open();
         //mList = (ListView) findViewById(R.id.list);
         fillData();
-
         registerForContextMenu(mList);
 
     }
