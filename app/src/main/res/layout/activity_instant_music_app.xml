@@ -6,19 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".MusicApp">
 
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="245dp"
+        android:layout_gravity="bottom"
+        android:visibility="invisible"
+        app:layout_anchor="@+id/register"
+        app:layout_anchorGravity="end|top" />
+
     <include
         android:id="@+id/include"
         layout="@layout/content_instant_music_app"
+        android:layout_width="match_parent"
+        android:layout_height="742dp"
+        android:background="@color/backColor" />
+
+    <ImageView
+        android:id="@+id/fondo"
         android:layout_width="wrap_content"
-        android:layout_height="742dp" />
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/fondo"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center"
+        app:srcCompat="@color/design_default_color_primary_dark" />
+
+    <ImageView
+        android:id="@+id/AppIcono"
+        android:layout_width="354dp"
+        android:layout_height="400dp"
+        android:contentDescription="@string/title_activity_instant_music_app"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="top|center"
+        app:srcCompat="@mipmap/unknown" />
+
+    <EditText
+        android:id="@+id/register"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/register"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/register"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="14sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="start|bottom" />
+
+    <EditText
+        android:id="@+id/forget"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/passwordR"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/passwordR"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="14sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|end" />
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/Login"
+        android:layout_width="@dimen/ancho"
         android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:fitsSystemWindows="false"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center">
+        app:layout_anchor="@+id/bottomAppBar"
+        app:layout_anchorGravity="top|center">
 
         <EditText
             android:id="@+id/email"
@@ -32,25 +91,27 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/password"
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:ems="10"
-            android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
+            android:singleLine="true"
+            android:textAllCaps="false"
             tools:targetApi="o" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="354dp"
-        android:layout_height="322dp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="top|center"
-        app:srcCompat="@mipmap/unknown" />
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:text="@string/accept"
+        app:layout_anchor="@+id/bottomAppBar"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

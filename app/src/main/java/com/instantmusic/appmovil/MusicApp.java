@@ -21,8 +21,9 @@ public class MusicApp extends AppCompatActivity {
     private static final int ACTIVITY_CREATE = 0;
     private static final int ACTIVITY_EDIT = 1;
 
-    private static final int SEARCH = Menu.FIRST;
-    private static final int P_LIST = Menu.FIRST + 1;
+    private static final int REGISTER = Menu.FIRST;
+    private static final int RECOVER =
+    private static final int LOGIN = Menu.FIRST + 1;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
@@ -42,15 +43,14 @@ public class MusicApp extends AppCompatActivity {
        // mDbHelper = new NotesDbAdapter(this);
        // mDbHelper.open();
         //mList = (ListView) findViewById(R.id.list);
-        fillData();
-        registerForContextMenu(mList);
+       // registerForContextMenu(mList);
 
     }
 
     /**
      * Populates the list with the notes
      */
-    private void fillData() {
+   /* private void fillData() {
         // Get all of the notes from the database and create the item list
         Cursor mNotesCursor = mDbHelper.fetchAllNotes();
         startManagingCursor(mNotesCursor);
@@ -65,15 +65,15 @@ public class MusicApp extends AppCompatActivity {
         SimpleCursorAdapter notes =
                 new SimpleCursorAdapter(this, R.layout.notes_row, mNotesCursor, from, to);
         mList.setAdapter(notes);
-    }
+    }*/
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    /*public boolean onCreateOptionsMenu(Menu menu) {
         boolean result = super.onCreateOptionsMenu(menu);
         menu.add(Menu.NONE, INSERT_ID, Menu.NONE, R.string.menu_insert);
         return result;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
