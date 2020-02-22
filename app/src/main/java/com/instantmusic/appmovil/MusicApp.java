@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 /**
  * Actividad principal. Muestra el listado de notas.
  */
@@ -27,7 +26,8 @@ public class MusicApp extends AppCompatActivity {
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
-
+    private String mail;
+    private String pass;
     private ListView mList;
 
 
@@ -75,17 +75,20 @@ public class MusicApp extends AppCompatActivity {
         return result;
     }*/
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case REGISTER:
                 registuser();
                 return true;
             case RECOVER:
-                registuser();
+                recover();
                 return true;
             case LOGIN:
-                registuser();
+                mail=(String)getText(R.string.email);
+                pass=(String)getText(R.string.password);
+                if((getText(R.string.email)=="12345@unizar.es")&&(getText(R.string.password)=="54321")){
+                    login();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -129,30 +132,37 @@ public class MusicApp extends AppCompatActivity {
     /**
      * Starts the activity to create a new note
      */
+
     private void registuser() {
         Intent i = new Intent(this, Regist.class);
     }
+
+    private void recover() {
+        Intent i = new Intent(this, Recover.class);
     }
-    private void createNote() {
+    private void login() {
+        Intent i = new Intent(this, Regist.class);
+    }
+   /* private void createNote() {
         Intent i = new Intent(this, NoteEdit.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
-
+*/
     /**
      * Starts the activity to edit an existing note
      * @param position unused
      * @param id identifier of the note that will be edited
      */
-    protected void editNote(int position, long id) {
+    /*protected void editNote(int position, long id) {
         Intent i = new Intent(this, NoteEdit.class);
         i.putExtra(NotesDbAdapter.KEY_ROWID, id);
         startActivityForResult(i, ACTIVITY_EDIT);
-    }
+    }*/
 
 
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         fillData();
-    }
+    }*/
 }
