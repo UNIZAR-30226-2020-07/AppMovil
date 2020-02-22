@@ -41,7 +41,7 @@
         app:layout_anchorGravity="top|center"
         app:srcCompat="@mipmap/unknown" />
 
-    <EditText
+    <EditVText
         android:id="@+id/register"
         android:layout_width="152dp"
         android:layout_height="wrap_content"
