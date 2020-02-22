@@ -22,7 +22,7 @@ public class MusicApp extends AppCompatActivity {
     private static final int ACTIVITY_EDIT = 1;
 
     private static final int REGISTER = Menu.FIRST;
-    private static final int RECOVER =
+    private static final int RECOVER =Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 1;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
@@ -79,7 +79,13 @@ public class MusicApp extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case REGISTER:
-                registuser():
+                registuser();
+                return true;
+            case RECOVER:
+                registuser();
+                return true;
+            case LOGIN:
+                registuser();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -89,13 +95,13 @@ public class MusicApp extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(Menu.NONE, DELETE_ID, Menu.NONE, R.string.menu_delete);
-        menu.add(Menu.NONE, EDIT_ID, Menu.NONE, R.string.menu_edit);
-        menu.add(Menu.NONE, SEND_SMS_ID, Menu.NONE, R.string.menu_send_sms);
-        menu.add(Menu.NONE, SEND_EMAIL_ID, Menu.NONE, R.string.menu_send_email);
+        menu.add(Menu.NONE, REGISTER, Menu.NONE, R.string.register);
+        menu.add(Menu.NONE, RECOVER, Menu.NONE, R.string.passwordR);
+        menu.add(Menu.NONE, LOGIN, Menu.NONE, R.string.accept);
+
     }
 
-    @Override
+  /*  @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case DELETE_ID:
@@ -118,7 +124,7 @@ public class MusicApp extends AppCompatActivity {
                 return true;
         }
         return super.onContextItemSelected(item);
-    }
+    }*/
 
     /**
      * Starts the activity to create a new note
