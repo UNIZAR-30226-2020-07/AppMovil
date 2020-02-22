@@ -78,8 +78,8 @@ public class MusicApp extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case INSERT_ID:
-                createNote();
+            case REGISTER:
+                registuser():
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -123,6 +123,10 @@ public class MusicApp extends AppCompatActivity {
     /**
      * Starts the activity to create a new note
      */
+    private void registuser() {
+        Intent i = new Intent(this, Regist.class);
+    }
+    }
     private void createNote() {
         Intent i = new Intent(this, NoteEdit.class);
         startActivityForResult(i, ACTIVITY_CREATE);
