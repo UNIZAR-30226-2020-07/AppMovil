@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">App Movil</string>
     <string name="title_activity_instant_music_app">InstantMusicApp</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
