@@ -84,11 +84,12 @@ public class MusicApp extends AppCompatActivity {
                 recover();
                 return true;
             case LOGIN:
-                mail=getString(R.string.email);
+               /* mail=getString(R.string.email);
                 pass=getString((R.string.password));
-                if((getText(R.string.email)=="1")&&(getText(R.string.password)=="1")){
+                if((mail=="1")&&(pass=="1")){
                     login();
-                }
+                }*/
+               login();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -135,13 +136,16 @@ public class MusicApp extends AppCompatActivity {
 
     private void registuser() {
         Intent i = new Intent(this, Regist.class);
+        startActivityForResult(i, ACTIVITY_CREATE);
     }
 
     private void recover() {
         Intent i = new Intent(this, Recover.class);
+        startActivityForResult(i, ACTIVITY_CREATE);
     }
     private void login() {
         Intent i = new Intent(this, Login.class);
+        startActivityForResult(i, ACTIVITY_CREATE);
     }
    /* private void createNote() {
         Intent i = new Intent(this, NoteEdit.class);
