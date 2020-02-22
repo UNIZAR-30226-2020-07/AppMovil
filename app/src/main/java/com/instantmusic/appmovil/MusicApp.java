@@ -22,7 +22,7 @@ public class MusicApp extends AppCompatActivity {
 
     private static final int REGISTER = Menu.FIRST;
     private static final int RECOVER =Menu.FIRST+1;
-    private static final int LOGIN = Menu.FIRST + 1;
+    private static final int LOGIN = Menu.FIRST + 2;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
@@ -141,7 +141,7 @@ public class MusicApp extends AppCompatActivity {
         Intent i = new Intent(this, Recover.class);
     }
     private void login() {
-        Intent i = new Intent(this, Regist.class);
+        Intent i = new Intent(this, Login.class);
     }
    /* private void createNote() {
         Intent i = new Intent(this, NoteEdit.class);
