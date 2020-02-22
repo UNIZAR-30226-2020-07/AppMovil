@@ -84,9 +84,9 @@ public class MusicApp extends AppCompatActivity {
                 recover();
                 return true;
             case LOGIN:
-                mail=(String)getText(R.string.email);
-                pass=(String)getText(R.string.password);
-                if((getText(R.string.email)=="12345@unizar.es")&&(getText(R.string.password)=="54321")){
+                mail=getString(R.string.email);
+                pass=getString((R.string.password));
+                if((getText(R.string.email)=="1")&&(getText(R.string.password)=="1")){
                     login();
                 }
                 return true;

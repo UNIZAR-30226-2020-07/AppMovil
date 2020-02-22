@@ -29,8 +29,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/fondo"
         app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center"
-        app:srcCompat="@color/design_default_color_primary_dark" />
+        app:layout_anchorGravity="center" />
 
     <ImageView
         android:id="@+id/AppIcono"
@@ -40,34 +39,6 @@
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="top|center"
         app:srcCompat="@mipmap/unknown" />
-
-    <EditVText
-        android:id="@+id/register"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/register"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:text="@string/register"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="14sp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="start|bottom" />
-
-    <EditText
-        android:id="@+id/forget"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/passwordR"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:text="@string/passwordR"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="14sp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|end" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/Login"
@@ -113,5 +84,34 @@
         android:text="@string/accept"
         app:layout_anchor="@+id/bottomAppBar"
         app:layout_anchorGravity="center" />
+
+    <Button
+        android:id="@+id/forget"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/passwordR"
+        android:importantForAutofill="no"
+        android:text="@string/passwordR"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="14sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|end" />
+
+    <Button
+        android:id="@+id/register"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/register"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:text="@string/register"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="14sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="start|bottom"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

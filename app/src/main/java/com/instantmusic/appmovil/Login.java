@@ -9,7 +9,7 @@ class Login extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instant_music_app_recover);
+        setContentView(R.layout.activity_instant_music_app_login);
 
         // mDbHelper = new NotesDbAdapter(this);
         // mDbHelper.open();

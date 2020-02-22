@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MusicApp">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_instant_music_app"
-        android:layout_width="match_parent"
-        android:layout_height="742dp"
-        android:background="@color/backColor" />
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -23,6 +16,13 @@
         app:layout_anchor="@+id/register"
         app:layout_anchorGravity="end|top" />
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_instant_music_app"
+        android:layout_width="match_parent"
+        android:layout_height="742dp"
+        android:background="@color/backColor" />
+
     <ImageView
         android:id="@+id/fondo"
         android:layout_width="wrap_content"
@@ -31,15 +31,6 @@
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center"
         app:srcCompat="@color/design_default_color_primary_dark" />
-
-    <ImageView
-        android:id="@+id/AppIcono"
-        android:layout_width="354dp"
-        android:layout_height="400dp"
-        android:contentDescription="@string/title_activity_instant_music_app"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center|top"
-        app:srcCompat="@mipmap/unknown" />
 
 
     <Button
@@ -50,5 +41,11 @@
         android:text="@string/accept"
         app:layout_anchor="@+id/bottomAppBar"
         app:layout_anchorGravity="center" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/unknown" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
