@@ -6,15 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".MusicApp">
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="245dp"
-        android:layout_gravity="bottom"
-        android:visibility="invisible"
-        app:layout_anchor="@+id/register"
-        app:layout_anchorGravity="end|top" />
+    <Button
+        android:id="@+id/forget"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/passwordR"
+        android:importantForAutofill="no"
+        android:text="@string/passwordR"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="14sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|end" />
+
+    <Button
+        android:id="@+id/register"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/register"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:text="@string/register"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="14sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="start|bottom" />
+
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:text="@string/accept"
+        app:layout_anchor="@+id/bottomAppBar"
+        app:layout_anchorGravity="center" />
 
     <include
         android:id="@+id/include"
@@ -76,42 +104,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
-        android:id="@+id/accept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/mainColor"
-        android:text="@string/accept"
-        app:layout_anchor="@+id/bottomAppBar"
-        app:layout_anchorGravity="center" />
-
-    <Button
-        android:id="@+id/forget"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/passwordR"
-        android:importantForAutofill="no"
-        android:text="@string/passwordR"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="14sp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|end" />
-
-    <Button
-        android:id="@+id/register"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/register"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:text="@string/register"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="14sp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="start|bottom"/>
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="245dp"
+        android:layout_gravity="bottom"
+        android:visibility="invisible"
+        app:layout_anchor="@+id/register"
+        app:layout_anchorGravity="end|top" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
