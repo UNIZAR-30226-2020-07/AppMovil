@@ -8,8 +8,11 @@ import android.view.MenuItem;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -21,14 +24,13 @@ public class MusicApp extends AppCompatActivity {
     private static final int ACTIVITY_EDIT = 1;
 
     private static final int REGISTER = Menu.FIRST;
-    private static final int RECOVER =Menu.FIRST+1;
+    private static final int RECOVER = Menu.FIRST + 1;
     private static final int LOGIN = Menu.FIRST + 2;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
-    private String mail;
-    private String pass;
-    private ListView mList;
+    private EditText mail;
+    private EditText pass;
 
 
     /**
@@ -40,10 +42,10 @@ public class MusicApp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
 
-       // mDbHelper = new NotesDbAdapter(this);
-       // mDbHelper.open();
+        // mDbHelper = new NotesDbAdapter(this);
+        // mDbHelper.open();
         //mList = (ListView) findViewById(R.id.list);
-       // registerForContextMenu(mList);
+        // registerForContextMenu(mList);
 
     }
 
@@ -66,43 +68,52 @@ public class MusicApp extends AppCompatActivity {
                 new SimpleCursorAdapter(this, R.layout.notes_row, mNotesCursor, from, to);
         mList.setAdapter(notes);
     }*/
-
-
-    @Override
-    /*public boolean onCreateOptionsMenu(Menu menu) {
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         boolean result = super.onCreateOptionsMenu(menu);
-        menu.add(Menu.NONE, INSERT_ID, Menu.NONE, R.string.menu_insert);
-        return result;
-    }*/
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case REGISTER:
-                registuser();
-                return true;
-            case RECOVER:
-                recover();
-                return true;
-            case LOGIN:
-               /* mail=getString(R.string.email);
-                pass=getString((R.string.password));
-                if((mail=="1")&&(pass=="1")){
-                    login();
-                }*/
-               login();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
         menu.add(Menu.NONE, REGISTER, Menu.NONE, R.string.register);
         menu.add(Menu.NONE, RECOVER, Menu.NONE, R.string.passwordR);
         menu.add(Menu.NONE, LOGIN, Menu.NONE, R.string.accept);
+        return result;
+    }*/
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case REGISTER:
+                Button confirmButton = findViewById(R.id.register);
+                confirmButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        registuser();
+                    }
+                });
+                return true;
+            case RECOVER:
+                Button confirmButton2 = findViewById(R.id.forget);
+                confirmButton2.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        recover();
+                    }
+                });
+
+                return true;
+            case LOGIN:
+                Button confirmButton3 = findViewById(R.id.accept);
+                mail=findViewById(R.id.email);
+                pass=findViewById(R.id.password);
+
+                confirmButton3.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        if ((mail.getText().toString() == "1") && (pass.getText().toString() == "1")) {
+                            login();
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    }
+                });
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
   /*  @Override
@@ -143,6 +154,7 @@ public class MusicApp extends AppCompatActivity {
         Intent i = new Intent(this, Recover.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
+
     private void login() {
         Intent i = new Intent(this, Login.class);
         startActivityForResult(i, ACTIVITY_CREATE);
@@ -164,9 +176,9 @@ public class MusicApp extends AppCompatActivity {
     }*/
 
 
-   /* @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        fillData();
-    }*/
+
+    }
 }

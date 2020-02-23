@@ -6,57 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".MusicApp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title" />
-
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_instant_music_app"
-        android:layout_width="match_parent"
-        android:layout_height="742dp"
-        android:background="@color/backColor" />
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="245dp"
-        android:layout_gravity="bottom"
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="66dp"
+        android:layout_height="54dp"
+        android:layout_weight="1"
         android:visibility="invisible"
-        app:layout_anchor="@+id/register"
+        app:layout_anchor="@+id/imageView"
         app:layout_anchorGravity="end|top" />
 
-    <ImageView
-        android:id="@+id/fondo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/fondo"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center"
-        app:srcCompat="@color/design_default_color_primary_dark" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="690dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="@string/search" />
 
-    <Button
-        android:id="@+id/accept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/mainColor"
-        android:text="@string/accept"
-        app:layout_anchor="@+id/bottomAppBar"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/searchResults"
+        android:layout_width="match_parent"
+        android:layout_height="620dp"
+        android:layout_weight="1"
+        app:layout_anchor="@+id/linearLayout"
         app:layout_anchorGravity="center" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
