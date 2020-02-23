@@ -45,6 +45,6 @@ public class Login extends AppCompatActivity {
     private void searchCancion() {
         cancion=findViewById(R.id.searchbar);
         String cancionSearch=cancion.toString();
-        System.out.println(cancionSearch);
+        System.out.print(cancionSearch);
     }
 }
