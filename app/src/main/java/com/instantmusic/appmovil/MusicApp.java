@@ -21,11 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MusicApp extends AppCompatActivity {
 
     private static final int ACTIVITY_CREATE = 0;
-    private static final int ACTIVITY_EDIT = 1;
-
-    private static final int REGISTER = Menu.FIRST;
-    private static final int RECOVER = Menu.FIRST + 1;
-    private static final int LOGIN = Menu.FIRST + 2;
+   //private static final int REGISTER = Menu.FIRST;
+   //private static final int RECOVER = Menu.FIRST + 1;
+   //private static final int LOGIN = Menu.FIRST + 2;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
@@ -41,7 +39,30 @@ public class MusicApp extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-
+        Button confirmButton = findViewById(R.id.register);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                registuser();
+            }
+        });
+        Button confirmButton2 = findViewById(R.id.forget);
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                recover();
+            }
+        });
+        Button confirmButton3 = (Button)findViewById(R.id.accept);
+        mail=findViewById(R.id.email);
+        pass=findViewById(R.id.password);
+        confirmButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if ((mail.getText().toString() == "1") && (pass.getText().toString() == "1")) {
+                    login();
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
         // mDbHelper = new NotesDbAdapter(this);
         // mDbHelper.open();
         //mList = (ListView) findViewById(R.id.list);
@@ -76,46 +97,6 @@ public class MusicApp extends AppCompatActivity {
         menu.add(Menu.NONE, LOGIN, Menu.NONE, R.string.accept);
         return result;
     }*/
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case REGISTER:
-                Button confirmButton = findViewById(R.id.register);
-                confirmButton.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                        registuser();
-                    }
-                });
-                return true;
-            case RECOVER:
-                Button confirmButton2 = findViewById(R.id.forget);
-                confirmButton2.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                        recover();
-                    }
-                });
-
-                return true;
-            case LOGIN:
-                Button confirmButton3 = findViewById(R.id.accept);
-                mail=findViewById(R.id.email);
-                pass=findViewById(R.id.password);
-
-                confirmButton3.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                        if ((mail.getText().toString() == "1") && (pass.getText().toString() == "1")) {
-                            login();
-                            setResult(RESULT_OK);
-                            finish();
-                        }
-                    }
-                });
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
   /*  @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
