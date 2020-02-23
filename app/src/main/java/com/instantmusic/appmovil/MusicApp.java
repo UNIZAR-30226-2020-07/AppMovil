@@ -51,15 +51,26 @@ public class MusicApp extends AppCompatActivity {
                 recover();
             }
         });
-        Button confirmButton3 = (Button)findViewById(R.id.accept);
+        Button confirmButton3 =findViewById(R.id.accept);
         mail=findViewById(R.id.email);
         pass=findViewById(R.id.password);
-        confirmButton3.setOnClickListener(new View.OnClickListener() {
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                System.out.println("Register");
+                registuser();
+            }
+        });
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                System.out.println("Recover");
+                recover();
+            }
+        }); confirmButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                System.out.println(mail.getText().toString());
                 if ((mail.getText().toString() == "1") && (pass.getText().toString() == "1")) {
                     login();
-                    setResult(RESULT_OK);
-                    finish();
                 }
             }
         });
