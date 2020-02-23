@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private ListView mList;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER =Menu.FIRST+1;

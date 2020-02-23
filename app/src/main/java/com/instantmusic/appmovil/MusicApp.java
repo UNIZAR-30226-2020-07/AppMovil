@@ -68,8 +68,8 @@ public class MusicApp extends AppCompatActivity {
             }
         }); confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                System.out.println(mail.getText().toString());
-                if ((mail.getText().toString() == "1") && (pass.getText().toString() == "1")) {
+                System.out.println(pass.getText().toString());
+                if ((mail.getText().toString().equals("1")) && (pass.getText().toString().equals("1"))) {
                     login();
                 }
             }
