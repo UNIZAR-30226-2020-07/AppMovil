@@ -10,7 +10,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -23,14 +24,14 @@
                 android:layout_width="350dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
-                android:text="@string/search" />
+                android:hint="@string/search" />
 
             <Button
-                android:id="@+id/searchButton"
+                android:id="@+id/search"
                 android:layout_width="65dp"
                 android:layout_height="55dp"
                 android:layout_weight="1"
-                android:background="@android:drawable/ic_menu_search"
+                android:background="@android:drawable/ic_search_category_default"
                 android:visibility="invisible" />
 
         </LinearLayout>
@@ -38,7 +39,7 @@
         <ListView
             android:id="@+id/searchResults"
             android:layout_width="match_parent"
-            android:layout_height="620dp"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
         </ListView>
