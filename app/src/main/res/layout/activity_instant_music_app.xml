@@ -23,13 +23,14 @@
 
         <TextView
             android:id="@+id/appName"
-            android:layout_width="188dp"
-            android:layout_height="wrap_content"
+            android:layout_width="175dp"
+            android:layout_height="40dp"
             android:ems="10"
             android:text="@string/app_name"
-            android:textAllCaps="true"
+            android:textAllCaps="false"
+            android:textColor="#000000"
             android:textSize="25sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/Login"
@@ -48,7 +49,10 @@
                 android:ems="10"
                 android:hint="@string/email"
                 android:importantForAutofill="no"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/password"
@@ -61,6 +65,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textAllCaps="false"
+                android:textSize="20sp"
                 tools:targetApi="o" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -88,7 +93,7 @@
 
             <Button
                 android:id="@+id/register"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="152dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -106,7 +111,7 @@
 
             <Button
                 android:id="@+id/forget"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="152dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
