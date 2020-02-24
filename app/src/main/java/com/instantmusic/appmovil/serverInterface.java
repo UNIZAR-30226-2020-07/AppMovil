@@ -3,9 +3,9 @@ package com.instantmusic.appmovil;
 
 
 public interface serverInterface {
-    void searchCancion(String song);
-    void registuser(String mail,String pass);
-    void recover(String mail);
-    void login(String mail,String pass);
+    int searchCancion(String song);
+    int registuser(String mail,String pass);
+    int recover(String mail);
+    int login(String mail,String pass);
 
 }
