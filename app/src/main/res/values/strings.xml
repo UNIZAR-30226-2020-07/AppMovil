@@ -2,6 +2,7 @@
     <string name="app_name">Instant Music</string>
     <string name="title_activity_instant_music_app">InstantMusicApp</string>
     <string name="password">Password</string>
+    <string name="Correo_electronico">Correo electrónico</string>
     <string name="email">Email</string>
     <string name="fondo">FondoApp</string>
     <string name="icono">InstantMusicIcono</string>
