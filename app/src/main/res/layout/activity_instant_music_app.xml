@@ -44,24 +44,26 @@
                 app:srcCompat="@mipmap/unknown" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/Enunciado1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@android:string/defaultMsisdnAlphaTag"
-            android:inputType="textPersonName"
-            android:text="@string/Correo_electronico"
-            android:textSize="24sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/Login"
-            android:layout_width="@dimen/ancho"
-            android:layout_height="wrap_content"
-            android:background="@color/mainColor"
-            android:fitsSystemWindows="false"
-            android:gravity="start"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            <EditText
+                android:id="@+id/Enunciado1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/Correo_electronico"
+                android:editable="false"
+                android:ems="10"
+                android:hint="@android:string/defaultMsisdnAlphaTag"
+                android:inputType="textShortMessage|textPersonName"
+                android:text="@string/Correo_electronico"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="11dp" />
 
             <EditText
                 android:id="@+id/email"
@@ -79,11 +81,23 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="21dp" />
+
+            <EditText
+                android:id="@+id/Enunciado2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/Correo_electronico"
+                android:editable="false"
+                android:ems="10"
+                android:hint="@android:string/defaultMsisdnAlphaTag"
+                android:inputType="textPersonName"
+                android:text="@string/Contrasenya"
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="11dp" />
 
             <EditText
                 android:id="@+id/password"
@@ -99,58 +113,58 @@
                 android:textSize="20sp"
                 tools:targetApi="o" />
 
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <Space
-            android:id="@+id/space"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
-
-        <Button
-            android:id="@+id/accept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/mainColor"
-            android:text="@string/accept" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
 
             <Button
-                android:id="@+id/register"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="152dp"
+                android:id="@+id/accept"
+                android:layout_width="335dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/register"
-                android:importantForAutofill="no"
-                android:inputType="none"
-                android:text="@string/register"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="14sp" />
+                android:layout_gravity="center"
+                android:background="@color/mainColor"
+                android:text="@string/accept" />
 
             <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="11dp" />
 
-            <Button
-                android:id="@+id/forget"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="152dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/passwordR"
-                android:importantForAutofill="no"
-                android:text="@string/passwordR"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/register"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/register"
+                    android:importantForAutofill="no"
+                    android:inputType="none"
+                    android:text="@string/register"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="14sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/forget"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/passwordR"
+                    android:importantForAutofill="no"
+                    android:text="@string/passwordR"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
