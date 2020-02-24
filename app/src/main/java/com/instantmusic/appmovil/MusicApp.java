@@ -12,15 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
+import com.instantmusic.appmovil.localServer;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Actividad principal. Muestra el listado de notas.
  */
-public class MusicApp extends AppCompatActivity {
+public class MusicApp  extends AppCompatActivity  {
 
-    private static final int ACTIVITY_CREATE = 0;
    private static final int REGISTER = Menu.FIRST;
    private static final int RECOVER = Menu.FIRST + 1;
    private static final int LOGIN = Menu.FIRST + 2;
@@ -29,7 +28,7 @@ public class MusicApp extends AppCompatActivity {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
-
+    private serverInterface server;
 
     /**
      * Called when the activity is first created.
@@ -39,38 +38,26 @@ public class MusicApp extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
+        mail=findViewById(R.id.email);
+        pass=findViewById(R.id.password);
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                registuser();
+                server.registuser(mail.getText().toString(),pass.getText().toString());
             }
         });
         Button confirmButton2 = findViewById(R.id.forget);
         confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                recover();
+                server.recover(mail.getText().toString());
             }
         });
         Button confirmButton3 =findViewById(R.id.accept);
-        mail=findViewById(R.id.email);
-        pass=findViewById(R.id.password);
-
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                registuser();
-            }
-        });
-        confirmButton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                recover();
-            }
-        }); confirmButton3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                if ((mail.getText().toString().equals("1")) && (pass.getText().toString().equals("1"))) {
-                    login();
+                if(server.login(mail.getText().toString(),pass.getText().toString())==0){
+                    Intent i = new Intent(this, Login.class);
                 }
             }
         });
@@ -133,30 +120,11 @@ public class MusicApp extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }*/
 
-    /**
+    /*
      * Starts the activity to create a new note
      */
 
-    private void registuser() {
-        Intent i = new Intent(this, Regist.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-    private void recover() {
-        Intent i = new Intent(this, Recover.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-    private void login() {
-        Intent i = new Intent(this, Login.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-   /* private void createNote() {
-        Intent i = new Intent(this, NoteEdit.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-*/
-    /**
+    /*
      * Starts the activity to edit an existing note
      * @param position unused
      * @param id identifier of the note that will be edited
