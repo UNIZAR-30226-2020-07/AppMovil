@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
+import com.instantmusic.appmovil.localServer;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Actividad principal. Muestra el listado de notas.
  */
-public class MusicApp extends AppCompatActivity {
+public class MusicApp  extends AppCompatActivity  {
 
     private static final int ACTIVITY_CREATE = 0;
    private static final int REGISTER = Menu.FIRST;
@@ -42,7 +42,7 @@ public class MusicApp extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                registuser();
+                registuser(mail.getText().toString(),pass.getText().toString());
             }
         });
         Button confirmButton2 = findViewById(R.id.forget);
@@ -55,10 +55,10 @@ public class MusicApp extends AppCompatActivity {
         mail=findViewById(R.id.email);
         pass=findViewById(R.id.password);
 
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                registuser();
+                recover(mail.getText().toString());
             }
         });
         confirmButton2.setOnClickListener(new View.OnClickListener() {
@@ -136,25 +136,6 @@ public class MusicApp extends AppCompatActivity {
     /**
      * Starts the activity to create a new note
      */
-
-    private void registuser() {
-        Intent i = new Intent(this, Regist.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-    private void recover() {
-        Intent i = new Intent(this, Recover.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-    private void login() {
-        Intent i = new Intent(this, Login.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-   /* private void createNote() {
-        Intent i = new Intent(this, NoteEdit.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
 */
     /**
      * Starts the activity to edit an existing note

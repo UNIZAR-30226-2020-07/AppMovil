@@ -39,16 +39,16 @@ public class Login extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case SEARCH:
-                searchCancion();
+                cancion=findViewById(R.id.searchbar);
+                searchCancion(cancion.getText().toString();
                 return true;
             
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void searchCancion() {
+    private void searchCancion(String song) {
         cancion=findViewById(R.id.searchbar);
-        String cancionSearch=cancion.toString();
-        System.out.print(cancionSearch);
+
     }
 }
