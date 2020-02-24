@@ -29,7 +29,7 @@ public class MusicApp  extends AppCompatActivity  {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
-
+    private serverInterface server;
 
     /**
      * Called when the activity is first created.
@@ -39,38 +39,37 @@ public class MusicApp  extends AppCompatActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
+        mail=findViewById(R.id.email);
+        pass=findViewById(R.id.password);
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                registuser(mail.getText().toString(),pass.getText().toString());
+                server.registuser(mail.getText().toString(),pass.getText().toString());
             }
         });
         Button confirmButton2 = findViewById(R.id.forget);
         confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                recover();
+                server.recover(mail.getText().toString());
             }
         });
         Button confirmButton3 =findViewById(R.id.accept);
-        mail=findViewById(R.id.email);
-        pass=findViewById(R.id.password);
-
         confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                recover(mail.getText().toString());
+               server.recover(mail.getText().toString());
             }
         });
         confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                recover();
+                server.recover(mail.getText().toString());
             }
         }); confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
                 if ((mail.getText().toString().equals("1")) && (pass.getText().toString().equals("1"))) {
-                    login();
+                    server.login(mail.getText().toString(),pass.getText().toString());
                 }
             }
         });
@@ -136,7 +135,7 @@ public class MusicApp  extends AppCompatActivity  {
     /**
      * Starts the activity to create a new note
      */
-*/
+
     /**
      * Starts the activity to edit an existing note
      * @param position unused

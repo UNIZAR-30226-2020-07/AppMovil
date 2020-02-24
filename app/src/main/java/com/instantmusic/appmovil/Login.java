@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
+import com.instantmusic.appmovil.localServer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class Login extends AppCompatActivity {
     private static final int RECOVER =Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
     private EditText cancion;
-
+    private localServer server;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -32,7 +32,8 @@ public class Login extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                searchCancion();
+                cancion.findViewById(R.id.searchbar);
+                server.searchCancion(cancion.getText().toString());
             }
         });
     }
@@ -40,15 +41,10 @@ public class Login extends AppCompatActivity {
         switch (item.getItemId()) {
             case SEARCH:
                 cancion=findViewById(R.id.searchbar);
-                searchCancion(cancion.getText().toString();
+                server.searchCancion(cancion.getText().toString());
                 return true;
             
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void searchCancion(String song) {
-        cancion=findViewById(R.id.searchbar);
-
     }
 }
