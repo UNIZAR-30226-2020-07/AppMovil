@@ -132,11 +132,11 @@ public class MusicApp  extends AppCompatActivity  {
         return super.onContextItemSelected(item);
     }*/
 
-    /**
+    /*
      * Starts the activity to create a new note
      */
 
-    /**
+    /*
      * Starts the activity to edit an existing note
      * @param position unused
      * @param id identifier of the note that will be edited
