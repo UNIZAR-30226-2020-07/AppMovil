@@ -10,12 +10,15 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class Login extends AppCompatActivity {
-    private ListView mList;
+    private ListView resList;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER =Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
     private EditText cancion;
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -23,8 +26,9 @@ public class Login extends AppCompatActivity {
 
         /*mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();*/
-        mList =findViewById(R.id.searchResults);
-        registerForContextMenu(mList);
+        resList =findViewById(R.id.searchResults);
+
+        registerForContextMenu(resList);
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -32,7 +36,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-  /*  public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case SEARCH:
                 searchCancion();
@@ -40,7 +44,7 @@ public class Login extends AppCompatActivity {
             
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     private void searchCancion() {
         cancion=findViewById(R.id.searchbar);
