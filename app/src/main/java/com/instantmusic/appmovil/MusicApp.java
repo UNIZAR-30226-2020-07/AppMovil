@@ -21,9 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MusicApp extends AppCompatActivity {
 
     private static final int ACTIVITY_CREATE = 0;
-   //private static final int REGISTER = Menu.FIRST;
-   //private static final int RECOVER = Menu.FIRST + 1;
-   //private static final int LOGIN = Menu.FIRST + 2;
+   private static final int REGISTER = Menu.FIRST;
+   private static final int RECOVER = Menu.FIRST + 1;
+   private static final int LOGIN = Menu.FIRST + 2;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
@@ -57,18 +57,18 @@ public class MusicApp extends AppCompatActivity {
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                System.out.println("Register");
+
                 registuser();
             }
         });
         confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                System.out.println("Recover");
+
                 recover();
             }
         }); confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                System.out.println(pass.getText().toString());
+
                 if ((mail.getText().toString().equals("1")) && (pass.getText().toString().equals("1"))) {
                     login();
                 }
@@ -100,14 +100,14 @@ public class MusicApp extends AppCompatActivity {
                 new SimpleCursorAdapter(this, R.layout.notes_row, mNotesCursor, from, to);
         mList.setAdapter(notes);
     }*/
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         boolean result = super.onCreateOptionsMenu(menu);
         menu.add(Menu.NONE, REGISTER, Menu.NONE, R.string.register);
         menu.add(Menu.NONE, RECOVER, Menu.NONE, R.string.passwordR);
         menu.add(Menu.NONE, LOGIN, Menu.NONE, R.string.accept);
         return result;
-    }*/
+    }
   /*  @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
