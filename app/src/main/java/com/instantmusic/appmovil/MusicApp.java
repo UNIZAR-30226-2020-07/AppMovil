@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MusicApp  extends AppCompatActivity  {
 
+    private static final int ACTIVITY_CREATE = 0;
    private static final int REGISTER = Menu.FIRST;
    private static final int RECOVER = Menu.FIRST + 1;
    private static final int LOGIN = Menu.FIRST + 2;
@@ -53,11 +54,22 @@ public class MusicApp  extends AppCompatActivity  {
             }
         });
         Button confirmButton3 =findViewById(R.id.accept);
-         confirmButton3.setOnClickListener(new View.OnClickListener() {
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                if(server.login(mail.getText().toString(),pass.getText().toString())==0){
-                    Intent i = new Intent(this, Login.class);
+               server.recover(mail.getText().toString());
+            }
+        });
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                server.recover(mail.getText().toString());
+            }
+        }); confirmButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                if ((mail.getText().toString().equals("1")) && (pass.getText().toString().equals("1"))) {
+                    server.login(mail.getText().toString(),pass.getText().toString());
                 }
             }
         });
