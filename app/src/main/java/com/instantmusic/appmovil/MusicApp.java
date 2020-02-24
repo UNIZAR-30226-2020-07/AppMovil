@@ -136,7 +136,6 @@ public class MusicApp  extends AppCompatActivity  {
     /**
      * Starts the activity to create a new note
      */
-*/
     /**
      * Starts the activity to edit an existing note
      * @param position unused

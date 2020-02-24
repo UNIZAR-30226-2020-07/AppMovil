@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
         switch (item.getItemId()) {
             case SEARCH:
                 cancion=findViewById(R.id.searchbar);
-                searchCancion(cancion.getText().toString();
+                searchCancion(cancion.getText().toString());
                 return true;
             
         }
