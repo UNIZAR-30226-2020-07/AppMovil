@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import com.instantmusic.appmovil.serverInterface;
+import com.instantmusic.appmovil.localServer;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -136,22 +136,6 @@ public class MusicApp  extends AppCompatActivity  {
     /**
      * Starts the activity to create a new note
      */
-
-
-
-    private void recover() {
-        Intent i = new Intent(this, Recover.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-    private void login() {
-        Intent i = new Intent(this, Login.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
-   /* private void createNote() {
-        Intent i = new Intent(this, NoteEdit.class);
-        startActivityForResult(i, ACTIVITY_CREATE);
-    }
 */
     /**
      * Starts the activity to edit an existing note
