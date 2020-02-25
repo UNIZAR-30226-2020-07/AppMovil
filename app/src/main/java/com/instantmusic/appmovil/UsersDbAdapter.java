@@ -123,14 +123,19 @@ public class UsersDbAdapter {
     }
 
     public Cursor checkUser(String email) throws SQLException {
-        String[] columns =new String[]{KEY_MAIL, KEY_PASS,KEY_PLAYLISTS};
-        Cursor mDbCursor=
-                mDb.query(true,DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
-                        null, null, null, null);
-        if (mDbCursor != null) {
-            mDbCursor.moveToFirst();
+        if (email == null) {
+            return null;
+        } else {
+            String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_PLAYLISTS};
+            Cursor mDbCursor =
+                    mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
+                            null, null, null, null);
+            if (mDbCursor != null) {
+                mDbCursor.moveToFirst();
+                if (mDbCursor.getCount() == 0) mDbCursor = null;
+            }
+            return mDbCursor;
         }
-        return mDbCursor;
     }
 
     /*
@@ -193,7 +198,8 @@ public class UsersDbAdapter {
                     mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
                                     KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_ARTIST + "=" + shit, null,
                             null, null, null, null);
-        }if (mCursor == null) {
+        }
+        if (mCursor == null) {
             mCursor =
                     mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
                                     KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_ARTIST + "=" + shit, null,
@@ -213,18 +219,21 @@ public class UsersDbAdapter {
      * @param playlists  value to set User playlists to
      * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updateUser(String mail, String pass,String song, String playlists) {
+    public boolean updateUser(String mail, String pass, String song, String playlists) {
         ContentValues args = new ContentValues();
-        if(mail!=null) {
+        if (mail != null) {
             args.put(KEY_MAIL, mail);
 
-        }if(pass!=null) {
+        }
+        if (pass != null) {
             args.put(KEY_PASS, pass);
 
-        }if(song!=null) {
+        }
+        if (song != null) {
             args.put(KEY_NAME, song);
 
-        }if(playlists!=null) {
+        }
+        if (playlists != null) {
             args.put(KEY_PLAYLISTS, playlists);
 
         }
@@ -317,11 +326,11 @@ public class UsersDbAdapter {
      * values passed in
      *
      * @param mail id of User to update
-     * @param name  value to set pass name to
+     * @param name value to set pass name to
      * @return true if the User was successfully updated, false otherwise
      */
     public boolean updatepass(long mail, String name) {
-        if(name == null || name.isEmpty()) return false;
+        if (name == null || name.isEmpty()) return false;
 
         ContentValues args = new ContentValues();
         args.put(KEY_NAME, name);
