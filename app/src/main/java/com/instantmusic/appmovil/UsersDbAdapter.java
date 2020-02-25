@@ -38,7 +38,7 @@ public class UsersDbAdapter {
      */
     private static final String DATABASE_CREATE_USERS =
             "create table Users (_id integer primary key autoincrement, "
-                    + "Mail text not null, PLAYLISTS text not null, pass integer);";
+                    + "Mail text not null, pass integer,PLAYLISTS text not null);";
     private static final String DATABASE_CREATE_SONGS =
             "create table Songs (_id integer primary key autoincrement, "
                     + "name text not null);";
@@ -105,7 +105,7 @@ public class UsersDbAdapter {
     }
 
 
-    /**
+    /*
      * Create a new User using the Mail and PLAYLISTS provided. If the User is
      * successfully created return the new mail for that User, otherwise return
      * a -1 to indicate failure.
@@ -126,6 +126,13 @@ public class UsersDbAdapter {
         return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
     }
 
+    public Cursor checkUser(String email) {
+        Cursor mCursor =
+                mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
+                                KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_NAME + "=" + email, null,
+                        null, null, null, null);
+        return mCursor;
+    }
     /**
      * Delete the User with the given mail
      *
@@ -136,7 +143,7 @@ public class UsersDbAdapter {
         return mDb.delete(DATABASE_TABLE_USERS, KEY_MAIL + "=" + mail, null) > 0;
     }
 
-    /**
+    /*
      * Return a Cursor over the list of all Users in the database.
      * Can be sorted by a data column (KEY_MAIL, KEY_PASS, ...)
      * Can be filtered by pass name
@@ -169,7 +176,7 @@ public class UsersDbAdapter {
         }
     }*/
 
-    /**
+    /*
      * Return a Cursor positioned at the User that matches the given mail
      *
      * @param mail id of User to retrieve
@@ -196,7 +203,7 @@ public class UsersDbAdapter {
 
     }
 
-    /**
+    /*
      * Update the User using the details provided. The User to be updated is
      * specified using the mail, and it is altered to use the Mail and PLAYLISTS
      * values passed in

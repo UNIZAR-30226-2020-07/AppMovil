@@ -18,6 +18,9 @@ public class localServer implements serverInterface {
         localDb.createUser(mail,pass);
         return 0;
     }
+    public Cursor checkUser(String mail) {
+        return localDb.checkUser(mail);
+    }
     public int recover(String mail) {
         return 0;
     }public int login(String mail,String pass) {
