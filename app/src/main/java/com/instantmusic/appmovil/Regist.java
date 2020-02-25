@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -72,6 +73,8 @@ public class Regist extends AppCompatActivity {
 
         if ( seguir ) { // Caso en el que no hay ningun error
             server.registUser(email,password);
+            Intent i = new Intent(this, Login.class);
+            startActivityForResult(i, 0);
         }
     }
 }

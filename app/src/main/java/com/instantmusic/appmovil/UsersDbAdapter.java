@@ -116,8 +116,6 @@ public class UsersDbAdapter {
      * @return mail or -1 if failed
      */
     public long createUser(String Mail, String pass) {
-        if (Mail == null || Mail.isEmpty() ||  (pass != null && pass !=null )) return -1;
-
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_MAIL, Mail);
         initialValues.put(KEY_PLAYLISTS, "");
@@ -127,13 +125,12 @@ public class UsersDbAdapter {
     }
 
     public Cursor checkUser(String email) {
-        Cursor mCursor =
-                mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
-                                KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_NAME + "=" + email, null,
+        return mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
+                        KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_MAIL + "=" + email, null,
                         null, null, null, null);
-        return mCursor;
     }
-    /**
+
+    /*
      * Delete the User with the given mail
      *
      * @param mail id of User to delete

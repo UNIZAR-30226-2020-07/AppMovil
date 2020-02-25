@@ -5,8 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public interface serverInterface  {
+    void openBBD();
     Cursor searchShit(String shit);
-    int registUser(String mail,String pass);
+    long registUser(String mail,String pass);
     int recover(String mail);
     Cursor checkUser(String email);
     int login(String mail,String pass);
