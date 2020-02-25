@@ -58,7 +58,7 @@ public class Regist extends AppCompatActivity {
             emailAux.setVisibility(View.VISIBLE);
             seguir = false;
         }
-        else if ( server.checkUser(email) !=0 ) { // Caso en el que el email este en uso ya
+        else if ( server.checkUser(email) ==0 ) { // Caso en el que el email este en uso ya
             texto = "That email is already registered";
             emailAux.setText(texto);
             emailAux.setTextColor(Color.RED);
@@ -72,8 +72,7 @@ public class Regist extends AppCompatActivity {
 
         if ( seguir ) { // Caso en el que no hay ningun error
             server.registUser(email,password);
-            Intent i = new Intent(this, Login.class);
-            startActivityForResult(i, 0);
+            Intent i = new Intent(this, MusicApp.class);
         }
     }
 }
