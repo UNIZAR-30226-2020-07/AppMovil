@@ -23,12 +23,11 @@ public class Login extends AppCompatActivity {
     private static final int RECOVER = Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
     private EditText shit;
-    private serverInterface server = new localServer();
+    private serverInterface server=new localServer(this);
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
-
         /*mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();*/
         resList =findViewById(R.id.searchResults);

@@ -44,9 +44,8 @@ public class localServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
     private UsersDbAdapter localDb;
 
-    public void openBBD() {
-        localDb = new UsersDbAdapter(this);
-        localDb.open();
+    localServer(Context ctx) {
+        this.localDb=new UsersDbAdapter(ctx);
     }
 
     public Cursor searchShit(String shit) {

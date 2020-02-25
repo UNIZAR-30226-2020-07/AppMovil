@@ -15,7 +15,7 @@ public class Regist extends AppCompatActivity {
     private EditText pass;
     private TextView passAux;
     private TextView emailAux;
-    private serverInterface server = new localServer();
+    private serverInterface server = new localServer(this);
 
     public void onCreate(Bundle savedInstanceState) {
 
