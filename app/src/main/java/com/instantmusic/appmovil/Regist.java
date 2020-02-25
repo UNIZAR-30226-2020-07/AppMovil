@@ -1,18 +1,10 @@
 package com.instantmusic.appmovil;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.database.Cursor;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +36,7 @@ public class Regist extends AppCompatActivity {
         boolean seguir = true;
         mail = findViewById(R.id.emailSign);
         pass = findViewById(R.id.passwordSign);
-        String texto = "";
+        String texto;
         String email = mail.getText().toString();
         String password = pass.getText().toString();
         emailAux = findViewById(R.id.emailTip);
