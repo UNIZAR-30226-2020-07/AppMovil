@@ -125,11 +125,10 @@ public class UsersDbAdapter {
     public Cursor checkUser(String email) throws SQLException {
         String[] columns =new String[]{KEY_MAIL, KEY_PASS,KEY_PLAYLISTS};
         Cursor mDbCursor=
-                mDb.query(true,DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?" + email, null,
+                mDb.query(true,DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
                         null, null, null, null);
         if (mDbCursor != null) {
             mDbCursor.moveToFirst();
-            if (mDbCursor.getCount() == 0) mDbCursor = null;
         }
         return mDbCursor;
     }
