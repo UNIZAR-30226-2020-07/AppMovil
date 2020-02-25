@@ -1,6 +1,7 @@
 package com.instantmusic.appmovil;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -47,8 +48,7 @@ public class Regist extends AppCompatActivity {
             passAux = findViewById(R.id.passwordTip);
             String texto = "Invalid password. Use at least 8 characters";
             passAux.setText(texto);
-            passAux.setTextColor(0xFA3021);
+            passAux.setTextColor(Color.RED);
         }
-
     }
 }
