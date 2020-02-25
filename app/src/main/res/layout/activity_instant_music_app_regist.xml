@@ -6,49 +6,167 @@
     android:layout_height="match_parent"
     tools:context=".MusicApp">
 
-    <Button
-        android:id="@+id/searchButton3"
-        android:layout_width="66dp"
-        android:layout_height="54dp"
-        android:layout_weight="1"
-        android:visibility="invisible"
-        app:layout_anchor="@+id/imageView"
-        app:layout_anchorGravity="end|top" />
-
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:background="#1F2B75"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        app:layout_anchorGravity="center|center_horizontal|center_vertical">
 
-        <AutoCompleteTextView
-            android:id="@+id/searchbar"
-            android:layout_width="690dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:text="@string/search" />
-
-        <ImageView
-            android:id="@+id/imageView"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_search" />
+            android:layout_height="11dp" />
+
+        <TextView
+            android:id="@+id/Accion"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:text="@string/Accion1"
+            android:textColor="#F8EBF0"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/Enunciado1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:text="@string/CreateAccount1"
+                    android:textColor="#F8EBF0"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="375dp"
+                android:layout_height="39dp"
+                android:layout_gravity="center"
+                android:autoLink="email"
+                android:background="#7E7A80"
+                android:ems="10"
+                android:hapticFeedbackEnabled="true"
+                android:hint="@android:string/defaultMsisdnAlphaTag"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#F8EBF0"
+                android:textColorHighlight="#F8EBF0"
+                android:textColorHint="#7E7A80"
+                android:textColorLink="#7E7A80"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="21dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/Enunciado2"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:text="@string/CreateAccount2"
+                    android:textColor="#F8EBF0"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/password"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="375dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:background="#7E7A80"
+                android:ems="10"
+                android:hint="@android:string/defaultMsisdnAlphaTag"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textAllCaps="false"
+                android:textColor="#F8EBF0"
+                android:textColorHighlight="#F8EBF0"
+                android:textColorHint="#7E7A80"
+                android:textColorLink="#7E7A80"
+                android:textSize="20sp"
+                tools:targetApi="o" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PasswordAdvise"
+                    android:textColor="#F8EBF0" />
+            </LinearLayout>
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/create"
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#777A99"
+                android:text="@string/CreateAccount"
+                android:textColor="#F8EBF0"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="26dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-    <AutoCompleteTextView
-        android:id="@+id/searchbar3"
-        android:layout_width="690dp"
-        android:layout_height="56dp"
-        android:layout_weight="1"
-        android:text="@string/search" />
-
-    <ListView
-        android:id="@+id/searchResults"
-        android:layout_width="match_parent"
-        android:layout_height="620dp"
-        android:layout_weight="1"
-        app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

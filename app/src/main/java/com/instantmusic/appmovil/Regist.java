@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +20,8 @@ public class Regist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_regist);
 
-        // mDbHelper = new NotesDbAdapter(this);
-        // mDbHelper.open();
-        //mList = (ListView) findViewById(R.id.list);
-        // registerForContextMenu(mList);
+        /*mDbHelper = new NotesDbAdapter(this);
+        mDbHelper.open();*/
 
     }
 }

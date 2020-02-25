@@ -17,7 +17,16 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="64dp" />
+            android:layout_height="11dp" />
+
+        <TextView
+            android:id="@+id/accion"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:text="@string/Accion2"
+            android:textColor="#F8EBF0"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,23 +35,12 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="237dp"
-                android:layout_height="85dp"
+                android:layout_width="266dp"
+                android:layout_height="98dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
-                app:srcCompat="@mipmap/logo_empresa" />
+                app:srcCompat="@mipmap/logo_empresa2" />
 
-            <Space
-                android:id="@+id/space2"
-                android:layout_width="32dp"
-                android:layout_height="37dp" />
-
-            <ImageView
-                android:id="@+id/AppIcono"
-                android:layout_width="84dp"
-                android:layout_height="80dp"
-                android:contentDescription="@string/title_activity_instant_music_app"
-                app:srcCompat="@mipmap/unknown" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,14 +49,26 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <TextView
-                android:id="@+id/Enunciado1"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/Correo_electronico"
-                android:textColor="#F8EBF0"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/Enunciado1"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:text="@string/Correo_electronico"
+                    android:textColor="#F8EBF0"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
@@ -66,12 +76,13 @@
 
             <EditText
                 android:id="@+id/email"
-                android:layout_width="match_parent"
+                android:layout_width="375dp"
                 android:layout_height="39dp"
+                android:layout_gravity="center"
                 android:autoLink="email"
                 android:background="#7E7A80"
                 android:ems="10"
-                android:gravity="center_vertical"
+                android:hapticFeedbackEnabled="true"
                 android:hint="@android:string/defaultMsisdnAlphaTag"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
@@ -87,14 +98,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="21dp" />
 
-            <TextView
-                android:id="@+id/Enunciado2"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/Contrasenya"
-                android:textColor="#F8EBF0"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/Enunciado2"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:text="@string/Contrasenya"
+                    android:textColor="#F8EBF0"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
@@ -103,8 +125,9 @@
             <EditText
                 android:id="@+id/password"
                 style="@style/Widget.AppCompat.EditText"
-                android:layout_width="match_parent"
+                android:layout_width="375dp"
                 android:layout_height="37dp"
+                android:layout_gravity="center"
                 android:autofillHints=""
                 android:background="#7E7A80"
                 android:ems="10"

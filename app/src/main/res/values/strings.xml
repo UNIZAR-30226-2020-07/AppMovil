@@ -4,11 +4,17 @@
     <string name="password">Password</string>
     <string name="Correo_electronico">Email</string>
     <string name="Contrasenya">Password</string>
+    <string name="Accion1">Create account</string>
+    <string name="Accion2">Log in</string>
+    <string name="CreateAccount1">What´s your email?</string>
+    <string name="CreateAccount2">Pick a password</string>
+    <string name="PasswordAdvise">Use at least 8 characters </string>
+    <string name="CreateAccount">Create </string>
     <string name="email">Email</string>
     <string name="fondo">FondoApp</string>
     <string name="icono">InstantMusicIcono</string>
-    <string name="register">Register</string>
+    <string name="register">REGISTER</string>
     <string name="passwordR">Recover password</string>
-    <string name="accept">Login</string>
+    <string name="accept">Log in</string>
     <string name="search">Buscar cancion</string>
 </resources>

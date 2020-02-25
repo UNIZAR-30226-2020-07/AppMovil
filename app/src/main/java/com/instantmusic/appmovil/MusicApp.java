@@ -41,7 +41,7 @@ public class MusicApp  extends AppCompatActivity  {
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                server.registuser(mail.getText().toString(),pass.getText().toString());
+                registInScreen();
             }
         });
         Button confirmButton2 = findViewById(R.id.forget);
@@ -68,6 +68,11 @@ public class MusicApp  extends AppCompatActivity  {
 
     private void logInScreen() {
         Intent i = new Intent(this,Login.class);
+        startActivityForResult(i, ACTIVITY_CREATE);
+    }
+
+    private void registInScreen() {
+        Intent i = new Intent(this,Regist.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 
