@@ -22,7 +22,7 @@ import android.util.Log;
 public class UsersDbAdapter {
 
     public static final String KEY_MAIL = "mail";
-    public static final String KEY_PLAYLISTS = "PLAYLISTS";
+    public static final String KEY_PLAYLISTS = "playlists";
     public static final String KEY_PASS = "pass";
 
     public static final String KEY_NAME = "name";
@@ -37,7 +37,7 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table users (Mrail text not null, pass text not null,PLAYLISTS text);";
+            "create table users (mail text not null, pass text not null,playlists text);";
     private static final String DATABASE_CREATE_SONGS =
             "create table songs (name text not null, _artist text not null,_categoria text not null);";
 
@@ -104,12 +104,12 @@ public class UsersDbAdapter {
 
 
     /*
-     * Create a new User using the mail and PLAYLISTS provided. If the User is
+     * Create a new User using the mail and playlists provided. If the User is
      * successfully created return the new mail for that User, otherwise return
      * a -1 to indicate failure.
      *
      * @param mail    the mail of the User
-     * @param PLAYLISTS     the PLAYLISTS of the User
+     * @param playlists     the playlists of the User
      * @param pass the pass id (null for no pass)
      * @return mail or -1 if failed
      */
@@ -123,9 +123,9 @@ public class UsersDbAdapter {
     }
 
     public Cursor checkUser(String email) throws SQLException {
+        String[] columns =new String[]{KEY_MAIL, KEY_PASS,KEY_PLAYLISTS};
         Cursor mDbCursor=
-                mDb.query(true,DATABASE_TABLE_USERS, new String[]{KEY_MAIL,
-                                KEY_PASS,KEY_PLAYLISTS}, KEY_MAIL + "=" + email, null,
+                mDb.query(true,DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?" + email, null,
                         null, null, null, null);
         if (mDbCursor != null) {
             mDbCursor.moveToFirst();
@@ -206,15 +206,15 @@ public class UsersDbAdapter {
 
     /*
      * Update the User using the details provided. The User to be updated is
-     * specified using the mail, and it is altered to use the mail and PLAYLISTS
+     * specified using the mail, and it is altered to use the mail and playlists
      * values passed in
      *
      * @param mail id of User to update
      * @param mail value to set User mail to
-     * @param PLAYLISTS  value to set User PLAYLISTS to
+     * @param playlists  value to set User playlists to
      * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updateUser(String mail, String pass,String song, String PLAYLISTS) {
+    public boolean updateUser(String mail, String pass,String song, String playlists) {
         ContentValues args = new ContentValues();
         if(mail!=null) {
             args.put(KEY_MAIL, mail);
@@ -225,15 +225,15 @@ public class UsersDbAdapter {
         }if(song!=null) {
             args.put(KEY_NAME, song);
 
-        }if(PLAYLISTS!=null) {
-            args.put(KEY_PLAYLISTS, PLAYLISTS);
+        }if(playlists!=null) {
+            args.put(KEY_PLAYLISTS, playlists);
 
         }
         return mDb.update(DATABASE_TABLE_USERS, args, KEY_ARTIST + "=" + mail, null) > 0;
     }
 
     /**
-     * Create a new User using the mail and PLAYLISTS provided. If the User is
+     * Create a new User using the mail and playlists provided. If the User is
      * successfully created return the new mail for that User, otherwise return
      * a -1 to indicate failure.
      *
@@ -314,7 +314,7 @@ public class UsersDbAdapter {
 
     /**
      * Update the User using the details provided. The User to be updated is
-     * specified using the mail, and it is altered to use the mail and PLAYLISTS
+     * specified using the mail, and it is altered to use the mail and playlists
      * values passed in
      *
      * @param mail id of User to update
