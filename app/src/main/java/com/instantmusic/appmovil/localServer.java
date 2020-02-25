@@ -25,7 +25,14 @@ public class localServer implements serverInterface {
         return 0;
     }
     public int addSong(String mail,String pass,String song,String playlist){
-        updateUser(mail,pass,song,playlist);
+        if(localDb.updateUser(mail,pass,song,playlist)){
         return 0;
+        }else{
+            return 1;
+        }
+        }
+
     }
-}
+
+
+

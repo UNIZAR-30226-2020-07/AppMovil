@@ -9,6 +9,6 @@ public interface serverInterface  {
     int registuser(String mail,String pass);
     int recover(String mail);
     int login(String mail,String pass);
-    int addSong(String song,String playlist);
+    int addSong(String mail,String pass,String song,String playlist);
 
 }

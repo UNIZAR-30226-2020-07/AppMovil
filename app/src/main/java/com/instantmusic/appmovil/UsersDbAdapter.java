@@ -206,14 +206,21 @@ public class UsersDbAdapter {
      * @param PLAYLISTS  value to set User PLAYLISTS to
      * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updateUser(String mail, String pass, String PLAYLISTS) {
-        if(mail == null || mail.isEmpty() || PLAYLISTS == null || pass==null) return false;
-
+    public boolean updateUser(String mail, String pass,String song, String PLAYLISTS) {
         ContentValues args = new ContentValues();
-        args.put(KEY_MAIL, mail);
-        args.put(KEY_PLAYLISTS, PLAYLISTS);
-        args.put(KEY_PASS, pass);
+        if(mail!=null) {
+            args.put(KEY_MAIL, mail);
 
+        }if(pass!=null) {
+            args.put(KEY_PASS, pass);
+
+        }if(song!=null) {
+            args.put(KEY_NAME, song);
+
+        }if(PLAYLISTS!=null) {
+            args.put(KEY_PLAYLISTS, PLAYLISTS);
+
+        }
         return mDb.update(DATABASE_TABLE_USERS, args, KEY_ARTIST + "=" + mail, null) > 0;
     }
 
