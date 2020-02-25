@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,8 +10,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import com.instantmusic.appmovil.localServer;
 import android.database.Cursor;
+import android.widget.SimpleCursorAdapter;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.net.UnknownServiceException;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
@@ -18,7 +22,7 @@ public class Login extends AppCompatActivity {
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER =Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
-    private EditText cancion;
+    private EditText shit;
     private serverInterface server=new localServer();
     public void onCreate(Bundle savedInstanceState) {
 
@@ -33,16 +37,26 @@ public class Login extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                cancion.findViewById(R.id.searchbar);
-                server.searchCancion(cancion.getText().toString(),Cursor );
+                shit.findViewById(R.id.searchbar);
+                Cursor shitCursor = server.searchShit(shit.getText().toString());
+                startManagingCursor(shitCursor);
+
+                // Create an array to specify the fields we want to display in the list (only TITLE)
+                String[] from = new String[]{UsersDbAdapter.KEY_NAME, UsersDbAdapter.KEY_ARTIST, UsersDbAdapter.KEY_CATEGORY};
+
+                // and an array of the fields we want to bind those fields to (in this case just text1)
+                int[] to = new int[]{R.id.text1, R.id.text2};
+                SimpleCursorAdapter search =
+                        new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
+                resList.setAdapter(search);
             }
         });
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case SEARCH:
-                cancion=findViewById(R.id.searchbar);
-                server.searchCancion(cancion.getText().toString());
+                shit=findViewById(R.id.searchbar);
+                server.searchShit(shit.getText().toString());
                 return true;
             
         }

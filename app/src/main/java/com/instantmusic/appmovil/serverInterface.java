@@ -5,9 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public interface serverInterface  {
-    Cursor searchCancion(String song);
+    Cursor searchShit(String shit);
     int registuser(String mail,String pass);
     int recover(String mail);
     int login(String mail,String pass);
+    int addSong(String song,String playlist);
 
 }

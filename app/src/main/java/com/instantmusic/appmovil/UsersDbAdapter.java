@@ -5,13 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Simple notes database access helper class. Defines the basic CRUD operations
- * for the notepad example, and gives the ability to list all notes as well as
- * retrieve or modify a specific note.
+ * Simple Users database access helper class. Defines the basic CRUD operations
+ * for the Userpad example, and gives the ability to list all Users as well as
+ * retrieve or modify a specific User.
  * <p>
  * This has been improved from the first version of this tutorial through the
  * addition of better error handling and also using returning a Cursor instead
@@ -20,9 +21,13 @@ import android.util.Log;
  */
 public class UsersDbAdapter {
 
-    public static final String KEY_TITLE = "title";
-    public static final String KEY_BODY = "body";
-    public static final String KEY_ROWID = "_id";
+    public static final String KEY_MAIL = "Mail";
+    public static final String KEY_PLAYLISTS = "PLAYLISTS";
+    public static final String KEY_PASS = "pass";
+
+    public static final String KEY_NAME = "name";
+    public static final String KEY_ARTIST = "_artist";
+    public static final String KEY_CATEGORY = "_categoria";
 
     private static final String TAG = "UsersDbAdapter";
     private DatabaseHelper mDbHelper;
@@ -31,13 +36,17 @@ public class UsersDbAdapter {
     /**
      * Database creation sql statement
      */
-    private static final String DATABASE_CREATE =
-            "create table notes (_id integer primary key autoincrement, "
-                    + "title text not null, body text not null);";
+    private static final String DATABASE_CREATE_USERS =
+            "create table Users (_id integer primary key autoincrement, "
+                    + "Mail text not null, PLAYLISTS text not null, pass integer);";
+    private static final String DATABASE_CREATE_SONGS =
+            "create table Songs (_id integer primary key autoincrement, "
+                    + "name text not null);";
 
-    private static final String DATABASE_NAME = "data";
-    private static final String DATABASE_TABLE = "notes";
-    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "Name";
+    private static final String DATABASE_TABLE_USERS = "Users";
+    private static final String DATABASE_TABLE_SONGS = "Songs";
+    private static final int DATABASE_VERSION = 4;
 
     private final Context mCtx;
 
@@ -49,15 +58,16 @@ public class UsersDbAdapter {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-
-            db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_CREATE_USERS);
+            db.execSQL(DATABASE_CREATE_SONGS);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS notes");
+            db.execSQL("DROP TABLE IF EXISTS Users;");
+            db.execSQL("DROP TABLE IF EXISTS Songs;");
             onCreate(db);
         }
     }
@@ -73,7 +83,7 @@ public class UsersDbAdapter {
     }
 
     /**
-     * Open the notes database. If it cannot be opened, try to create a new
+     * Open the Users database. If it cannot be opened, try to create a new
      * instance of the database. If it cannot be created, throw an exception to
      * signal the failure
      *
@@ -87,86 +97,221 @@ public class UsersDbAdapter {
         return this;
     }
 
+    /**
+     * Closes the Users database.
+     */
     public void close() {
         mDbHelper.close();
     }
 
 
     /**
-     * Create a new note using the title and body provided. If the note is
-     * successfully created return the new rowId for that note, otherwise return
+     * Create a new User using the Mail and PLAYLISTS provided. If the User is
+     * successfully created return the new mail for that User, otherwise return
      * a -1 to indicate failure.
      *
-     * @param title the title of the note
-     * @param body  the body of the note
-     * @return rowId or -1 if failed
+     * @param Mail    the Mail of the User
+     * @param PLAYLISTS     the PLAYLISTS of the User
+     * @param pass the pass id (null for no pass)
+     * @return mail or -1 if failed
      */
-    public long createNote(String title, String body) {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_TITLE, title);
-        initialValues.put(KEY_BODY, body);
+    public long createUser(String Mail, String pass) {
+        if (Mail == null || Mail.isEmpty() ||  (pass != null && pass !=null )) return -1;
 
-        return mDb.insert(DATABASE_TABLE, null, initialValues);
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_MAIL, Mail);
+        initialValues.put(KEY_PLAYLISTS, "");
+        initialValues.put(KEY_PASS, pass);
+
+        return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
     }
 
     /**
-     * Delete the note with the given rowId
+     * Delete the User with the given mail
      *
-     * @param rowId id of note to delete
+     * @param mail id of User to delete
      * @return true if deleted, false otherwise
      */
-    public boolean deleteNote(long rowId) {
-
-        return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
+    public boolean deleteUser(long mail) {
+        return mDb.delete(DATABASE_TABLE_USERS, KEY_MAIL + "=" + mail, null) > 0;
     }
 
     /**
-     * Return a Cursor over the list of all notes in the database
+     * Return a Cursor over the list of all Users in the database.
+     * Can be sorted by a data column (KEY_MAIL, KEY_PASS, ...)
+     * Can be filtered by pass name
      *
-     * @return Cursor over all notes
+     * @param orderBy  if null not ordered. if not, order by that column name
+     * @param pass if null show all, if not, show only Users with that pass name (not id)
+     * @return a cursor with the Users
      */
-    public Cursor fetchAllNotes() {
-
-        return mDb.query(DATABASE_TABLE, new String[]{KEY_ROWID, KEY_TITLE,
-                KEY_BODY}, null, null, null, null, KEY_TITLE + " ASC");
-    }
+   /*public Cursor searchAllUsers(String orderBy, String pass) {
+        try {
+//        if (pass != null) {
+//            pass = KEY_PASS + "=" + searchpass(pass);
+//        }
+            //return mDb.rawQuery("SELECT " + DATABASE_TABLE_USERS + "." + KEY_ARTIST + " AS " + KEY_ARTIST + "," + KEY_MAIL + "," + KEY_PLAYLISTS + "," + KEY_NAME + " FROM " + DATABASE_TABLE_USERS + " LEFT JOIN " + DATABASE_TABLE_SONGS + " ON " + DATABASE_TABLE_USERS + '.' + KEY_PASS + '=' + DATABASE_TABLE_SONGS+"."+KEY_ARTIST,null);
+            return mDb.rawQuery(
+                    "SELECT " + DATABASE_TABLE_USERS + "." + KEY_ARTIST + " AS " + KEY_ARTIST + ", " +
+                            KEY_MAIL + ", " +
+                            KEY_PLAYLISTS + ", " +
+                            DATABASE_TABLE_SONGS + "." + KEY_NAME + " AS " + KEY_NAME +
+                            " FROM " + DATABASE_TABLE_USERS + "" +
+                            " LEFT JOIN " + DATABASE_TABLE_SONGS + " ON " + DATABASE_TABLE_USERS + '.' + KEY_PASS + '=' + DATABASE_TABLE_SONGS + "." + KEY_ARTIST +
+                            (pass != null ? " WHERE " + KEY_NAME + "='" + pass + '\'' : "") +
+                            (orderBy != null ? " ORDER BY " + orderBy : "")
+                    , null);
+//        return mDb.query(DATABASE_TABLE_USERS, new String[]{KEY_ARTIST, KEY_MAIL,
+//                KEY_PLAYLISTS, KEY_PASS}, pass, null, null, null, orderBy);
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }*/
 
     /**
-     * Return a Cursor positioned at the note that matches the given rowId
+     * Return a Cursor positioned at the User that matches the given mail
      *
-     * @param rowId id of note to retrieve
-     * @return Cursor positioned to matching note, if found
-     * @throws SQLException if note could not be found/retrieved
+     * @param mail id of User to retrieve
+     * @return Cursor positioned to matching User, if found
+     * @throws SQLException if User could not be found/retrieved
      */
-    public Cursor fetchNote(long rowId) throws SQLException {
-
+    public Cursor searchShit(String shit) throws SQLException {
         Cursor mCursor =
-
-                mDb.query(true, DATABASE_TABLE, new String[]{KEY_ROWID,
-                                KEY_TITLE, KEY_BODY}, KEY_ROWID + "=" + rowId, null,
+                mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
+                                KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_NAME + "=" + shit, null,
                         null, null, null, null);
-        if (mCursor != null) {
-            mCursor.moveToFirst();
+        if (mCursor == null) {
+            mCursor =
+                    mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
+                                    KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_ARTIST + "=" + shit, null,
+                            null, null, null, null);
+        }if (mCursor == null) {
+            mCursor =
+                    mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
+                                    KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_ARTIST + "=" + shit, null,
+                            null, null, null, null);
         }
         return mCursor;
 
     }
 
     /**
-     * Update the note using the details provided. The note to be updated is
-     * specified using the rowId, and it is altered to use the title and body
+     * Update the User using the details provided. The User to be updated is
+     * specified using the mail, and it is altered to use the Mail and PLAYLISTS
      * values passed in
      *
-     * @param rowId id of note to update
-     * @param title value to set note title to
-     * @param body  value to set note body to
-     * @return true if the note was successfully updated, false otherwise
+     * @param mail id of User to update
+     * @param Mail value to set User Mail to
+     * @param PLAYLISTS  value to set User PLAYLISTS to
+     * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updateNote(long rowId, String title, String body) {
-        ContentValues args = new ContentValues();
-        args.put(KEY_TITLE, title);
-        args.put(KEY_BODY, body);
+    public boolean updateUser(String mail, String pass, String PLAYLISTS) {
+        if(mail == null || mail.isEmpty() || PLAYLISTS == null || pass==null) return false;
 
-        return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+        ContentValues args = new ContentValues();
+        args.put(KEY_MAIL, mail);
+        args.put(KEY_PLAYLISTS, PLAYLISTS);
+        args.put(KEY_PASS, pass);
+
+        return mDb.update(DATABASE_TABLE_USERS, args, KEY_ARTIST + "=" + mail, null) > 0;
+    }
+
+    /**
+     * Create a new User using the Mail and PLAYLISTS provided. If the User is
+     * successfully created return the new mail for that User, otherwise return
+     * a -1 to indicate failure.
+     *
+     * @param name the name of the pass
+     * @return mail or -1 if failed
+     */
+    public long createpass(String name) {
+        if (name == null || name.isEmpty()) return -1;
+
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_NAME, name);
+
+        return mDb.insert(DATABASE_TABLE_SONGS, null, initialValues);
+    }
+
+    /**
+     * Delete the User with the given mail
+     *
+     * @param mail id of User to delete
+     * @return true if deleted, false otherwise
+     */
+    public boolean deletepass(long mail) {
+
+        return mDb.delete(DATABASE_TABLE_SONGS, KEY_ARTIST + "=" + mail, null) > 0;
+    }
+
+    /**
+     * Return a Cursor over the list of all Users in the database
+     *
+     * @return Cursor over all Users
+     */
+    public Cursor searchAllSongs() {
+        return mDb.query(DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, null, null, null, null, null);
+    }
+
+    /**
+     * Return a Cursor positioned at the pass that matches the given mail
+     *
+     * @param mail id of User to retrieve
+     * @return Cursor positioned to matching User, if found
+     * @throws SQLException if User could not be found/retrieved
+     */
+    public Cursor searchpass(long mail) throws SQLException {
+
+        Cursor mCursor =
+                mDb.query(true, DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST,
+                                KEY_NAME}, KEY_ARTIST + "=" + mail, null,
+                        null, null, null, null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+            if (mCursor.getCount() == 0) mCursor = null;
+        }
+        return mCursor;
+    }
+
+
+    /**
+     * Return a Cursor positioned at the pass that matches the given name
+     * If no pass with that name is found, one is created
+     * If null or empty string is passed, null is returned
+     *
+     * @param name name of pass to retrieve
+     * @return Cursor positioned to matching pass (if not found is created first) or null if empty/null pass
+     */
+    public Integer searchpass(String name) {
+        if (name == null || name.isEmpty()) return null;
+
+        Cursor mCursor = mDb.query(true, DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, KEY_NAME + " like '" + name + '\'', null, null, null, null, null);
+
+        if (mCursor.getCount() == 0) {
+            createpass(name);
+            mCursor = mDb.query(true, DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, KEY_NAME + " like '" + name + '\'', null, null, null, null, null);
+        }
+
+        mCursor.moveToFirst();
+        return mCursor.getInt(mCursor.getColumnIndex(KEY_ARTIST));
+    }
+
+    /**
+     * Update the User using the details provided. The User to be updated is
+     * specified using the mail, and it is altered to use the Mail and PLAYLISTS
+     * values passed in
+     *
+     * @param mail id of User to update
+     * @param name  value to set pass name to
+     * @return true if the User was successfully updated, false otherwise
+     */
+    public boolean updatepass(long mail, String name) {
+        if(name == null || name.isEmpty()) return false;
+
+        ContentValues args = new ContentValues();
+        args.put(KEY_NAME, name);
+
+        return mDb.update(DATABASE_TABLE_SONGS, args, KEY_ARTIST + "=" + mail, null) > 0;
     }
 }
