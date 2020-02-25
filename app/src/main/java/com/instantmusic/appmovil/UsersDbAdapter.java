@@ -21,7 +21,7 @@ import android.util.Log;
  */
 public class UsersDbAdapter {
 
-    public static final String KEY_MAIL = "Mail";
+    public static final String KEY_MAIL = "mail";
     public static final String KEY_PLAYLISTS = "PLAYLISTS";
     public static final String KEY_PASS = "pass";
 
@@ -37,15 +37,13 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table Users (_id integer primary key autoincrement, "
-                    + "Mail text not null, pass integer,PLAYLISTS text not null);";
+            "create table users (Mrail text not null, pass text not null,PLAYLISTS text);";
     private static final String DATABASE_CREATE_SONGS =
-            "create table Songs (_id integer primary key autoincrement, "
-                    + "name text not null);";
+            "create table songs (name text not null, _artist text not null,_categoria text not null);";
 
-    private static final String DATABASE_NAME = "Name";
-    private static final String DATABASE_TABLE_USERS = "Users";
-    private static final String DATABASE_TABLE_SONGS = "Songs";
+    private static final String DATABASE_NAME = "name";
+    private static final String DATABASE_TABLE_USERS = "users";
+    private static final String DATABASE_TABLE_SONGS = "songs";
     private static final int DATABASE_VERSION = 4;
 
     private final Context mCtx;
@@ -66,8 +64,8 @@ public class UsersDbAdapter {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS Users;");
-            db.execSQL("DROP TABLE IF EXISTS Songs;");
+            db.execSQL("DROP TABLE IF EXISTS users;");
+            db.execSQL("DROP TABLE IF EXISTS songs;");
             onCreate(db);
         }
     }
@@ -106,28 +104,34 @@ public class UsersDbAdapter {
 
 
     /*
-     * Create a new User using the Mail and PLAYLISTS provided. If the User is
+     * Create a new User using the mail and PLAYLISTS provided. If the User is
      * successfully created return the new mail for that User, otherwise return
      * a -1 to indicate failure.
      *
-     * @param Mail    the Mail of the User
+     * @param mail    the mail of the User
      * @param PLAYLISTS     the PLAYLISTS of the User
      * @param pass the pass id (null for no pass)
      * @return mail or -1 if failed
      */
-    public long createUser(String Mail, String pass) {
+    public long createUser(String mail, String pass) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_MAIL, Mail);
+        initialValues.put(KEY_MAIL, mail);
         initialValues.put(KEY_PLAYLISTS, "");
         initialValues.put(KEY_PASS, pass);
 
         return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
     }
 
-    public Cursor checkUser(String email) {
-        return mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
-                        KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_MAIL + "=" + email, null,
+    public Cursor checkUser(String email) throws SQLException {
+        Cursor mDbCursor=
+                mDb.query(true,DATABASE_TABLE_USERS, new String[]{KEY_MAIL,
+                                KEY_PASS,KEY_PLAYLISTS}, KEY_MAIL + "=" + email, null,
                         null, null, null, null);
+        if (mDbCursor != null) {
+            mDbCursor.moveToFirst();
+            if (mDbCursor.getCount() == 0) mDbCursor = null;
+        }
+        return mDbCursor;
     }
 
     /*
@@ -202,11 +206,11 @@ public class UsersDbAdapter {
 
     /*
      * Update the User using the details provided. The User to be updated is
-     * specified using the mail, and it is altered to use the Mail and PLAYLISTS
+     * specified using the mail, and it is altered to use the mail and PLAYLISTS
      * values passed in
      *
      * @param mail id of User to update
-     * @param Mail value to set User Mail to
+     * @param mail value to set User mail to
      * @param PLAYLISTS  value to set User PLAYLISTS to
      * @return true if the User was successfully updated, false otherwise
      */
@@ -229,7 +233,7 @@ public class UsersDbAdapter {
     }
 
     /**
-     * Create a new User using the Mail and PLAYLISTS provided. If the User is
+     * Create a new User using the mail and PLAYLISTS provided. If the User is
      * successfully created return the new mail for that User, otherwise return
      * a -1 to indicate failure.
      *
@@ -310,7 +314,7 @@ public class UsersDbAdapter {
 
     /**
      * Update the User using the details provided. The User to be updated is
-     * specified using the mail, and it is altered to use the Mail and PLAYLISTS
+     * specified using the mail, and it is altered to use the mail and PLAYLISTS
      * values passed in
      *
      * @param mail id of User to update

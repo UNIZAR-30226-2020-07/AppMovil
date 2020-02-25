@@ -45,9 +45,11 @@ public class localServer implements serverInterface {
     private UsersDbAdapter localDb;
 
     localServer(Context ctx) {
-        this.localDb=new UsersDbAdapter(ctx);
+        this.localDb = new UsersDbAdapter(ctx);
     }
-
+    public void openDb(){
+        localDb.open();
+    }
     public Cursor searchShit(String shit) {
         return localDb.searchShit(shit);
     }
@@ -57,8 +59,7 @@ public class localServer implements serverInterface {
     }
 
     public Cursor checkUser(String mail) {
-        Cursor aux = localDb.checkUser(mail);
-        return aux;
+       return localDb.checkUser(mail);
     }
 
     public int recover(String mail) {
@@ -66,7 +67,13 @@ public class localServer implements serverInterface {
     }
 
     public int login(String mail, String pass) {
-        return 0;
+        Cursor user = localDb.checkUser(mail);
+        if (user != null) {
+            if (user.getString(3) == pass) {
+                return 0;
+            }
+        }
+        return 1;
     }
 
     public int addSong(String mail, String pass, String song, String playlist) {
