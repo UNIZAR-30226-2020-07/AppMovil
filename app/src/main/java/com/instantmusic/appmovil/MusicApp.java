@@ -5,21 +5,19 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.database.Cursor;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import com.instantmusic.appmovil.localServer;
 import androidx.appcompat.app.AppCompatActivity;
-
 /**
  * Actividad principal. Muestra el listado de notas.
  */
 public class MusicApp  extends AppCompatActivity  {
-
+    private static int ACTIVITY_CREATE=0;
    private static final int REGISTER = Menu.FIRST;
    private static final int RECOVER = Menu.FIRST + 1;
    private static final int LOGIN = Menu.FIRST + 2;
@@ -28,7 +26,7 @@ public class MusicApp  extends AppCompatActivity  {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
-    private serverInterface server;
+    private serverInterface server=new localServer();
 
     /**
      * Called when the activity is first created.
@@ -57,7 +55,7 @@ public class MusicApp  extends AppCompatActivity  {
             public void onClick(View view) {
 
                 if(server.login(mail.getText().toString(),pass.getText().toString())==0){
-                    Intent i = new Intent(this, Login.class);
+                    logInScreen();
                 }
             }
         });
@@ -66,6 +64,11 @@ public class MusicApp  extends AppCompatActivity  {
         //mList = (ListView) findViewById(R.id.list);
         // registerForContextMenu(mList);
 
+    }
+
+    private void logInScreen() {
+        Intent i = new Intent(this,Login.class);
+        startActivityForResult(i, ACTIVITY_CREATE);
     }
 
     /**
@@ -87,14 +90,14 @@ public class MusicApp  extends AppCompatActivity  {
                 new SimpleCursorAdapter(this, R.layout.notes_row, mNotesCursor, from, to);
         mList.setAdapter(notes);
     }*/
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         boolean result = super.onCreateOptionsMenu(menu);
         menu.add(Menu.NONE, REGISTER, Menu.NONE, R.string.register);
         menu.add(Menu.NONE, RECOVER, Menu.NONE, R.string.passwordR);
         menu.add(Menu.NONE, LOGIN, Menu.NONE, R.string.accept);
         return result;
-    }
+    }*/
   /*  @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -1,15 +1,18 @@
 package com.instantmusic.appmovil;
 
 import android.content.Intent;
+import android.database.Cursor;
+
 import com.instantmusic.appmovil.Login;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class localServer implements serverInterface {
     private static final int ACTIVITY_CREATE =0;
+    private UsersDbAdapter localDb;
     localServer(){}
-    public int searchCancion(String song) {
-            return 0;
+    public Cursor searchCancion(String song) {
+            return localDb.
     }
 
     public int registuser(String mail, String pass) {

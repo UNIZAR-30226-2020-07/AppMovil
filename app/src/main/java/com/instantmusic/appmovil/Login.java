@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import com.instantmusic.appmovil.localServer;
+import android.database.Cursor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class Login extends AppCompatActivity {
     private static final int LOGIN = Menu.FIRST + 2;
     private EditText cancion;
     private serverInterface server=new localServer();
-    Login(){}
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 cancion.findViewById(R.id.searchbar);
-                server.searchCancion(cancion.getText().toString());
+                server.searchCancion(cancion.getText().toString(),Cursor );
             }
         });
     }
