@@ -12,21 +12,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * Actividad principal. Muestra el listado de notas.
  */
-public class MusicApp  extends AppCompatActivity  {
-    private static int ACTIVITY_CREATE=0;
-   private static final int REGISTER = Menu.FIRST;
-   private static final int RECOVER = Menu.FIRST + 1;
-   private static final int LOGIN = Menu.FIRST + 2;
+public class MusicApp extends AppCompatActivity {
+    private static int ACTIVITY_CREATE = 0;
+    private static final int REGISTER = Menu.FIRST;
+    private static final int RECOVER = Menu.FIRST + 1;
+    private static final int LOGIN = Menu.FIRST + 2;
     //private static final int EDIT_ID = Menu.FIRST + 2;
     //private static final int SEND_SMS_ID = Menu.FIRST + 3;
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
-    private serverInterface server=new localServer();
+    private serverInterface server = new localServer();
 
     /**
      * Called when the activity is first created.
@@ -36,8 +38,8 @@ public class MusicApp  extends AppCompatActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-        mail=findViewById(R.id.email);
-        pass=findViewById(R.id.password);
+        mail = findViewById(R.id.email);
+        pass = findViewById(R.id.password);
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -50,11 +52,11 @@ public class MusicApp  extends AppCompatActivity  {
                 server.recover(mail.getText().toString());
             }
         });
-        Button confirmButton3 =findViewById(R.id.accept);
-         confirmButton3.setOnClickListener(new View.OnClickListener() {
+        Button confirmButton3 = findViewById(R.id.accept);
+        confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                if(server.login(mail.getText().toString(),pass.getText().toString())==0){
+                if (server.login(mail.getText().toString(), pass.getText().toString()) == 0) {
                     logInScreen();
                 }
             }
@@ -67,12 +69,12 @@ public class MusicApp  extends AppCompatActivity  {
     }
 
     private void logInScreen() {
-        Intent i = new Intent(this,Login.class);
+        Intent i = new Intent(this, Login.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 
     private void registInScreen() {
-        Intent i = new Intent(this,Regist.class);
+        Intent i = new Intent(this, Regist.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 
@@ -142,8 +144,6 @@ public class MusicApp  extends AppCompatActivity  {
         i.putExtra(NotesDbAdapter.KEY_ROWID, id);
         startActivityForResult(i, ACTIVITY_EDIT);
     }*/
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

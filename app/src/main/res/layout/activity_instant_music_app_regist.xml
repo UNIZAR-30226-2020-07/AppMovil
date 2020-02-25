@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailSign"
                 android:layout_width="375dp"
                 android:layout_height="39dp"
                 android:layout_gravity="center"
@@ -82,9 +82,24 @@
                 android:textColorLink="#7E7A80"
                 android:textSize="20sp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="21dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/emailTip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emailAlreadyInUse"
+                    android:textColor="#FA3021"
+                    android:visibility="invisible" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -110,7 +125,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordSign"
                 style="@style/Widget.AppCompat.EditText"
                 android:layout_width="375dp"
                 android:layout_height="37dp"
@@ -140,7 +155,7 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/passwordTip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/PasswordAdvise"
@@ -161,10 +176,6 @@
                 android:text="@string/CreateAccount"
                 android:textColor="#F8EBF0"
                 android:textStyle="bold" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="26dp" />
 
         </LinearLayout>
 
