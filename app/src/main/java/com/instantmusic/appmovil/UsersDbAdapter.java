@@ -116,7 +116,7 @@ public class UsersDbAdapter {
     public long createUser(String mail, String pass) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_MAIL, mail);
-        initialValues.put(KEY_PLAYLISTS, "");
+        initialValues.put(KEY_PLAYLISTS, "none");
         initialValues.put(KEY_PASS, pass);
 
         return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);

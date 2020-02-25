@@ -28,7 +28,7 @@ public class MusicApp extends AppCompatActivity {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
-    public serverInterface server = new localServer(this);
+    public serverInterface server;
 
     /**
      * Called when the activity is first created.
@@ -38,7 +38,7 @@ public class MusicApp extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-        server.openDb();
+        server = new localServer(this);
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         Button confirmButton = findViewById(R.id.register);
@@ -68,6 +68,7 @@ public class MusicApp extends AppCompatActivity {
         // registerForContextMenu(mList);
 
     }
+
     private void logInScreen() {
         Intent i = new Intent(this, Login.class);
         startActivityForResult(i, ACTIVITY_CREATE);

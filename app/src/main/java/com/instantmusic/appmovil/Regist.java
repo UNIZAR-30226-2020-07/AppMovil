@@ -15,14 +15,13 @@ public class Regist extends AppCompatActivity {
     private EditText pass;
     private TextView passAux;
     private TextView emailAux;
-    private serverInterface server = new localServer(this);
-
+    public serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_regist);
-
         Button confirmButton = findViewById(R.id.create);
+        server=new localServer(this);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSignUp();
@@ -59,7 +58,7 @@ public class Regist extends AppCompatActivity {
             emailAux.setVisibility(View.VISIBLE);
             seguir = false;
         }
-        else if ( server.checkUser(email) != null ) { // Caso en el que el email este en uso ya
+        else if ( server.checkUser(email) !=0 ) { // Caso en el que el email este en uso ya
             texto = "That email is already registered";
             emailAux.setText(texto);
             emailAux.setTextColor(Color.RED);
