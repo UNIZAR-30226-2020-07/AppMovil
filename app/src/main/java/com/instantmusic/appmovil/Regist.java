@@ -73,6 +73,7 @@ public class Regist extends AppCompatActivity {
         if ( seguir ) { // Caso en el que no hay ningun error
             server.registUser(email,password);
             Intent i = new Intent(this, MusicApp.class);
+            startActivityForResult(i, 0);
         }
     }
 }
