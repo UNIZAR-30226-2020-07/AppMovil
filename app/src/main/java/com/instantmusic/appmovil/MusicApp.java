@@ -56,7 +56,6 @@ public class MusicApp extends AppCompatActivity {
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
                 if (server.login(mail.getText().toString(), pass.getText().toString()) == 0) {
                     logInScreen();
                 }

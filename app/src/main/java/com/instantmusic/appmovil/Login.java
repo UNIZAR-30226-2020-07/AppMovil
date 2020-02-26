@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     private static final int RECOVER = Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
     private EditText shit;
-    private serverInterface server=new localServer(this);
+    private serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         /*mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();*/
         resList =findViewById(R.id.searchResults);
-
+        server=new localServer(this);
         registerForContextMenu(resList);
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {

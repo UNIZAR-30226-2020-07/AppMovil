@@ -72,7 +72,7 @@ public class localServer implements serverInterface {
     public int login(String mail, String pass) {
         Cursor user = localDb.checkUser(mail);
         if (user != null) {
-            if (user.getString(2) == pass) {
+            if (user.getString(1).equals(pass)) {
                 return 0;
             }
         }
