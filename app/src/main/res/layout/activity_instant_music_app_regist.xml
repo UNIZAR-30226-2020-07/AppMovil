@@ -10,7 +10,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#1F2B75"
+        android:background="@mipmap/grade"
         android:gravity="center|top"
         android:orientation="vertical"
         app:layout_anchorGravity="center|center_horizontal|center_vertical">
