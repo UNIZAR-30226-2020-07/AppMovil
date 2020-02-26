@@ -80,7 +80,8 @@
                 android:textColorHighlight="#F8EBF0"
                 android:textColorHint="#7E7A80"
                 android:textColorLink="#7E7A80"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:paddingLeft="10dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -142,7 +143,8 @@
                 android:textColorHint="#7E7A80"
                 android:textColorLink="#7E7A80"
                 android:textSize="20sp"
-                tools:targetApi="o" />
+                tools:targetApi="o"
+                android:paddingLeft="10dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
