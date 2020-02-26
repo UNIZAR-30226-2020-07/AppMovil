@@ -15,7 +15,9 @@
     <string name="icono">InstantMusicIcono</string>
     <string name="register">REGISTER</string>
     <string name="emailAlreadyInUse">That email is already registered</string>
+    <string name="emailNotRegistered">That email is not registered</string>
     <string name="passwordR">Recover password</string>
+    <string name="Advise">Your email and password combination does not match an InstantMusic account. Please try again</string>
     <string name="accept">Log in</string>
     <string name="search">Buscar cancion</string>
 </resources>

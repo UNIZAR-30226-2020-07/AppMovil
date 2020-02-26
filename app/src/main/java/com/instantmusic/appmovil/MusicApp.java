@@ -1,6 +1,7 @@
 package com.instantmusic.appmovil;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +30,7 @@ public class MusicApp extends AppCompatActivity {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
+    private TextView aux;
     public serverInterface server;
 
     /**
@@ -56,7 +59,13 @@ public class MusicApp extends AppCompatActivity {
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (server.login(mail.getText().toString(), pass.getText().toString()) == 0) {
+                String texto;
+                if ( server.login(mail.getText().toString(), pass.getText().toString()) == 1 ) { // Caso en el que los datos introducidos sean erroneos
+                    aux = findViewById(R.id.Tip);
+                    aux.setTextColor(Color.RED);
+                    aux.setVisibility(View.VISIBLE);
+                }
+                else {
                     logInScreen();
                 }
             }
