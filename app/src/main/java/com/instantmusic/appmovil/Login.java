@@ -1,12 +1,11 @@
 package com.instantmusic.appmovil;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import com.instantmusic.appmovil.localServer;
 import android.database.Cursor;
@@ -22,17 +21,15 @@ public class Login extends AppCompatActivity {
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
-    private EditText shit;
+    private AutoCompleteTextView shit;
     private serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
-        /*mDbHelper = new NotesDbAdapter(this);
-        mDbHelper.open();*/
         resList =findViewById(R.id.searchResults);
         server=new localServer(this);
-        registerForContextMenu(resList);
+//        registerForContextMenu(resList);
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -42,7 +39,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void confirmSearch() {
-        shit.findViewById(R.id.searchbar);
+        shit = findViewById(R.id.searchbar);
         Cursor shitCursor = server.searchShit(shit.getText().toString());
         startManagingCursor(shitCursor);
 

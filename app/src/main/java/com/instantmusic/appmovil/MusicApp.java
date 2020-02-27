@@ -44,6 +44,12 @@ public class MusicApp extends AppCompatActivity {
         server = new localServer(this);
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
+        server.addSong("Pegamos_tela","Omar_Montes","Reggaeton");
+        server.addSong("Despacito","Luis_Fonsi","Reggaeton");
+        server.addSong("Purpurina","Alberto_Gambino","Hip-Hop");
+        server.addSong("Fighting_Gold","Kazusou_Oda","Rock");
+        server.addSong("Me_Gusta","Shakira","Reggaeton");
+        server.addSong("Call_me _aybe","Carly_Rae_Jepsen","Pop");
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

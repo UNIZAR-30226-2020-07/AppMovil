@@ -10,7 +10,7 @@ public interface serverInterface  {
     int recover(String mail);
     int checkUser(String email);
     int login(String mail,String pass);
-    int addSong(String mail,String pass,String song);
-    int songInfo(String name,String artist,String categoria);
+    int addSongToUser(String mail,String pass,String song);
+    long addSong(String name,String artist,String categoria);
 
 }

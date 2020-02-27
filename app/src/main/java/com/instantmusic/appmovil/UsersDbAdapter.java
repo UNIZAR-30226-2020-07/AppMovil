@@ -136,7 +136,18 @@ public class UsersDbAdapter {
             }
             return mDbCursor;
         }
-    }public Cursor songInfo(String name) throws SQLException {
+    }
+
+    public long addSong(String name,String artist,String category) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_NAME, name);
+        initialValues.put(KEY_ARTIST, artist);
+        initialValues.put(KEY_CATEGORY, category);
+
+        return mDb.insert(DATABASE_TABLE_SONGS, null, initialValues);
+    }
+
+    public Cursor songInfo(String name) throws SQLException {
         if (name == null) {
             return null;
         } else {
@@ -203,24 +214,21 @@ public class UsersDbAdapter {
      * @throws SQLException if User could not be found/retrieved
      */
     public Cursor searchShit(String shit) throws SQLException {
+        String[] columns = new String[]{KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
         Cursor mCursor =
-                mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
-                                KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_NAME + "=" + shit, null,
+                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{shit}, null,
                         null, null, null, null);
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
-                                    KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_ARTIST + "=" + shit, null,
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "=" + shit, null,
                             null, null, null, null);
         }
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_USERS, new String[]{KEY_ARTIST,
-                                    KEY_MAIL, KEY_PLAYLISTS, KEY_PASS}, KEY_ARTIST + "=" + shit, null,
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "=" + shit, null,
                             null, null, null, null);
         }
         return mCursor;
-
     }
 
     /*

@@ -78,6 +78,10 @@ public class localServer implements serverInterface {
         return 0;
 
     }
+
+    public long addSong(String name,String artist,String category) {
+        return localDb.addSong(name,artist,category);
+    }
     public int recover(String mail) {
         return 0;
     }
@@ -92,7 +96,7 @@ public class localServer implements serverInterface {
         return 1;
     }
 
-    public int addSong(String mail, String pass, String song) {
+    public int addSongToUser(String mail, String pass, String song) {
         if (localDb.updateUser(mail, pass, song)) {
             return 0;
         } else {
