@@ -24,7 +24,7 @@ public class UsersDbAdapter {
     public static final String KEY_MAIL = "mail";
     public static final String KEY_PLAYLISTS = "playlists";
     public static final String KEY_PASS = "pass";
-r
+
     public static final String KEY_NAME = "name";
     public static final String KEY_ARTIST = "_artist";
     public static final String KEY_CATEGORY = "_categoria";
@@ -136,6 +136,20 @@ r
             }
             return mDbCursor;
         }
+    }public Cursor songInfo(String name) throws SQLException {
+        if (name == null) {
+            return null;
+        } else {
+            String[] columns = new String[]{KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+            Cursor mDbCursor =
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{name},
+                            null, null, null, null);
+            if (mDbCursor != null) {
+                mDbCursor.moveToFirst();
+                if (mDbCursor.getCount() == 0) mDbCursor = null;
+            }
+            return mDbCursor;
+        }
     }
 
     /*
@@ -219,8 +233,9 @@ r
      * @param playlists  value to set User playlists to
      * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updateUser(String mail, String pass, String song, String playlists) {
+    public boolean updateUser(String mail, String pass, String song) {
         ContentValues args = new ContentValues();
+        String playlist;
         if (mail != null) {
             args.put(KEY_MAIL, mail);
 
@@ -230,12 +245,10 @@ r
 
         }
         if (song != null) {
-            args.put(KEY_NAME, song);
-
-        }
-        if (playlists != null) {
-            args.put(KEY_PLAYLISTS, playlists);
-
+            Cursor c;
+            c=checkUser(mail);
+            playlist=c.getString(2);
+            playlist=playlist+"/"+song;
         }
         return mDb.update(DATABASE_TABLE_USERS, args, KEY_ARTIST + "=" + mail, null) > 0;
     }

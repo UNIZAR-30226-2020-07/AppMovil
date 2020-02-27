@@ -70,7 +70,12 @@ public class localServer implements serverInterface {
         }
         return 1;
     }
-    public int addSong(String email){
+    public int songInfo(String name,String artist,String categoria) {
+        Cursor user = localDb.songInfo((name));
+        if (user == null) {
+            return 1;
+        }
+        return 0;
 
     }
     public int recover(String mail) {
@@ -87,8 +92,8 @@ public class localServer implements serverInterface {
         return 1;
     }
 
-    public int addSong(String mail, String pass, String song, String playlist) {
-        if (localDb.updateUser(mail, pass, song, playlist)) {
+    public int addSong(String mail, String pass, String song) {
+        if (localDb.updateUser(mail, pass, song)) {
             return 0;
         } else {
             return 1;

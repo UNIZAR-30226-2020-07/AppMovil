@@ -4,59 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/grade"
     tools:context=".MusicApp">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#F8EBF0"
             android:orientation="horizontal">
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchbar"
-                android:layout_width="354dp"
+                android:layout_width="341dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
+                android:background="#F8EBF0"
                 android:hint="@string/search" />
 
             <Button
                 android:id="@+id/search"
-                android:layout_width="65dp"
-                android:layout_height="55dp"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@mipmap/searchicon"
+                android:backgroundTint="#000000"
                 android:visibility="visible" />
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/unknown" />
-
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/searchResults"
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="673dp"
-        android:layout_gravity="bottom"
-        android:visibility="invisible">
+        android:layout_height="match_parent"
+        app:layout_anchor="@+id/linearLayout3"
+        app:layout_anchorGravity="center">
 
-    </ListView>
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.viewpager.widget.ViewPager>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
