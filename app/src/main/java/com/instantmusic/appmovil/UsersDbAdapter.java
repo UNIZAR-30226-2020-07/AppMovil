@@ -37,9 +37,11 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table users (mail text not null, pass text not null,playlists text);";
+            "create table users (_id integer primary key autoincrement, "
+                    + "mail text not null, pass text not null,playlists text not null);";
     private static final String DATABASE_CREATE_SONGS =
-            "create table songs (name text not null, _artist text not null,_categoria text not null);";
+            "create table songs (_id integer primary key autoincrement, "
+                    + "name text not null, _artist text not null, _categoria text not null);";
 
     private static final String DATABASE_NAME = "name";
     private static final String DATABASE_TABLE_USERS = "users";
