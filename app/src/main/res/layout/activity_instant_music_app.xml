@@ -180,21 +180,21 @@
                 android:layout_height="26dp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Space
-                    android:layout_width="1dp"
+                    android:layout_width="17dp"
                     android:layout_height="20dp"
                     android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/register"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="62dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edit_round"
+                    android:background="#003F51B5"
                     android:ems="10"
                     android:hint="@string/register"
                     android:importantForAutofill="no"
@@ -202,33 +202,35 @@
                     android:text="@string/register"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="#F8EBF0"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="230dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/forget"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="152dp"
+                    android:layout_width="112dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edit_round"
+                    android:background="#00FFFFFF"
+                    android:backgroundTint="#00FFFFFF"
                     android:ems="10"
                     android:hint="@string/passwordR"
                     android:importantForAutofill="no"
                     android:text="@string/passwordR"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="#F8EBF0"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <Space
-                    android:layout_width="1dp"
+                    android:layout_width="17dp"
                     android:layout_height="20dp"
                     android:layout_weight="1" />
+
             </LinearLayout>
         </LinearLayout>
 

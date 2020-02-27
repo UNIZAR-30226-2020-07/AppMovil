@@ -64,7 +64,15 @@ public class localServer implements serverInterface {
         }
         return 0;
     }
+    public int deleteUser(String email){
+        if(localDb.deleteUser(email)){
+            return 0;
+        }
+        return 1;
+    }
+    public int addSong(String email){
 
+    }
     public int recover(String mail) {
         return 0;
     }

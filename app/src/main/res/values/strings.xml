@@ -13,7 +13,7 @@
     <string name="email">Email</string>
     <string name="fondo">FondoApp</string>
     <string name="icono">InstantMusicIcono</string>
-    <string name="register">REGISTER</string>
+    <string name="register">Register</string>
     <string name="emailAlreadyInUse">That email is already registered</string>
     <string name="emailNotRegistered">That email is not registered</string>
     <string name="passwordR">Recover password</string>

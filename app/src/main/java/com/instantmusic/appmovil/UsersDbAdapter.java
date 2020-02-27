@@ -24,7 +24,7 @@ public class UsersDbAdapter {
     public static final String KEY_MAIL = "mail";
     public static final String KEY_PLAYLISTS = "playlists";
     public static final String KEY_PASS = "pass";
-
+r
     public static final String KEY_NAME = "name";
     public static final String KEY_ARTIST = "_artist";
     public static final String KEY_CATEGORY = "_categoria";
@@ -144,8 +144,8 @@ public class UsersDbAdapter {
      * @param mail id of User to delete
      * @return true if deleted, false otherwise
      */
-    public boolean deleteUser(long mail) {
-        return mDb.delete(DATABASE_TABLE_USERS, KEY_MAIL + "=" + mail, null) > 0;
+    public boolean deleteUser(String email) {
+        return mDb.delete(DATABASE_TABLE_USERS, KEY_MAIL + "=?", new String[]{email}) > 0;
     }
 
     /*
@@ -239,35 +239,6 @@ public class UsersDbAdapter {
         }
         return mDb.update(DATABASE_TABLE_USERS, args, KEY_ARTIST + "=" + mail, null) > 0;
     }
-
-    /**
-     * Create a new User using the mail and playlists provided. If the User is
-     * successfully created return the new mail for that User, otherwise return
-     * a -1 to indicate failure.
-     *
-     * @param name the name of the pass
-     * @return mail or -1 if failed
-     */
-    public long createpass(String name) {
-        if (name == null || name.isEmpty()) return -1;
-
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_NAME, name);
-
-        return mDb.insert(DATABASE_TABLE_SONGS, null, initialValues);
-    }
-
-    /**
-     * Delete the User with the given mail
-     *
-     * @param mail id of User to delete
-     * @return true if deleted, false otherwise
-     */
-    public boolean deletepass(long mail) {
-
-        return mDb.delete(DATABASE_TABLE_SONGS, KEY_ARTIST + "=" + mail, null) > 0;
-    }
-
     /**
      * Return a Cursor over the list of all Users in the database
      *
@@ -276,50 +247,6 @@ public class UsersDbAdapter {
     public Cursor searchAllSongs() {
         return mDb.query(DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, null, null, null, null, null);
     }
-
-    /**
-     * Return a Cursor positioned at the pass that matches the given mail
-     *
-     * @param mail id of User to retrieve
-     * @return Cursor positioned to matching User, if found
-     * @throws SQLException if User could not be found/retrieved
-     */
-    public Cursor searchpass(long mail) throws SQLException {
-
-        Cursor mCursor =
-                mDb.query(true, DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST,
-                                KEY_NAME}, KEY_ARTIST + "=" + mail, null,
-                        null, null, null, null);
-        if (mCursor != null) {
-            mCursor.moveToFirst();
-            if (mCursor.getCount() == 0) mCursor = null;
-        }
-        return mCursor;
-    }
-
-
-    /**
-     * Return a Cursor positioned at the pass that matches the given name
-     * If no pass with that name is found, one is created
-     * If null or empty string is passed, null is returned
-     *
-     * @param name name of pass to retrieve
-     * @return Cursor positioned to matching pass (if not found is created first) or null if empty/null pass
-     */
-    public Integer searchpass(String name) {
-        if (name == null || name.isEmpty()) return null;
-
-        Cursor mCursor = mDb.query(true, DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, KEY_NAME + " like '" + name + '\'', null, null, null, null, null);
-
-        if (mCursor.getCount() == 0) {
-            createpass(name);
-            mCursor = mDb.query(true, DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, KEY_NAME + " like '" + name + '\'', null, null, null, null, null);
-        }
-
-        mCursor.moveToFirst();
-        return mCursor.getInt(mCursor.getColumnIndex(KEY_ARTIST));
-    }
-
     /**
      * Update the User using the details provided. The User to be updated is
      * specified using the mail, and it is altered to use the mail and playlists
