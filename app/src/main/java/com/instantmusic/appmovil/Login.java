@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
         String[] from = new String[]{UsersDbAdapter.KEY_NAME, UsersDbAdapter.KEY_ARTIST, UsersDbAdapter.KEY_CATEGORY};
 
         // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[]{R.id.text1, R.id.text2};
+        int[] to = new int[]{R.id.text1, R.id.text2,R.id.text3};
         SimpleCursorAdapter search =
                 new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
         resList.setAdapter(search);

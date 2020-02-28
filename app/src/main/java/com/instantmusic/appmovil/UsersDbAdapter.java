@@ -28,6 +28,7 @@ public class UsersDbAdapter {
     public static final String KEY_NAME = "name";
     public static final String KEY_ARTIST = "_artist";
     public static final String KEY_CATEGORY = "_categoria";
+    public static final String KEY_ID = "_id";
 
     private static final String TAG = "UsersDbAdapter";
     private DatabaseHelper mDbHelper;
@@ -37,11 +38,9 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table users (_id integer primary key autoincrement, "
-                    + "mail text not null, pass text not null,playlists text not null);";
+            "create table users (mail text not null, pass text not null,playlists text not null);";
     private static final String DATABASE_CREATE_SONGS =
-            "create table songs (_id integer primary key autoincrement, "
-                    + "name text not null, _artist text not null, _categoria text not null);";
+            "create table songs (_id integer primary key autoincrement,name text not null, _artist text not null, _categoria text not null);";
 
     private static final String DATABASE_NAME = "name";
     private static final String DATABASE_TABLE_USERS = "users";
@@ -153,7 +152,7 @@ public class UsersDbAdapter {
         if (name == null) {
             return null;
         } else {
-            String[] columns = new String[]{KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+            String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
             Cursor mDbCursor =
                     mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{name},
                             null, null, null, null);
@@ -216,19 +215,23 @@ public class UsersDbAdapter {
      * @throws SQLException if User could not be found/retrieved
      */
     public Cursor searchShit(String shit) throws SQLException {
-        String[] columns = new String[]{KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+        String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
         Cursor mCursor =
-                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{shit}, null,
+                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=" +shit, null, null,
                         null, null, null, null);
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "=" + shit, null,
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "="+shit, null,
                             null, null, null, null);
         }
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "=" + shit, null,
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "="+shit, null,
                             null, null, null, null);
+        }
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+            if (mCursor.getCount() == 0) mCursor = null;
         }
         return mCursor;
     }
