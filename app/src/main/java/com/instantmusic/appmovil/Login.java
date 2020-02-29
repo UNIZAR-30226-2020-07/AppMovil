@@ -20,6 +20,7 @@ import java.util.List;
 public class Login extends AppCompatActivity {
     private ListView resList;
     private ScrollView resBarList;
+    private View resElement;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
@@ -37,8 +38,10 @@ public class Login extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSearch();
-                resBarList.setVisibility(View.VISIBLE);
                 resList.setSelection(0);
+
+                resBarList.setVisibility(View.VISIBLE);
+
                 registerForContextMenu(resBarList);
             }
         });
