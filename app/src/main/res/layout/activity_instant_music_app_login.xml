@@ -50,19 +50,12 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_anchor="@+id/linearLayout3"
-        app:layout_anchorGravity="center">
-
-        <SearchView
-            android:id="@+id/busqueda"
+        <ListView
+            android:id="@+id/searchRes"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

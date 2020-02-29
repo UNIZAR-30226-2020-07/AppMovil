@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
-        resList =findViewById(R.id.searchResults);
+        resList =findViewById(R.id.searchRes);
         server=new localServer(this);
 //        registerForContextMenu(resList);
         Button confirmButton = findViewById(R.id.search);

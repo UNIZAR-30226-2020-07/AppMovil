@@ -40,9 +40,9 @@ public class UsersDbAdapter {
     private static final String DATABASE_CREATE_USERS =
             "create table users (mail text not null, pass text not null,playlists text not null);";
     private static final String DATABASE_CREATE_SONGS =
-            "create table songs (_id integer primary key autoincrement,name text not null, _artist text not null, _categoria text not null);";
+            "create table songs (_id integer primary key autoincrement,"+"name text not null, _artist text not null, _categoria text not null);";
 
-    private static final String DATABASE_NAME = "name";
+    private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
     private static final String DATABASE_TABLE_SONGS = "songs";
     private static final int DATABASE_VERSION = 4;
@@ -217,16 +217,16 @@ public class UsersDbAdapter {
     public Cursor searchShit(String shit) throws SQLException {
         String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
         Cursor mCursor =
-                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=" +shit, null, null,
+                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?" , new String[]{shit}, null,
                         null, null, null, null);
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "="+shit, null,
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "=?" , new String[]{shit},
                             null, null, null, null);
         }
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "="+shit, null,
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "=?" , new String[]{shit},
                             null, null, null, null);
         }
         if (mCursor != null) {
