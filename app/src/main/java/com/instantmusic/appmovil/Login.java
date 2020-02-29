@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import com.instantmusic.appmovil.localServer;
 import android.database.Cursor;
+import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class Login extends AppCompatActivity {
     private ListView resList;
+    private ScrollView resBarList;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST+1;
     private static final int LOGIN = Menu.FIRST + 2;
@@ -28,15 +30,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
         resList =findViewById(R.id.searchRes);
+        resBarList =findViewById(R.id.searchBarRes);
         server=new localServer(this);
 //        registerForContextMenu(resList);
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSearch();
-                resList.setVisibility(View.VISIBLE);
+                resBarList.setVisibility(View.VISIBLE);
                 resList.setSelection(0);
-                registerForContextMenu(resList);
+                registerForContextMenu(resBarList);
             }
         });
     }
