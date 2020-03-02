@@ -19,7 +19,6 @@ import java.util.List;
 
 public class Login extends AppCompatActivity {
     private ListView resList;
-    private ScrollView resBarList;
     private View resElement;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST+1;
@@ -31,7 +30,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
         resList =findViewById(R.id.searchRes);
-        resBarList =findViewById(R.id.searchBarRes);
         server=new localServer(this);
 //        registerForContextMenu(resList);
         Button confirmButton = findViewById(R.id.search);
@@ -40,9 +38,9 @@ public class Login extends AppCompatActivity {
                 confirmSearch();
                 resList.setSelection(0);
 
-                resBarList.setVisibility(View.VISIBLE);
+                resList.setVisibility(View.VISIBLE);
 
-                registerForContextMenu(resBarList);
+                registerForContextMenu(resList);
             }
         });
     }

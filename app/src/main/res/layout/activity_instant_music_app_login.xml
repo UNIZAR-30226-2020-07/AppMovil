@@ -64,19 +64,12 @@
 
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/searchBarRes"
+        <ListView
+            android:id="@+id/searchRes"
             android:layout_width="390dp"
             android:layout_height="560dp"
             android:layout_gravity="center">
-
-            <ListView
-                android:id="@+id/searchRes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </ListView>
-        </ScrollView>
+        </ListView>
 
         <Space
             android:layout_width="match_parent"
