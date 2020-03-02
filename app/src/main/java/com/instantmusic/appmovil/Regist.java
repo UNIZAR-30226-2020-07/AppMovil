@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Regist extends AppCompatActivity {
     private EditText mail;
+    private EditText username;
     private EditText pass;
     private TextView passAux;
     private TextView emailAux;
+    private TextView userAux;
     public serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
 
@@ -27,6 +29,7 @@ public class Regist extends AppCompatActivity {
                 confirmSignUp();
             }
         });
+
         /*mDbHelper = new NotesDbAdapter(this);
         mDbHelper.open();*/
 
@@ -71,7 +74,39 @@ public class Regist extends AppCompatActivity {
         }
 
         if ( seguir ) { // Caso en el que no hay ningun error
-            server.registUser(email,password);
+            setContentView(R.layout.activity_instant_music_app_regist2);
+            Button confirmButton2 = findViewById(R.id.createF);
+            confirmButton2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    confirmSignUp2();
+                }
+            });
+        }
+    }private void confirmSignUp2() {
+        boolean seguir = true;
+        username = findViewById(R.id.usernameSign);
+        String texto;
+        String user = username.getText().toString();
+        userAux = findViewById(R.id.usernameTip);
+        if ( username.length() < 4 ) { // Caso en el que la longitud de la contrasenya no sea correcto
+            texto = "Invalid username. Use at least 4 characters";
+            userAux.setText(texto);
+            userAux.setTextColor(Color.RED);
+            seguir = false;
+        }
+        else { // La contrasenya es valida y por tanto se quita el mensaje de error de contrasenya
+            texto = "";
+            userAux.setText(texto);
+        }
+        if ( user.isEmpty() ) { // Caso en el que el email sea vacio
+            texto = "Username is empty";
+            userAux.setText(texto);
+            userAux.setTextColor(Color.RED);
+            userAux.setVisibility(View.VISIBLE);
+            seguir = false;
+        }
+        if ( seguir ) { // Caso en el que no hay ningun error
+            server.registUser(mail.getText().toString(),pass.getText().toString(),user);
             Intent i = new Intent(this, MusicApp.class);
             startActivityForResult(i, 0);
         }

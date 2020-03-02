@@ -36,4 +36,13 @@
         android:layout_weight="1"
         android:background="@color/secondaryColor" />
 
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:paddingLeft="@dimen/ancho"
+        android:paddingRight="@dimen/ancho" />
+
 </LinearLayout>

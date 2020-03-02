@@ -24,6 +24,7 @@ public class UsersDbAdapter {
     public static final String KEY_MAIL = "mail";
     public static final String KEY_PLAYLISTS = "playlists";
     public static final String KEY_PASS = "pass";
+    public static final String KEY_USER = "user";
 
     public static final String KEY_NAME = "name";
     public static final String KEY_ARTIST = "_artist";
@@ -38,7 +39,7 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table users (mail text not null, pass text not null,playlists text not null);";
+            "create table users (mail text not null, pass text not null,user not null,playlists text not null);";
     private static final String DATABASE_CREATE_SONGS =
             "create table songs (_id integer primary key autoincrement,"+"name text not null, _artist text not null, _categoria text not null);";
 
@@ -114,11 +115,12 @@ public class UsersDbAdapter {
      * @param pass the pass id (null for no pass)
      * @return mail or -1 if failed
      */
-    public long createUser(String mail, String pass) {
+    public long createUser(String mail, String pass,String user) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_MAIL, mail);
         initialValues.put(KEY_PLAYLISTS, "none");
         initialValues.put(KEY_PASS, pass);
+        initialValues.put(KEY_USER, user);
 
         return mDb.insert(DATABASE_TABLE_USERS, null, initialValues);
     }
@@ -127,7 +129,7 @@ public class UsersDbAdapter {
         if (email == null) {
             return null;
         } else {
-            String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_PLAYLISTS};
+            String[] columns = new String[]{KEY_MAIL, KEY_PASS,KEY_USER, KEY_PLAYLISTS};
             Cursor mDbCursor =
                     mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
                             null, null, null, null);
@@ -282,12 +284,11 @@ public class UsersDbAdapter {
      * @param name value to set pass name to
      * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updatepass(long mail, String name) {
-        if (name == null || name.isEmpty()) return false;
+    public boolean updatePass(String mail, String pass,String nPass) {
+        if (mail == null || mail.isEmpty()) return false;
 
         ContentValues args = new ContentValues();
-        args.put(KEY_NAME, name);
-
-        return mDb.update(DATABASE_TABLE_SONGS, args, KEY_ARTIST + "=" + mail, null) > 0;
+        args.put(KEY_PASS, nPass);
+        return mDb.update(DATABASE_TABLE_SONGS, args, KEY_MAIL + "=" + mail, null) > 0;
     }
 }

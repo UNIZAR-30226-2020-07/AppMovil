@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public interface serverInterface  {
     Cursor searchShit(String shit);
-    long registUser(String mail,String pass);
+    long registUser(String mail,String pass,String user);
     int recover(String mail);
     int checkUser(String email);
     int login(String mail,String pass);

@@ -53,8 +53,8 @@ public class localServer implements serverInterface {
         return localDb.searchShit(shit);
     }
 
-    public long registUser(String mail, String pass) {
-        return localDb.createUser(mail, pass);
+    public long registUser(String mail, String pass,String user) {
+        return localDb.createUser(mail, pass,user);
     }
 
     public int checkUser(String mail) {
