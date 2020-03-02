@@ -16,7 +16,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.multidex.MultiDex;
 
 /**
  * Actividad principal. Muestra el listado de notas.
@@ -39,7 +38,6 @@ public class MusicApp extends AppCompatActivity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        MultiDex.install(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
         server = new localServer(this);
