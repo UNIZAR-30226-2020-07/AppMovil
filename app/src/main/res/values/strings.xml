@@ -11,7 +11,8 @@
     <string name="CreateAccount3">Choose a username</string>
     <string name="PasswordAdvise">Use at least 8 characters </string>
     <string name="UsernameAdvise">Use at least 4 characters </string>
-    <string name="CreateAccount">Create </string>
+    <string name="CreateAccount">Next </string>
+    <string name="CreateAccount4">Create </string>
     <string name="email">Email</string>
     <string name="fondo">FondoApp</string>
     <string name="icono">InstantMusicIcono</string>

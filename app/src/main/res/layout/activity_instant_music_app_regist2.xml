@@ -19,38 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="11dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/Accion"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/backButton1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@mipmap/flecha" />
-
-            <Space
-                android:layout_width="30sp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/Accion"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/Accion1"
-                android:textColor="#F8EBF0"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="110sp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-        </LinearLayout>
+            android:layout_height="43dp"
+            android:text="@string/Accion1"
+            android:textColor="#F8EBF0"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
@@ -76,7 +52,7 @@
                     android:id="@+id/Enunciado1"
                     android:layout_width="wrap_content"
                     android:layout_height="43dp"
-                    android:text="@string/CreateAccount1"
+                    android:text="@string/CreateAccount3"
                     android:textColor="#F8EBF0"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -87,7 +63,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/emailSign"
+                android:id="@+id/usernameSign"
                 android:layout_width="375dp"
                 android:layout_height="39dp"
                 android:layout_gravity="center"
@@ -107,69 +83,10 @@
                 android:textSize="20sp"
                 android:paddingLeft="10dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="17dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/emailTip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/emailAlreadyInUse"
-                    android:textColor="#FA3021"
-                    android:visibility="invisible" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="17dp"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/Enunciado2"
-                    android:layout_width="match_parent"
-                    android:layout_height="43dp"
-                    android:text="@string/CreateAccount2"
-                    android:textColor="#F8EBF0"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/passwordSign"
-                style="@style/Widget.AppCompat.EditText"
-                android:layout_width="375dp"
-                android:layout_height="37dp"
-                android:layout_gravity="center"
-                android:autofillHints=""
-                android:background="@drawable/edit_round"
-                android:ems="10"
-                android:hint="@android:string/defaultMsisdnAlphaTag"
-                android:inputType="textPassword"
-                android:singleLine="true"
-                android:textAllCaps="false"
-                android:textColor="#F8EBF0"
-                android:textColorHighlight="#F8EBF0"
-                android:textColorHint="#7E7A80"
-                android:textColorLink="#7E7A80"
-                android:textSize="20sp"
-                tools:targetApi="o"
-                android:paddingLeft="10dp"/>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,10 +98,10 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/passwordTip"
+                    android:id="@+id/usernameTip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/PasswordAdvise"
+                    android:text="@string/UsernameAdvise"
                     android:textColor="#F8EBF0" />
             </LinearLayout>
 
@@ -194,12 +111,12 @@
                 android:layout_height="25dp" />
 
             <Button
-                android:id="@+id/create"
+                android:id="@+id/createF"
                 android:layout_width="335dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/edit_round"
-                android:text="@string/CreateAccount"
+                android:text="@string/CreateAccount4"
                 android:textColor="#F8EBF0"
                 android:textStyle="bold" />
 
