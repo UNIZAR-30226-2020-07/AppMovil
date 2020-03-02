@@ -53,7 +53,7 @@
         <ScrollView
             android:id="@+id/searchBarRes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="585dp">
 
             <ListView
                 android:id="@+id/searchRes"
@@ -62,6 +62,45 @@
 
             </ListView>
         </ScrollView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/secondaryColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menuButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/menuButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/menuButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/menuButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Button" />
+        </LinearLayout>
 
     </LinearLayout>
 
