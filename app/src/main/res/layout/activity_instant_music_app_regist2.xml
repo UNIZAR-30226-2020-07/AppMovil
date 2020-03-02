@@ -19,14 +19,43 @@
             android:layout_width="match_parent"
             android:layout_height="11dp" />
 
-        <TextView
-            android:id="@+id/Accion"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:text="@string/Accion1"
-            android:textColor="#F8EBF0"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/backButton2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@mipmap/flecha"
+                android:shadowColor="#00FFFFFF"
+                android:textColor="#00FFFFFF"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorHint="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
+
+            <Space
+                android:layout_width="67dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
+            <TextView
+                android:id="@+id/Accion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/Accion1"
+                android:textColor="#F8EBF0"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="110sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

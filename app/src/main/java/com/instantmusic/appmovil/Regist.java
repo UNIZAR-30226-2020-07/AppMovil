@@ -14,7 +14,9 @@ public class Regist extends AppCompatActivity {
     private EditText mail;
     private EditText username;
     private EditText pass;
+    private EditText passConfirm;
     private TextView passAux;
+    private TextView passConfirmAux;
     private TextView emailAux;
     private TextView userAux;
     public serverInterface server;
@@ -42,8 +44,10 @@ public class Regist extends AppCompatActivity {
         String texto;
         String email = mail.getText().toString();
         String password = pass.getText().toString();
+        String passwordConfirm = passConfirm.getText().toString();
         emailAux = findViewById(R.id.emailTip);
         passAux = findViewById(R.id.passwordTip);
+        passConfirmAux = findViewById(R.id.passwordTip3);
         if ( password.length() < 8 ) { // Caso en el que la longitud de la contrasenya no sea correcto
             texto = "Invalid password. Use at least 8 characters";
             passAux.setText(texto);
@@ -53,6 +57,12 @@ public class Regist extends AppCompatActivity {
         else { // La contrasenya es valida y por tanto se quita el mensaje de error de contrasenya
             texto = "";
             passAux.setText(texto);
+        }
+        if ( passwordConfirm != password ) { // Las contrasenyas no coinciden, se muestra mensaje de error
+            passConfirmAux.setVisibility(View.VISIBLE);
+        }
+        else { // Coinciden por tanto se quita el mensaje
+            passConfirmAux.setVisibility(View.INVISIBLE);
         }
         if ( email.isEmpty() ) { // Caso en el que el email sea vacio
             texto = "Email is empty";

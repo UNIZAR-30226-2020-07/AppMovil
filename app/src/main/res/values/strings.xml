@@ -4,11 +4,13 @@
     <string name="password">Password</string>
     <string name="Correo_electronico">Email</string>
     <string name="Contrasenya">Password</string>
+    <string name="ConfirmPassword">Passwords does not match</string>
     <string name="Accion1">Create account</string>
     <string name="Accion2">Log in</string>
     <string name="CreateAccount1">What´s your email?</string>
     <string name="CreateAccount2">Pick a password</string>
     <string name="CreateAccount3">Choose a username</string>
+    <string name="CreateAccount5">Confirm password</string>
     <string name="PasswordAdvise">Use at least 8 characters </string>
     <string name="UsernameAdvise">Use at least 4 characters </string>
     <string name="CreateAccount">Next </string>
