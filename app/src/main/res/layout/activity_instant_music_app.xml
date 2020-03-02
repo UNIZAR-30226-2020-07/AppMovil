@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="43dp"
             android:text="@string/Accion2"
-            android:textColor="#F8EBF0"
+            android:textColor="@color/color2"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:text="@string/Correo_electronico"
-                    android:textColor="#F8EBF0"
+                    android:textColor="@color/color2"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -83,16 +83,15 @@
                 android:background="@drawable/edit_round"
                 android:ems="10"
                 android:hapticFeedbackEnabled="true"
-                android:hint="@android:string/defaultMsisdnAlphaTag"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#F8EBF0"
-                android:textColorHighlight="#F8EBF0"
-                android:textColorHint="#7E7A80"
-                android:textColorLink="#7E7A80"
+                android:textColor="@color/color2"
+                android:textColorHighlight="@color/color2"
+                android:textColorHint="@color/color5"
+                android:textColorLink="@color/color5"
                 android:textSize="20sp" />
 
             <Space
@@ -114,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:text="@string/Contrasenya"
-                    android:textColor="#F8EBF0"
+                    android:textColor="@color/color2"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -129,7 +128,6 @@
                 android:layout_width="375dp"
                 android:layout_height="37dp"
                 android:layout_gravity="center"
-                android:autofillHints=""
                 android:background="@drawable/edit_round"
                 android:ems="10"
                 android:hint="@android:string/defaultMsisdnAlphaTag"
@@ -137,10 +135,10 @@
                 android:paddingLeft="10dp"
                 android:singleLine="true"
                 android:textAllCaps="false"
-                android:textColor="#F8EBF0"
-                android:textColorHighlight="#F8EBF0"
-                android:textColorHint="#7E7A80"
-                android:textColorLink="#7E7A80"
+                android:textColor="@color/color2"
+                android:textColorHighlight="@color/color2"
+                android:textColorHint="@color/color5"
+                android:textColorLink="@color/color5"
                 android:textSize="20sp"
                 tools:targetApi="o" />
 
@@ -160,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/Advise"
-                    android:textColor="#FA3021"
+                    android:textColor="@color/color4"
                     android:visibility="invisible" />
 
             </LinearLayout>
@@ -172,7 +170,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/edit_round"
                 android:text="@string/accept"
-                android:textColor="#F8EBF0"
+                android:textColor="@color/color2"
                 android:textStyle="bold" />
 
             <Space
@@ -189,15 +187,14 @@
                     android:id="@+id/register"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="53dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="#003F51B5"
-                    android:ems="10"
                     android:hint="@string/register"
                     android:importantForAutofill="no"
                     android:inputType="none"
                     android:text="@string/register"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="#F8EBF0"
+                    android:textColor="@color/color2"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -212,13 +209,13 @@
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:background="#00FFFFFF"
-                    android:backgroundTint="#00FFFFFF"
+                    android:backgroundTint="@color/color3"
                     android:ems="10"
                     android:hint="@string/passwordR"
                     android:importantForAutofill="no"
                     android:text="@string/passwordR"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="#F8EBF0"
+                    android:textColor="@color/color2"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -226,6 +223,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
