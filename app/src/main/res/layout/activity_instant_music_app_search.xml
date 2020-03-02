@@ -47,8 +47,8 @@
 
                 <Button
                     android:id="@+id/search"
-                    android:layout_width="54dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="53dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@mipmap/searchicon"
                     android:backgroundTint="#000000"
@@ -66,45 +66,11 @@
 
         <ListView
             android:id="@+id/searchRes"
-            android:layout_width="390dp"
-            android:layout_height="560dp"
-            android:layout_gravity="center">
-        </ListView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/secondaryColor" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/menuButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/menuButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/menuButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/menuButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
+            android:layout_width="394dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/backColor"
+            android:visibility="visible"></ListView>
 
     </LinearLayout>
 
