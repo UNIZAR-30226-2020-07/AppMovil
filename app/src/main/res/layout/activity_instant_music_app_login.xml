@@ -20,40 +20,55 @@
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#F8EBF0"
             android:orientation="horizontal">
 
             <Space
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <AutoCompleteTextView
-                android:id="@+id/searchbar"
-                android:layout_width="341dp"
-                android:layout_height="56dp"
                 android:layout_weight="1"
-                android:background="#F8EBF0"
-                android:hint="@string/search" />
+                android:background="@color/secondaryColor" />
 
-            <Button
-                android:id="@+id/search"
-                android:layout_width="54dp"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/backColor"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/searchbar"
+                    android:layout_width="341dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:background="#F8EBF0"
+                    android:hint="@string/search" />
+
+                <Button
+                    android:id="@+id/search"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@mipmap/searchicon"
+                    android:backgroundTint="#000000"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@mipmap/searchicon"
-                android:backgroundTint="#000000"
-                android:visibility="visible" />
+                android:background="@color/secondaryColor" />
 
         </LinearLayout>
 
         <ScrollView
             android:id="@+id/searchBarRes"
-            android:layout_width="match_parent"
-            android:layout_height="585dp">
+            android:layout_width="390dp"
+            android:layout_height="560dp"
+            android:layout_gravity="center">
 
             <ListView
                 android:id="@+id/searchRes"
@@ -70,7 +85,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="70dp"
             android:orientation="horizontal">
 
             <Button
