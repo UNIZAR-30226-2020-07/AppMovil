@@ -41,10 +41,13 @@ public class Regist extends AppCompatActivity {
         boolean seguir = true;
         mail = findViewById(R.id.emailSign);
         pass = findViewById(R.id.passwordSign);
+        passConfirm = findViewById(R.id.passwordSign4);
         String texto;
         String email = mail.getText().toString();
         String password = pass.getText().toString();
         String passwordConfirm = passConfirm.getText().toString();
+        System.out.println(passwordConfirm);
+        System.out.println(password);
         emailAux = findViewById(R.id.emailTip);
         passAux = findViewById(R.id.passwordTip);
         passConfirmAux = findViewById(R.id.passwordTip3);
@@ -58,8 +61,9 @@ public class Regist extends AppCompatActivity {
             texto = "";
             passAux.setText(texto);
         }
-        if ( passwordConfirm != password ) { // Las contrasenyas no coinciden, se muestra mensaje de error
+        if ( !passwordConfirm.equals(password) ) { // Las contrasenyas no coinciden, se muestra mensaje de error
             passConfirmAux.setVisibility(View.VISIBLE);
+            seguir = false;
         }
         else { // Coinciden por tanto se quita el mensaje
             passConfirmAux.setVisibility(View.INVISIBLE);
