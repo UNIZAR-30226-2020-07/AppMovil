@@ -16,6 +16,8 @@
     <string name="CreateAccount">Next </string>
     <string name="CreateAccount4">Create </string>
     <string name="email">Email</string>
+    <string name="SongName">Nombre de la cancion</string>
+    <string name="AutorName">Nombre del autor</string>
     <string name="fondo">FondoApp</string>
     <string name="icono">InstantMusicIcono</string>
     <string name="register">Register</string>
