@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import com.instantmusic.appmovil.localServer;
 import android.database.Cursor;
@@ -20,10 +21,9 @@ import java.util.List;
 
 public class Login extends AppCompatActivity {
     private ListView resList;
+    private String stringSearch;
     private View resElement;
     private static final int SEARCH = Menu.FIRST;
-    private static final int RECOVER = Menu.FIRST+1;
-    private static final int LOGIN = Menu.FIRST + 2;
     private AutoCompleteTextView shit;
     private serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,8 @@ public class Login extends AppCompatActivity {
         resList =findViewById(R.id.searchRes);
         server=new localServer(this);
 //        registerForContextMenu(resList);
+        EditText searchBar=findViewById(R.id.searchbar);
+        stringSearch=searchBar.getText().toString();
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -43,7 +45,12 @@ public class Login extends AppCompatActivity {
 
     private void confirmSearch() {
         Intent i = new Intent(this, Search.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("search",stringSearch);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtras(bundle);
         startActivityForResult(i, 0);
+
 
     }
 

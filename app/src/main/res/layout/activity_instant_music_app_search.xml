@@ -38,7 +38,7 @@
                 android:orientation="horizontal">
 
                 <AutoCompleteTextView
-                    android:id="@+id/searchbar"
+                    android:id="@+id/searchbar2"
                     android:layout_width="341dp"
                     android:layout_height="56dp"
                     android:layout_weight="1"
