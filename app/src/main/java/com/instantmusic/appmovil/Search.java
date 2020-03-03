@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -51,7 +52,12 @@ public class Search extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,Login.class);
+        startActivity(intent);
+    }
     private void confirmSearch() {
         shit = findViewById(R.id.searchbar);
         Cursor shitCursor = server.searchShit(shit.getText().toString());

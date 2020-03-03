@@ -29,6 +29,7 @@
         <activity android:name=".Login"></activity>
         <activity android:name=".Recover"></activity>
         <activity android:name=".Regist"></activity>
+        <activity android:name=".Search"></activity>
     </application>
 
 </manifest>

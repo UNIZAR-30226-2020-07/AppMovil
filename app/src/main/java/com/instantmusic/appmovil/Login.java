@@ -36,13 +36,7 @@ public class Login extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
                 confirmSearch();
-                resList.setSelection(0);
-
-                resList.setVisibility(View.VISIBLE);
-
-                registerForContextMenu(resList);
             }
         });
     }

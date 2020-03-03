@@ -3,29 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:visibility="visible">
 
-    <ImageView
+    <Button
         android:id="@+id/text1"
-        android:layout_width="150dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="150sp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:srcCompat="@drawable/imagen0" />
+        android:background="@drawable/imagen0"
+        android:textColor="@color/backColor" />
 
     <Button
         android:id="@+id/text2"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="100sp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/secondaryColor" />
+        android:background="@color/backColor"
+        android:textColor="@color/secondaryColor" />
 
     <Button
         android:id="@+id/text3"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
-        android:layout_height="100sp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/secondaryColor" />
+        android:background="@color/backColor"
+        android:textColor="@color/secondaryColor" />
 
 </LinearLayout>

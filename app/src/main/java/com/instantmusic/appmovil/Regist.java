@@ -19,6 +19,7 @@ public class Regist extends AppCompatActivity {
     private TextView passConfirmAux;
     private TextView emailAux;
     private TextView userAux;
+    private String email;
     public serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
 
@@ -31,19 +32,32 @@ public class Regist extends AppCompatActivity {
                 confirmSignUp();
             }
         });
-
-        /*mDbHelper = new NotesDbAdapter(this);
-        mDbHelper.open();*/
-
+        Button confirmButton2 = findViewById(R.id.backButton1);
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back1();
+            }
+        });
     }
-
+    @Override
+    public void onBackPressed() {}
+    private void back1() {
+        Intent i = new Intent();
+        setResult(RESULT_OK, i);
+        finish();
+    }private void back2() {
+        setContentView(R.layout.activity_instant_music_app_regist);
+        EditText mail=findViewById(R.id.emailSign);
+        mail.setText(email);
+    }
     private void confirmSignUp() {
         boolean seguir = true;
         mail = findViewById(R.id.emailSign);
         pass = findViewById(R.id.passwordSign);
         passConfirm = findViewById(R.id.passwordSign4);
         String texto;
-        String email = mail.getText().toString();
+        email = mail.getText().toString();
         String password = pass.getText().toString();
         String passwordConfirm = passConfirm.getText().toString();
         System.out.println(passwordConfirm);
@@ -93,6 +107,13 @@ public class Regist extends AppCompatActivity {
             confirmButton2.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     confirmSignUp2();
+                }
+            });
+            Button confirmButton3 = findViewById(R.id.backButton2);
+            confirmButton3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    back2();
                 }
             });
         }
