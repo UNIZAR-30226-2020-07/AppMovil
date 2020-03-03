@@ -130,7 +130,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/edit_round"
                 android:ems="10"
-                android:hint="@android:string/defaultMsisdnAlphaTag"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:singleLine="true"

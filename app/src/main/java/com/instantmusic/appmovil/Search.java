@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Search extends AppCompatActivity {
     private ListView resList;
+    private Cursor shitCursor;
     private String stringSearch;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST + 1;
@@ -64,8 +65,7 @@ public class Search extends AppCompatActivity {
 
     private void confirmSearch() {
         shit = findViewById(R.id.searchbar2);
-
-        Cursor shitCursor = server.searchShit(shit.getText().toString());
+        shitCursor = server.searchShit(shit.getText().toString());
         System.out.println("debug");
         startManagingCursor(shitCursor);
 

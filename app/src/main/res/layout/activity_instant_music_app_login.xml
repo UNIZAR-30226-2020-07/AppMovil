@@ -64,16 +64,9 @@
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/searchRes"
-            android:layout_width="390dp"
-            android:layout_height="560dp"
-            android:layout_gravity="center">
-        </ListView>
-
         <Space
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="500dp"
             android:background="@color/secondaryColor" />
 
         <LinearLayout
