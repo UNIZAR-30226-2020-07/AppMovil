@@ -31,9 +31,14 @@ public class Login extends AppCompatActivity {
         server=new localServer(this);
 //        registerForContextMenu(resList);
         EditText searchBar=findViewById(R.id.searchbar);
-        stringSearch=searchBar.getText().toString();
+        if(searchBar.getText().length() == 0){
+            stringSearch="";
+        }else{
+            stringSearch=searchBar.getText().toString();
+        }
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 confirmSearch();
             }
@@ -49,7 +54,8 @@ public class Login extends AppCompatActivity {
         startActivityForResult(i, 1);
 
     }
-
+    @Override
+    public void onBackPressed() {}
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case SEARCH:

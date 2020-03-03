@@ -14,7 +14,15 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="250sp" />
+            android:layout_height="220sp" />
+
+        <ImageView
+            android:id="@+id/lupaGrande"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="center"
+            app:srcCompat="@drawable/lupagrande2" />
 
         <TextView
             android:id="@+id/searchTip1"
@@ -25,14 +33,6 @@
             android:textColor="@color/secondaryColor"
             android:textSize="22sp" />
 
-        <ImageView
-            android:id="@+id/lupaGrande"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="center"
-            app:srcCompat="@drawable/searchicon" />
-
         <TextView
             android:id="@+id/searchTip2"
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:text="@string/searchTip2"
             android:textAlignment="center"
             android:textColor="@color/secondaryColor"
-            android:textSize="22sp" />
+            android:textSize="21sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -114,7 +114,44 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/secondaryColor"
-            android:visibility="visible"></ListView>
+            android:visibility="visible">
+
+        </ListView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="570dp"
+            android:background="@color/secondaryColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menuButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/menuButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/menuButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/menuButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
     </LinearLayout>
 
