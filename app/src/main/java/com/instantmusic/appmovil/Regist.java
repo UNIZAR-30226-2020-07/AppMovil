@@ -159,8 +159,10 @@ public class Regist extends AppCompatActivity {
         }
         if ( seguir ) { // Caso en el que no hay ningun error
             server.registUser(mail.getText().toString(),pass.getText().toString(),user);
-            Intent i = new Intent(this, MusicApp.class);
-            startActivityForResult(i, 0);
+            Intent i = new Intent();
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            setResult(RESULT_OK, i);
+            finish();
         }
     }
 }
