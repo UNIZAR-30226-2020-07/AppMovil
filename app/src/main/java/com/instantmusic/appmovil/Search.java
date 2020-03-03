@@ -50,9 +50,6 @@ public class Search extends AppCompatActivity {
 
                 confirmSearch();
                 resList.setSelection(0);
-
-                resList.setVisibility(View.VISIBLE);
-
                 registerForContextMenu(resList);
             }
         });
@@ -66,8 +63,10 @@ public class Search extends AppCompatActivity {
     }
 
     private void confirmSearch() {
-        shit = findViewById(R.id.searchbar);
+        shit = findViewById(R.id.searchbar2);
+
         Cursor shitCursor = server.searchShit(shit.getText().toString());
+        System.out.println("debug");
         startManagingCursor(shitCursor);
 
         // Create an array to specify the fields we want to display in the list (only TITLE)
