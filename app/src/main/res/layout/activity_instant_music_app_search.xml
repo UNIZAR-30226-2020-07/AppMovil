@@ -21,13 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0"
             android:text="@string/searchTip1"
             android:textColor="@color/secondaryColor"
             android:textSize="22sp" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/lupaGrande"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -35,7 +34,7 @@
             app:srcCompat="@drawable/searchicon" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/searchTip2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/searchTip2"
