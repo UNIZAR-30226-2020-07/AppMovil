@@ -39,7 +39,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background=""
+                android:background="#00FFFFFF"
                 android:scaleType="center"
                 app:srcCompat="@drawable/scrolldown" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background=""
+                android:background="#00FFFFFF"
                 android:scaleType="center"
                 app:srcCompat="@drawable/points" />
 
@@ -121,6 +121,17 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
     </LinearLayout>
