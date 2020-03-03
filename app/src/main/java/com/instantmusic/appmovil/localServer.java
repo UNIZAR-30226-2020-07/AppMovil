@@ -103,4 +103,7 @@ public class localServer implements serverInterface {
             return 1;
         }
     }
+    public void close(){
+        localDb.close();
+    }
 }

@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Search extends AppCompatActivity {
     private ListView resList;
-    private Cursor shitCursor;
     private String stringSearch;
     private TextView searchTip1;
     private TextView searchTip2;
@@ -65,20 +65,26 @@ public class Search extends AppCompatActivity {
                 registerForContextMenu(resList);
             }
         });
-
     }
 
-    private void confirmSearch() {
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        setResult(RESULT_OK, i);
+        finish();
+    }
+    private void confirmSearch() {
         shit = findViewById(R.id.searchbar2);
         System.out.println(shit.getText().toString());
-        shitCursor = server.searchShit(shit.getText().toString());
+        Cursor shitCursor = server.searchShit(shit.getText().toString());
         if (shitCursor == null) {
             searchTip1.setVisibility(View.VISIBLE);
             searchTip2.setVisibility(View.VISIBLE);
             lupaGrande.setVisibility(View.VISIBLE);
             // Create an array to specify the fields we want to display in the list (only TITLE)
-            String[] from = new String[]{null, null, null};
+            String[] from = new String[]{UsersDbAdapter.KEY_NAME, UsersDbAdapter.KEY_ARTIST, UsersDbAdapter.KEY_CATEGORY};
 
             // and an array of the fields we want to bind those fields to (in this case just text1)
             int[] to = new int[]{R.id.text1, R.id.text2, R.id.text3};
@@ -103,13 +109,7 @@ public class Search extends AppCompatActivity {
         }
 
     }
-
-    @Override
-    public void onBackPressed() {
-        finishActivity(1);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case SEARCH:
                 shit = findViewById(R.id.searchbar2);
@@ -118,5 +118,5 @@ public class Search extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

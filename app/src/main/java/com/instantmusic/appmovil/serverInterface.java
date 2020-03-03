@@ -12,5 +12,6 @@ public interface serverInterface  {
     int login(String mail,String pass);
     int addSongToUser(String mail,String pass,String song);
     long addSong(String name,String artist,String categoria);
+    void close();
 
 }
