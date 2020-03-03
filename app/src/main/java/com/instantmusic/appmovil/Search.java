@@ -60,8 +60,9 @@ public class Search extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
+        Intent i = new Intent();
+        setResult(RESULT_OK, i);
+        finish();
     }
 
     private void confirmSearch() {

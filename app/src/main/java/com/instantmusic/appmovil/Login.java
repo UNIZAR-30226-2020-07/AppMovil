@@ -22,7 +22,6 @@ import java.util.List;
 public class Login extends AppCompatActivity {
     private ListView resList;
     private String stringSearch;
-    private View resElement;
     private static final int SEARCH = Menu.FIRST;
     private AutoCompleteTextView shit;
     private serverInterface server;
@@ -49,7 +48,7 @@ public class Login extends AppCompatActivity {
         bundle.putString("search",stringSearch);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtras(bundle);
-        startActivityForResult(i, 0);
+        startActivityForResult(i, 1);
 
 
     }

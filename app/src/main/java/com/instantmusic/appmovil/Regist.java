@@ -48,6 +48,20 @@ public class Regist extends AppCompatActivity {
         finish();
     }private void back2() {
         setContentView(R.layout.activity_instant_music_app_regist);
+        Button confirmButton = findViewById(R.id.create);
+        server=new localServer(this);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                confirmSignUp();
+            }
+        });
+        Button confirmButton2 = findViewById(R.id.backButton1);
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back1();
+            }
+        });
         EditText mail=findViewById(R.id.emailSign);
         mail.setText(email);
     }
