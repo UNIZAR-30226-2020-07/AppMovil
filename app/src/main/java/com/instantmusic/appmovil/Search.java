@@ -34,9 +34,9 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_search);
         resList = findViewById(R.id.searchRes);
-        searchTip1=findViewById(R.id.searchTip1);
-        searchTip2=findViewById(R.id.searchTip2);
-        lupaGrande=findViewById(R.id.lupaGrande);
+        searchTip1 = findViewById(R.id.searchTip1);
+        searchTip2 = findViewById(R.id.searchTip2);
+        lupaGrande = findViewById(R.id.lupaGrande);
         Bundle datos = this.getIntent().getExtras();
         stringSearch = datos.getString("search");
         server = new localServer(this);
@@ -75,17 +75,25 @@ public class Search extends AppCompatActivity {
     private void confirmSearch() {
 
         shit = findViewById(R.id.searchbar2);
-        if(shit.getText().toString()==null){
+        System.out.println(shit.getText().toString());
+        shitCursor = server.searchShit(shit.getText().toString());
+        if (shitCursor == null) {
             searchTip1.setVisibility(View.VISIBLE);
             searchTip2.setVisibility(View.VISIBLE);
             lupaGrande.setVisibility(View.VISIBLE);
-        }else {
+            // Create an array to specify the fields we want to display in the list (only TITLE)
+            String[] from = new String[]{null, null, null};
+
+            // and an array of the fields we want to bind those fields to (in this case just text1)
+            int[] to = new int[]{R.id.text1, R.id.text2, R.id.text3};
+            SimpleCursorAdapter search =
+                    new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
+            resList.setAdapter(search);
+        } else {
             searchTip1.setVisibility(View.INVISIBLE);
             searchTip2.setVisibility(View.INVISIBLE);
             lupaGrande.setVisibility(View.INVISIBLE);
 
-            shitCursor = server.searchShit(shit.getText().toString());
-            System.out.println("debug");
             startManagingCursor(shitCursor);
 
             // Create an array to specify the fields we want to display in the list (only TITLE)
@@ -97,6 +105,7 @@ public class Search extends AppCompatActivity {
                     new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
             resList.setAdapter(search);
         }
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
