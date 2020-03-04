@@ -7,17 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import com.instantmusic.appmovil.localServer;
-import android.database.Cursor;
-import android.widget.ScrollView;
-import android.widget.SimpleCursorAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.net.UnknownServiceException;
-import java.util.List;
 
 public class Login extends AppCompatActivity {
     private static final int SEARCH = Menu.FIRST;
@@ -30,7 +21,7 @@ public class Login extends AppCompatActivity {
         server=new localServer(this);
 //        registerForContextMenu(resList);
 
-        Button confirmButton = findViewById(R.id.menuButton2);
+        Button confirmButton = findViewById(R.id.menuButton1);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,14 +37,4 @@ public class Login extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {}
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case SEARCH:
-                shit=findViewById(R.id.searchbar);
-                server.searchShit(shit.getText().toString());
-                return true;
-            
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

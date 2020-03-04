@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Search extends AppCompatActivity {
     private ListView resList;
+    private EditText search;
     private TextView searchTip1;
     private TextView searchTip2;
     private ImageView lupaGrande;
@@ -36,6 +39,7 @@ public class Search extends AppCompatActivity {
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
+        search=findViewById(R.id.searchbar2);
         server = new localServer(this);
 //        registerForContextMenu(resList);
         shit = findViewById(R.id.searchbar2);
@@ -43,9 +47,19 @@ public class Search extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                confirmSearch();
+                search();
                 resList.setSelection(0);
                 registerForContextMenu(resList);
+            }
+        });
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search();
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -58,8 +72,10 @@ public class Search extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
-    public void
-    private void confirmSearch() {
+
+
+
+    private void search() {
         shit = findViewById(R.id.searchbar2);
         System.out.println(shit.getText().toString());
         Cursor shitCursor = server.searchShit(shit.getText().toString());
