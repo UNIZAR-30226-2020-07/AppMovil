@@ -8,6 +8,7 @@
     tools:context=".MusicApp">
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -55,6 +56,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -66,6 +68,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
 
             <Space
@@ -118,40 +121,54 @@
 
         </ListView>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="570dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_anchor="@+id/linearLayout4"
+        app:layout_anchorGravity="bottom|center">
+
+        <Button
+            android:id="@+id/menuButton1"
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:layout_weight="0"
             android:background="@color/secondaryColor" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+        <Button
+            android:id="@+id/menuButton2"
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
 
-            <Button
-                android:id="@+id/menuButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+        <Button
+            android:id="@+id/menuButton3"
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
 
-            <Button
-                android:id="@+id/menuButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+        <Button
+            android:id="@+id/menuButton4"
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
 
-            <Button
-                android:id="@+id/menuButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/menuButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/menuButton5"
+            style="@android:style/ButtonBar"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
 
     </LinearLayout>
 

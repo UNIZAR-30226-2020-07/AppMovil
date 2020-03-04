@@ -20,7 +20,6 @@ import java.net.UnknownServiceException;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
-    private String stringSearch;
     private static final int SEARCH = Menu.FIRST;
     private AutoCompleteTextView shit;
     private serverInterface server;
@@ -30,27 +29,18 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_login);
         server=new localServer(this);
 //        registerForContextMenu(resList);
-        EditText searchBar=findViewById(R.id.searchbar);
-        if(searchBar.getText().length() == 0){
-            stringSearch="";
-        }else{
-            stringSearch=searchBar.getText().toString();
-        }
-        Button confirmButton = findViewById(R.id.search);
+
+        Button confirmButton = findViewById(R.id.menuButton2);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmSearch();
+                Search();
             }
         });
     }
 
-    private void confirmSearch() {
+    private void Search() {
         Intent i = new Intent(this, Search.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("search",stringSearch);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtras(bundle);
         startActivityForResult(i, 1);
 
     }

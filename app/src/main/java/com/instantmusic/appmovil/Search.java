@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Search extends AppCompatActivity {
     private ListView resList;
-    private String stringSearch;
     private TextView searchTip1;
     private TextView searchTip2;
     private ImageView lupaGrande;
@@ -37,25 +36,9 @@ public class Search extends AppCompatActivity {
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
-        Bundle datos = this.getIntent().getExtras();
-        stringSearch = datos.getString("search");
         server = new localServer(this);
 //        registerForContextMenu(resList);
         shit = findViewById(R.id.searchbar2);
-        if (stringSearch != "") {
-            shit.setText(stringSearch);
-            Cursor shitCursor = server.searchShit(stringSearch);
-            startManagingCursor(shitCursor);
-
-            // Create an array to specify the fields we want to display in the list (only TITLE)
-            String[] from = new String[]{UsersDbAdapter.KEY_NAME, UsersDbAdapter.KEY_ARTIST, UsersDbAdapter.KEY_CATEGORY};
-
-            // and an array of the fields we want to bind those fields to (in this case just text1)
-            int[] to = new int[]{R.id.text1, R.id.text2, R.id.text3};
-            SimpleCursorAdapter search =
-                    new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
-            resList.setAdapter(search);
-        }
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -75,6 +58,7 @@ public class Search extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
+    public void
     private void confirmSearch() {
         shit = findViewById(R.id.searchbar2);
         System.out.println(shit.getText().toString());
