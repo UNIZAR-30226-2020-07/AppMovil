@@ -21,17 +21,47 @@ public class Login extends AppCompatActivity {
         server=new localServer(this);
 //        registerForContextMenu(resList);
 
-        Button confirmButton = findViewById(R.id.menuButton1);
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+        Button Button2 = findViewById(R.id.menuButton2);
+        Button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Search();
+            }
+        });Button Button3 = findViewById(R.id.menuButton3);
+        Button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Podcasts();
+            }
+        });Button Button4 = findViewById(R.id.menuButton4);
+        Button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Friends();
+            }
+        });Button Button5 = findViewById(R.id.menuButton5);
+        Button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings();
             }
         });
     }
 
     private void Search() {
         Intent i = new Intent(this, Search.class);
+        startActivityForResult(i, 1);
+
+    }private void Podcasts() {
+        Intent i = new Intent(this, Podcasts.class);
+        startActivityForResult(i, 1);
+
+    }private void Friends() {
+        Intent i = new Intent(this, Friends.class);
+        startActivityForResult(i, 1);
+
+    }private void Settings() {
+        Intent i = new Intent(this, Settings.class);
         startActivityForResult(i, 1);
 
     }

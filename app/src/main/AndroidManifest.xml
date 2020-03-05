@@ -30,6 +30,9 @@
         <activity android:name=".Recover"></activity>
         <activity android:name=".Regist"></activity>
         <activity android:name=".Search"></activity>
+        <activity android:name=".Friends"></activity>
+        <activity android:name=".Podcasts"></activity>
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>
