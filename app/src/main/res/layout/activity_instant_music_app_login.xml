@@ -17,72 +17,156 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:orientation="horizontal"
-        app:layout_anchor="@+id/linearLayout3"
-        app:layout_anchorGravity="bottom|center">
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/grade"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/menuButton6"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
+
+        <Space
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/grade" />
+
+        <ImageView
+            android:id="@+id/menuButton7"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
+
+        <Space
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/grade" />
+
+        <ImageView
+            android:id="@+id/menuButton8"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
+
+        <Space
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/grade" />
+
+        <ImageView
+            android:id="@+id/menuButton9"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
+
+        <Space
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/grade" />
+
+        <ImageView
+            android:id="@+id/menuButton10"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="60sp"
+            android:layout_weight="0"
+            android:background="@color/secondaryColor" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="2sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/menuButton1"
             style="@android:style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@color/secondaryColor" />
+            android:background="@drawable/ic_launcher_foreground" />
 
         <Space
             android:layout_width="1sp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/grade" />
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/menuButton2"
             style="@android:style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@color/secondaryColor" />
+            android:background="@drawable/searchicon" />
 
         <Space
-            android:layout_width="1sp"
+            android:layout_width="2sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/menuButton3"
-            style="@android:style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@color/secondaryColor" />
+            android:background="@drawable/searchicon" />
 
         <Space
-            android:layout_width="1sp"
+            android:layout_width="2sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/menuButton4"
-            style="@android:style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@color/secondaryColor" />
+            android:background="@drawable/searchicon" />
 
         <Space
             android:layout_width="1sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/menuButton5"
-            style="@android:style/ButtonBar"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@color/secondaryColor" />
+            android:background="@drawable/searchicon" />
+
     </LinearLayout>
 
 
