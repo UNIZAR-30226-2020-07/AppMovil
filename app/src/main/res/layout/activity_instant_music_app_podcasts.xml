@@ -209,7 +209,7 @@
             android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@drawable/ic_launcher_foreground" />
+            android:background="@drawable/home480" />
 
         <Space
             android:layout_width="1sp"
@@ -234,7 +234,7 @@
             android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@drawable/searchicon" />
+            android:background="@drawable/microphone100" />
 
         <Space
             android:layout_width="2sp"
@@ -246,7 +246,7 @@
             android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@drawable/searchicon" />
+            android:background="@drawable/friends100" />
 
         <Space
             android:layout_width="1sp"
@@ -258,7 +258,7 @@
             android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_weight="0"
-            android:background="@drawable/searchicon" />
+            android:background="@drawable/settings100" />
 
     </LinearLayout>
 
