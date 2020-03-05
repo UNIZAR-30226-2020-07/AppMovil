@@ -48,6 +48,32 @@ public class Friends extends AppCompatActivity {
                 resList.setSelection(0);
                 registerForContextMenu(resList);
             }
+        });Button Button1 = findViewById(R.id.menuButton1);
+        Button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Home();
+            }
+        });
+        Button Button2 = findViewById(R.id.menuButton2);
+        Button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Search();
+            }
+        });Button Button3 = findViewById(R.id.menuButton3);
+        Button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Podcasts();
+            }
+        });
+        Button Button5 = findViewById(R.id.menuButton5);
+        Button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings();
+            }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -60,6 +86,31 @@ public class Friends extends AppCompatActivity {
             }
         });
     }
+
+    private void Home() {
+        Intent i = new Intent(this, Login.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Search() {
+        Intent i = new Intent(this, Search.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Settings() {
+        Intent i = new Intent(this, Settings.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Podcasts() {
+        Intent i = new Intent(this, Podcasts.class);
+        startActivityForResult(i, 1);
+
+    }
+
 
 
     @Override

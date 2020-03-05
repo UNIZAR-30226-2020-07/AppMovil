@@ -48,6 +48,33 @@ public class Podcasts extends AppCompatActivity {
                 resList.setSelection(0);
                 registerForContextMenu(resList);
             }
+        });Button Button1 = findViewById(R.id.menuButton1);
+        Button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Home();
+            }
+        });
+        Button Button2 = findViewById(R.id.menuButton2);
+        Button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Search();
+            }
+        });
+        Button Button4 = findViewById(R.id.menuButton4);
+        Button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Friends();
+            }
+        });
+        Button Button5 = findViewById(R.id.menuButton5);
+        Button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings();
+            }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -60,6 +87,31 @@ public class Podcasts extends AppCompatActivity {
             }
         });
     }
+
+    private void Home() {
+        Intent i = new Intent(this, Login.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Search() {
+        Intent i = new Intent(this, Search.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Friends() {
+        Intent i = new Intent(this, Friends.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Settings() {
+        Intent i = new Intent(this, Settings.class);
+        startActivityForResult(i, 1);
+
+    }
+
 
 
     @Override

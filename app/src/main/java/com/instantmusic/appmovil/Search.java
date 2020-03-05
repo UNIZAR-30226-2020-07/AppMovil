@@ -39,7 +39,7 @@ public class Search extends AppCompatActivity {
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
-        search=findViewById(R.id.searchbar2);
+        search = findViewById(R.id.searchbar2);
         server = new localServer(this);
 //        registerForContextMenu(resList);
         shit = findViewById(R.id.searchbar2);
@@ -50,6 +50,34 @@ public class Search extends AppCompatActivity {
                 search();
                 resList.setSelection(0);
                 registerForContextMenu(resList);
+            }
+        });
+        Button Button1 = findViewById(R.id.menuButton1);
+        Button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Home();
+            }
+        });
+        Button Button3 = findViewById(R.id.menuButton3);
+        Button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Podcasts();
+            }
+        });
+        Button Button4 = findViewById(R.id.menuButton4);
+        Button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Friends();
+            }
+        });
+        Button Button5 = findViewById(R.id.menuButton5);
+        Button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings();
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -64,6 +92,29 @@ public class Search extends AppCompatActivity {
         });
     }
 
+    private void Home() {
+        Intent i = new Intent(this, Login.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Podcasts() {
+        Intent i = new Intent(this, Podcasts.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Friends() {
+        Intent i = new Intent(this, Friends.class);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Settings() {
+        Intent i = new Intent(this, Settings.class);
+        startActivityForResult(i, 1);
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -72,7 +123,6 @@ public class Search extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
-
 
 
     private void search() {
