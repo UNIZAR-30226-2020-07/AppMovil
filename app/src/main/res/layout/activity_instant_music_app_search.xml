@@ -91,7 +91,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/secondaryColor"
             android:visibility="visible">
 
         </ListView>
@@ -106,11 +105,11 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <Space
+        <ImageView
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/grade"
+            android:background="@color/backColor"
             tools:visibility="visible" />
 
         <ImageView
@@ -121,11 +120,11 @@
             android:layout_weight="0"
             android:background="@color/secondaryColor" />
 
-        <Space
+        <ImageView
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:background="@color/backColor" />
 
         <ImageView
             android:id="@+id/menuButton7"
@@ -135,11 +134,11 @@
             android:layout_weight="0"
             android:background="@color/secondaryColor" />
 
-        <Space
+        <ImageView
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:background="@color/backColor" />
 
         <ImageView
             android:id="@+id/menuButton8"
@@ -149,11 +148,11 @@
             android:layout_weight="0"
             android:background="@color/secondaryColor" />
 
-        <Space
+        <ImageView
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:background="@color/backColor" />
 
         <ImageView
             android:id="@+id/menuButton9"
@@ -163,11 +162,11 @@
             android:layout_weight="0"
             android:background="@color/secondaryColor" />
 
-        <Space
+        <ImageView
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:background="@color/backColor" />
 
         <ImageView
             android:id="@+id/menuButton10"
@@ -176,6 +175,13 @@
             android:layout_height="60sp"
             android:layout_weight="0"
             android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@color/backColor" />
 
     </LinearLayout>
 
@@ -250,6 +256,26 @@
             android:background="@drawable/searchicon" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_weight="0"
+        android:background="@color/backColor"
+        app:layout_anchor="@+id/linearLayout6"
+        app:layout_anchorGravity="top|center"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_weight="0"
+        android:background="@color/backColor"
+        app:layout_anchor="@+id/linearLayout4"
+        app:layout_anchorGravity="bottom|center"
+        tools:visibility="visible" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -24,77 +24,88 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <Space
+        <ImageView
+            android:id="@+id/imageView17"
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade"
+            android:layout_weight="1"
+            android:background="@color/backColor"
             tools:visibility="visible" />
 
         <ImageView
-            android:id="@+id/menuButton6"
+            android:id="@+id/menuButton15"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="60sp"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:background="@color/secondaryColor" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
 
         <ImageView
-            android:id="@+id/menuButton7"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <Space
+            android:id="@+id/imageView18"
             android:layout_width="2sp"
             android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:layout_weight="1"
+            android:background="@color/backColor" />
 
         <ImageView
-            android:id="@+id/menuButton8"
+            android:id="@+id/menuButton16"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="60sp"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
-        <Space
+        <ImageView
+            android:id="@+id/imageView19"
             android:layout_width="2sp"
             android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:layout_weight="1"
+            android:background="@color/backColor" />
 
         <ImageView
-            android:id="@+id/menuButton9"
+            android:id="@+id/menuButton17"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="60sp"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
-        <Space
+        <ImageView
+            android:id="@+id/imageView20"
             android:layout_width="2sp"
             android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
+            android:layout_weight="1"
+            android:background="@color/backColor" />
 
         <ImageView
-            android:id="@+id/menuButton10"
+            android:id="@+id/menuButton18"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="60sp"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/backColor" />
+
+        <ImageView
+            android:id="@+id/menuButton19"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="60sp"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/backColor" />
     </LinearLayout>
 
     <LinearLayout
@@ -168,6 +179,26 @@
             android:background="@drawable/searchicon" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_weight="0"
+        android:background="@color/backColor"
+        app:layout_anchor="@+id/linearLayout6"
+        app:layout_anchorGravity="top|center"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_weight="0"
+        android:background="@color/backColor"
+        app:layout_anchor="@+id/linearLayout3"
+        app:layout_anchorGravity="bottom|center"
+        tools:visibility="visible" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
