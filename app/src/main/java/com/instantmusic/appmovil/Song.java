@@ -1,5 +1,8 @@
 package com.instantmusic.appmovil;
 
+// Esta implementacion ha sido sacada de esta pagina: https://www.journaldev.com/22203/android-media-player-song-with-seekbar
+// Sobre dicha implementacion se han realizado cambios para adecuarlo al modelo que queremos seguir.
+
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -8,11 +11,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-public class Song extends AppCompatActivity {
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+public class Song extends AppCompatActivity implements Runnable {
     private static final int SEARCH = Menu.FIRST;
     private serverInterface server;
     private TextView songName;
@@ -21,9 +25,9 @@ public class Song extends AppCompatActivity {
     SeekBar seekBar;
     boolean wasPlaying = false;
     boolean sonando = false;
-    ImageButton play;
-    ImageButton next;
-    ImageButton previous;
+    FloatingActionButton play;
+    FloatingActionButton next;
+    FloatingActionButton previous;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +35,7 @@ public class Song extends AppCompatActivity {
         server=new localServer(this);
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
-        previous = findViewById(R.id.nextSong);
+        previous = findViewById(R.id.previousSong);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
@@ -114,9 +118,13 @@ public class Song extends AppCompatActivity {
                 mediaPlayer.prepare();
                 mediaPlayer.setVolume(0.5f, 0.5f);
                 mediaPlayer.setLooping(false);
-                seekBar.setMax(mediaPlayer.getDuration());
-                mediaPlayer.start();
-                new Thread((Runnable) this).start();
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    public void onPrepared(MediaPlayer mp) {
+                        seekBar.setMax(mediaPlayer.getDuration());
+                        mediaPlayer.start();
+                        new Thread(Song.this).start();
+                    }
+                });
             }
             wasPlaying = false;
         } catch (Exception e) {
@@ -125,20 +133,23 @@ public class Song extends AppCompatActivity {
     }
 
     public void run() {
-        int currentPosition = mediaPlayer.getCurrentPosition();
-        int total = mediaPlayer.getDuration();
-
-        while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
-            try {
-                Thread.sleep(1000);
-                currentPosition = mediaPlayer.getCurrentPosition();
-            } catch (InterruptedException e) {
-                return;
-            } catch (Exception e) {
-                return;
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            public void onPrepared(MediaPlayer mp) {
+                int currentPosition = mediaPlayer.getCurrentPosition();
+                int total = mediaPlayer.getDuration();
+                while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
+                    try {
+                        Thread.sleep(1000);
+                        currentPosition = mediaPlayer.getCurrentPosition();
+                    } catch (InterruptedException e) {
+                        return;
+                    } catch (Exception e) {
+                        return;
+                    }
+                    seekBar.setProgress(currentPosition);
+                }
             }
-            seekBar.setProgress(currentPosition);
-        }
+        });
     }
 
     @Override
