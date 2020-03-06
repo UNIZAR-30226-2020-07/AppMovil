@@ -166,6 +166,28 @@ public class UsersDbAdapter {
         }
     }
 
+    public String buscarCancion(long id) {
+        String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+        Cursor aux = mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ID + "=?",new String[]{String.valueOf(id)},
+                null, null, null, null);
+        String resultado = "Esta fallando";
+        if ( aux != null ) {
+            resultado = aux.getString(aux.getColumnIndex(KEY_NAME));
+        }
+        return resultado;
+    }
+
+    public String buscarAutor(long id) {
+        String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+        Cursor aux = mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, null, null);
+        String resultado = "Esta fallando";
+        if ( aux != null ) {
+            resultado = aux.getString(aux.getColumnIndex(KEY_ARTIST));
+        }
+        return resultado;
+    }
+
     /*
      * Delete the User with the given mail
      *
@@ -275,7 +297,7 @@ public class UsersDbAdapter {
     public Cursor searchAllSongs() {
         return mDb.query(DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, null, null, null, null, null);
     }
-    /**
+    /*
      * Update the User using the details provided. The User to be updated is
      * specified using the mail, and it is altered to use the mail and playlists
      * values passed in

@@ -44,13 +44,8 @@ public class Search extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView autor = findViewById(R.id.AutorName);
-                TextView song = findViewById(R.id.SongName);
-                String songName = "";
-                String autorName = "";
-                //autor.setText(autorName);
-                //song.setText(songName);
-                Song();
+                //Song(server.buscarCancion(id), server.buscarAutor(id));
+                Song("Pegamos tela","Omar Montes");
             }
         });
         search = findViewById(R.id.searchbar2);
@@ -130,9 +125,11 @@ public class Search extends AppCompatActivity {
 
     }
 
-    private void Song() {
+    private void Song(String songName, String autorName) {
         Intent i = new Intent(this, Song.class);
-        startActivityForResult(i, 1);
+        i.putExtra(this.getPackageName() + ".dataString", songName);
+        i.putExtra(this.getPackageName() + ".dataString", autorName);
+        this.startActivity(i);
     }
 
     @Override
@@ -142,7 +139,6 @@ public class Search extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
-
 
     private void search() {
         shit = findViewById(R.id.searchbar2);

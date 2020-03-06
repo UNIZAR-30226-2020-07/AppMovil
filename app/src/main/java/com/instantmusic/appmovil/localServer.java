@@ -79,6 +79,14 @@ public class localServer implements serverInterface {
 
     }
 
+    public String buscarCancion(long id) {
+        return localDb.buscarCancion(id);
+    }
+
+    public String buscarAutor(long id) {
+        return localDb.buscarAutor(id);
+    }
+
     public long addSong(String name,String artist,String category) {
         return localDb.addSong(name,artist,category);
     }
