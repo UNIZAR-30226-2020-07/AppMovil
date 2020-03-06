@@ -33,6 +33,7 @@
         <activity android:name=".Friends"></activity>
         <activity android:name=".Podcasts"></activity>
         <activity android:name=".Settings"></activity>
+        <activity android:name=".Song"></activity>
     </application>
 
 </manifest>

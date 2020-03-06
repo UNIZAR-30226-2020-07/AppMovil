@@ -1,4 +1,4 @@
-/**
+/*
  * Songs API
  * Test version of the api
  *
@@ -68,13 +68,13 @@ public class ApiInvoker {
   /** Content type "text/plain" with UTF-8 encoding. */
   public static final ContentType TEXT_PLAIN_UTF8 = ContentType.create("text/plain", Consts.UTF_8);
 
-  /**
+  /*
    * ISO 8601 date time format.
    * @see https://en.wikipedia.org/wiki/ISO_8601
    */
   public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
-  /**
+  /*
    * ISO 8601 date format.
    * @see https://en.wikipedia.org/wiki/ISO_8601
    */

@@ -97,7 +97,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/SongName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -130,7 +130,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/AutorName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -151,6 +151,26 @@
                 android:layout_width="100dp"
                 android:layout_height="175dp"
                 android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:id="@+id/seekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="75dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/darker_gray" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -207,7 +227,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                app:srcCompat="@drawable/repeatBlack" />
+                app:srcCompat="@drawable/repeat2" />
 
             <Space
                 android:layout_width="80dp"
@@ -221,7 +241,8 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                app:srcCompat="@drawable/shuffle2Black" />
+                app:srcCompat="@drawable/shuffle2" />
+
         </LinearLayout>
 
     </LinearLayout>

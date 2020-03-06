@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,19 @@ public class Search extends AppCompatActivity {
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
+        resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView autor = findViewById(R.id.AutorName);
+                TextView song = findViewById(R.id.SongName);
+                String songName = "";
+                String autorName = "";
+                //autor.setText(autorName);
+                //song.setText(songName);
+                Song();
+            }
+        });
         search = findViewById(R.id.searchbar2);
         server = new localServer(this);
 //        registerForContextMenu(resList);
@@ -114,6 +128,11 @@ public class Search extends AppCompatActivity {
         Intent i = new Intent(this, Settings.class);
         startActivityForResult(i, 1);
 
+    }
+
+    private void Song() {
+        Intent i = new Intent(this, Song.class);
+        startActivityForResult(i, 1);
     }
 
     @Override
