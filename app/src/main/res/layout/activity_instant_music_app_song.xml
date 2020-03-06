@@ -185,7 +185,7 @@
                 android:background="@android:color/darker_gray" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/previousSong"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -202,7 +202,7 @@
                 app:srcCompat="@drawable/play" />
 
             <ImageButton
-                android:id="@+id/stop"
+                android:id="@+id/nextSong"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
@@ -216,8 +216,8 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="125dp"
-                android:layout_height="10dp"
+                android:layout_width="137dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
 
@@ -230,7 +230,7 @@
                 app:srcCompat="@drawable/repeat2" />
 
             <Space
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
