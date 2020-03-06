@@ -11,6 +11,7 @@
     <string name="CreateAccount2">Pick a password</string>
     <string name="CreateAccount3">Choose a username</string>
     <string name="CreateAccount5">Confirm password</string>
+    <string name="Playing">Playing </string>
     <string name="PasswordAdvise">Use at least 8 characters </string>
     <string name="UsernameAdvise">Use at least 4 characters </string>
     <string name="CreateAccount">Next </string>

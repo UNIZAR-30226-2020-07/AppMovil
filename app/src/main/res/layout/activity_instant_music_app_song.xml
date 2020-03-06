@@ -45,7 +45,25 @@
                 app:srcCompat="@drawable/scrolldown" />
 
             <Space
-                android:layout_width="309dp"
+                android:layout_width="120dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/Playing"
+                android:textColor="@color/color2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="120dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
@@ -141,7 +159,7 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="35dp"
+                android:layout_width="55dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
@@ -149,16 +167,11 @@
             <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                app:srcCompat="@drawable/pause" />
-
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/next" />
 
             <ImageButton
                 android:id="@+id/play"
@@ -168,19 +181,13 @@
                 android:background="#00FFFFFF"
                 app:srcCompat="@drawable/play" />
 
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
-
             <ImageButton
                 android:id="@+id/stop"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                app:srcCompat="@drawable/stop" />
+                app:srcCompat="@drawable/back" />
         </LinearLayout>
 
         <LinearLayout
@@ -200,7 +207,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                app:srcCompat="@drawable/repeat" />
+                app:srcCompat="@drawable/repeatBlack" />
 
             <Space
                 android:layout_width="80dp"
@@ -214,161 +221,8 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
-                app:srcCompat="@drawable/shuffle" />
+                app:srcCompat="@drawable/shuffle2Black" />
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade"
-            tools:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/menuButton6"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
-
-        <ImageView
-            android:id="@+id/menuButton7"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
-
-        <ImageView
-            android:id="@+id/menuButton8"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
-
-        <ImageView
-            android:id="@+id/menuButton9"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/grade" />
-
-        <ImageView
-            android:id="@+id/menuButton10"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton1"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/home480" />
-
-        <Space
-            android:layout_width="1sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton2"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/searchicon" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton3"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/microphone100" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton4"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/friends100" />
-
-        <Space
-            android:layout_width="1sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton5"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/settings100" />
 
     </LinearLayout>
 
