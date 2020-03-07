@@ -4,6 +4,8 @@ package com.instantmusic.appmovil;
 // Sobre dicha implementacion se han realizado cambios para adecuarlo al modelo que queremos seguir.
 
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,7 +26,6 @@ public class Song extends AppCompatActivity implements Runnable {
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
     boolean wasPlaying = false;
-    boolean sonando = false;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -53,6 +54,8 @@ public class Song extends AppCompatActivity implements Runnable {
         });
         final TextView seekBarHint = findViewById(R.id.minuto);
         seekBar = findViewById(R.id.seekBar);
+        seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        seekBar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -68,6 +71,8 @@ public class Song extends AppCompatActivity implements Runnable {
                 else
                     seekBarHint.setText("0:" + x);
 
+                seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                seekBar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
                 double percent = progress / (double) seekBar.getMax();
                 int offset = seekBar.getThumbOffset();
                 int seekWidth = seekBar.getWidth();
@@ -85,7 +90,6 @@ public class Song extends AppCompatActivity implements Runnable {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
                 if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                     mediaPlayer.seekTo(seekBar.getProgress());
                 }
@@ -112,7 +116,7 @@ public class Song extends AppCompatActivity implements Runnable {
 
                 play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
 
-                AssetFileDescriptor descriptor = getAssets().openFd("pegamos_tela.mp3");
+                AssetFileDescriptor descriptor = getAssets().openFd("fighting_gold.mp3");
                 mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
                 descriptor.close();
                 mediaPlayer.prepare();
@@ -133,23 +137,19 @@ public class Song extends AppCompatActivity implements Runnable {
     }
 
     public void run() {
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            public void onPrepared(MediaPlayer mp) {
-                int currentPosition = mediaPlayer.getCurrentPosition();
-                int total = mediaPlayer.getDuration();
-                while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
-                    try {
-                        Thread.sleep(1000);
-                        currentPosition = mediaPlayer.getCurrentPosition();
-                    } catch (InterruptedException e) {
-                        return;
-                    } catch (Exception e) {
-                        return;
-                    }
-                    seekBar.setProgress(currentPosition);
-                }
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        int total = mediaPlayer.getDuration();
+        while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
+            try {
+                Thread.sleep(1000);
+                currentPosition = mediaPlayer.getCurrentPosition();
+            } catch (InterruptedException e) {
+                return;
+            } catch (Exception e) {
+                return;
             }
-        });
+            seekBar.setProgress(currentPosition);
+        }
     }
 
     @Override
