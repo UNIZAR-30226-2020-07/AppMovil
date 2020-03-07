@@ -8,24 +8,15 @@
     tools:context=".MusicApp">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
         android:visibility="visible">
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/imageView4"
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -33,7 +24,7 @@
             tools:visibility="visible" />
 
         <ImageView
-            android:id="@+id/menuButton15"
+            android:id="@+id/menuButton"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -41,14 +32,14 @@
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/imageView18"
+            android:id="@+id/imageView6"
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/menuButton16"
+            android:id="@+id/menuButton11"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -56,14 +47,14 @@
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/imageView19"
+            android:id="@+id/imageView7"
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/menuButton17"
+            android:id="@+id/menuButton12"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -71,14 +62,14 @@
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/imageView20"
+            android:id="@+id/imageView8"
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/menuButton18"
+            android:id="@+id/menuButton13"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -86,14 +77,14 @@
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/imageView21"
+            android:id="@+id/imageView9"
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/menuButton19"
+            android:id="@+id/menuButton14"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -101,7 +92,7 @@
             android:background="@color/secondaryColor" />
 
         <ImageView
-            android:id="@+id/imageView22"
+            android:id="@+id/imageView10"
             android:layout_width="2sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -109,7 +100,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="vertical"
@@ -118,7 +109,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout5"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:orientation="horizontal"
@@ -127,7 +118,7 @@
             <Space
                 android:layout_width="20sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton1"
@@ -135,12 +126,12 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:background="@drawable/home480_2" />
+                android:background="@drawable/home480" />
 
             <Space
                 android:layout_width="30sp"
                 android:layout_height="match_parent"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton2"
@@ -148,12 +139,12 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:background="@drawable/searchicon" />
+                android:background="@drawable/lupagrande2" />
 
             <Space
                 android:layout_width="35sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton3"
@@ -165,7 +156,7 @@
             <Space
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton4"
@@ -177,7 +168,7 @@
             <Space
                 android:layout_width="50sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton5"
@@ -189,7 +180,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
@@ -197,12 +188,13 @@
             <Space
                 android:layout_width="25sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/home"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
@@ -211,12 +203,13 @@
             <Space
                 android:layout_width="40sp"
                 android:layout_height="match_parent"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/searchButton"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
@@ -225,13 +218,13 @@
             <Space
                 android:layout_width="27sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/podcasts"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
@@ -240,13 +233,13 @@
             <Space
                 android:layout_width="30sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/friends"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
@@ -255,18 +248,27 @@
             <Space
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/settings"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Settings" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
 
     </LinearLayout>
 

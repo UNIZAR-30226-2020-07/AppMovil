@@ -47,7 +47,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_vertical"
         android:orientation="vertical"
@@ -97,29 +97,9 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="@color/backColor"
-        app:layout_anchor="@+id/linearLayout6"
-        app:layout_anchorGravity="top|center"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="@color/backColor"
-        app:layout_anchor="@+id/linearLayout4"
-        app:layout_anchorGravity="bottom|center"
-        tools:visibility="visible" />
-
     <LinearLayout
         android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
@@ -210,7 +190,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="vertical"
@@ -219,7 +199,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout5"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:orientation="horizontal"
@@ -228,7 +208,7 @@
             <Space
                 android:layout_width="20sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton1"
@@ -241,7 +221,7 @@
             <Space
                 android:layout_width="30sp"
                 android:layout_height="match_parent"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton2"
@@ -249,12 +229,12 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:background="@drawable/searchicon_2" />
+                android:background="@drawable/lupagrande2" />
 
             <Space
                 android:layout_width="35sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton3"
@@ -266,7 +246,7 @@
             <Space
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton4"
@@ -278,7 +258,7 @@
             <Space
                 android:layout_width="50sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton5"
@@ -290,7 +270,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
