@@ -30,5 +30,10 @@
     <string name="search">Buscar cancion</string>
     <string name="searchTip1">Encuentra tu musica favorita</string>
     <string name="searchTip2">Busca por artistas, canciones, playlists o álbumes</string>
+    <string name="home">Home</string>
+    <string name="searchButton">Search</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="friends">Friends</string>
+    <string name="settings">Settings</string>
 
 </resources>

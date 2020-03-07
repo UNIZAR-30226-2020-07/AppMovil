@@ -97,166 +97,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:visibility="visible">
-
-        <ImageView
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@color/backColor"
-            tools:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/menuButton6"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@color/backColor" />
-
-        <ImageView
-            android:id="@+id/menuButton7"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@color/backColor" />
-
-        <ImageView
-            android:id="@+id/menuButton8"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@color/backColor" />
-
-        <ImageView
-            android:id="@+id/menuButton9"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@color/backColor" />
-
-        <ImageView
-            android:id="@+id/menuButton10"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@color/backColor" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton1"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/home480" />
-
-        <Space
-            android:layout_width="1sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton2"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/searchicon" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton3"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/microphone100" />
-
-        <Space
-            android:layout_width="2sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton4"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/friends100" />
-
-        <Space
-            android:layout_width="1sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
-        <Button
-            android:id="@+id/menuButton5"
-            android:layout_width="80sp"
-            android:layout_height="60sp"
-            android:layout_weight="0"
-            android:background="@drawable/settings100" />
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
@@ -276,6 +116,262 @@
         app:layout_anchor="@+id/linearLayout4"
         app:layout_anchorGravity="bottom|center"
         tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/menuButton"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="70sp"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/menuButton11"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="70sp"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/menuButton12"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="70sp"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/menuButton13"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="70sp"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/menuButton14"
+            style="@android:style/ButtonBar"
+            android:layout_width="80sp"
+            android:layout_height="70sp"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="2sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/secondaryColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/linearLayout6"
+        app:layout_anchorGravity="center">
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <Space
+                android:layout_width="20sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/menuButton1"
+                style="@android:style/ButtonBar"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_weight="0"
+                android:background="@drawable/home480" />
+
+            <Space
+                android:layout_width="30sp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/menuButton2"
+                style="@android:style/ButtonBar"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_weight="0"
+                android:background="@drawable/searchicon_2" />
+
+            <Space
+                android:layout_width="35sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/menuButton3"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_weight="0"
+                android:background="@drawable/microphone100" />
+
+            <Space
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/menuButton4"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_weight="0"
+                android:background="@drawable/friends100" />
+
+            <Space
+                android:layout_width="50sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/menuButton5"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_weight="0"
+                android:background="@drawable/settings100" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="25sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/home"
+                android:textAlignment="center"
+                android:textColor="@color/color2"
+                tools:text="Home" />
+
+            <Space
+                android:layout_width="40sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/searchButton"
+                android:textAlignment="center"
+                android:textColor="@color/color2"
+                tools:text="Search" />
+
+            <Space
+                android:layout_width="27sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/podcasts"
+                android:textAlignment="center"
+                android:textColor="@color/color2"
+                tools:text="Podcasts" />
+
+            <Space
+                android:layout_width="30sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/friends"
+                android:textAlignment="center"
+                android:textColor="@color/color2"
+                tools:text="Friends" />
+
+            <Space
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/settings"
+                android:textAlignment="center"
+                android:textColor="@color/color2"
+                tools:text="Settings" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
