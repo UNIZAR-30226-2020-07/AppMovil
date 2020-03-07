@@ -203,6 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:text="@string/home"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Home" />
@@ -216,6 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:text="@string/searchButton"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Search" />
@@ -230,6 +232,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:text="@string/podcasts"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Podcasts" />
@@ -244,6 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:text="@string/friends"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Friends" />
@@ -258,6 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:text="@string/settings"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Settings" />

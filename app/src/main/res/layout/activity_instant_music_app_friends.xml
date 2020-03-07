@@ -241,12 +241,14 @@
             <Space
                 android:layout_width="25sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:text="@string/home"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Home" />
@@ -254,12 +256,14 @@
             <Space
                 android:layout_width="40sp"
                 android:layout_height="match_parent"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:text="@string/searchButton"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Search" />
@@ -267,13 +271,14 @@
             <Space
                 android:layout_width="27sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:text="@string/podcasts"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Podcasts" />
@@ -281,13 +286,14 @@
             <Space
                 android:layout_width="30sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:text="@string/friends"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Friends" />
@@ -295,13 +301,14 @@
             <Space
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0" />
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:text="@string/settings"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Settings" />
