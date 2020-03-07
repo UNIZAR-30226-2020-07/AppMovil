@@ -128,7 +128,7 @@ public class Search extends AppCompatActivity {
     private void Song(String songName, String autorName) {
         Intent i = new Intent(this, Song.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".dataString", autorName);
+        i.putExtra(this.getPackageName() + ".String", autorName);
         this.startActivity(i);
     }
 

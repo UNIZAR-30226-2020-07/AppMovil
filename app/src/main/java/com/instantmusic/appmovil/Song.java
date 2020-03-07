@@ -41,7 +41,7 @@ public class Song extends AppCompatActivity implements Runnable {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
             songName = findViewById(R.id.SongName);
             songName.setText(cancion);
-            String autor = extras.getString(this.getPackageName() + ".dataString");
+            String autor = extras.getString(this.getPackageName() + ".String");
             autorName = findViewById(R.id.AutorName);
             autorName.setText(autor);
         }
