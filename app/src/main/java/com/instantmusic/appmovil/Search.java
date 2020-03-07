@@ -45,7 +45,7 @@ public class Search extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Song(server.buscarCancion(id), server.buscarAutor(id));
-                Song("Pegamos tela","Omar Montes");
+                Song("Fighting Gold","Kazusou Oda");
             }
         });
         search = findViewById(R.id.searchbar2);
