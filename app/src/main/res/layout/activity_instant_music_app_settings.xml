@@ -190,6 +190,7 @@
                 android:text="@string/home"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
+                android:textSize="14dp"
                 tools:text="Home" />
 
             <Space
@@ -205,6 +206,7 @@
                 android:text="@string/searchButton"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
+                android:textSize="14dp"
                 tools:text="Search" />
 
             <Space
@@ -219,7 +221,8 @@
                 android:layout_weight="0"
                 android:text="@string/podcasts"
                 android:textAlignment="center"
-                android:textColor="@color/color2" />
+                android:textColor="@color/color2"
+                android:textSize="14dp" />
 
             <Space
                 android:layout_width="33dp"
@@ -234,21 +237,23 @@
                 android:text="@string/friends"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
+                android:textSize="14dp"
                 tools:text="Friends" />
 
             <Space
-                android:layout_width="35dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0" />
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="50dp"
+                android:layout_width="62dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/settings"
                 android:textAlignment="center"
                 android:textColor="@color/color2"
+                android:textSize="14dp"
                 tools:text="Settings" />
         </LinearLayout>
 
