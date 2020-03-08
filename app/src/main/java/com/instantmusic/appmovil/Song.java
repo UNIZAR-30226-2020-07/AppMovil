@@ -3,6 +3,7 @@ package com.instantmusic.appmovil;
 // Esta implementacion ha sido sacada de esta pagina: https://www.journaldev.com/22203/android-media-player-song-with-seekbar
 // Sobre dicha implementacion se han realizado cambios para adecuarlo al modelo que queremos seguir.
 
+import android.annotation.SuppressLint;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -10,7 +11,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +23,11 @@ public class Song extends AppCompatActivity implements Runnable {
     private serverInterface server;
     private TextView songName;
     private TextView autorName;
+    private TextView timer;
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
     boolean wasPlaying = false;
+    int i = 0;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -37,6 +39,7 @@ public class Song extends AppCompatActivity implements Runnable {
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
         previous = findViewById(R.id.previousSong);
+        timer = findViewById(R.id.minuto);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
@@ -62,15 +65,11 @@ public class Song extends AppCompatActivity implements Runnable {
                 seekBarHint.setVisibility(View.VISIBLE);
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
                 seekBarHint.setVisibility(View.VISIBLE);
-                int x = (int) Math.ceil(progress / 1000f);
-                if (x < 10)
-                    seekBarHint.setText("0:0" + x);
-                else
-                    seekBarHint.setText("0:" + x);
-
+                seekBarHint.setText(createTimerLabel(progress));
                 seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
                 seekBar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
                 double percent = progress / (double) seekBar.getMax();
@@ -162,5 +161,17 @@ public class Song extends AppCompatActivity implements Runnable {
         mediaPlayer.stop();
         mediaPlayer.release();
         mediaPlayer = null;
+    }
+
+    public String createTimerLabel(int duration) {
+        String timerLabel = "";
+        int min = duration / 1000 / 60;
+        int sec = duration / 1000 % 60;
+        timerLabel += min + ":";
+        if ( sec < 10 ) {
+            timerLabel += "0";
+        }
+        timerLabel += sec;
+        return timerLabel;
     }
 }
