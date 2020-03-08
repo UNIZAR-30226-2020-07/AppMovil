@@ -116,66 +116,66 @@
             android:visibility="visible">
 
             <Space
-                android:layout_width="20sp"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton1"
                 style="@android:style/ButtonBar"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
                 android:background="@drawable/home480" />
 
             <Space
-                android:layout_width="30sp"
+                android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton2"
                 style="@android:style/ButtonBar"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/lupagrande2" />
+                android:background="@drawable/lupagrande" />
 
             <Space
-                android:layout_width="35sp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton3"
-                android:layout_width="40sp"
-                android:layout_height="40sp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
                 android:background="@drawable/microphone100" />
 
             <Space
-                android:layout_width="40sp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton4"
-                android:layout_width="40sp"
-                android:layout_height="40sp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
                 android:background="@drawable/friends100" />
 
             <Space
-                android:layout_width="50sp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/menuButton5"
-                android:layout_width="40sp"
-                android:layout_height="40sp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/settings100" />
+                android:background="@drawable/settings100_2" />
 
         </LinearLayout>
 
@@ -186,7 +186,7 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="25sp"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -201,7 +201,7 @@
                 tools:text="Home" />
 
             <Space
-                android:layout_width="40sp"
+                android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
@@ -216,7 +216,7 @@
                 tools:text="Search" />
 
             <Space
-                android:layout_width="27sp"
+                android:layout_width="27dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -231,7 +231,7 @@
                 tools:text="Podcasts" />
 
             <Space
-                android:layout_width="30sp"
+                android:layout_width="27dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -246,7 +246,7 @@
                 tools:text="Friends" />
 
             <Space
-                android:layout_width="40sp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -259,6 +259,12 @@
                 android:textAlignment="center"
                 android:textColor="@color/color2"
                 tools:text="Settings" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
     </LinearLayout>

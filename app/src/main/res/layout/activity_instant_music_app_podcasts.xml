@@ -8,105 +8,6 @@
     tools:context=".MusicApp">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="220sp" />
-
-        <ImageView
-            android:id="@+id/lupaGrande"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="center"
-            app:srcCompat="@drawable/lupagrande2" />
-
-        <TextView
-            android:id="@+id/searchTip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/searchTip1"
-            android:textColor="@color/secondaryColor"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/searchTip2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/searchTip2"
-            android:textAlignment="center"
-            android:textColor="@color/secondaryColor"
-            android:textSize="21sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_vertical"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backColor"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/searchbar2"
-                android:layout_width="341dp"
-                android:layout_height="56dp"
-                android:layout_weight="0"
-                android:background="#F8EBF0"
-                android:hint="@string/search"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/search"
-                android:layout_width="53dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:background="@drawable/searchicon"
-                android:backgroundTint="#000000"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/searchRes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/secondaryColor"
-            android:visibility="visible">
-
-        </ListView>
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/secondaryColor"
-        tools:visibility="visible" />
-
-    <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -231,7 +132,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/searchicon" />
+                android:background="@drawable/lupagrande" />
 
             <Space
                 android:layout_width="45dp"
@@ -353,6 +254,105 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="220sp" />
+
+        <ImageView
+            android:id="@+id/lupaGrande"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="center"
+            app:srcCompat="@drawable/lupagrande2" />
+
+        <TextView
+            android:id="@+id/searchTip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/searchTip1"
+            android:textColor="@color/secondaryColor"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/searchTip2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/searchTip2"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryColor"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backColor"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/searchbar2"
+                android:layout_width="341dp"
+                android:layout_height="56dp"
+                android:layout_weight="0"
+                android:background="#F8EBF0"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/search"
+                android:layout_width="53dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@drawable/searchicon"
+                android:backgroundTint="#000000"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/searchRes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/secondaryColor"
+            android:visibility="visible">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/secondaryColor"
+        tools:visibility="visible" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
