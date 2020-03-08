@@ -8,14 +8,14 @@
     tools:context=".MusicApp">
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:visibility="visible">
+    android:id="@+id/linearLayout6"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="horizontal"
+    android:visibility="visible">
 
-        <ImageView
+    <ImageView
             android:id="@+id/menuButton"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
