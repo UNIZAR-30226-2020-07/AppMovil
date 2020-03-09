@@ -48,7 +48,7 @@ public class MusicApp extends AppCompatActivity {
         server.addSong("Purpurina","Alberto Gambino","Hip-Hop");
         server.addSong("Fighting Gold","Kazusou Oda","Rock");
         server.addSong("Me Gusta","Shakira","Reggaeton");
-        server.addSong("Call me maybe","Carly Rae Jepsen","Pop");
+        server.addSong("Pikete italiano","Kvndy Swing","Trap");
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

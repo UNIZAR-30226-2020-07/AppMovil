@@ -26,7 +26,8 @@ public class Song extends AppCompatActivity implements Runnable {
     private TextView timer;
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
-    boolean wasPlaying = false;
+    private boolean wasPlaying = false;
+    private boolean isPaused = true;
     int i = 0;
     FloatingActionButton play;
     FloatingActionButton next;
@@ -81,9 +82,10 @@ public class Song extends AppCompatActivity implements Runnable {
                         - Math.round(percent * offset)
                         - Math.round(percent * labelWidth / 2));
                 if (progress > 0 && mediaPlayer != null && !mediaPlayer.isPlaying()) {
-                    clearMediaPlayer();
+                    //clearMediaPlayer();
+                    isPaused = true;
                     play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
-                    Song.this.seekBar.setProgress(0);
+                    //Song.this.seekBar.setProgress(0);
                 }
             }
 
@@ -100,37 +102,41 @@ public class Song extends AppCompatActivity implements Runnable {
 
         try {
 
-            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                clearMediaPlayer();
-                seekBar.setProgress(0);
-                wasPlaying = true;
-                play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
-            }
-
             if (!wasPlaying) {
 
                 if (mediaPlayer == null) {
                     mediaPlayer = new MediaPlayer();
+                    play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
+
+                    AssetFileDescriptor descriptor = getAssets().openFd("pikete-italiano.mp3");
+                    mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+                    descriptor.close();
+                    mediaPlayer.prepare();
+                    mediaPlayer.setVolume(0.5f, 0.5f);
+                    mediaPlayer.setLooping(false);
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        public void onPrepared(MediaPlayer mp) {
+                            seekBar.setMax(mediaPlayer.getDuration());
+                            mediaPlayer.start();
+                            //new Thread(Song.this).start();
+                        }
+                    });
                 }
-
-                play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
-
-                AssetFileDescriptor descriptor = getAssets().openFd("fighting_gold.mp3");
-                mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
-                descriptor.close();
-                mediaPlayer.prepare();
-                mediaPlayer.setVolume(0.5f, 0.5f);
-                mediaPlayer.setLooping(false);
-                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    public void onPrepared(MediaPlayer mp) {
-                        seekBar.setMax(mediaPlayer.getDuration());
-                        mediaPlayer.start();
-                        new Thread(Song.this).start();
-                    }
-                });
+                wasPlaying = true;
             }
-            wasPlaying = false;
-        } catch (Exception e) {
+            else if ( wasPlaying ) {
+                play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
+                mediaPlayer.pause();
+                wasPlaying = false;
+                isPaused = true;
+            }
+            else if (isPaused) {
+                mediaPlayer.start();
+                wasPlaying = true;
+                isPaused = false;
+            }
+        }
+        catch(Exception e){
             e.printStackTrace();
         }
     }
