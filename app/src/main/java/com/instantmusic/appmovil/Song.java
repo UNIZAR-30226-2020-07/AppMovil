@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -19,16 +18,14 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Song extends AppCompatActivity implements Runnable {
-    private static final int SEARCH = Menu.FIRST;
-    private serverInterface server;
-    private TextView songName;
-    private TextView autorName;
-    private TextView timer;
+    //private static final int SEARCH = Menu.FIRST;
+    serverInterface server;
+    TextView songName;
+    TextView autorName;
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
-    private boolean wasPlaying = false;
-    private boolean isPaused = true;
-    int i = 0;
+    private boolean isPlaying = false;
+    private boolean isPaused = false;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -40,8 +37,8 @@ public class Song extends AppCompatActivity implements Runnable {
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
         previous = findViewById(R.id.previousSong);
-        timer = findViewById(R.id.minuto);
         Bundle extras = getIntent().getExtras();
+
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
             songName = findViewById(R.id.SongName);
@@ -82,10 +79,10 @@ public class Song extends AppCompatActivity implements Runnable {
                         - Math.round(percent * offset)
                         - Math.round(percent * labelWidth / 2));
                 if (progress > 0 && mediaPlayer != null && !mediaPlayer.isPlaying()) {
-                    //clearMediaPlayer();
-                    isPaused = true;
+                    clearMediaPlayer();
+                    //isPaused = true;
                     play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
-                    //Song.this.seekBar.setProgress(0);
+                    Song.this.seekBar.setProgress(0);
                 }
             }
 
@@ -99,62 +96,68 @@ public class Song extends AppCompatActivity implements Runnable {
     }
 
     public void playSong() {
-
-        try {
-
-            if (!wasPlaying) {
-
+        if (!isPlaying && !isPaused) {
+            try {
                 if (mediaPlayer == null) {
                     mediaPlayer = new MediaPlayer();
-                    play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
-
-                    AssetFileDescriptor descriptor = getAssets().openFd("pikete-italiano.mp3");
-                    mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
-                    descriptor.close();
-                    mediaPlayer.prepare();
-                    mediaPlayer.setVolume(0.5f, 0.5f);
-                    mediaPlayer.setLooping(false);
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        public void onPrepared(MediaPlayer mp) {
-                            seekBar.setMax(mediaPlayer.getDuration());
-                            mediaPlayer.start();
-                            //new Thread(Song.this).start();
-                        }
-                    });
                 }
-                wasPlaying = true;
+                play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
+                AssetFileDescriptor descriptor = getAssets().openFd("pikete-italiano.mp3");
+                mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+                descriptor.close();
+                mediaPlayer.prepare();
+                mediaPlayer.setVolume(0.5f, 0.5f);
+                mediaPlayer.setLooping(false);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        isPlaying = false;
+                        isPaused = false;
+                    }
+                });
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    public void onPrepared(MediaPlayer mp) {
+                        seekBar.setMax(mediaPlayer.getDuration());
+                        mediaPlayer.start();
+                        new Thread(Song.this).start();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            else if ( wasPlaying ) {
-                play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
-                mediaPlayer.pause();
-                wasPlaying = false;
-                isPaused = true;
-            }
-            else if (isPaused) {
-                mediaPlayer.start();
-                wasPlaying = true;
-                isPaused = false;
-            }
+            isPlaying = true;
         }
-        catch(Exception e){
-            e.printStackTrace();
+        else if ( isPlaying ) {
+            play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
+            mediaPlayer.pause();
+            isPlaying = false;
+            isPaused = true;
+        }
+        else if (isPaused) {
+            play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
+            mediaPlayer.start();
+            isPlaying = true;
+            isPaused = false;
         }
     }
 
     public void run() {
-        int currentPosition = mediaPlayer.getCurrentPosition();
-        int total = mediaPlayer.getDuration();
-        while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
-            try {
-                Thread.sleep(1000);
-                currentPosition = mediaPlayer.getCurrentPosition();
-            } catch (InterruptedException e) {
-                return;
-            } catch (Exception e) {
-                return;
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            public void onPrepared(MediaPlayer mp) {
+                int currentPosition = mediaPlayer.getCurrentPosition();
+                int total = mediaPlayer.getDuration();
+                while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
+                    try {
+                      Thread.sleep(1000);
+                       currentPosition = mediaPlayer.getCurrentPosition();
+                    }
+                    catch (InterruptedException e) {
+                      return;
+                    }
+                    seekBar.setProgress(currentPosition);
+                }
             }
-            seekBar.setProgress(currentPosition);
-        }
+        });
     }
 
     @Override
