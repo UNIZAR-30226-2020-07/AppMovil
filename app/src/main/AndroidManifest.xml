@@ -34,6 +34,7 @@
         <activity android:name=".Podcasts"></activity>
         <activity android:name=".Settings"></activity>
         <activity android:name=".Song"></activity>
+        <activity android:name=".Playlists"></activity>
     </application>
 
 </manifest>
