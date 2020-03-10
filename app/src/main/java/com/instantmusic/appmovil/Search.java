@@ -92,35 +92,48 @@ public class Search extends AppCompatActivity {
             public void onClick(View view) {
                 Settings();
             }
-        });Button Button6 = findViewById(R.id.optionSearch);
+        });
+        Button Button6 = findViewById(R.id.optionSearch);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nameActivated();
+                categoryActivated();
+                artistActivated();
+                albumActivated();
                 if(searchMenu.getVisibility()==View.VISIBLE){
                     searchMenu.setVisibility(View.INVISIBLE);
                 }else {
                     searchMenu.setVisibility(View.VISIBLE);
                 }
+
             }
         });
         Switch s1=findViewById(R.id.switchName);
         Switch s2=findViewById(R.id.switchCategory);
         Switch s3=findViewById(R.id.switchArtist);
-        s1.setOnClickListener(new View.OnClickListener() {
+        Switch s4=findViewById(R.id.switchAlbum);
+        s1.setOnClickListener(new Switch.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+            }
+        });
+        s2.setOnClickListener(new Switch.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
 
             }
         });
-        s2.setOnClickListener(new View.OnClickListener() {
+        s3.setOnClickListener(new Switch.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
 
             }
         });
-        s3.setOnClickListener(new View.OnClickListener() {
+        s4.setOnClickListener(new Switch.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
@@ -138,7 +151,63 @@ public class Search extends AppCompatActivity {
             }
         });
     }
+    private void nameActivated(){
+        Switch s2=findViewById(R.id.switchCategory);
+        Switch s3=findViewById(R.id.switchArtist);
+        Switch s4=findViewById(R.id.switchAlbum);
+        if(s2.isActivated()){
+            s2.setChecked(false);
+        }
+        if(s3.isActivated()){
+            s3.setChecked(false);
+        }
+        if(s4.isActivated()){
+            s4.setChecked(false);
+        }
 
+    }
+    private void categoryActivated(){
+        Switch s1=findViewById(R.id.switchName);
+        Switch s3=findViewById(R.id.switchArtist);
+        Switch s4=findViewById(R.id.switchAlbum);
+        if(s1.isActivated()){
+            s1.setChecked(false);
+        }
+        if(s3.isActivated()){
+            s3.setChecked(false);
+        }
+        if(s4.isActivated()){
+            s4.setChecked(false);
+        }
+    }
+    private void artistActivated(){
+        Switch s1=findViewById(R.id.switchName);
+        Switch s2=findViewById(R.id.switchCategory);
+        Switch s4=findViewById(R.id.switchAlbum);
+        if(s2.isActivated()){
+            s2.setChecked(false);
+        }
+        if(s1.isActivated()){
+            s1.setChecked(false);
+        }
+        if(s4.isActivated()){
+            s4.setChecked(false);
+        }
+    }
+    private void albumActivated(){
+        Switch s1=findViewById(R.id.switchName);
+        Switch s2=findViewById(R.id.switchCategory);
+        Switch s3=findViewById(R.id.switchArtist);
+        if(s2.isActivated()){
+            s2.setChecked(false);
+        }
+        if(s3.isActivated()){
+            s3.setChecked(false);
+        }
+        if(s1.isActivated()){
+            s1.setChecked(false);
+        }
+    }
     private void Home() {
         Intent i = new Intent(this, Login.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -186,6 +255,7 @@ public class Search extends AppCompatActivity {
         Switch searchName=findViewById(R.id.switchName);
         Switch searchArtist=findViewById(R.id.switchArtist);
         Switch searchCategory=findViewById(R.id.switchCategory);
+        Switch searchAlbum=findViewById(R.id.switchAlbum);
         int searchType=0;
         if(searchName.isActivated()){
             searchType=0;
@@ -193,6 +263,8 @@ public class Search extends AppCompatActivity {
             searchType=1;
         }if(searchArtist.isActivated()){
             searchType=2;
+        }if(searchAlbum.isActivated()){
+            searchType=3;
         }
         shit = findViewById(R.id.searchbar2);
         Cursor shitCursor=null;

@@ -389,7 +389,7 @@
 
         <ScrollView
             android:id="@+id/searchMenu"
-            android:layout_width="175dp"
+            android:layout_width="180dp"
             android:layout_height="125dp"
             android:layout_gravity="end"
             android:layout_weight="0"
