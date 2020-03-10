@@ -96,7 +96,35 @@ public class Search extends AppCompatActivity {
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchMenu.setVisibility(View.VISIBLE);
+                if(searchMenu.getVisibility()==View.VISIBLE){
+                    searchMenu.setVisibility(View.INVISIBLE);
+                }else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        Switch s1=findViewById(R.id.switchName);
+        Switch s2=findViewById(R.id.switchCategory);
+        Switch s3=findViewById(R.id.switchArtist);
+        s1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+
+            }
+        });
+        s2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+
+            }
+        });
+        s3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
