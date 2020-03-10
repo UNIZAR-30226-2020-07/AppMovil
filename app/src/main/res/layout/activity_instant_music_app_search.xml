@@ -272,8 +272,8 @@
 
         <ImageView
             android:id="@+id/lupaGrande"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="center"
             app:srcCompat="@drawable/lupagrande" />
@@ -285,7 +285,7 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/searchTip1"
             android:textColor="@color/secondaryColor"
-            android:textSize="22sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/searchTip2"
@@ -294,7 +294,7 @@
             android:text="@string/searchTip2"
             android:textAlignment="center"
             android:textColor="@color/secondaryColor"
-            android:textSize="21sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 
@@ -392,7 +392,8 @@
             android:layout_width="175dp"
             android:layout_height="125dp"
             android:layout_gravity="end"
-            android:layout_weight="0">
+            android:layout_weight="0"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -419,6 +420,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/artist"
+                    android:textColor="@color/secondaryColor" />
+
+                <Switch
+                    android:id="@+id/switchAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/album"
                     android:textColor="@color/secondaryColor" />
             </LinearLayout>
         </ScrollView>

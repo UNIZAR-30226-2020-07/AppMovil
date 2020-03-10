@@ -39,5 +39,6 @@
     <string name="category">Category</string>
     <string name="artist">Artist</string>
     <string name="song">Song</string>
+    <string name="album">Album</string>
 
 </resources>
