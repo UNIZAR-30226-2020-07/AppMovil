@@ -171,7 +171,7 @@ public class Search extends AppCompatActivity {
         switch(searchType){
             case 0:
                 shitCursor = server.searchShit(shit.getText().toString());
-                break;
+                break;p
             case 1:
                 //shitcursor=server.searchCategory(shit.getText().toString());
                 break;
