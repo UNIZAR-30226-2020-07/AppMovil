@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class Search extends AppCompatActivity {
     private TextView searchTip1;
     private TextView searchTip2;
     private ImageView lupaGrande;
+    private ScrollView searchMenu;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST + 1;
     private static final int LOGIN = Menu.FIRST + 2;
@@ -40,6 +43,7 @@ public class Search extends AppCompatActivity {
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
+        searchMenu=findViewById(R.id.searchMenu);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -87,6 +91,12 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Settings();
+            }
+        });Button Button6 = findViewById(R.id.optionSearch);
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.VISIBLE);
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -145,9 +155,30 @@ public class Search extends AppCompatActivity {
     }
 
     private void search() {
+        Switch searchName=findViewById(R.id.switchName);
+        Switch searchArtist=findViewById(R.id.switchArtist);
+        Switch searchCategory=findViewById(R.id.switchCategory);
+        int searchType=0;
+        if(searchName.isActivated()){
+            searchType=0;
+        }if(searchCategory.isActivated()){
+            searchType=1;
+        }if(searchArtist.isActivated()){
+            searchType=2;
+        }
         shit = findViewById(R.id.searchbar2);
-        System.out.println(shit.getText().toString());
-        Cursor shitCursor = server.searchShit(shit.getText().toString());
+        Cursor shitCursor=null;
+        switch(searchType){
+            case 0:
+                shitCursor = server.searchShit(shit.getText().toString());
+                break;
+            case 1:
+                //shitcursor=server.searchCategory(shit.getText().toString());
+                break;
+            case 2:
+                //shitcursor=server.searchArtist(shit.getText().toString());
+                break;
+        }
         if (shitCursor == null) {
             searchTip1.setVisibility(View.VISIBLE);
             searchTip2.setVisibility(View.VISIBLE);

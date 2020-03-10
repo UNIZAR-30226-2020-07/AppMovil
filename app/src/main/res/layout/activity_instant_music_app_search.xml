@@ -379,7 +379,7 @@
                 app:srcCompat="@color/secondaryColor" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/optionSearch"
                 android:layout_width="40dp"
                 android:layout_height="50dp"
                 android:layout_gravity="end"
@@ -388,6 +388,7 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/searchMenu"
             android:layout_width="175dp"
             android:layout_height="125dp"
             android:layout_gravity="end"
@@ -400,21 +401,21 @@
                 android:orientation="vertical">
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switchName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/song"
                     android:textColor="@color/secondaryColor" />
 
                 <Switch
-                    android:id="@+id/switch2"
+                    android:id="@+id/switchCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/category"
                     android:textColor="@color/secondaryColor" />
 
                 <Switch
-                    android:id="@+id/switch3"
+                    android:id="@+id/switchArtist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/artist"
