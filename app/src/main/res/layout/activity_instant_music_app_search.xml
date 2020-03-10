@@ -308,20 +308,20 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backColor"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/searchbar2"
-                android:layout_width="341dp"
-                android:layout_height="56dp"
+                android:layout_width="325dp"
+                android:layout_height="50dp"
                 android:layout_weight="0"
                 android:background="#F8EBF0"
                 android:hint="@string/search"
@@ -330,8 +330,8 @@
 
             <Button
                 android:id="@+id/search"
-                android:layout_width="53dp"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_weight="0"
                 android:background="@drawable/searchicon"
                 android:backgroundTint="#000000"
@@ -347,6 +347,80 @@
             android:visibility="visible">
 
         </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="2dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                app:srcCompat="@color/secondaryColor" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_weight="0"
+                android:background="@drawable/downarrow" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="175dp"
+            android:layout_height="125dp"
+            android:layout_gravity="end"
+            android:layout_weight="0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backColor"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/song"
+                    android:textColor="@color/secondaryColor" />
+
+                <Switch
+                    android:id="@+id/switch2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category"
+                    android:textColor="@color/secondaryColor" />
+
+                <Switch
+                    android:id="@+id/switch3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/artist"
+                    android:textColor="@color/secondaryColor" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
