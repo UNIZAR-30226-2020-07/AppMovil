@@ -25,7 +25,7 @@ public class Song extends AppCompatActivity implements Runnable {
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
     private boolean isPlaying = false;
-    private boolean isPaused = false;
+    boolean isPaused = false;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;

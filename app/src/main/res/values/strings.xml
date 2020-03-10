@@ -36,8 +36,8 @@
     <string name="friends">Friends</string>
     <string name="settings">Settings</string>
     <string name="play">Play</string>
-    <string name="category">By category</string>
-    <string name="artist">By artist</string>
-    <string name="song">By name</string>
+    <string name="category">Category</string>
+    <string name="artist">Artist</string>
+    <string name="song">Song</string>
 
 </resources>
