@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -22,10 +23,12 @@ public class Song extends AppCompatActivity implements Runnable {
     serverInterface server;
     TextView songName;
     TextView autorName;
+    Handler handler = new Handler();
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
     private boolean isPlaying = false;
-    boolean isPaused = false;
+    private boolean isPaused = false;
+    private int length;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -57,12 +60,12 @@ public class Song extends AppCompatActivity implements Runnable {
         seekBar = findViewById(R.id.seekBar);
         seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 seekBarHint.setVisibility(View.VISIBLE);
             }
-
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
@@ -80,7 +83,6 @@ public class Song extends AppCompatActivity implements Runnable {
                         - Math.round(percent * labelWidth / 2));
                 if (progress > 0 && mediaPlayer != null && !mediaPlayer.isPlaying()) {
                     clearMediaPlayer();
-                    //isPaused = true;
                     play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
                     Song.this.seekBar.setProgress(0);
                 }
@@ -96,6 +98,7 @@ public class Song extends AppCompatActivity implements Runnable {
     }
 
     public void playSong() {
+
         if (!isPlaying && !isPaused) {
             try {
                 if (mediaPlayer == null) {
@@ -118,6 +121,8 @@ public class Song extends AppCompatActivity implements Runnable {
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     public void onPrepared(MediaPlayer mp) {
                         seekBar.setMax(mediaPlayer.getDuration());
+                        handler.removeCallbacks(moveSeekBarThread);
+                        handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                         mediaPlayer.start();
                         new Thread(Song.this).start();
                     }
@@ -132,9 +137,12 @@ public class Song extends AppCompatActivity implements Runnable {
             mediaPlayer.pause();
             isPlaying = false;
             isPaused = true;
+            //length = mediaPlayer.getCurrentPosition();
         }
         else if (isPaused) {
             play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
+            handler.removeCallbacks(moveSeekBarThread);
+            handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
             mediaPlayer.start();
             isPlaying = true;
             isPaused = false;
@@ -152,13 +160,35 @@ public class Song extends AppCompatActivity implements Runnable {
                        currentPosition = mediaPlayer.getCurrentPosition();
                     }
                     catch (InterruptedException e) {
-                      return;
+                        return;
+                    }
+                    catch(Exception e) {
+                        return;
                     }
                     seekBar.setProgress(currentPosition);
                 }
             }
         });
     }
+
+    /**
+     * The Move seek bar. Thread to move seekbar based on the current position
+     * of the song
+     */
+    private Runnable moveSeekBarThread = new Runnable() {
+        public void run() {
+            if(mediaPlayer.isPlaying()){
+
+                int mediaPos_new = mediaPlayer.getCurrentPosition();
+                int mediaMax_new = mediaPlayer.getDuration();
+                seekBar.setMax(mediaMax_new);
+                seekBar.setProgress(mediaPos_new);
+
+                handler.postDelayed(this, 100); //Looping the thread after 0.1 second
+            }
+
+        }
+    };
 
     @Override
     protected void onDestroy() {
