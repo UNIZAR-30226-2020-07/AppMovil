@@ -43,5 +43,6 @@
     <string name="vacio"></string>
     <string name="myplaylist">My playlists</string>
     <string name="addPlaylist">Create playlist</string>
+    <string name="rateSong">Rate this song</string>
 
 </resources>

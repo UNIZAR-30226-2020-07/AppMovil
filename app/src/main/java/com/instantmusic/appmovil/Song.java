@@ -11,6 +11,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,19 +30,69 @@ public class Song extends AppCompatActivity implements Runnable {
     SeekBar seekBar;
     private boolean isPlaying = false;
     private boolean isPaused = false;
+    private boolean isLooped = false;
+    private boolean isShuffled = false;
     //private int length;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
+    ImageView loop;
+    ImageView shuffle;
+    RatingBar ratingBar;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_song);
         server=new localServer(this);
+        loop = findViewById(R.id.loop);
+        previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
-        previous = findViewById(R.id.previousSong);
+        shuffle = findViewById(R.id.shuffle);
         Bundle extras = getIntent().getExtras();
+
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearMediaPlayer();
+                isPlaying = false;
+                isPaused = false;
+                play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
+                Song.this.seekBar.setProgress(0);
+            }
+        });
+
+        loop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ( mediaPlayer != null ) {
+                    if ( isLooped ) {
+                        loop.setImageDrawable(ContextCompat.getDrawable(Song.this, R.drawable.repeat));
+                        mediaPlayer.setLooping(false);
+                        isLooped = false;
+                    }
+                    else {
+                        loop.setImageDrawable(ContextCompat.getDrawable(Song.this, R.drawable.repeat2));
+                        mediaPlayer.setLooping(true);
+                        isLooped = true;
+                    }
+                }
+            }
+        });
+
+        shuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ( isShuffled ) {
+                    shuffle.setImageDrawable(ContextCompat.getDrawable(Song.this, R.drawable.shuffle2));
+                    isShuffled = false;
+                }
+                else {
+                    shuffle.setImageDrawable(ContextCompat.getDrawable(Song.this, R.drawable.shufflewhite));
+                    isShuffled = true;
+                }
+            }
+        });
 
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
@@ -106,13 +158,14 @@ public class Song extends AppCompatActivity implements Runnable {
                 if (mediaPlayer == null) {
                     mediaPlayer = new MediaPlayer();
                 }
+
                 play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
+                mediaPlayer.start();
                 AssetFileDescriptor descriptor = getAssets().openFd("pikete-italiano.mp3");
                 mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
                 descriptor.close();
                 mediaPlayer.prepare();
                 mediaPlayer.setVolume(0.5f, 0.5f);
-                mediaPlayer.setLooping(false);
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
@@ -126,7 +179,7 @@ public class Song extends AppCompatActivity implements Runnable {
                         handler.removeCallbacks(moveSeekBarThread);
                         handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                         mediaPlayer.start();
-                        new Thread(Song.this).start();
+                        // new Thread(Song.this).start();
                     }
                 });
             } catch (Exception e) {
@@ -136,18 +189,25 @@ public class Song extends AppCompatActivity implements Runnable {
         }
         else if ( isPlaying ) {
             play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
-            mediaPlayer.pause();
-            isPlaying = false;
-            isPaused = true;
-            //length = mediaPlayer.getCurrentPosition();
+            if ( mediaPlayer != null ) {
+                mediaPlayer.pause();
+                isPlaying = false;
+                isPaused = true;
+            }
         }
         else if (isPaused) {
             play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
             handler.removeCallbacks(moveSeekBarThread);
             handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
-            mediaPlayer.start();
-            isPlaying = true;
-            isPaused = false;
+            if (mediaPlayer != null) {
+                mediaPlayer.start();
+                isPlaying = true;
+                isPaused = false;
+            }
+            else {
+                isPlaying = false;
+                isPaused = false;
+            }
         }
     }
 
@@ -179,16 +239,16 @@ public class Song extends AppCompatActivity implements Runnable {
      */
     private Runnable moveSeekBarThread = new Runnable() {
         public void run() {
-            if(mediaPlayer.isPlaying()){
+            if (mediaPlayer != null ) {
+                if(mediaPlayer.isPlaying()){
+                    int mediaPos_new = mediaPlayer.getCurrentPosition();
+                    int mediaMax_new = mediaPlayer.getDuration();
+                    seekBar.setMax(mediaMax_new);
+                    seekBar.setProgress(mediaPos_new);
 
-                int mediaPos_new = mediaPlayer.getCurrentPosition();
-                int mediaMax_new = mediaPlayer.getDuration();
-                seekBar.setMax(mediaMax_new);
-                seekBar.setProgress(mediaPos_new);
-
-                handler.postDelayed(this, 100); //Looping the thread after 0.1 second
+                    handler.postDelayed(this, 100); //Looping the thread after 0.1 second
+                }
             }
-
         }
     };
 
@@ -199,9 +259,12 @@ public class Song extends AppCompatActivity implements Runnable {
     }
 
     private void clearMediaPlayer() {
-        mediaPlayer.stop();
-        mediaPlayer.release();
-        mediaPlayer = null;
+        if ( mediaPlayer != null ) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     public String createTimerLabel(int duration) {
