@@ -213,6 +213,7 @@ public class UsersDbAdapter {
         return mCursor;
     }
 
+    /*
     public Cursor searchPlaylists(String user) {
         String username;
         String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
@@ -227,6 +228,7 @@ public class UsersDbAdapter {
         }
         return aux;
     }
+    */
 
     /*
      * Delete the User with the given mail

@@ -61,16 +61,16 @@ public class Login extends AppCompatActivity {
                 Settings();
             }
         });
-        Cursor shitCursor=server.allPlaylists(user);
-        startManagingCursor(shitCursor);
+//        Cursor shitCursor=server.allPlaylists(user);
+        //startManagingCursor(shitCursor);
         // Create an array to specify the fields we want to display in the list (only TITLE)
         String[] from = new String[]{UsersDbAdapter.KEY_NAME, UsersDbAdapter.KEY_ARTIST, UsersDbAdapter.KEY_CATEGORY};
 
         // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[]{R.id.text1, R.id.text2, R.id.text3};
-        SimpleCursorAdapter search =
-                new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
-        myPlaylist.setAdapter(search);
+        //int[] to = new int[]{R.id.text1, R.id.text2, R.id.text3};
+       // SimpleCursorAdapter search =
+         //       new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
+       // myPlaylist.setAdapter(search);
     }
 
 

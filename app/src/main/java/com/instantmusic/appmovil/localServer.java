@@ -87,12 +87,13 @@ public class localServer implements serverInterface {
         return localDb.buscarArtista(artist);
     }
 
+    /*
     @Override
     public Cursor allPlaylists(String user) {
         return localDb.searchPlaylists(user);
 
     }
-
+     */
     public long addSong(String name,String artist,String category) {
         return localDb.addSong(name,artist,category);
     }

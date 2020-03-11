@@ -28,7 +28,7 @@ public class Song extends AppCompatActivity implements Runnable {
     SeekBar seekBar;
     private boolean isPlaying = false;
     private boolean isPaused = false;
-    private int length;
+    //private int length;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;

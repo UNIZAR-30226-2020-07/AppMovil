@@ -215,6 +215,21 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/loop"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/repeat" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/previousSong"
                 android:layout_width="wrap_content"
@@ -226,7 +241,7 @@
                 app:srcCompat="@android:drawable/ic_media_previous" />
 
             <Space
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
@@ -245,7 +260,7 @@
                 app:srcCompat="@android:drawable/ic_media_play" />
 
             <Space
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
@@ -263,34 +278,19 @@
                 app:rippleColor="#FFFFFF"
                 app:srcCompat="@android:drawable/ic_media_next" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                app:srcCompat="@drawable/repeat2" />
-
             <Space
-                android:layout_width="55dp"
+                android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/shuffle"
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
+                android:scaleType="centerInside"
                 app:srcCompat="@drawable/shuffle2" />
 
         </LinearLayout>
