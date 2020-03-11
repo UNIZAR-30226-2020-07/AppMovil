@@ -79,17 +79,30 @@ public class localServer implements serverInterface {
 
     }
 
-    public String buscarCancion(long id) {
-        return localDb.buscarCancion(id);
+    public Cursor buscarCancion(String song) {
+        return localDb.buscarCancion(song);
     }
 
-    public String buscarAutor(long id) {
-        return localDb.buscarAutor(id);
+    public Cursor buscarArtista(String artist) {
+        return localDb.buscarArtista(artist);
+    }
+
+    @Override
+    public Cursor allPlaylists(String user) {
+        return localDb.searchPlaylists(user);
+
     }
 
     public long addSong(String name,String artist,String category) {
         return localDb.addSong(name,artist,category);
     }
+
+    @Override
+    public long addPlaylist(String playlist,String author) {
+        localDb.addPlaylist(playlist,author);
+        return 0;
+    }
+
     public int recover(String mail) {
         return 0;
     }
@@ -104,12 +117,10 @@ public class localServer implements serverInterface {
         return 1;
     }
 
-    public int addSongToUser(String mail, String pass, String song) {
-        if (localDb.updateUser(mail, pass, song)) {
-            return 0;
-        } else {
-            return 1;
-        }
+    @Override
+    public int addSongToPlaylist(String playlist, String song,String author) {
+        localDb.addSongToPlaylist(playlist,song,author);
+        return 0;
     }
     public void close(){
         localDb.close();

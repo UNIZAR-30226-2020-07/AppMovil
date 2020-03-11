@@ -22,14 +22,16 @@ import android.util.Log;
 public class UsersDbAdapter {
 
     public static final String KEY_MAIL = "mail";
-    public static final String KEY_PLAYLISTS = "playlists";
+    public static final String KEY_PLAYLIST = "playlist";
     public static final String KEY_PASS = "pass";
     public static final String KEY_USER = "user";
-
     public static final String KEY_NAME = "name";
+    public static final String KEY_NAMEP = "nameP";
     public static final String KEY_ARTIST = "_artist";
     public static final String KEY_CATEGORY = "_categoria";
     public static final String KEY_ID = "_id";
+
+    public static final String KEY_AUTHOR = "autor";
 
     private static final String TAG = "UsersDbAdapter";
     private DatabaseHelper mDbHelper;
@@ -39,16 +41,20 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table users (mail text not null, pass text not null,user not null,playlists text not null);";
+            "create table users (mail text not null, pass text not null,user not null,playlist text not null);";
     private static final String DATABASE_CREATE_SONGS =
-            "create table songs (_id integer primary key autoincrement,"+"name text not null, _artist text not null, _categoria text not null);";
+            "create table songs (_id integer primary key autoincrement," + "name text not null, _artist text not null, _categoria text not null);";
+    private static final String DATABASE_CREATE_PLAYLISTS =
+            "create table playlists (_id integer primary key autoincrement," + "nameP text not null, autor text not null, name text not null);";
 
     private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
     private static final String DATABASE_TABLE_SONGS = "songs";
+    private static final String DATABASE_TABLE_PLAYLISTS = "playlists";
     private static final int DATABASE_VERSION = 4;
 
     private final Context mCtx;
+
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -60,6 +66,7 @@ public class UsersDbAdapter {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_CREATE_USERS);
             db.execSQL(DATABASE_CREATE_SONGS);
+            db.execSQL(DATABASE_CREATE_PLAYLISTS);
         }
 
         @Override
@@ -68,6 +75,7 @@ public class UsersDbAdapter {
                     + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS users;");
             db.execSQL("DROP TABLE IF EXISTS songs;");
+            db.execSQL("DROP TABLE IF EXISTS playlists;");
             onCreate(db);
         }
     }
@@ -115,10 +123,10 @@ public class UsersDbAdapter {
      * @param pass the pass id (null for no pass)
      * @return mail or -1 if failed
      */
-    public long createUser(String mail, String pass,String user) {
+    public long createUser(String mail, String pass, String user) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_MAIL, mail);
-        initialValues.put(KEY_PLAYLISTS, "none");
+        initialValues.put(KEY_PLAYLIST, "none");
         initialValues.put(KEY_PASS, pass);
         initialValues.put(KEY_USER, user);
 
@@ -129,7 +137,7 @@ public class UsersDbAdapter {
         if (email == null) {
             return null;
         } else {
-            String[] columns = new String[]{KEY_MAIL, KEY_PASS,KEY_USER, KEY_PLAYLISTS};
+            String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
             Cursor mDbCursor =
                     mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
                             null, null, null, null);
@@ -141,7 +149,7 @@ public class UsersDbAdapter {
         }
     }
 
-    public long addSong(String name,String artist,String category) {
+    public long addSong(String name, String artist, String category) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_ARTIST, artist);
@@ -150,11 +158,27 @@ public class UsersDbAdapter {
         return mDb.insert(DATABASE_TABLE_SONGS, null, initialValues);
     }
 
+    public long addPlaylist(String playlist, String author) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_PLAYLIST, playlist);
+
+        return mDb.update(DATABASE_TABLE_USERS, initialValues, KEY_MAIL + "=?" ,new String[]{author});
+    }
+
+    public long addSongToPlaylist(String playlist, String song,String author) {
+        ContentValues args = new ContentValues();
+        args.put(KEY_NAMEP, playlist);
+        args.put(KEY_NAME, song);
+        args.put(KEY_AUTHOR, author);
+        return mDb.insert(DATABASE_TABLE_PLAYLISTS,null,args);
+
+    }
+
     public Cursor songInfo(String name) throws SQLException {
         if (name == null) {
             return null;
         } else {
-            String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+            String[] columns = new String[]{KEY_ID, KEY_NAME, KEY_ARTIST, KEY_CATEGORY};
             Cursor mDbCursor =
                     mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{name},
                             null, null, null, null);
@@ -166,26 +190,42 @@ public class UsersDbAdapter {
         }
     }
 
-    public String buscarCancion(long id) {
-        String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
-        Cursor aux = mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ID + "=?",new String[]{String.valueOf(id)},
+    public Cursor buscarCancion(String song) {
+        String[] columns = new String[]{KEY_ID, KEY_NAME, KEY_ARTIST, KEY_CATEGORY};
+        Cursor mCursor = mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{song},
                 null, null, null, null);
         String resultado = "Esta fallando";
-        if ( aux != null ) {
-            resultado = aux.getString(aux.getColumnIndex(KEY_NAME));
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+            if (mCursor.getCount() == 0) mCursor = null;
         }
-        return resultado;
+        return mCursor;
     }
 
-    public String buscarAutor(long id) {
-        String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
-        Cursor aux = mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ID + "=?", new String[]{String.valueOf(id)},
+    public Cursor buscarArtista(String artist) {
+        String[] columns = new String[]{KEY_ID, KEY_NAME, KEY_ARTIST, KEY_CATEGORY};
+        Cursor mCursor = mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "=?", new String[]{artist},
                 null, null, null, null);
-        String resultado = "Esta fallando";
-        if ( aux != null ) {
-            resultado = aux.getString(aux.getColumnIndex(KEY_ARTIST));
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+            if (mCursor.getCount() == 0) mCursor = null;
         }
-        return resultado;
+        return mCursor;
+    }
+
+    public Cursor searchPlaylists(String user) {
+        String username;
+        String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
+        Cursor aux = mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{user},
+                null, null, null, null);
+        username = aux.getString(2);
+        columns = new String[]{KEY_ID, KEY_NAMEP, KEY_AUTHOR, KEY_NAME};
+        aux = mDb.query(DATABASE_TABLE_PLAYLISTS, columns, KEY_AUTHOR + "=?", new String[]{username}, null, null, null);
+        if (aux != null) {
+            aux.moveToFirst();
+            if (aux.getCount() == 0) aux = null;
+        }
+        return aux;
     }
 
     /*
@@ -239,18 +279,18 @@ public class UsersDbAdapter {
      * @throws SQLException if User could not be found/retrieved
      */
     public Cursor searchShit(String shit) throws SQLException {
-        String[] columns = new String[]{KEY_ID,KEY_NAME,KEY_ARTIST,KEY_CATEGORY};
+        String[] columns = new String[]{KEY_ID, KEY_NAME, KEY_ARTIST, KEY_CATEGORY};
         Cursor mCursor =
-                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?" , new String[]{shit}, null,
+                mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_NAME + "=?", new String[]{shit}, null,
                         null, null, null, null);
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "=?" , new String[]{shit},
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_ARTIST + "=?", new String[]{shit},
                             null, null, null, null);
         }
         if (mCursor == null) {
             mCursor =
-                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "=?" , new String[]{shit},
+                    mDb.query(true, DATABASE_TABLE_SONGS, columns, KEY_CATEGORY + "=?", new String[]{shit},
                             null, null, null, null);
         }
         if (mCursor != null) {
@@ -283,12 +323,13 @@ public class UsersDbAdapter {
         }
         if (song != null) {
             Cursor c;
-            c=checkUser(mail);
-            playlist=c.getString(2);
-            playlist=playlist+"/"+song;
+            c = checkUser(mail);
+            playlist = c.getString(2);
+            playlist = playlist + "/" + song;
         }
         return mDb.update(DATABASE_TABLE_USERS, args, KEY_ARTIST + "=" + mail, null) > 0;
     }
+
     /**
      * Return a Cursor over the list of all Users in the database
      *
@@ -297,6 +338,7 @@ public class UsersDbAdapter {
     public Cursor searchAllSongs() {
         return mDb.query(DATABASE_TABLE_SONGS, new String[]{KEY_ARTIST, KEY_NAME}, null, null, null, null, null);
     }
+
     /*
      * Update the User using the details provided. The User to be updated is
      * specified using the mail, and it is altered to use the mail and playlists
@@ -306,7 +348,7 @@ public class UsersDbAdapter {
      * @param name value to set pass name to
      * @return true if the User was successfully updated, false otherwise
      */
-    public boolean updatePass(String mail, String pass,String nPass) {
+    public boolean updatePass(String mail, String pass, String nPass) {
         if (mail == null || mail.isEmpty()) return false;
 
         ContentValues args = new ContentValues();
