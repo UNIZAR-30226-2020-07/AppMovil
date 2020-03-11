@@ -40,5 +40,6 @@
     <string name="artist">Artist</string>
     <string name="song">Song</string>
     <string name="album">Album</string>
+    <string name="vacio"></string>
 
 </resources>

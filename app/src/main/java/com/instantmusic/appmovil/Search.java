@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,8 +13,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
@@ -28,7 +32,8 @@ public class Search extends AppCompatActivity {
     private TextView searchTip1;
     private TextView searchTip2;
     private ImageView lupaGrande;
-    private ScrollView searchMenu;
+    private LinearLayout searchMenu;
+    private int searchType = 1;
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST + 1;
     private static final int LOGIN = Menu.FIRST + 2;
@@ -43,13 +48,14 @@ public class Search extends AppCompatActivity {
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
-        searchMenu=findViewById(R.id.searchMenu);
+        searchMenu = findViewById(R.id.searchMenu);
+        findViewById(R.id.switchName).setBackground(getResources().getDrawable(R.drawable.tick512));
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Song(server.buscarCancion(id), server.buscarAutor(id));
-                Song("Pikete italiano","Kvndy Swing");
+                Song("Pikete italiano", "Kvndy Swing");
             }
         });
         search = findViewById(R.id.searchbar2);
@@ -92,39 +98,57 @@ public class Search extends AppCompatActivity {
             public void onClick(View view) {
                 Settings();
             }
-        });Button Button6 = findViewById(R.id.optionSearch);
+        });
+        Button Button6 = findViewById(R.id.optionSearch);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(searchMenu.getVisibility()==View.VISIBLE){
+                if (searchMenu.getVisibility() == View.VISIBLE) {
                     searchMenu.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     searchMenu.setVisibility(View.VISIBLE);
                 }
+
             }
         });
-        Switch s1=findViewById(R.id.switchName);
-        Switch s2=findViewById(R.id.switchCategory);
-        Switch s3=findViewById(R.id.switchArtist);
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
         s1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-
+                searchType=1;
+                search.setHint("Buscar cancion");
+                nameActivated();
             }
         });
         s2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-
+                searchType=2;
+                search.setHint("Buscar categoria");
+                categoryActivated();
             }
         });
         s3.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View view){
+                searchMenu.setVisibility(View.INVISIBLE);
+                searchType=3;
+                search.setHint("Buscar artista");
+                artistActivated();
+            }
+        });
+        s4.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-
+                searchType=4;
+                search.setHint("Buscar album");
+                albumActivated();
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -137,6 +161,86 @@ public class Search extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void nameActivated() {
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        switch (searchType) {
+            case 2:
+                s2.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 3:
+                s3.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 4:
+                s4.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+        }
+        System.out.println(searchType);
+        s1.setBackground(getResources().getDrawable(R.drawable.tick512));
+    }
+
+    private void categoryActivated() {
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        switch (searchType) {
+            case 1:
+                s1.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 3:
+                s3.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 4:
+                s4.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+        }
+        System.out.println(searchType);
+        s2.setBackground(getResources().getDrawable(R.drawable.tick512));
+    }
+
+    private void artistActivated() {
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        switch (searchType) {
+            case 1:
+                s1.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 2:
+                s2.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 4:
+                s4.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+        }
+        System.out.println(searchType);
+        s3.setBackground(getResources().getDrawable(R.drawable.tick512));
+    }
+
+    private void albumActivated() {
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        switch (searchType) {
+            case 1:
+                s1.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 2:
+                s2.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+            case 3:
+                s3.setBackground(getResources().getDrawable(R.drawable.vacio));
+                break;
+        }
+        System.out.println(searchType);
+        s4.setBackground(getResources().getDrawable(R.drawable.tick512));
     }
 
     private void Home() {
@@ -183,28 +287,20 @@ public class Search extends AppCompatActivity {
     }
 
     private void search() {
-        Switch searchName=findViewById(R.id.switchName);
-        Switch searchArtist=findViewById(R.id.switchArtist);
-        Switch searchCategory=findViewById(R.id.switchCategory);
-        int searchType=0;
-        if(searchName.isActivated()){
-            searchType=0;
-        }if(searchCategory.isActivated()){
-            searchType=1;
-        }if(searchArtist.isActivated()){
-            searchType=2;
-        }
         shit = findViewById(R.id.searchbar2);
-        Cursor shitCursor=null;
-        switch(searchType){
-            case 0:
+        Cursor shitCursor = null;
+        switch (searchType) {
+            case 1:
                 shitCursor = server.searchShit(shit.getText().toString());
                 break;
-            case 1:
+            case 2:
                 //shitcursor=server.searchCategory(shit.getText().toString());
                 break;
-            case 2:
+            case 3:
                 //shitcursor=server.searchArtist(shit.getText().toString());
+                break;
+            case 4:
+                //shitcursor=server.searchAlbum(shit.getText().toString());
                 break;
         }
         if (shitCursor == null) {
