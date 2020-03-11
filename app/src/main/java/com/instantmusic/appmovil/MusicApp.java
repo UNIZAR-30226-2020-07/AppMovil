@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,7 +66,6 @@ public class MusicApp extends AppCompatActivity {
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String texto;
                 if ( server.login(mail.getText().toString(), pass.getText().toString()) == 1 ) { // Caso en el que los datos introducidos sean erroneos
                     aux = findViewById(R.id.Tip);
                     aux.setTextColor(Color.RED);
@@ -73,6 +74,40 @@ public class MusicApp extends AppCompatActivity {
                 else {
                     logInScreen();
                 }
+            }
+        });
+        pass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if ( server.login(mail.getText().toString(), pass.getText().toString()) == 1 ) { // Caso en el que los datos introducidos sean erroneos
+                        aux = findViewById(R.id.Tip);
+                        aux.setTextColor(Color.RED);
+                        aux.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        logInScreen();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        mail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if ( server.login(mail.getText().toString(), pass.getText().toString()) == 1 ) { // Caso en el que los datos introducidos sean erroneos
+                        aux = findViewById(R.id.Tip);
+                        aux.setTextColor(Color.RED);
+                        aux.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        logInScreen();
+                    }
+                    return true;
+                }
+                return false;
             }
         });
         // mDbHelper = new NotesDbAdapter(this);
@@ -158,6 +193,7 @@ public class MusicApp extends AppCompatActivity {
         i.putExtra(NotesDbAdapter.KEY_ROWID, id);
         startActivityForResult(i, ACTIVITY_EDIT);
     }*/
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
