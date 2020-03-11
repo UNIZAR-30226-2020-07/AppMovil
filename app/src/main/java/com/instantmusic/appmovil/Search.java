@@ -49,7 +49,6 @@ public class Search extends AppCompatActivity {
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
-        findViewById(R.id.switchName).setBackground(getResources().getDrawable(R.drawable.tick512));
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -119,7 +118,7 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                searchType=1;
+                searchType = 1;
                 search.setHint("Buscar cancion");
                 nameActivated();
             }
@@ -128,16 +127,16 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                searchType=2;
+                searchType = 2;
                 search.setHint("Buscar categoria");
                 categoryActivated();
             }
         });
         s3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                searchType=3;
+                searchType = 3;
                 search.setHint("Buscar artista");
                 artistActivated();
             }
@@ -146,7 +145,7 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                searchType=4;
+                searchType = 4;
                 search.setHint("Buscar album");
                 albumActivated();
             }
@@ -168,19 +167,10 @@ public class Search extends AppCompatActivity {
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
         Button s4 = findViewById(R.id.switchAlbum);
-        switch (searchType) {
-            case 2:
-                s2.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 3:
-                s3.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 4:
-                s4.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-        }
-        System.out.println(searchType);
         s1.setBackground(getResources().getDrawable(R.drawable.tick512));
+        s4.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s3.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s2.setBackground(getResources().getDrawable(R.drawable.vacio));
     }
 
     private void categoryActivated() {
@@ -188,18 +178,10 @@ public class Search extends AppCompatActivity {
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
         Button s4 = findViewById(R.id.switchAlbum);
-        switch (searchType) {
-            case 1:
-                s1.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 3:
-                s3.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 4:
-                s4.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-        }
-        System.out.println(searchType);
+
+        s4.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s3.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s1.setBackground(getResources().getDrawable(R.drawable.vacio));
         s2.setBackground(getResources().getDrawable(R.drawable.tick512));
     }
 
@@ -208,18 +190,10 @@ public class Search extends AppCompatActivity {
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
         Button s4 = findViewById(R.id.switchAlbum);
-        switch (searchType) {
-            case 1:
-                s1.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 2:
-                s2.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 4:
-                s4.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-        }
-        System.out.println(searchType);
+
+        s4.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s2.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s1.setBackground(getResources().getDrawable(R.drawable.vacio));
         s3.setBackground(getResources().getDrawable(R.drawable.tick512));
     }
 
@@ -228,18 +202,9 @@ public class Search extends AppCompatActivity {
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
         Button s4 = findViewById(R.id.switchAlbum);
-        switch (searchType) {
-            case 1:
-                s1.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 2:
-                s2.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-            case 3:
-                s3.setBackground(getResources().getDrawable(R.drawable.vacio));
-                break;
-        }
-        System.out.println(searchType);
+        s3.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s2.setBackground(getResources().getDrawable(R.drawable.vacio));
+        s1.setBackground(getResources().getDrawable(R.drawable.vacio));
         s4.setBackground(getResources().getDrawable(R.drawable.tick512));
     }
 
