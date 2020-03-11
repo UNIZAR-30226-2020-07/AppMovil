@@ -60,7 +60,7 @@ public class Song extends AppCompatActivity implements Runnable {
         seekBar = findViewById(R.id.seekBar);
         seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
+        /*
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -95,6 +95,8 @@ public class Song extends AppCompatActivity implements Runnable {
                 }
             }
         });
+
+       */
     }
 
     public void playSong() {
