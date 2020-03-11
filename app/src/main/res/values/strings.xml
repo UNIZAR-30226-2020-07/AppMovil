@@ -41,7 +41,5 @@
     <string name="song">Song</string>
     <string name="album">Album</string>
     <string name="vacio"></string>
-    <string name="myplaylist">My playlists</string>
-    <string name="addPlaylist">Create playlist</string>
 
 </resources>

@@ -32,7 +32,6 @@ public class MusicApp extends AppCompatActivity {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
-    private String email;
     private TextView aux;
     public serverInterface server;
 
@@ -73,7 +72,6 @@ public class MusicApp extends AppCompatActivity {
                     aux.setVisibility(View.VISIBLE);
                 }
                 else {
-                    email=mail.getText().toString();
                     logInScreen();
                 }
             }
@@ -121,7 +119,6 @@ public class MusicApp extends AppCompatActivity {
 
     private void logInScreen() {
         Intent i = new Intent(this, Login.class);
-        i.putExtra("email", email);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 

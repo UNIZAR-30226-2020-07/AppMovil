@@ -10,12 +10,10 @@ public interface serverInterface  {
     int recover(String mail);
     int checkUser(String email);
     int login(String mail,String pass);
-    int addSongToPlaylist(String playlist, String song,String author);
+    int addSongToUser(String mail,String pass,String song);
     long addSong(String name,String artist,String categoria);
-    long addPlaylist(String playlist,String author);
-    Cursor buscarCancion(String song);
-    Cursor buscarArtista(String artist);
-    Cursor allPlaylists(String user);
+    String buscarCancion(long id);
+    String buscarAutor(long id);
     void close();
 
 }
