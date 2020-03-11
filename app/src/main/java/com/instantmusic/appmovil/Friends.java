@@ -27,10 +27,13 @@ public class Friends extends AppCompatActivity {
     private static final int LOGIN = Menu.FIRST + 2;
     private EditText shit;
     private serverInterface server;
+    private String user;
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        user = extras.getString("email");
         setContentView(R.layout.activity_instant_music_app_friends);
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
@@ -90,6 +93,7 @@ public class Friends extends AppCompatActivity {
     private void Home() {
         Intent i = new Intent(this, Login.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -97,6 +101,7 @@ public class Friends extends AppCompatActivity {
     private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -104,6 +109,7 @@ public class Friends extends AppCompatActivity {
     private void Settings() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -111,6 +117,7 @@ public class Friends extends AppCompatActivity {
     private void Podcasts() {
         Intent i = new Intent(this, Podcasts.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }

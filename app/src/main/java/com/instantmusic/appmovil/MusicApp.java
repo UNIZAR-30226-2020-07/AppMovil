@@ -32,6 +32,8 @@ public class MusicApp extends AppCompatActivity {
     //private static final int SEND_EMAIL_ID = Menu.FIRST + 4;
     private EditText mail;
     private EditText pass;
+    private String email;
+    private String name;
     private TextView aux;
     public serverInterface server;
 
@@ -51,6 +53,7 @@ public class MusicApp extends AppCompatActivity {
         server.addSong("Fighting Gold","Kazusou Oda","Rock");
         server.addSong("Me Gusta","Shakira","Reggaeton");
         server.addSong("Pikete italiano","Kvndy Swing","Trap");
+
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -72,6 +75,9 @@ public class MusicApp extends AppCompatActivity {
                     aux.setVisibility(View.VISIBLE);
                 }
                 else {
+                    email=mail.getText().toString();
+                    server.addPlaylist("Jojos", email);
+                    server.addSongToPlaylist("Fighting Gold", "Jojos", name);
                     logInScreen();
                 }
             }
@@ -104,6 +110,7 @@ public class MusicApp extends AppCompatActivity {
                     }
                     else {
                         logInScreen();
+
                     }
                     return true;
                 }
@@ -119,6 +126,7 @@ public class MusicApp extends AppCompatActivity {
 
     private void logInScreen() {
         Intent i = new Intent(this, Login.class);
+        i.putExtra("email", email);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 
