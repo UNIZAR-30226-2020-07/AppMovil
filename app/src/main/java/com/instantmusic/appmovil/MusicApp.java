@@ -53,6 +53,7 @@ public class MusicApp extends AppCompatActivity {
         server.addSong("Fighting Gold","Kazusou Oda","Rock");
         server.addSong("Me Gusta","Shakira","Reggaeton");
         server.addSong("Pikete italiano","Kvndy Swing","Trap");
+
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -75,6 +76,8 @@ public class MusicApp extends AppCompatActivity {
                 }
                 else {
                     email=mail.getText().toString();
+                    server.addPlaylist("Jojos", email);
+                    server.addSongToPlaylist("Fighting Gold", "Jojos", name);
                     logInScreen();
                 }
             }
@@ -107,6 +110,7 @@ public class MusicApp extends AppCompatActivity {
                     }
                     else {
                         logInScreen();
+
                     }
                     return true;
                 }

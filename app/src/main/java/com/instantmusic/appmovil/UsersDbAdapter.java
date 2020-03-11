@@ -41,24 +41,33 @@ public class UsersDbAdapter {
      * Database creation sql statement
      */
     private static final String DATABASE_CREATE_USERS =
-            "create table users (mail text not null, pass text not null,user not null,playlist text not null);";
+            "create table users (_id integer primary key autoincrement," + "mail text not null, pass text not null,user not null,playlist text not null);";
     private static final String DATABASE_CREATE_SONGS =
             "create table songs (_id integer primary key autoincrement," + "name text not null, _artist text not null, _categoria text not null);";
     private static final String DATABASE_CREATE_PLAYLISTS =
             "create table playlists (_id integer primary key autoincrement," + "nameP text not null, autor text not null, name text not null);";
+    private static final String DATABASE_CREATE_LIST_PLAYLISTS =
+            "create table listplaylists (_id integer primary key autoincrement," + "nameP text not null, autor text not null);";
 
     private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE_USERS = "users";
     private static final String DATABASE_TABLE_SONGS = "songs";
     private static final String DATABASE_TABLE_PLAYLISTS = "playlists";
+    private static final String DATABASE_TABLE_LIST_PLAYLISTS = "listplaylists";
     private static final int DATABASE_VERSION = 4;
 
     private final Context mCtx;
 
     public Cursor infoUser(String email) {
-        String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
-       return mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
-                null, null, null, null);
+        String[] columns = new String[]{KEY_ID, KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
+        Cursor mDbCursor =
+                mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
+                        null, null, null, null);
+        if (mDbCursor != null) {
+            mDbCursor.moveToFirst();
+            if (mDbCursor.getCount() == 0) mDbCursor = null;
+        }
+        return mDbCursor;
     }
 
 
@@ -73,6 +82,7 @@ public class UsersDbAdapter {
             db.execSQL(DATABASE_CREATE_USERS);
             db.execSQL(DATABASE_CREATE_SONGS);
             db.execSQL(DATABASE_CREATE_PLAYLISTS);
+            db.execSQL(DATABASE_CREATE_LIST_PLAYLISTS);
         }
 
         @Override
@@ -82,6 +92,7 @@ public class UsersDbAdapter {
             db.execSQL("DROP TABLE IF EXISTS users;");
             db.execSQL("DROP TABLE IF EXISTS songs;");
             db.execSQL("DROP TABLE IF EXISTS playlists;");
+            db.execSQL("DROP TABLE IF EXISTS listplaylists;");
             onCreate(db);
         }
     }
@@ -143,7 +154,7 @@ public class UsersDbAdapter {
         if (email == null) {
             return null;
         } else {
-            String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
+            String[] columns = new String[]{KEY_ID, KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
             Cursor mDbCursor =
                     mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{email},
                             null, null, null, null);
@@ -220,13 +231,8 @@ public class UsersDbAdapter {
     }
 
     public Cursor searchPlaylists(String user) {
-        String username;
-        String[] columns = new String[]{KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
-        Cursor aux = mDb.query(true, DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{user},
-                null, null, null, null);
-        username = aux.getString(2);
-        columns = new String[]{KEY_ID, KEY_NAMEP, KEY_AUTHOR, KEY_NAME};
-        aux = mDb.query(DATABASE_TABLE_PLAYLISTS, columns, KEY_AUTHOR + "=?", new String[]{username}, null, null, null);
+        String[] columns = new String[]{KEY_ID, KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
+        Cursor aux = mDb.query(DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{user}, null, null, null);
         if (aux != null) {
             aux.moveToFirst();
             if (aux.getCount() == 0) aux = null;

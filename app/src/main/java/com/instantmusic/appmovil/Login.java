@@ -23,6 +23,7 @@ public class Login extends AppCompatActivity {
     private String name;
     private ListView myPlaylist;
 
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -31,11 +32,18 @@ public class Login extends AppCompatActivity {
 //        registerForContextMenu(resList);
         Bundle extras = getIntent().getExtras();
         user = extras.getString("email");
-        Cursor aux=server.infoUser(user);
-        name=aux.getString(1);
-        server.addPlaylist("Jojos",user);
-        server.addSongToPlaylist("Fighting Gold","Jojos",name);
         myPlaylist = findViewById(R.id.myPlaylists);
+
+        Cursor aux = server.infoUser(user);
+        name = aux.getString(3);
+
+        Cursor shitCursor = server.allPlaylists(user);
+        startManagingCursor(shitCursor);
+        String[] from = new String[]{UsersDbAdapter.KEY_PLAYLIST, UsersDbAdapter.KEY_USER};
+        int[] to = new int[]{R.id.text1, R.id.text2};
+        SimpleCursorAdapter search =
+                new SimpleCursorAdapter(this, R.layout.myplaylists_row, shitCursor, from, to);
+        myPlaylist.setAdapter(search);
         Button Button2 = findViewById(R.id.menuButton2);
         Button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,23 +72,14 @@ public class Login extends AppCompatActivity {
                 Settings();
             }
         });
-        Cursor shitCursor=server.allPlaylists(name);
-        startManagingCursor(shitCursor);
-        // Create an array to specify the fields we want to display in the list (only TITLE)
-        String[] from = new String[]{UsersDbAdapter.KEY_NAME, UsersDbAdapter.KEY_ARTIST, UsersDbAdapter.KEY_CATEGORY};
 
-        // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[]{R.id.text1, R.id.text2, R.id.text3};
-        SimpleCursorAdapter search =
-                new SimpleCursorAdapter(this, R.layout.search_row, shitCursor, from, to);
-        myPlaylist.setAdapter(search);
     }
-
 
 
     private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -88,6 +87,7 @@ public class Login extends AppCompatActivity {
     private void Podcasts() {
         Intent i = new Intent(this, Podcasts.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -95,6 +95,7 @@ public class Login extends AppCompatActivity {
     private void Friends() {
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -102,6 +103,7 @@ public class Login extends AppCompatActivity {
     private void Settings() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
