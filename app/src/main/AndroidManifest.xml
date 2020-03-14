@@ -26,16 +26,26 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter></activity>
-        <activity android:name=".Login"></activity>
-        <activity android:name=".Recover"></activity>
-        <activity android:name=".Regist"></activity>
-        <activity android:name=".Search"></activity>
-        <activity android:name=".Friends"></activity>
-        <activity android:name=".Podcasts"></activity>
-        <activity android:name=".Settings"></activity>
-        <activity android:name=".Song"></activity>
-        <activity android:name=".Playlists"></activity>
-        <activity android:name=".remoteServer"></activity>
+        <activity android:name=".Login"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Recover"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Regist"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Search"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Friends"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Podcasts"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Settings"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Song"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".Playlists"
+            tools:ignore="LockedOrientationActivity">></activity>
+        <activity android:name=".remoteServer"
+            tools:ignore="LockedOrientationActivity">></activity>
     </application>
 
 </manifest>

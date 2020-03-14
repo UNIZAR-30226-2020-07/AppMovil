@@ -13,16 +13,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import io.swagger.client.JSON;
+import io.swagger.client.api.RestAuthApi;
 import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.model.Register;
 
 public class remoteServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
-    private Register regist;
+    private RestAuthApi serverRequest;
     private String BASE_URL= "https://ps-20-server-django-app.herokuapp.com/api/v1";
 
     remoteServer() { }
-    private JSON _fetch()
     public Cursor searchShit(String shit) {
         JSONObject serverRes = new JSONObject();
         return regist.searchShit(shit);
@@ -30,6 +30,7 @@ public class remoteServer implements serverInterface {
 
     public long registUser(String mail, String pass1,String pass2, String user) {
         JSONObject serverRes = new JSONObject();
+        Register regist=new Register();
         regist.setPassword1(pass1);
         regist.setPassword2(pass2);
         regist.setUsername(user);
