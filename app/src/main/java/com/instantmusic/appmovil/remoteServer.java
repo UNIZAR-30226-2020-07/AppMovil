@@ -12,15 +12,17 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import io.swagger.client.JSON;
 import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.model.Register;
 
 public class remoteServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
     private Register regist;
+    private String BASE_URL= "https://ps-20-server-django-app.herokuapp.com/api/v1";
 
     remoteServer() { }
-
+    private JSON _fetch()
     public Cursor searchShit(String shit) {
         JSONObject serverRes = new JSONObject();
         return regist.searchShit(shit);
@@ -30,9 +32,9 @@ public class remoteServer implements serverInterface {
         JSONObject serverRes = new JSONObject();
         regist.setPassword1(pass1);
         regist.setPassword2(pass2);
-        regist.setUsername(mail);
-        serverRes =
-        return regist.createUser(mail, pass, user);
+        regist.setUsername(user);
+        regist.setEmail(mail);
+        return 0;
     }
 
     public int checkUser(String mail) {
