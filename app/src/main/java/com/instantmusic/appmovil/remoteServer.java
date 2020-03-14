@@ -66,7 +66,7 @@ public class remoteServer implements serverInterface {
         return null;
     }
 
-    public int deleteUser(String email) {
+    /*public int deleteUser(String email) {
         JSONObject serverRes = new JSONObject();
         if (regist.deleteUser(email)) {
             return 0;
@@ -77,7 +77,7 @@ public class remoteServer implements serverInterface {
     public int songInfo(String name, String artist, String categoria) {
         return 0;
     }
-
+    */
     public Cursor buscarCancion(String song) {
         JSONObject serverRes = new JSONObject();
         return regist.buscarCancion(song);
