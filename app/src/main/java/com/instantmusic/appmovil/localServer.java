@@ -40,7 +40,7 @@ import java.io.InputStream;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
-public class localServer implements serverInterface {
+/*public class localServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
     private UsersDbAdapter localDb;
 
@@ -131,4 +131,4 @@ public class localServer implements serverInterface {
     public void close(){
         localDb.close();
     }
-}
+}*/
