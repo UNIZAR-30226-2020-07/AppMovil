@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public interface serverInterface  {
-    Cursor searchShit(String shit);
+    /*Cursor searchShit(String shit);
     long registUser(String mail,String pass,String user);
     int recover(String mail);
     int checkUser(String email);
@@ -17,6 +17,6 @@ public interface serverInterface  {
     Cursor buscarCancion(String song);
     Cursor buscarArtista(String artist);
     Cursor allPlaylists(String user);
-    void close();
+    void close();*/
 
 }

@@ -44,7 +44,7 @@ public class MusicApp extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-        server = new localServer(this);
+        server = new remoteServer(this);
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         server.addSong("Pegamos tela","Omar Montes","Reggaeton");
