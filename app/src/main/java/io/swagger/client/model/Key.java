@@ -25,14 +25,14 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * VerifyEmail
+ * Key
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-14T18:16:12.217Z")
-public class VerifyEmail {
+public class Key {
   @SerializedName("key")
   private String key = null;
 
-  public VerifyEmail key(String key) {
+  public Key key(String key) {
     this.key = key;
     return this;
   }
@@ -41,7 +41,7 @@ public class VerifyEmail {
    * Get key
    * @return key
   **/
-  @ApiModelProperty(required = true, value = "")
+  @ApiModelProperty(value = "")
   public String getKey() {
     return key;
   }
@@ -59,8 +59,8 @@ public class VerifyEmail {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    VerifyEmail verifyEmail = (VerifyEmail) o;
-    return Objects.equals(this.key, verifyEmail.key);
+    Key key = (Key) o;
+    return Objects.equals(this.key, key.key);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class VerifyEmail {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class VerifyEmail {\n");
+    sb.append("class Key {\n");
     
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("}");

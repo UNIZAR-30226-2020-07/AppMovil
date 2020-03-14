@@ -18,7 +18,6 @@ import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.ApiResponse;
 import io.swagger.client.Configuration;
-import io.swagger.client.JSON;
 import io.swagger.client.Pair;
 import io.swagger.client.ProgressRequestBody;
 import io.swagger.client.ProgressResponseBody;
@@ -28,11 +27,14 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import io.swagger.client.model.Key;
 import io.swagger.client.model.Login;
+import io.swagger.client.model.LoginInvalid;
 import io.swagger.client.model.PasswordChange;
 import io.swagger.client.model.PasswordReset;
 import io.swagger.client.model.PasswordResetConfirm;
 import io.swagger.client.model.Register;
+import io.swagger.client.model.RegisterInvalid;
 import io.swagger.client.model.User;
 import io.swagger.client.model.VerifyEmail;
 
@@ -128,11 +130,11 @@ public class RestAuthApi {
      * 
      * Check the credentials and return the REST Token if the credentials are valid and authenticated. Calls Django Auth login method to register User ID in Django session framework  Accept the following POST parameters: username, password Return the REST Framework Token Object&#39;s key.
      * @param data  (required)
-     * @return Login
+     * @return Key
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public JSON restAuthLoginCreate(Login data) throws ApiException {
-        ApiResponse<Login> resp = restAuthLoginCreateWithHttpInfo(data);
+    public Key restAuthLoginCreate(Login data) throws ApiException {
+        ApiResponse<Key> resp = restAuthLoginCreateWithHttpInfo(data);
         return resp.getData();
     }
 
@@ -140,12 +142,12 @@ public class RestAuthApi {
      * 
      * Check the credentials and return the REST Token if the credentials are valid and authenticated. Calls Django Auth login method to register User ID in Django session framework  Accept the following POST parameters: username, password Return the REST Framework Token Object&#39;s key.
      * @param data  (required)
-     * @return ApiResponse&lt;Login&gt;
+     * @return ApiResponse&lt;Key&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Login> restAuthLoginCreateWithHttpInfo(Login data) throws ApiException {
+    public ApiResponse<Key> restAuthLoginCreateWithHttpInfo(Login data) throws ApiException {
         com.squareup.okhttp.Call call = restAuthLoginCreateValidateBeforeCall(data, null, null);
-        Type localVarReturnType = new TypeToken<Login>(){}.getType();
+        Type localVarReturnType = new TypeToken<Key>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -157,7 +159,7 @@ public class RestAuthApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call restAuthLoginCreateAsync(Login data, final ApiCallback<Login> callback) throws ApiException {
+    public com.squareup.okhttp.Call restAuthLoginCreateAsync(Login data, final ApiCallback<Key> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -179,7 +181,7 @@ public class RestAuthApi {
         }
 
         com.squareup.okhttp.Call call = restAuthLoginCreateValidateBeforeCall(data, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Login>(){}.getType();
+        Type localVarReturnType = new TypeToken<Key>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -834,11 +836,11 @@ public class RestAuthApi {
      * 
      * 
      * @param data  (required)
-     * @return Register
+     * @return Key
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public JSON restAuthRegistrationCreate(Register data) throws ApiException {
-        ApiResponse<JSON> resp = restAuthRegistrationCreateWithHttpInfo(data);
+    public Key restAuthRegistrationCreate(Register data) throws ApiException {
+        ApiResponse<Key> resp = restAuthRegistrationCreateWithHttpInfo(data);
         return resp.getData();
     }
 
@@ -846,12 +848,12 @@ public class RestAuthApi {
      * 
      * 
      * @param data  (required)
-     * @return ApiResponse&lt;Register&gt;
+     * @return ApiResponse&lt;Key&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<JSON> restAuthRegistrationCreateWithHttpInfo(Register data) throws ApiException {
+    public ApiResponse<Key> restAuthRegistrationCreateWithHttpInfo(Register data) throws ApiException {
         com.squareup.okhttp.Call call = restAuthRegistrationCreateValidateBeforeCall(data, null, null);
-        Type localVarReturnType = new TypeToken<Register>(){}.getType();
+        Type localVarReturnType = new TypeToken<Key>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -863,7 +865,7 @@ public class RestAuthApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call restAuthRegistrationCreateAsync(Register data, final ApiCallback<Register> callback) throws ApiException {
+    public com.squareup.okhttp.Call restAuthRegistrationCreateAsync(Register data, final ApiCallback<Key> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -885,7 +887,7 @@ public class RestAuthApi {
         }
 
         com.squareup.okhttp.Call call = restAuthRegistrationCreateValidateBeforeCall(data, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Register>(){}.getType();
+        Type localVarReturnType = new TypeToken<Key>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
