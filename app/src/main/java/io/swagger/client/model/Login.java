@@ -22,73 +22,74 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.Album;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Artist
+ * Login
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-14T16:06:26.034Z")
-public class Artist {
-  @SerializedName("id")
-  private Integer id = null;
+public class Login {
+  @SerializedName("username")
+  private String username = null;
 
-  @SerializedName("albums")
-  private List<Album> albums = new ArrayList<Album>();
+  @SerializedName("email")
+  private String email = null;
 
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("password")
+  private String password = null;
+
+  public Login username(String username) {
+    this.username = username;
+    return this;
+  }
 
    /**
-   * Get id
-   * @return id
+   * Get username
+   * @return username
   **/
   @ApiModelProperty(value = "")
-  public Integer getId() {
-    return id;
+  public String getUsername() {
+    return username;
   }
 
-  public Artist albums(List<Album> albums) {
-    this.albums = albums;
-    return this;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
-  public Artist addAlbumsItem(Album albumsItem) {
-    this.albums.add(albumsItem);
-    return this;
-  }
-
-   /**
-   * Get albums
-   * @return albums
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public List<Album> getAlbums() {
-    return albums;
-  }
-
-  public void setAlbums(List<Album> albums) {
-    this.albums = albums;
-  }
-
-  public Artist name(String name) {
-    this.name = name;
+  public Login email(String email) {
+    this.email = email;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get email
+   * @return email
   **/
-  @ApiModelProperty(required = true, value = "")
-  public String getName() {
-    return name;
+  @ApiModelProperty(value = "")
+  public String getEmail() {
+    return email;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public Login password(String password) {
+    this.password = password;
+    return this;
+  }
+
+   /**
+   * Get password
+   * @return password
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
 
@@ -100,26 +101,26 @@ public class Artist {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Artist artist = (Artist) o;
-    return Objects.equals(this.id, artist.id) &&
-        Objects.equals(this.albums, artist.albums) &&
-        Objects.equals(this.name, artist.name);
+    Login login = (Login) o;
+    return Objects.equals(this.username, login.username) &&
+        Objects.equals(this.email, login.email) &&
+        Objects.equals(this.password, login.password);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, albums, name);
+    return Objects.hash(username, email, password);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Artist {\n");
+    sb.append("class Login {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    albums: ").append(toIndentedString(albums)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    username: ").append(toIndentedString(username)).append("\n");
+    sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("}");
     return sb.toString();
   }

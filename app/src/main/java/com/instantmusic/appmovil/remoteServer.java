@@ -3,25 +3,34 @@ package com.instantmusic.appmovil;
 import android.content.Context;
 import android.database.Cursor;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import io.swagger.client.auth.HttpBasicAuth;
+import io.swagger.client.model.Register;
 
 public class remoteServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
-    private HttpBasicAuth regist;
+    private Register regist;
 
-    remoteServer(Context ctx) {
-        this.regist = new HttpBasicAuth();
-    }
+    remoteServer() { }
 
     public Cursor searchShit(String shit) {
         JSONObject serverRes = new JSONObject();
         return regist.searchShit(shit);
     }
 
-    public long registUser(String mail, String pass, String user) {
+    public long registUser(String mail, String pass1,String pass2, String user) {
         JSONObject serverRes = new JSONObject();
+        regist.setPassword1(pass1);
+        regist.setPassword2(pass2);
+        regist.setUsername(mail);
         serverRes =
         return regist.createUser(mail, pass, user);
     }

@@ -22,73 +22,32 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.Album;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Artist
+ * VerifyEmail
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-14T16:06:26.034Z")
-public class Artist {
-  @SerializedName("id")
-  private Integer id = null;
+public class VerifyEmail {
+  @SerializedName("key")
+  private String key = null;
 
-  @SerializedName("albums")
-  private List<Album> albums = new ArrayList<Album>();
-
-  @SerializedName("name")
-  private String name = null;
-
-   /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(value = "")
-  public Integer getId() {
-    return id;
-  }
-
-  public Artist albums(List<Album> albums) {
-    this.albums = albums;
-    return this;
-  }
-
-  public Artist addAlbumsItem(Album albumsItem) {
-    this.albums.add(albumsItem);
+  public VerifyEmail key(String key) {
+    this.key = key;
     return this;
   }
 
    /**
-   * Get albums
-   * @return albums
+   * Get key
+   * @return key
   **/
   @ApiModelProperty(required = true, value = "")
-  public List<Album> getAlbums() {
-    return albums;
+  public String getKey() {
+    return key;
   }
 
-  public void setAlbums(List<Album> albums) {
-    this.albums = albums;
-  }
-
-  public Artist name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Get name
-   * @return name
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
+  public void setKey(String key) {
+    this.key = key;
   }
 
 
@@ -100,26 +59,22 @@ public class Artist {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Artist artist = (Artist) o;
-    return Objects.equals(this.id, artist.id) &&
-        Objects.equals(this.albums, artist.albums) &&
-        Objects.equals(this.name, artist.name);
+    VerifyEmail verifyEmail = (VerifyEmail) o;
+    return Objects.equals(this.key, verifyEmail.key);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, albums, name);
+    return Objects.hash(key);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Artist {\n");
+    sb.append("class VerifyEmail {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    albums: ").append(toIndentedString(albums)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("}");
     return sb.toString();
   }

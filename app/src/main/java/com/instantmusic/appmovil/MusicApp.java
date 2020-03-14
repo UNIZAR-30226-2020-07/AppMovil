@@ -44,15 +44,15 @@ public class MusicApp extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-        server = new remoteServer(this);
+        server = new remoteServer();
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
-        server.addSong("Pegamos tela","Omar Montes","Reggaeton");
+        /*server.addSong("Pegamos tela","Omar Montes","Reggaeton");
         server.addSong("Despacito","Luis Fonsi","Reggaeton");
         server.addSong("Purpurina","Alberto Gambino","Hip-Hop");
         server.addSong("Fighting Gold","Kazusou Oda","Rock");
         server.addSong("Me Gusta","Shakira","Reggaeton");
-        server.addSong("Pikete italiano","Kvndy Swing","Trap");
+        server.addSong("Pikete italiano","Kvndy Swing","Trap");*/
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

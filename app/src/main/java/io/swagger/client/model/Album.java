@@ -1,5 +1,5 @@
-/**
- * Songs API
+/*
+ * API
  * Test version of the api
  *
  * OpenAPI spec version: v1
@@ -10,68 +10,111 @@
  * Do not edit the class manually.
  */
 
+
 package io.swagger.client.model;
 
-import io.swagger.client.model.Song;
-import java.util.*;
-import io.swagger.annotations.*;
+import java.util.Objects;
+import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.Song;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@ApiModel(description = "")
+/**
+ * Album
+ */
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-14T16:06:26.034Z")
 public class Album {
-  
   @SerializedName("id")
   private Integer id = null;
+
   @SerializedName("songs")
-  private List<Song> songs = null;
+  private List<Song> songs = new ArrayList<Song>();
+
   @SerializedName("name")
   private String name = null;
+
   @SerializedName("artist")
   private Integer artist = null;
 
-  /**
-   **/
+   /**
+   * Get id
+   * @return id
+  **/
   @ApiModelProperty(value = "")
   public Integer getId() {
     return id;
   }
-  public void setId(Integer id) {
-    this.id = id;
+
+  public Album songs(List<Song> songs) {
+    this.songs = songs;
+    return this;
   }
 
-  /**
-   **/
+  public Album addSongsItem(Song songsItem) {
+    this.songs.add(songsItem);
+    return this;
+  }
+
+   /**
+   * Get songs
+   * @return songs
+  **/
   @ApiModelProperty(required = true, value = "")
   public List<Song> getSongs() {
     return songs;
   }
+
   public void setSongs(List<Song> songs) {
     this.songs = songs;
   }
 
-  /**
-   **/
+  public Album name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Get name
+   * @return name
+  **/
   @ApiModelProperty(required = true, value = "")
   public String getName() {
     return name;
   }
+
   public void setName(String name) {
     this.name = name;
   }
 
-  /**
-   **/
+  public Album artist(Integer artist) {
+    this.artist = artist;
+    return this;
+  }
+
+   /**
+   * Get artist
+   * @return artist
+  **/
   @ApiModelProperty(value = "")
   public Integer getArtist() {
     return artist;
   }
+
   public void setArtist(Integer artist) {
     this.artist = artist;
   }
 
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
     }
@@ -79,32 +122,41 @@ public class Album {
       return false;
     }
     Album album = (Album) o;
-    return (this.id == null ? album.id == null : this.id.equals(album.id)) &&
-        (this.songs == null ? album.songs == null : this.songs.equals(album.songs)) &&
-        (this.name == null ? album.name == null : this.name.equals(album.name)) &&
-        (this.artist == null ? album.artist == null : this.artist.equals(album.artist));
+    return Objects.equals(this.id, album.id) &&
+        Objects.equals(this.songs, album.songs) &&
+        Objects.equals(this.name, album.name) &&
+        Objects.equals(this.artist, album.artist);
   }
 
   @Override
   public int hashCode() {
-    int result = 17;
-    result = 31 * result + (this.id == null ? 0: this.id.hashCode());
-    result = 31 * result + (this.songs == null ? 0: this.songs.hashCode());
-    result = 31 * result + (this.name == null ? 0: this.name.hashCode());
-    result = 31 * result + (this.artist == null ? 0: this.artist.hashCode());
-    return result;
+    return Objects.hash(id, songs, name, artist);
   }
 
+
   @Override
-  public String toString()  {
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Album {\n");
     
-    sb.append("  id: ").append(id).append("\n");
-    sb.append("  songs: ").append(songs).append("\n");
-    sb.append("  name: ").append(name).append("\n");
-    sb.append("  artist: ").append(artist).append("\n");
-    sb.append("}\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    songs: ").append(toIndentedString(songs)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    artist: ").append(toIndentedString(artist)).append("\n");
+    sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+
 }
+

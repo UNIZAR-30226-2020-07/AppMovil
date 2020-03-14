@@ -1,5 +1,5 @@
-/**
- * Songs API
+/*
+ * API
  * Test version of the api
  *
  * OpenAPI spec version: v1
@@ -10,68 +10,120 @@
  * Do not edit the class manually.
  */
 
+
 package io.swagger.client.model;
 
-import io.swagger.client.model.Artist;
-import java.util.*;
-import io.swagger.annotations.*;
+import java.util.Objects;
+import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.Artist;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@ApiModel(description = "")
+/**
+ * InlineResponse2001
+ */
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-14T16:06:26.034Z")
 public class InlineResponse2001 {
-  
   @SerializedName("count")
   private Integer count = null;
+
   @SerializedName("next")
   private String next = null;
+
   @SerializedName("previous")
   private String previous = null;
-  @SerializedName("results")
-  private List<Artist> results = null;
 
-  /**
-   **/
+  @SerializedName("results")
+  private List<Artist> results = new ArrayList<Artist>();
+
+  public InlineResponse2001 count(Integer count) {
+    this.count = count;
+    return this;
+  }
+
+   /**
+   * Get count
+   * @return count
+  **/
   @ApiModelProperty(required = true, value = "")
   public Integer getCount() {
     return count;
   }
+
   public void setCount(Integer count) {
     this.count = count;
   }
 
-  /**
-   **/
+  public InlineResponse2001 next(String next) {
+    this.next = next;
+    return this;
+  }
+
+   /**
+   * Get next
+   * @return next
+  **/
   @ApiModelProperty(value = "")
   public String getNext() {
     return next;
   }
+
   public void setNext(String next) {
     this.next = next;
   }
 
-  /**
-   **/
+  public InlineResponse2001 previous(String previous) {
+    this.previous = previous;
+    return this;
+  }
+
+   /**
+   * Get previous
+   * @return previous
+  **/
   @ApiModelProperty(value = "")
   public String getPrevious() {
     return previous;
   }
+
   public void setPrevious(String previous) {
     this.previous = previous;
   }
 
-  /**
-   **/
+  public InlineResponse2001 results(List<Artist> results) {
+    this.results = results;
+    return this;
+  }
+
+  public InlineResponse2001 addResultsItem(Artist resultsItem) {
+    this.results.add(resultsItem);
+    return this;
+  }
+
+   /**
+   * Get results
+   * @return results
+  **/
   @ApiModelProperty(required = true, value = "")
   public List<Artist> getResults() {
     return results;
   }
+
   public void setResults(List<Artist> results) {
     this.results = results;
   }
 
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
     }
@@ -79,32 +131,41 @@ public class InlineResponse2001 {
       return false;
     }
     InlineResponse2001 inlineResponse2001 = (InlineResponse2001) o;
-    return (this.count == null ? inlineResponse2001.count == null : this.count.equals(inlineResponse2001.count)) &&
-        (this.next == null ? inlineResponse2001.next == null : this.next.equals(inlineResponse2001.next)) &&
-        (this.previous == null ? inlineResponse2001.previous == null : this.previous.equals(inlineResponse2001.previous)) &&
-        (this.results == null ? inlineResponse2001.results == null : this.results.equals(inlineResponse2001.results));
+    return Objects.equals(this.count, inlineResponse2001.count) &&
+        Objects.equals(this.next, inlineResponse2001.next) &&
+        Objects.equals(this.previous, inlineResponse2001.previous) &&
+        Objects.equals(this.results, inlineResponse2001.results);
   }
 
   @Override
   public int hashCode() {
-    int result = 17;
-    result = 31 * result + (this.count == null ? 0: this.count.hashCode());
-    result = 31 * result + (this.next == null ? 0: this.next.hashCode());
-    result = 31 * result + (this.previous == null ? 0: this.previous.hashCode());
-    result = 31 * result + (this.results == null ? 0: this.results.hashCode());
-    return result;
+    return Objects.hash(count, next, previous, results);
   }
 
+
   @Override
-  public String toString()  {
+  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2001 {\n");
     
-    sb.append("  count: ").append(count).append("\n");
-    sb.append("  next: ").append(next).append("\n");
-    sb.append("  previous: ").append(previous).append("\n");
-    sb.append("  results: ").append(results).append("\n");
-    sb.append("}\n");
+    sb.append("    count: ").append(toIndentedString(count)).append("\n");
+    sb.append("    next: ").append(toIndentedString(next)).append("\n");
+    sb.append("    previous: ").append(toIndentedString(previous)).append("\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("}");
     return sb.toString();
   }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+
 }
+

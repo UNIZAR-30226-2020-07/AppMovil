@@ -22,73 +22,53 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.Album;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Artist
+ * PasswordChange
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-14T16:06:26.034Z")
-public class Artist {
-  @SerializedName("id")
-  private Integer id = null;
+public class PasswordChange {
+  @SerializedName("new_password1")
+  private String newPassword1 = null;
 
-  @SerializedName("albums")
-  private List<Album> albums = new ArrayList<Album>();
+  @SerializedName("new_password2")
+  private String newPassword2 = null;
 
-  @SerializedName("name")
-  private String name = null;
-
-   /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(value = "")
-  public Integer getId() {
-    return id;
-  }
-
-  public Artist albums(List<Album> albums) {
-    this.albums = albums;
-    return this;
-  }
-
-  public Artist addAlbumsItem(Album albumsItem) {
-    this.albums.add(albumsItem);
+  public PasswordChange newPassword1(String newPassword1) {
+    this.newPassword1 = newPassword1;
     return this;
   }
 
    /**
-   * Get albums
-   * @return albums
+   * Get newPassword1
+   * @return newPassword1
   **/
   @ApiModelProperty(required = true, value = "")
-  public List<Album> getAlbums() {
-    return albums;
+  public String getNewPassword1() {
+    return newPassword1;
   }
 
-  public void setAlbums(List<Album> albums) {
-    this.albums = albums;
+  public void setNewPassword1(String newPassword1) {
+    this.newPassword1 = newPassword1;
   }
 
-  public Artist name(String name) {
-    this.name = name;
+  public PasswordChange newPassword2(String newPassword2) {
+    this.newPassword2 = newPassword2;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get newPassword2
+   * @return newPassword2
   **/
   @ApiModelProperty(required = true, value = "")
-  public String getName() {
-    return name;
+  public String getNewPassword2() {
+    return newPassword2;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setNewPassword2(String newPassword2) {
+    this.newPassword2 = newPassword2;
   }
 
 
@@ -100,26 +80,24 @@ public class Artist {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Artist artist = (Artist) o;
-    return Objects.equals(this.id, artist.id) &&
-        Objects.equals(this.albums, artist.albums) &&
-        Objects.equals(this.name, artist.name);
+    PasswordChange passwordChange = (PasswordChange) o;
+    return Objects.equals(this.newPassword1, passwordChange.newPassword1) &&
+        Objects.equals(this.newPassword2, passwordChange.newPassword2);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, albums, name);
+    return Objects.hash(newPassword1, newPassword2);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Artist {\n");
+    sb.append("class PasswordChange {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    albums: ").append(toIndentedString(albums)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    newPassword1: ").append(toIndentedString(newPassword1)).append("\n");
+    sb.append("    newPassword2: ").append(toIndentedString(newPassword2)).append("\n");
     sb.append("}");
     return sb.toString();
   }
