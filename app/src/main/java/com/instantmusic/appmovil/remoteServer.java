@@ -21,10 +21,6 @@ public class remoteServer implements serverInterface {
     }
 
     public int checkUser(String mail) {
-        Cursor user = localDb.checkUser((mail));
-        if (user == null) {
-            return 1;
-        }
         return 0;
     }
 
