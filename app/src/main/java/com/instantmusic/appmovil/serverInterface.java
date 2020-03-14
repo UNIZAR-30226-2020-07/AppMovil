@@ -8,7 +8,7 @@ import io.swagger.client.JSON;
 
 public interface serverInterface  {
     Cursor searchShit(String shit);
-    JSON registUser(String mail, String pass, String user);
+    JSON registUser(String mail, String pass1,String pass2, String user);
     int recover(String mail);
     int checkUser(String email);
     Cursor infoUser(String email);
