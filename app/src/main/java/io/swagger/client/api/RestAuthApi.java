@@ -131,7 +131,7 @@ public class RestAuthApi {
      * @return Login
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Login restAuthLoginCreate(Login data) throws ApiException {
+    public JSON restAuthLoginCreate(Login data) throws ApiException {
         ApiResponse<Login> resp = restAuthLoginCreateWithHttpInfo(data);
         return resp.getData();
     }

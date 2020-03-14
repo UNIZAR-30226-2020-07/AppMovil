@@ -16,12 +16,12 @@ import io.swagger.client.ApiException;
 import io.swagger.client.JSON;
 import io.swagger.client.api.RestAuthApi;
 import io.swagger.client.auth.HttpBasicAuth;
+import io.swagger.client.model.Login;
 import io.swagger.client.model.Register;
 
 public class remoteServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
     private RestAuthApi serverRequest;
-    private String BASE_URL= "https://ps-20-server-django-app.herokuapp.com/api/v1";
 
     remoteServer() { }
     public Cursor searchShit(String shit) {
@@ -48,7 +48,19 @@ public class remoteServer implements serverInterface {
     public int checkUser(String mail) {
         return 0;
     }
+    public JSON login(String mail, String pass) {
+        JSON serverRes =new JSON();
+        io.swagger.client.model.Login log=new Login();
+       log.setPassword(pass);
+       log.setEmail(mail);
+        try {
+            serverRes=serverRequest.restAuthLoginCreate(log);
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
 
+        return serverRes;
+    }
 
     public Cursor infoUser(String email) {
         return null;
@@ -103,16 +115,6 @@ public class remoteServer implements serverInterface {
 
     public int recover(String mail) {
         return 0;
-    }
-
-    public int login(String mail, String pass) {
-        Cursor user = regist.checkUser(mail);
-        if (user != null) {
-            if (user.getString(2).equals(pass)) {
-                return 0;
-            }
-        }
-        return 1;
     }
 
     public int addSongToPlaylist(String playlist, String song, String author) {
