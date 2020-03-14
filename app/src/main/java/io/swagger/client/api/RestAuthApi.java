@@ -18,6 +18,7 @@ import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.ApiResponse;
 import io.swagger.client.Configuration;
+import io.swagger.client.JSON;
 import io.swagger.client.Pair;
 import io.swagger.client.ProgressRequestBody;
 import io.swagger.client.ProgressResponseBody;
@@ -836,8 +837,8 @@ public class RestAuthApi {
      * @return Register
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Register restAuthRegistrationCreate(Register data) throws ApiException {
-        ApiResponse<Register> resp = restAuthRegistrationCreateWithHttpInfo(data);
+    public JSON restAuthRegistrationCreate(Register data) throws ApiException {
+        ApiResponse<JSON> resp = restAuthRegistrationCreateWithHttpInfo(data);
         return resp.getData();
     }
 
@@ -848,7 +849,7 @@ public class RestAuthApi {
      * @return ApiResponse&lt;Register&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Register> restAuthRegistrationCreateWithHttpInfo(Register data) throws ApiException {
+    public ApiResponse<JSON> restAuthRegistrationCreateWithHttpInfo(Register data) throws ApiException {
         com.squareup.okhttp.Call call = restAuthRegistrationCreateValidateBeforeCall(data, null, null);
         Type localVarReturnType = new TypeToken<Register>(){}.getType();
         return apiClient.execute(call, localVarReturnType);

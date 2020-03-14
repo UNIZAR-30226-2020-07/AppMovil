@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import io.swagger.client.ApiException;
 import io.swagger.client.JSON;
 import io.swagger.client.api.RestAuthApi;
 import io.swagger.client.auth.HttpBasicAuth;
@@ -25,24 +26,30 @@ public class remoteServer implements serverInterface {
     remoteServer() { }
     public Cursor searchShit(String shit) {
         JSONObject serverRes = new JSONObject();
-        return regist.searchShit(shit);
+        return null;
     }
 
-    public long registUser(String mail, String pass1,String pass2, String user) {
-        JSONObject serverRes = new JSONObject();
+    public JSON registUser(String mail, String pass1,String pass2, String user) {
+        JSON serverRes =new JSON();
         Register regist=new Register();
         regist.setPassword1(pass1);
         regist.setPassword2(pass2);
         regist.setUsername(user);
         regist.setEmail(mail);
-        return 0;
+        try {
+            serverRes=serverRequest.restAuthRegistrationCreate(regist);
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+
+        return serverRes;
     }
 
     public int checkUser(String mail) {
         return 0;
     }
 
-    @Override
+
     public Cursor infoUser(String email) {
         return null;
     }
@@ -78,7 +85,7 @@ public class remoteServer implements serverInterface {
         return regist.buscarAlbum(artist);
     }
 
-    @Override
+
     public Cursor allPlaylists(String user) {
         return regist.searchPlaylists(user);
 
@@ -88,7 +95,7 @@ public class remoteServer implements serverInterface {
         return regist.addSong(name, artist, category);
     }
 
-    @Override
+
     public long addPlaylist(String playlist, String author) {
         regist.addPlaylist(playlist, author);
         return 0;
@@ -108,13 +115,8 @@ public class remoteServer implements serverInterface {
         return 1;
     }
 
-    @Override
     public int addSongToPlaylist(String playlist, String song, String author) {
         regist.addSongToPlaylist(playlist, song, author);
         return 0;
-    }
-
-    public void close() {
-        regist.close();
     }
 }
