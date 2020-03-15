@@ -78,7 +78,7 @@ public class remoteServer implements serverInterface {
         return 0;
     }
     */
-    public Cursor buscarCancion(String song) {
+    /*public Cursor buscarCancion(String song) {
         JSONObject serverRes = new JSONObject();
         return regist.buscarCancion(song);
     }
@@ -120,5 +120,5 @@ public class remoteServer implements serverInterface {
     public int addSongToPlaylist(String playlist, String song, String author) {
         regist.addSongToPlaylist(playlist, song, author);
         return 0;
-    }
+    }*/
 }

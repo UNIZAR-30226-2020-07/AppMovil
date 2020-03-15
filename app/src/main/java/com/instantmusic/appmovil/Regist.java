@@ -52,7 +52,7 @@ public class Regist extends AppCompatActivity {
     }private void back2() {
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
-        server=new localServer(this);
+        server = new remoteServer();
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSignUp();
@@ -158,7 +158,7 @@ public class Regist extends AppCompatActivity {
             seguir = false;
         }
         if ( seguir ) { // Caso en el que no hay ningun error
-            server.(mail.getText().toString(),pass.getText().toString(),user);
+            server.registUser(mail.getText().toString(), pass.getText().toString(), passConfirm.getText().toString(), user);
             Intent i = new Intent();
             i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             setResult(RESULT_OK, i);
