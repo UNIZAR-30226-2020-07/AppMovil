@@ -16,7 +16,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="450dp" />
+            android:layout_height="400dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,16 +28,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0" />
 
-            <androidx.cardview.widget.CardView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:cardBackgroundColor="@color/secondaryColor">
+                android:layout_height="200dp"
+                android:layout_weight="0">
 
                 <ListView
-                    android:id="@+id/myPlaylists"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </androidx.cardview.widget.CardView>
+                    android:id="@+id/myPlayLists"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0" />
+            </HorizontalScrollView>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -302,7 +304,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="410dp" />
+            android:layout_height="365dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -323,7 +325,7 @@
                 android:textSize="20sp" />
 
             <Space
-                android:layout_width="10dp"
+                android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 

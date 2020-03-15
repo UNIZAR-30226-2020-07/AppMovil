@@ -14,6 +14,8 @@ import android.widget.SimpleCursorAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Login extends AppCompatActivity {
     private static final int SEARCH = Menu.FIRST;
@@ -22,8 +24,6 @@ public class Login extends AppCompatActivity {
     private String user;
     private String name;
     private ListView myPlaylist;
-
-
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -32,8 +32,7 @@ public class Login extends AppCompatActivity {
 //        registerForContextMenu(resList);
         Bundle extras = getIntent().getExtras();
         user = extras.getString("email");
-        myPlaylist = findViewById(R.id.myPlaylists);
-
+        myPlaylist = findViewById(R.id.myPlayLists);
         Cursor aux = server.infoUser(user);
         name = aux.getString(3);
 

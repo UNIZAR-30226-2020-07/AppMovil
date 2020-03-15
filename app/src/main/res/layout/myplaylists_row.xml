@@ -6,6 +6,13 @@
     tools:context=".MusicApp">
 
 
+    <Button
+        android:id="@+id/buttonSong"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_weight="0"
+        android:visibility="invisible" />
+
     <ImageView
         android:id="@+id/iconoSong"
         android:layout_width="130dp"
@@ -67,12 +74,5 @@
             android:layout_weight="0" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/buttonSong"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_weight="0"
-        android:visibility="invisible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
