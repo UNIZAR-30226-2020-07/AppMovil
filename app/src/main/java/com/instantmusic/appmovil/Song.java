@@ -25,6 +25,7 @@ public class Song extends AppCompatActivity implements Runnable {
     serverInterface server;
     TextView songName;
     TextView autorName;
+    TextView ratingScale;
     Handler handler = new Handler();
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
@@ -49,7 +50,36 @@ public class Song extends AppCompatActivity implements Runnable {
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
         shuffle = findViewById(R.id.shuffle);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingScale = (TextView) findViewById(R.id.tvRatingScale);
         Bundle extras = getIntent().getExtras();
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                ratingScale.setText(String.valueOf(v));
+                ratingScale.setVisibility(View.VISIBLE);
+                switch ((int) ratingBar.getRating()) {
+                    case 1:
+                        ratingScale.setText("Very bad");
+                        break;
+                    case 2:
+                        ratingScale.setText("Bad");
+                        break;
+                    case 3:
+                        ratingScale.setText("Good");
+                        break;
+                    case 4:
+                        ratingScale.setText("Great");
+                        break;
+                    case 5:
+                        ratingScale.setText("Awesome. I love it");
+                        break;
+                    default:
+                        ratingScale.setText("");
+                }
+            }
+        });
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +209,7 @@ public class Song extends AppCompatActivity implements Runnable {
                         handler.removeCallbacks(moveSeekBarThread);
                         handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                         mediaPlayer.start();
-                        // new Thread(Song.this).start();
+                        //new Thread(Song.this).start();
                     }
                 });
             } catch (Exception e) {
