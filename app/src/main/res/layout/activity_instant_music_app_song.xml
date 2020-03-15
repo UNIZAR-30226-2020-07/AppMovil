@@ -31,7 +31,7 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="10dp"
+                android:layout_width="25dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
@@ -46,7 +46,7 @@
                 app:srcCompat="@drawable/scrolldown" />
 
             <Space
-                android:layout_width="120dp"
+                android:layout_width="80dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
@@ -64,19 +64,27 @@
                 android:textStyle="bold" />
 
             <Space
-                android:layout_width="120dp"
+                android:layout_width="80dp"
                 android:layout_height="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
 
-            <ImageButton
+            <com.github.clans.fab.FloatingActionMenu
                 android:id="@+id/points"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="center"
-                app:srcCompat="@drawable/points" />
+                app:menu_icon="@drawable/points"
+                app:menu_colorNormal="#00FFFFFF"
+                app:menu_backgroundColor="@android:color/transparent">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:fab_label="Add to a playlist"
+            </com.github.clans.fab.FloatingActionMenu>
 
         </LinearLayout>
 
