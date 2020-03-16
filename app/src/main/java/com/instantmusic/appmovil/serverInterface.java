@@ -2,7 +2,6 @@ package com.instantmusic.appmovil;
 
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import io.swagger.client.JSON;
 
@@ -12,7 +11,8 @@ public interface serverInterface  {
     int recover(String mail);
     int checkUser(String email);
     Cursor infoUser(String email);
-    JSON login(String mail,String pass);
+
+    int login(String mail, String pass);
     int addSongToPlaylist(String playlist, String song,String author);
     long addSong(String name,String artist,String categoria);
     long addPlaylist(String playlist,String author);

@@ -18,7 +18,6 @@ import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.ApiResponse;
 import io.swagger.client.Configuration;
-import io.swagger.client.JSON;
 import io.swagger.client.Pair;
 import io.swagger.client.ProgressRequestBody;
 import io.swagger.client.ProgressResponseBody;
@@ -134,8 +133,8 @@ public class RestAuthApi {
      * @return Key
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public JSON restAuthLoginCreate(Login data) throws ApiException {
-        ApiResponse<JSON> resp = restAuthLoginCreateWithHttpInfo(data);
+    public Key restAuthLoginCreate(Login data) throws ApiException {
+        ApiResponse<Key> resp = restAuthLoginCreateWithHttpInfo(data);
         return resp.getData();
     }
 
@@ -146,7 +145,7 @@ public class RestAuthApi {
      * @return ApiResponse&lt;Key&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<JSON> restAuthLoginCreateWithHttpInfo(Login data) throws ApiException {
+    public ApiResponse<Key> restAuthLoginCreateWithHttpInfo(Login data) throws ApiException {
         com.squareup.okhttp.Call call = restAuthLoginCreateValidateBeforeCall(data, null, null);
         Type localVarReturnType = new TypeToken<Key>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -840,8 +839,8 @@ public class RestAuthApi {
      * @return Key
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public JSON restAuthRegistrationCreate(Register data) throws ApiException {
-        ApiResponse<JSON> resp = restAuthRegistrationCreateWithHttpInfo(data);
+    public Key restAuthRegistrationCreate(Register data) throws ApiException {
+        ApiResponse<Key> resp = restAuthRegistrationCreateWithHttpInfo(data);
         return resp.getData();
     }
 
@@ -852,7 +851,7 @@ public class RestAuthApi {
      * @return ApiResponse&lt;Key&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<JSON> restAuthRegistrationCreateWithHttpInfo(Register data) throws ApiException {
+    public ApiResponse<Key> restAuthRegistrationCreateWithHttpInfo(Register data) throws ApiException {
         com.squareup.okhttp.Call call = restAuthRegistrationCreateValidateBeforeCall(data, null, null);
         Type localVarReturnType = new TypeToken<Key>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
