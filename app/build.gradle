@@ -46,6 +46,7 @@ android {
         compile 'org.reactivestreams:reactive-streams:1.0.3'
         compileOnly 'com.google.code.findbugs:jsr305:3.0.1'
         implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation 'com.squareup.sqlbrite3:sqlbrite:3.2.0'
         implementation 'androidx.appcompat:appcompat:1.1.0'
         implementation 'com.squareup.okhttp3:okhttp:4.4.0'
         implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

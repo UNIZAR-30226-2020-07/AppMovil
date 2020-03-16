@@ -18,8 +18,8 @@ package com.tpg.movierx.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.squareup.sqlbrite.BriteDatabase;
-import com.squareup.sqlbrite.SqlBrite;
+import com.squareup.sqlbrite3.BriteDatabase;
+import com.squareup.sqlbrite3.SqlBrite;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
