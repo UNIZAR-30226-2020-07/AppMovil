@@ -11,16 +11,16 @@ public class Cancion extends Elemento {
         this.artist = artist;
         this.category = category;
         switch (category) {
-            case 1:
+            case "a":
 
                 break;
-            case 2:
+            case "2":
                 //shitcursor=server.searchCategory(shit.getText().toString());
                 break;
-            case 3:
+            case "3":
                 //shitcursor=server.searchArtist(shit.getText().toString());
                 break;
-            case 4:
+            case "4":
                 //shitcursor=server.searchAlbum(shit.getText().toString());
                 break;
         }

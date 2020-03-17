@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
+import com.instantmusic.appmovil.HorizontalListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     private serverInterface server;
     private String user;
     private String name;
-    private ListView myPlaylist;
+    private HorizontalListView myPlaylist;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

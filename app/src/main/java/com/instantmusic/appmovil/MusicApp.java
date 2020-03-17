@@ -75,9 +75,9 @@ public class MusicApp extends AppCompatActivity {
                 else {
                     email=mail.getText().toString();
                     server.addPlaylist("Jojos", email);
-                    server.addSongToPlaylist("Fighting Gold", "Jojos", name);
+                    server.addSongToPlaylist("Fighting Gold", "Jojos", "Admin");
                     server.addPlaylist("Jojo", email);
-                    server.addSongToPlaylist("Fighting Gold", "Jojos", name);
+                    server.addSongToPlaylist("Fighting Gold", "Jojos", "Admin");
                     logInScreen();
                 }
             }

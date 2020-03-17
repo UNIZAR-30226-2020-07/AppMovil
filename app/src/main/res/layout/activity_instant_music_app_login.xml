@@ -18,31 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="400dp" />
 
-        <LinearLayout
+        <com.instantmusic.appmovil.HorizontalListView
+            android:id="@+id/myPlayLists"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_weight="0">
-
-                <ListView
-                    android:id="@+id/myPlayLists"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0" />
-            </HorizontalScrollView>
-
-        </LinearLayout>
-
+            android:layout_height="175dp"
+            android:divider="#878787"
+            app:dividerWidth="2dp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
