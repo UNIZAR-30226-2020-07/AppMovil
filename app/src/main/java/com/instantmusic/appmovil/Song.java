@@ -20,8 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Song extends AppCompatActivity implements Runnable {
-    //private static final int SEARCH = Menu.FIRST;
+public class Song extends AppCompatActivity {
     serverInterface server;
     TextView songName;
     TextView autorName;
@@ -33,7 +32,6 @@ public class Song extends AppCompatActivity implements Runnable {
     private boolean isPaused = false;
     private boolean isLooped = false;
     private boolean isShuffled = false;
-    //private int length;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -50,8 +48,8 @@ public class Song extends AppCompatActivity implements Runnable {
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
         shuffle = findViewById(R.id.shuffle);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        ratingScale = (TextView) findViewById(R.id.tvRatingScale);
+        ratingBar = findViewById(R.id.ratingBar);
+        ratingScale = findViewById(R.id.tvRatingScale);
         Bundle extras = getIntent().getExtras();
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -59,24 +57,30 @@ public class Song extends AppCompatActivity implements Runnable {
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 ratingScale.setText(String.valueOf(v));
                 ratingScale.setVisibility(View.VISIBLE);
+                String texto = "";
                 switch ((int) ratingBar.getRating()) {
                     case 1:
-                        ratingScale.setText("Very bad");
+                        texto = "Very bad";
+                        ratingScale.setText(texto);
                         break;
                     case 2:
-                        ratingScale.setText("Bad");
+                        texto = "Bad";
+                        ratingScale.setText(texto);
                         break;
                     case 3:
-                        ratingScale.setText("Good");
+                        texto = "Good";
+                        ratingScale.setText(texto);
                         break;
                     case 4:
-                        ratingScale.setText("Great");
+                        texto = "Great";
+                        ratingScale.setText(texto);
                         break;
                     case 5:
-                        ratingScale.setText("Awesome. I love it");
+                        texto = "Awesome. I love it";
+                        ratingScale.setText(texto);
                         break;
                     default:
-                        ratingScale.setText("");
+                        ratingScale.setText(texto);
                 }
             }
         });
@@ -85,9 +89,9 @@ public class Song extends AppCompatActivity implements Runnable {
             @Override
             public void onClick(View v) {
                 clearMediaPlayer();
-                isPlaying = false;
-                isPaused = false;
                 play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
+                isPaused = false;
+                isPlaying = false;
                 Song.this.seekBar.setProgress(0);
             }
         });
@@ -163,16 +167,14 @@ public class Song extends AppCompatActivity implements Runnable {
                 seekBarHint.setX(offset + seekBar.getX() + val
                         - Math.round(percent * offset)
                         - Math.round(percent * labelWidth / 2));
-                if (progress > 0 && mediaPlayer != null && !mediaPlayer.isPlaying()) {
-                    clearMediaPlayer();
-                    play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
-                    Song.this.seekBar.setProgress(0);
-                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                if (mediaPlayer != null && isPlaying) {
+                    mediaPlayer.seekTo(seekBar.getProgress());
+                }
+                else if (mediaPlayer != null && isPaused) {
                     mediaPlayer.seekTo(seekBar.getProgress());
                 }
             }
@@ -190,7 +192,6 @@ public class Song extends AppCompatActivity implements Runnable {
                 }
 
                 play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
-                mediaPlayer.start();
                 AssetFileDescriptor descriptor = getAssets().openFd("pikete-italiano.mp3");
                 mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
                 descriptor.close();
@@ -201,6 +202,10 @@ public class Song extends AppCompatActivity implements Runnable {
                     public void onCompletion(MediaPlayer mp) {
                         isPlaying = false;
                         isPaused = false;
+                        play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
+                        clearMediaPlayer();
+                        Song.this.seekBar.setProgress(0);
+
                     }
                 });
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -209,28 +214,29 @@ public class Song extends AppCompatActivity implements Runnable {
                         handler.removeCallbacks(moveSeekBarThread);
                         handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                         mediaPlayer.start();
-                        //new Thread(Song.this).start();
+                        isPlaying = true;
                     }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            isPlaying = true;
         }
         else if ( isPlaying ) {
             play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_play));
             if ( mediaPlayer != null ) {
                 mediaPlayer.pause();
+                handler.removeCallbacks(moveSeekBarThread);
+                handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                 isPlaying = false;
                 isPaused = true;
             }
         }
         else if (isPaused) {
             play.setImageDrawable(ContextCompat.getDrawable(Song.this, android.R.drawable.ic_media_pause));
-            handler.removeCallbacks(moveSeekBarThread);
-            handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
             if (mediaPlayer != null) {
                 mediaPlayer.start();
+                handler.removeCallbacks(moveSeekBarThread);
+                handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                 isPlaying = true;
                 isPaused = false;
             }
@@ -241,27 +247,6 @@ public class Song extends AppCompatActivity implements Runnable {
         }
     }
 
-    public void run() {
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            public void onPrepared(MediaPlayer mp) {
-                int currentPosition = mediaPlayer.getCurrentPosition();
-                int total = mediaPlayer.getDuration();
-                while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
-                    try {
-                      Thread.sleep(1000);
-                       currentPosition = mediaPlayer.getCurrentPosition();
-                    }
-                    catch (InterruptedException e) {
-                        return;
-                    }
-                    catch(Exception e) {
-                        return;
-                    }
-                    seekBar.setProgress(currentPosition);
-                }
-            }
-        });
-    }
 
     /**
      * The Move seek bar. Thread to move seekbar based on the current position
