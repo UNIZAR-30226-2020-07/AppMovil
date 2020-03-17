@@ -177,9 +177,10 @@ public class UsersDbAdapter {
 
     public long addPlaylist(String playlist, String author) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_PLAYLIST, playlist);
+        initialValues.put(KEY_NAMEP, playlist);
+        initialValues.put(KEY_AUTHOR, author);
 
-        return mDb.update(DATABASE_TABLE_USERS, initialValues, KEY_MAIL + "=?" ,new String[]{author});
+        return mDb.insert(DATABASE_TABLE_LIST_PLAYLISTS, null, initialValues);
     }
 
     public long addSongToPlaylist(String playlist, String song,String author) {
@@ -231,8 +232,8 @@ public class UsersDbAdapter {
     }
 
     public Cursor searchPlaylists(String user) {
-        String[] columns = new String[]{KEY_ID, KEY_MAIL, KEY_PASS, KEY_USER, KEY_PLAYLIST};
-        Cursor aux = mDb.query(DATABASE_TABLE_USERS, columns, KEY_MAIL + "=?", new String[]{user}, null, null, null);
+        String[] columns = new String[]{KEY_ID,KEY_NAMEP,KEY_AUTHOR};
+        Cursor aux = mDb.query(DATABASE_TABLE_LIST_PLAYLISTS, columns, KEY_AUTHOR + "=?", new String[]{user}, null, null, null);
         if (aux != null) {
             aux.moveToFirst();
             if (aux.getCount() == 0) aux = null;
