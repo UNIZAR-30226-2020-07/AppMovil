@@ -88,13 +88,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@color/secondaryColor"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/searchMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/backColor"
+                    android:background="@color/secondaryColor"
                     android:orientation="vertical"
                     android:visibility="visible">
 
@@ -103,14 +104,20 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
+                        <Space
+                            android:layout_width="5dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
                         <Button
                             android:id="@+id/switchName"
                             android:layout_width="100dp"
                             android:layout_height="30dp"
-                            android:background="@color/backColor"
+                            android:background="@color/secondaryColor"
                             android:text="@string/songMenu1"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
+                            android:textColor="@color/backColor"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -120,14 +127,20 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
                         <Button
                             android:id="@+id/switchCategory"
                             android:layout_width="100dp"
                             android:layout_height="30dp"
-                            android:background="@color/backColor"
+                            android:background="@color/secondaryColor"
                             android:text="@string/songMenu2"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
+                            android:textColor="@color/backColor"
                             android:textSize="14sp" />
                     </LinearLayout>
 
