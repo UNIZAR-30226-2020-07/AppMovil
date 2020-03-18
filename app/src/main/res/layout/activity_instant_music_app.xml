@@ -94,9 +94,24 @@
                 android:textColorLink="@color/color5"
                 android:textSize="20sp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="11dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/emailLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emailAlreadyInUse"
+                    android:textColor="#FA3021"
+                    android:visibility="invisible" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -28,6 +28,7 @@ public class Regist extends AppCompatActivity {
     private String password;
     private String passwordConfirm;
     public serverInterface server;
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class Regist extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {}
 
@@ -55,7 +57,9 @@ public class Regist extends AppCompatActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         setResult(RESULT_OK, i);
         finish();
-    }private void back2() {
+    }
+
+    private void back2() {
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
         server=new remoteServer();
@@ -89,6 +93,7 @@ public class Regist extends AppCompatActivity {
             }
         });
     }
+
     private void confirmSignUp() {
         boolean seguir = true;
         mail = findViewById(R.id.emailSign);

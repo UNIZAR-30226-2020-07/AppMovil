@@ -29,6 +29,8 @@ public class MusicApp extends AppCompatActivity {
     private static int ACTIVITY_CREATE = 0;
     private EditText mail;
     private EditText pass;
+    private TextView mailTip;
+    private TextView  passTip;
     private String email;
     private String name;
     private TextView aux;
@@ -45,7 +47,6 @@ public class MusicApp extends AppCompatActivity {
         server = new remoteServer();
         local=new localServer(this);
         mail = findViewById(R.id.email);
-        pass = findViewById(R.id.password);
         email = mail.getText().toString();
         mail.setTextColor(Color.WHITE);
         local.addSong("Pegamos tela","Omar Montes","Reggaeton");
@@ -72,68 +73,65 @@ public class MusicApp extends AppCompatActivity {
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                boolean seguir = true;
+                mail = findViewById(R.id.email);
+                pass = findViewById(R.id.password);
+                mailTip = findViewById(R.id.emailLogin);
+                passTip = findViewById(R.id.Tip);
+                String userEmail = mail.getText().toString();
+                String password = pass.getText().toString();
+                String texto ="";
 
-                server.login(mail.getText().toString(), pass.getText().toString(), new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) {
-                        if(responseCode == 200) {
-                            logInScreen();
-                        }else{
-                            new AlertDialog.Builder(MusicApp.this)
-                                    .setMessage(Utils.listifyErrors(data))
-                                    .show();
+                if ( userEmail.isEmpty() ) {
+                    texto = "Email is empty";
+                    mailTip.setText(texto);
+                    mailTip.setTextColor(Color.RED);
+                    mailTip.setVisibility(View.VISIBLE);
+                    seguir = false;
+                }
+                else {
+                    texto = "";
+                    mailTip.setText(texto);
+                }
+
+                if ( password.isEmpty() ) {
+                    texto = "Password is empty";
+                    passTip.setText(texto);
+                    passTip.setTextColor(Color.RED);
+                    passTip.setVisibility(View.VISIBLE);
+                    seguir = false;
+                }
+                else {
+                    texto = "";
+                    passTip.setText(texto);
+                }
+
+                if ( seguir ) {
+                    server.login(mail.getText().toString(), pass.getText().toString(), new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if(responseCode == 200) {
+                                logInScreen();
+                            }
+                            else{
+                                String error = Utils.listifyErrors(data);
+                                if ( error.equals("Unable to log in with provided credentials.")) {
+                                    String texto = "Your email and password combination does not match an InstantMusic account. Please try again";
+                                    passTip=findViewById(R.id.Tip);
+                                    passTip.setText(texto);
+                                    passTip.setTextColor(Color.RED);
+                                    passTip.setVisibility(View.VISIBLE);
+                                }
+                            }
                         }
-                    }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) {
-                        Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-        /*
-        pass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if ( server.login(mail.getText().toString(), pass.getText().toString()) == 1 ) { // Caso en el que los datos introducidos sean erroneos
-                        aux = findViewById(R.id.Tip);
-                        aux.setTextColor(Color.RED);
-                        aux.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        logInScreen();
-                    }
-                    return true;
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+                            Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-                return false;
             }
         });
-        mail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if ( server.login(mail.getText().toString(), pass.getText().toString()) == 1 ) { // Caso en el que los datos introducidos sean erroneos
-                        aux = findViewById(R.id.Tip);
-                        aux.setTextColor(Color.RED);
-                        aux.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        logInScreen();
-
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-        // mDbHelper = new NotesDbAdapter(this);
-        // mDbHelper.open();
-        //mList = (ListView) findViewById(R.id.list);
-        // registerForContextMenu(mList);
-
-         */
-
     }
 
     private void logInScreen() {
