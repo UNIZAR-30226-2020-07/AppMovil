@@ -88,37 +88,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/searchMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/secondaryColor"
+                    android:background="@color/backColor"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <Space
-                            android:layout_width="5dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
                         <Button
                             android:id="@+id/switchName"
-                            android:layout_width="110dp"
-                            android:layout_height="40dp"
-                            android:background="@color/secondaryColor"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:background="@color/backColor"
                             android:text="@string/songMenu1"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/backColor"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -127,21 +120,15 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
                         <Button
                             android:id="@+id/switchCategory"
-                            android:layout_width="110dp"
-                            android:layout_height="40dp"
-                            android:background="@color/secondaryColor"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:background="@color/backColor"
                             android:text="@string/songMenu2"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/backColor"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -283,19 +270,24 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="67dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/loop"
-                android:layout_width="63dp"
-                android:layout_height="58dp"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/repeat" />
 
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/previousSong"
@@ -353,8 +345,8 @@
 
             <ImageButton
                 android:id="@+id/shuffle"
-                android:layout_width="wrap_content"
-                android:layout_height="63dp"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="centerInside"
