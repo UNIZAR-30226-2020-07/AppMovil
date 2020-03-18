@@ -33,6 +33,7 @@ public class MusicApp extends AppCompatActivity {
     private String name;
     private TextView aux;
     public serverInterface server;
+    public serverInterface local;
 
     /**
      * Called when the activity is first created.
@@ -42,6 +43,7 @@ public class MusicApp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
         server = new remoteServer();
+        local=new localServer(this);
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         email = mail.getText().toString();
@@ -52,6 +54,9 @@ public class MusicApp extends AppCompatActivity {
         server.addSong("Fighting Gold","Kazusou Oda","Rock");
         server.addSong("Me Gusta","Shakira","Reggaeton");
         server.addSong("Pikete italiano","Kvndy Swing","Trap");
+        local.addPlaylist("Jojos","Admin");
+        local.addPlaylist("Jojos1","Admin");
+        local.addPlaylist("Jojos2","Admin");
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -67,6 +72,7 @@ public class MusicApp extends AppCompatActivity {
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+
                 server.login(mail.getText().toString(), pass.getText().toString(), new JSONConnection.Listener() {
                     @Override
                     public void onValidResponse(int responseCode, JSONObject data) {
@@ -76,10 +82,8 @@ public class MusicApp extends AppCompatActivity {
                             new AlertDialog.Builder(MusicApp.this)
                                     .setMessage(Utils.listifyErrors(data))
                                     .show();
-
                         }
                     }
-
                     @Override
                     public void onErrorResponse(Throwable throwable) {
                         Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
@@ -134,7 +138,6 @@ public class MusicApp extends AppCompatActivity {
 
     private void logInScreen() {
         Intent i = new Intent(this, Login.class);
-        i.putExtra("email", email);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
 

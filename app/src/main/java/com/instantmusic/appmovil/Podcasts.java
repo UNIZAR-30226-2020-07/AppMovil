@@ -31,8 +31,6 @@ public class Podcasts extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        user = extras.getString("email");
         setContentView(R.layout.activity_instant_music_app_podcasts);
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
@@ -93,14 +91,14 @@ public class Podcasts extends AppCompatActivity {
     private void Home() {
         Intent i = new Intent(this, Login.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
+
         startActivityForResult(i, 1);
     }
 
     private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
+
         startActivityForResult(i, 1);
 
     }
@@ -108,15 +106,12 @@ public class Podcasts extends AppCompatActivity {
     private void Friends() {
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
         startActivityForResult(i, 1);
-
     }
 
     private void Settings() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }

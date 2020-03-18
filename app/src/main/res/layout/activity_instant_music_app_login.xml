@@ -59,21 +59,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@android:drawable/ic_menu_add" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/addPlaylist"
-                android:textColor="@color/backColor"
-                android:textSize="11sp" />
         </LinearLayout>
 
         <Space
@@ -97,9 +82,9 @@
         <com.instantmusic.appmovil.HorizontalListView
             android:id="@+id/mySongs"
             android:layout_width="match_parent"
-            android:layout_height="132dp"
+            android:layout_height="112dp"
             android:background="@color/secondaryColor"
-            app:dividerWidth="2dp" />
+            app:dividerWidth="0dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,7 +101,7 @@
         <com.instantmusic.appmovil.HorizontalListView
             android:id="@+id/myPlayLists"
             android:layout_width="match_parent"
-            android:layout_height="132dp"
+            android:layout_height="112dp"
             android:background="@color/secondaryColor"
             app:dividerWidth="2dp" />
     </LinearLayout>

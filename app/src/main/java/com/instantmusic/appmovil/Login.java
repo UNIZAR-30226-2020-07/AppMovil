@@ -30,12 +30,9 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_login);
         server = new localServer(this);
 //        registerForContextMenu(resList);
-        Bundle extras = getIntent().getExtras();
-        user = extras.getString("email");
         myPlaylist = findViewById(R.id.myPlayLists);
-        Cursor aux = server.infoUser(user);
         //name = aux.getString(3);
-        Cursor shitCursor = server.allPlaylists(user);
+        Cursor shitCursor = server.allPlaylists("Admin");
         startManagingCursor(shitCursor);
         String[] from = new String[]{UsersDbAdapter.KEY_NAMEP};
         int[] to = new int[]{R.id.text1};
@@ -77,7 +74,7 @@ public class Login extends AppCompatActivity {
     private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
+
         startActivityForResult(i, 1);
 
     }
@@ -85,7 +82,7 @@ public class Login extends AppCompatActivity {
     private void Podcasts() {
         Intent i = new Intent(this, Podcasts.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
+
         startActivityForResult(i, 1);
 
     }
@@ -93,7 +90,6 @@ public class Login extends AppCompatActivity {
     private void Friends() {
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
@@ -101,7 +97,6 @@ public class Login extends AppCompatActivity {
     private void Settings() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("email", user);
         startActivityForResult(i, 1);
 
     }
