@@ -88,9 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/secondaryColor"
                 android:orientation="horizontal"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/searchMenu"
@@ -112,14 +111,14 @@
 
                         <Button
                             android:id="@+id/switchName"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
+                            android:layout_width="110dp"
+                            android:layout_height="40dp"
                             android:background="@color/secondaryColor"
                             android:text="@string/songMenu1"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
                             android:textColor="@color/backColor"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
@@ -135,14 +134,14 @@
 
                         <Button
                             android:id="@+id/switchCategory"
-                            android:layout_width="100dp"
-                            android:layout_height="30dp"
+                            android:layout_width="110dp"
+                            android:layout_height="40dp"
                             android:background="@color/secondaryColor"
                             android:text="@string/songMenu2"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
                             android:textColor="@color/backColor"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
