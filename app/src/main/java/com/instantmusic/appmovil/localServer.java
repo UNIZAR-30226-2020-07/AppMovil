@@ -53,8 +53,8 @@ public class localServer implements serverInterface {
         return localDb.searchShit(shit);
     }
 
-    public long registUser(String mail, String pass,String user) {
-        return localDb.createUser(mail, pass,user);
+    public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {
+        //return localDb.createUser(mail, pass,user);
     }
 
     public int checkUser(String mail) {
@@ -113,7 +113,8 @@ public class localServer implements serverInterface {
         return 0;
     }
 
-    public int login(String mail, String pass) {
+    public void login(String username_email, String password, JSONConnection.Listener listener) {
+        /*
         Cursor user = localDb.checkUser(mail);
         if (user != null) {
             if (user.getString(2).equals(pass)) {
@@ -121,6 +122,7 @@ public class localServer implements serverInterface {
             }
         }
         return 1;
+         */
     }
 
     @Override

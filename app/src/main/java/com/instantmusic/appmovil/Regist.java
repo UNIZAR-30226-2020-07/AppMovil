@@ -1,15 +1,17 @@
 package com.instantmusic.appmovil;
 
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
 
 public class Regist extends AppCompatActivity {
     private EditText mail;
@@ -27,7 +29,7 @@ public class Regist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
-        server=new localServer(this);
+        server=new remoteServer(this);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSignUp();
@@ -77,11 +79,10 @@ public class Regist extends AppCompatActivity {
         email = mail.getText().toString();
         String password = pass.getText().toString();
         String passwordConfirm = passConfirm.getText().toString();
-        System.out.println(passwordConfirm);
-        System.out.println(password);
         emailAux = findViewById(R.id.emailTip);
         passAux = findViewById(R.id.passwordTip);
         passConfirmAux = findViewById(R.id.passwordTip3);
+        /*
         if ( password.length() < 8 ) { // Caso en el que la longitud de la contrasenya no sea correcto
             texto = "Invalid password. Use at least 8 characters";
             passAux.setText(texto);
@@ -117,30 +118,31 @@ public class Regist extends AppCompatActivity {
             texto = "";
             emailAux.setText(texto);
         }
+        */
+        setContentView(R.layout.activity_instant_music_app_regist2);
+        Button confirmButton2 = findViewById(R.id.createF);
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                confirmSignUp2();
+            }
+        });
+        Button confirmButton3 = findViewById(R.id.backButton2);
+        confirmButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back2();
+            }
+        });
+    }
 
-        if ( seguir ) { // Caso en el que no hay ningun error
-            setContentView(R.layout.activity_instant_music_app_regist2);
-            Button confirmButton2 = findViewById(R.id.createF);
-            confirmButton2.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    confirmSignUp2();
-                }
-            });
-            Button confirmButton3 = findViewById(R.id.backButton2);
-            confirmButton3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    back2();
-                }
-            });
-        }
-    }private void confirmSignUp2() {
+    private void confirmSignUp2() {
         boolean seguir = true;
         username = findViewById(R.id.usernameSign);
         String texto;
         String user = username.getText().toString();
         userAux = findViewById(R.id.usernameTip);
-        if ( username.length() < 4 ) { // Caso en el que la longitud de la contrasenya no sea correcto
+        /*
+        if ( user.length() < 4 ) { // Caso en el que la longitud de la contrasenya no sea correcto
             texto = "Invalid username. Use at least 4 characters";
             userAux.setText(texto);
             userAux.setTextColor(Color.RED);
@@ -157,12 +159,30 @@ public class Regist extends AppCompatActivity {
             userAux.setVisibility(View.VISIBLE);
             seguir = false;
         }
-        if ( seguir ) { // Caso en el que no hay ningun error
-            server.registUser(mail.getText().toString(),pass.getText().toString(),user);
-            Intent i = new Intent();
-            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            setResult(RESULT_OK, i);
-            finish();
-        }
+         */
+        server.registUser(username.getText().toString(), mail.getText().toString(), pass.getText().toString(), passConfirm.getText().toString(), new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) {
+                if (responseCode == 201) {
+                    System.out.println("FUNCIONA");
+                    Intent i = new Intent();
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
+                else {
+                    System.out.println("WHAT");
+                    new AlertDialog.Builder(Regist.this)
+                            .setMessage(Utils.listifyErrors(data))
+                            .show();
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+                System.out.println("NO FUNCIONA");
+                Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

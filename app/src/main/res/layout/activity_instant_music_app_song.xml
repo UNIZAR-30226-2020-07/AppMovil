@@ -283,24 +283,19 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/loop"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_width="63dp"
+                android:layout_height="58dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/repeat" />
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/previousSong"
@@ -358,8 +353,8 @@
 
             <ImageButton
                 android:id="@+id/shuffle"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="centerInside"
