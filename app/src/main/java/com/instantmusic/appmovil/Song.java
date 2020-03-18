@@ -4,6 +4,7 @@ package com.instantmusic.appmovil;
 // Sobre dicha implementacion se han realizado cambios para adecuarlo al modelo que queremos seguir.
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -34,6 +35,8 @@ public class Song extends AppCompatActivity {
     private boolean isPaused = false;
     private boolean isLooped = false;
     private boolean isShuffled = false;
+    private Button add;
+    private Button see;
     private LinearLayout searchMenu;
     FloatingActionButton play;
     FloatingActionButton next;
@@ -55,8 +58,31 @@ public class Song extends AppCompatActivity {
         ratingScale = findViewById(R.id.tvRatingScale);
         searchMenu = findViewById(R.id.searchMenu);
         Bundle extras = getIntent().getExtras();
+        see =findViewById(R.id.seeArtist);
+        add=findViewById(R.id.addPlaylist);
         Button Button6 = findViewById(R.id.optionSong);
         Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                } else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });see.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                } else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+                addPlaylist();
+
+            }
+        });add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (searchMenu.getVisibility() == View.VISIBLE) {
@@ -276,13 +302,16 @@ public class Song extends AppCompatActivity {
                     int mediaMax_new = mediaPlayer.getDuration();
                     seekBar.setMax(mediaMax_new);
                     seekBar.setProgress(mediaPos_new);
-
                     handler.postDelayed(this, 100); //Looping the thread after 0.1 second
                 }
             }
         }
     };
-
+    private void addPlaylist(){
+        Intent i=new Intent(this,addPlaylist.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivityForResult(i, 1);
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
