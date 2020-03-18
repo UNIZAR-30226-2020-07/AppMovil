@@ -162,7 +162,7 @@
                 android:orientation="horizontal">
 
                 <Space
-                    android:layout_width="36dp"
+                    android:layout_width="17dp"
                     android:layout_height="20dp"
                     android:layout_weight="1" />
 
@@ -170,9 +170,8 @@
                     android:id="@+id/Tip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Advise"
-                    android:textColor="@color/color4"
+                    android:text="@string/emailAlreadyInUse"
+                    android:textColor="#FA3021"
                     android:visibility="invisible" />
 
             </LinearLayout>
