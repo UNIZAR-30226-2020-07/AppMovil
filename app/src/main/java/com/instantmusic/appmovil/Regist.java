@@ -54,7 +54,7 @@ public class Regist extends AppCompatActivity {
     }private void back2() {
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
-        server=new localServer(this);
+        server=new remoteServer(this);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSignUp();
@@ -164,14 +164,12 @@ public class Regist extends AppCompatActivity {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if (responseCode == 201) {
-                    System.out.println("FUNCIONA");
                     Intent i = new Intent();
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     setResult(RESULT_OK, i);
                     finish();
                 }
                 else {
-                    System.out.println("WHAT");
                     new AlertDialog.Builder(Regist.this)
                             .setMessage(Utils.listifyErrors(data))
                             .show();
@@ -180,7 +178,6 @@ public class Regist extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(Throwable throwable) {
-                System.out.println("NO FUNCIONA");
                 Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
             }
         });
