@@ -57,6 +57,20 @@ public class Regist extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
         server=new remoteServer(this);
+        EditText mail=findViewById(R.id.emailSign);
+        mail.setText(email);
+        mail.setTextColor(Color.WHITE);
+        pass.setText(email);
+        pass.setTextColor(getResources().getColor(R.color.color2));
+        passConfirm.setText(email);
+        passConfirm.setTextColor(getResources().getColor(R.color.color2));
+        if (emailRegistered) {
+            String texto = "An user is already registered with that email address.";
+            emailAux.setText(texto);
+            emailAux.setTextColor(Color.RED);
+            emailAux.setVisibility(View.VISIBLE);
+            emailRegistered = false;
+        }
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSignUp();
@@ -69,8 +83,6 @@ public class Regist extends AppCompatActivity {
                 back1();
             }
         });
-        EditText mail=findViewById(R.id.emailSign);
-        mail.setText(email);
     }
     private void confirmSignUp() {
         boolean seguir = true;
@@ -114,10 +126,6 @@ public class Regist extends AppCompatActivity {
             emailAux.setText(texto);
             emailAux.setTextColor(Color.RED);
             emailAux.setVisibility(View.VISIBLE);
-            seguir = false;
-        }
-        else if ( emailRegistered ) {
-            emailRegistered=false;
             seguir = false;
         }
         else { // El email es valido y por tanto se quita el mensaje de error de email
@@ -179,14 +187,14 @@ public class Regist extends AppCompatActivity {
                     else {
                         String error = Utils.listifyErrors(data);
                         if ( error.equals("A user is already registered with this e-mail address.")) {
-                            System.out.println("HA ENTRADO");
-                            String texto = "An user is already registered with that email address.";
-                            emailAux.setText(texto);
-                            emailAux.setTextColor(Color.RED);
-                            emailAux.setVisibility(View.VISIBLE);
+                            emailRegistered = true;
+                            back2();
                         }
                         if ( error.equals("A user is already registered with this e-mail address.")) {
-                            System.out.println("HA ENTRADO");
+                            String texto = "An user is already registered with that email address.";
+                            userAux.setText(texto);
+                            userAux.setTextColor(Color.RED);
+                            userAux.setVisibility(View.VISIBLE);
                         }
                     }
                 }
