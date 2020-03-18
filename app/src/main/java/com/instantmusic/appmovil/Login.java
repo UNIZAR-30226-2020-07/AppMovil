@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         user = extras.getString("email");
         myPlaylist = findViewById(R.id.myPlayLists);
         Cursor aux = server.infoUser(user);
-        name = aux.getString(3);
+        //name = aux.getString(3);
 
         Cursor shitCursor = server.allPlaylists(user);
         startManagingCursor(shitCursor);
