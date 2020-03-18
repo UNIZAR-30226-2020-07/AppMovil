@@ -168,9 +168,9 @@
 
                 <TextView
                     android:id="@+id/Tip"
-                    android:layout_width="match_parent"
+                    android:layout_width="376dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/emailAlreadyInUse"
+                    android:text="@string/Advise"
                     android:textColor="#FA3021"
                     android:visibility="invisible" />
 
