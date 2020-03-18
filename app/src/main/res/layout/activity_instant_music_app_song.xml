@@ -69,49 +69,49 @@
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
 
-            <ImageButton
-                android:id="@+id/points"
+            <Button
+                android:id="@+id/optionSong"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:scaleType="center"
-                app:srcCompat="@drawable/points" />
+                android:layout_weight="0"
+                android:background="@drawable/points" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="406dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/searchMenu"
-                    android:layout_width="143dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/backColor"
-                    android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/verArtista"
-                            android:layout_width="wrap_content"
+                        <Button
+                            android:id="@+id/switchName"
+                            android:layout_width="100dp"
                             android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:text="@string/song"
-                            android:textSize="20sp" />
+                            android:background="@color/backColor"
+                            android:text="@string/songMenu1"
+                            android:textAlignment="viewStart"
+                            android:textAllCaps="false"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -120,15 +120,26 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/anyadirPlaylist"
-                            android:layout_width="wrap_content"
+                        <Button
+                            android:id="@+id/switchCategory"
+                            android:layout_width="100dp"
                             android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:text="@string/category"
-                            android:textSize="20sp" />
-
+                            android:background="@color/backColor"
+                            android:text="@string/songMenu2"
+                            android:textAlignment="viewStart"
+                            android:textAllCaps="false"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
 
                 </LinearLayout>
             </LinearLayout>

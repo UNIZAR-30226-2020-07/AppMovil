@@ -46,5 +46,7 @@
     <string name="addPlaylist">Create playlist</string>
     <string name="rateSong">Rate this song</string>
     <string name="homeTitle">Your home</string>
+    <string name="songMenu1">Add to playlist</string>
+    <string name="songMenu2">See artist</string>
 
 </resources>

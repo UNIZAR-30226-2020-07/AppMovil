@@ -11,7 +11,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ public class Song extends AppCompatActivity {
     private boolean isPaused = false;
     private boolean isLooped = false;
     private boolean isShuffled = false;
+    private LinearLayout searchMenu;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -50,7 +53,20 @@ public class Song extends AppCompatActivity {
         shuffle = findViewById(R.id.shuffle);
         ratingBar = findViewById(R.id.ratingBar);
         ratingScale = findViewById(R.id.tvRatingScale);
+        searchMenu = findViewById(R.id.searchMenu);
         Bundle extras = getIntent().getExtras();
+        Button Button6 = findViewById(R.id.optionSong);
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                } else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

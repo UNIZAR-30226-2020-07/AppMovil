@@ -114,14 +114,10 @@ public class Search extends AppCompatActivity {
         });
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
-        Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
         s1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                searchType = 1;
-                search.setHint("Buscar cancion");
                 nameActivated();
             }
         });
@@ -129,27 +125,7 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                searchType = 2;
-                search.setHint("Buscar categoria");
                 categoryActivated();
-            }
-        });
-        s3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchMenu.setVisibility(View.INVISIBLE);
-                searchType = 3;
-                search.setHint("Buscar artista");
-                artistActivated();
-            }
-        });
-        s4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchMenu.setVisibility(View.INVISIBLE);
-                searchType = 4;
-                search.setHint("Buscar album");
-                albumActivated();
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -165,49 +141,16 @@ public class Search extends AppCompatActivity {
     }
 
     private void nameActivated() {
-        Button s1 = findViewById(R.id.switchName);
-        Button s2 = findViewById(R.id.switchCategory);
-        Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
-        s1.setBackground(getResources().getDrawable(R.drawable.tick512));
-        s4.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s3.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s2.setBackground(getResources().getDrawable(R.drawable.vacio));
+       Intent i=new Intent(this,Login.class);
+       i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+       startActivityForResult(i, 1);
+
     }
 
     private void categoryActivated() {
-        Button s1 = findViewById(R.id.switchName);
-        Button s2 = findViewById(R.id.switchCategory);
-        Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
-
-        s4.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s3.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s1.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s2.setBackground(getResources().getDrawable(R.drawable.tick512));
-    }
-
-    private void artistActivated() {
-        Button s1 = findViewById(R.id.switchName);
-        Button s2 = findViewById(R.id.switchCategory);
-        Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
-
-        s4.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s2.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s1.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s3.setBackground(getResources().getDrawable(R.drawable.tick512));
-    }
-
-    private void albumActivated() {
-        Button s1 = findViewById(R.id.switchName);
-        Button s2 = findViewById(R.id.switchCategory);
-        Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
-        s3.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s2.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s1.setBackground(getResources().getDrawable(R.drawable.vacio));
-        s4.setBackground(getResources().getDrawable(R.drawable.tick512));
+        Intent i=new Intent(this,Login.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivityForResult(i, 1);
     }
 
     private void Home() {
