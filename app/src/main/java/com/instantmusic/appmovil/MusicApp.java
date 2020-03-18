@@ -41,7 +41,7 @@ public class MusicApp extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-        server = new remoteServer(this);
+        server = new remoteServer();
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         email = mail.getText().toString();

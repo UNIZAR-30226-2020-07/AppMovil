@@ -10,16 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class remoteServer implements serverInterface {
-    private UsersDbAdapter localDb;
-
-    remoteServer(Context ctx) {
-        this.localDb = new UsersDbAdapter(ctx);
-        localDb.open();
-    }
-
-
     public Cursor searchShit(String shit) {
-        return localDb.searchShit(shit);
+        return null;
     }
 
     public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {
@@ -57,54 +49,45 @@ public class remoteServer implements serverInterface {
     }
 
     public int checkUser(String mail) {
-        Cursor user = localDb.checkUser((mail));
-        if (user == null) {
-            return 1;
-        }
+
         return 0;
     }
 
     @Override
     public Cursor infoUser(String email) {
-        return localDb.infoUser(email);
+        return null;
     }
 
     public int deleteUser(String email){
-        if(localDb.deleteUser(email)){
-            return 0;
-        }
         return 1;
     }
     public int songInfo(String name,String artist,String categoria) {
-        Cursor user = localDb.songInfo((name));
-        if (user == null) {
-            return 1;
-        }
+
         return 0;
 
     }
 
     public Cursor buscarCancion(String song) {
-        return localDb.buscarCancion(song);
+        return null;
     }
 
     public Cursor buscarArtista(String artist) {
-        return localDb.buscarArtista(artist);
+        return null;
     }
 
     @Override
     public Cursor allPlaylists(String user) {
-        return localDb.searchPlaylists(user);
+        return null;
 
     }
 
     public long addSong(String name,String artist,String category) {
-        return localDb.addSong(name,artist,category);
+        return 0;
     }
 
     @Override
     public long addPlaylist(String playlist,String author) {
-        localDb.addPlaylist(playlist,author);
+
         return 0;
     }
 
@@ -115,11 +98,10 @@ public class remoteServer implements serverInterface {
 
     @Override
     public int addSongToPlaylist(String playlist, String song,String author) {
-        localDb.addSongToPlaylist(playlist,song,author);
+
         return 0;
     }
     public void close(){
-        localDb.close();
     }
 
     // ------------------- To save data -------------------
