@@ -25,6 +25,8 @@ public class Regist extends AppCompatActivity {
     private TextView userAux;
     private boolean emailRegistered = false;
     private String email;
+    private String password;
+    private String passwordConfirm;
     public serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
 
@@ -57,15 +59,18 @@ public class Regist extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
         server=new remoteServer();
-        EditText mail=findViewById(R.id.emailSign);
+        mail=findViewById(R.id.emailSign);
         mail.setText(email);
         mail.setTextColor(Color.WHITE);
-        pass.setText(email);
+        pass=findViewById(R.id.passwordSign);
+        pass.setText(password);
         pass.setTextColor(getResources().getColor(R.color.color2));
-        passConfirm.setText(email);
+        passConfirm=findViewById(R.id.passwordSign4);
+        passConfirm.setText(passwordConfirm);
         passConfirm.setTextColor(getResources().getColor(R.color.color2));
         if (emailRegistered) {
-            String texto = "An user is already registered with that email address.";
+            String texto = "An user is already registered with that email address";
+            emailAux=findViewById(R.id.emailTip);
             emailAux.setText(texto);
             emailAux.setTextColor(Color.RED);
             emailAux.setVisibility(View.VISIBLE);
@@ -91,8 +96,8 @@ public class Regist extends AppCompatActivity {
         passConfirm = findViewById(R.id.passwordSign4);
         String texto;
         email = mail.getText().toString();
-        String password = pass.getText().toString();
-        String passwordConfirm = passConfirm.getText().toString();
+        password = pass.getText().toString();
+        passwordConfirm = passConfirm.getText().toString();
         emailAux = findViewById(R.id.emailTip);
         passAux = findViewById(R.id.passwordTip);
         passConfirmAux = findViewById(R.id.passwordTip3);
@@ -190,8 +195,9 @@ public class Regist extends AppCompatActivity {
                             emailRegistered = true;
                             back2();
                         }
-                        if ( error.equals("A user is already registered with this e-mail address.")) {
-                            String texto = "An user is already registered with that email address.";
+                        if ( error.equals("A user with that username already exists.")) {
+                            String texto = "A user with that username already exists";
+                            userAux=findViewById(R.id.usernameTip);
                             userAux.setText(texto);
                             userAux.setTextColor(Color.RED);
                             userAux.setVisibility(View.VISIBLE);

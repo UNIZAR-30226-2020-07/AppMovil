@@ -51,7 +51,7 @@
         <ListView
             android:id="@+id/searchRes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="601dp"
             android:layout_gravity="center"
             android:visibility="visible">
 
