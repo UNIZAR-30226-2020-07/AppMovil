@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/backColor"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="invisible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
