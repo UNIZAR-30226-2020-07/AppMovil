@@ -2,6 +2,7 @@ package com.instantmusic.appmovil;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class Regist extends AppCompatActivity {
     private TextView passConfirmAux;
     private TextView emailAux;
     private TextView userAux;
+    private boolean emailRegistered = false;
     private String email;
     public serverInterface server;
     public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,7 @@ public class Regist extends AppCompatActivity {
         emailAux = findViewById(R.id.emailTip);
         passAux = findViewById(R.id.passwordTip);
         passConfirmAux = findViewById(R.id.passwordTip3);
-        /*
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         if ( password.length() < 8 ) { // Caso en el que la longitud de la contrasenya no sea correcto
             texto = "Invalid password. Use at least 8 characters";
             passAux.setText(texto);
@@ -107,32 +109,37 @@ public class Regist extends AppCompatActivity {
             emailAux.setVisibility(View.VISIBLE);
             seguir = false;
         }
-        else if ( server.checkUser(email) ==0 ) { // Caso en el que el email este en uso ya
-            texto = "That email is already registered";
+        else if ( !( email.matches(emailPattern) ) ) {
+            texto = "Email is not valid";
             emailAux.setText(texto);
             emailAux.setTextColor(Color.RED);
             emailAux.setVisibility(View.VISIBLE);
+            seguir = false;
+        }
+        else if ( emailRegistered ) {
+            emailRegistered=false;
             seguir = false;
         }
         else { // El email es valido y por tanto se quita el mensaje de error de email
             texto = "";
             emailAux.setText(texto);
         }
-        */
-        setContentView(R.layout.activity_instant_music_app_regist2);
-        Button confirmButton2 = findViewById(R.id.createF);
-        confirmButton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                confirmSignUp2();
-            }
-        });
-        Button confirmButton3 = findViewById(R.id.backButton2);
-        confirmButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                back2();
-            }
-        });
+        if ( seguir ) {
+            setContentView(R.layout.activity_instant_music_app_regist2);
+            Button confirmButton2 = findViewById(R.id.createF);
+            confirmButton2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    confirmSignUp2();
+                }
+            });
+            Button confirmButton3 = findViewById(R.id.backButton2);
+            confirmButton3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    back2();
+                }
+            });
+        }
     }
 
     private void confirmSignUp2() {
@@ -141,8 +148,15 @@ public class Regist extends AppCompatActivity {
         String texto;
         String user = username.getText().toString();
         userAux = findViewById(R.id.usernameTip);
-        /*
-        if ( user.length() < 4 ) { // Caso en el que la longitud de la contrasenya no sea correcto
+
+        if ( user.isEmpty() ) { // Caso en el que el email sea vacio
+            texto = "Username is empty";
+            userAux.setText(texto);
+            userAux.setTextColor(Color.RED);
+            userAux.setVisibility(View.VISIBLE);
+            seguir = false;
+        }
+        else if ( user.length() < 4 ) { // Caso en el que la longitud de la contrasenya no sea correcto
             texto = "Invalid username. Use at least 4 characters";
             userAux.setText(texto);
             userAux.setTextColor(Color.RED);
@@ -152,34 +166,36 @@ public class Regist extends AppCompatActivity {
             texto = "";
             userAux.setText(texto);
         }
-        if ( user.isEmpty() ) { // Caso en el que el email sea vacio
-            texto = "Username is empty";
-            userAux.setText(texto);
-            userAux.setTextColor(Color.RED);
-            userAux.setVisibility(View.VISIBLE);
-            seguir = false;
-        }
-         */
-        server.registUser(username.getText().toString(), mail.getText().toString(), pass.getText().toString(), passConfirm.getText().toString(), new JSONConnection.Listener() {
-            @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
-                if (responseCode == 201) {
-                    Intent i = new Intent();
-                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    setResult(RESULT_OK, i);
-                    finish();
+        if ( seguir ) {
+            server.registUser(username.getText().toString(), mail.getText().toString(), pass.getText().toString(), passConfirm.getText().toString(), new JSONConnection.Listener() {
+                @Override
+                public void onValidResponse(int responseCode, JSONObject data) {
+                    if (responseCode == 201) {
+                        Intent i = new Intent();
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        setResult(RESULT_OK, i);
+                        finish();
+                    }
+                    else {
+                        String error = Utils.listifyErrors(data);
+                        if ( error.equals("A user is already registered with this e-mail address.")) {
+                            System.out.println("HA ENTRADO");
+                            String texto = "An user is already registered with that email address.";
+                            emailAux.setText(texto);
+                            emailAux.setTextColor(Color.RED);
+                            emailAux.setVisibility(View.VISIBLE);
+                        }
+                        if ( error.equals("A user is already registered with this e-mail address.")) {
+                            System.out.println("HA ENTRADO");
+                        }
+                    }
                 }
-                else {
-                    new AlertDialog.Builder(Regist.this)
-                            .setMessage(Utils.listifyErrors(data))
-                            .show();
-                }
-            }
 
-            @Override
-            public void onErrorResponse(Throwable throwable) {
-                Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onErrorResponse(Throwable throwable) {
+                    Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

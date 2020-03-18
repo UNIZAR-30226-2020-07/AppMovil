@@ -76,6 +76,7 @@ public class MusicApp extends AppCompatActivity {
                             new AlertDialog.Builder(MusicApp.this)
                                     .setMessage(Utils.listifyErrors(data))
                                     .show();
+
                         }
                     }
 
