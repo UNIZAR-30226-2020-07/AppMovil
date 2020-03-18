@@ -37,6 +37,7 @@
         <activity android:name=".Song"></activity>
         <activity android:name=".Playlists"></activity>
         <activity android:name=".remoteServer"></activity>
+        <activity android:name=".addPlaylist"></activity>
     </application>
 
 </manifest>

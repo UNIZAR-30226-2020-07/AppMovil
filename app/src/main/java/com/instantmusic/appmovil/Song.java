@@ -79,7 +79,7 @@ public class Song extends AppCompatActivity {
                 } else {
                     searchMenu.setVisibility(View.VISIBLE);
                 }
-                addPlaylist();
+
 
             }
         });add.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class Song extends AppCompatActivity {
                 } else {
                     searchMenu.setVisibility(View.VISIBLE);
                 }
-
+                addPlaylist();
             }
         });
 

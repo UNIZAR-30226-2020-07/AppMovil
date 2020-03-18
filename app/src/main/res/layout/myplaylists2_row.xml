@@ -1,0 +1,65 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MusicApp">
+
+
+    <Button
+        android:id="@+id/buttonSong"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:layout_weight="0"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="10dp"
+                android:layout_weight="0" />
+
+            <ImageView
+                android:id="@+id/iconoSong"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/rufio2" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="275dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:textAlignment="center"
+            android:textColor="@color/backColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Titulo playlist" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
