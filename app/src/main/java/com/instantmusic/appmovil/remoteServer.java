@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class remoteServer implements serverInterface {
-    public Cursor searchShit(String shit) {
-        return null;
-    }
 
     public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {
         initialize()
@@ -39,6 +36,9 @@ public class remoteServer implements serverInterface {
                 .putData("password", password)
                 .setListener(listener)
                 .execute();
+    }
+    public Cursor searchShit(String shit) {
+        return null;
     }
 
     public static void getUserData(JSONConnection.Listener listener){

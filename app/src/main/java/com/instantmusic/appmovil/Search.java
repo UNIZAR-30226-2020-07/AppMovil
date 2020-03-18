@@ -44,11 +44,7 @@ public class Search extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        user = extras.getString("email");
-
         setContentView(R.layout.activity_instant_music_app_search);
-
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);

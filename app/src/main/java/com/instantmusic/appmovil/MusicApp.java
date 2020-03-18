@@ -48,12 +48,12 @@ public class MusicApp extends AppCompatActivity {
         pass = findViewById(R.id.password);
         email = mail.getText().toString();
         mail.setTextColor(Color.WHITE);
-        server.addSong("Pegamos tela","Omar Montes","Reggaeton");
-        server.addSong("Despacito","Luis Fonsi","Reggaeton");
-        server.addSong("Purpurina","Alberto Gambino","Hip-Hop");
-        server.addSong("Fighting Gold","Kazusou Oda","Rock");
-        server.addSong("Me Gusta","Shakira","Reggaeton");
-        server.addSong("Pikete italiano","Kvndy Swing","Trap");
+        local.addSong("Pegamos tela","Omar Montes","Reggaeton");
+        local.addSong("Despacito","Luis Fonsi","Reggaeton");
+        local.addSong("Purpurina","Alberto Gambino","Hip-Hop");
+        local.addSong("Fighting Gold","Kazusou Oda","Rock");
+        local.addSong("Me Gusta","Shakira","Reggaeton");
+        local.addSong("Pikete italiano","Kvndy Swing","Trap");
         local.addPlaylist("Jojos","Admin");
         local.addPlaylist("Jojos1","Admin");
         local.addPlaylist("Jojos2","Admin");
