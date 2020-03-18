@@ -35,11 +35,10 @@ public class Login extends AppCompatActivity {
         myPlaylist = findViewById(R.id.myPlayLists);
         Cursor aux = server.infoUser(user);
         //name = aux.getString(3);
-
         Cursor shitCursor = server.allPlaylists(user);
         startManagingCursor(shitCursor);
-        String[] from = new String[]{UsersDbAdapter.KEY_NAMEP, UsersDbAdapter.KEY_AUTHOR};
-        int[] to = new int[]{R.id.text1, R.id.text2};
+        String[] from = new String[]{UsersDbAdapter.KEY_NAMEP};
+        int[] to = new int[]{R.id.text1};
         SimpleCursorAdapter search =
                 new SimpleCursorAdapter(this, R.layout.myplaylists_row, shitCursor, from, to);
         myPlaylist.setAdapter(search);

@@ -45,6 +45,7 @@ public class MusicApp extends AppCompatActivity {
         mail = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         email = mail.getText().toString();
+        mail.setTextColor(Color.WHITE);
         server.addSong("Pegamos tela","Omar Montes","Reggaeton");
         server.addSong("Despacito","Luis Fonsi","Reggaeton");
         server.addSong("Purpurina","Alberto Gambino","Hip-Hop");

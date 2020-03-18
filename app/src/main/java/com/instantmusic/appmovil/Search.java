@@ -46,12 +46,15 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         user = extras.getString("email");
+
         setContentView(R.layout.activity_instant_music_app_search);
+
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
+
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -59,6 +62,7 @@ public class Search extends AppCompatActivity {
                 Song("Nombre de la cancion", "Nombre del artista");
             }
         });
+
         search = findViewById(R.id.searchbar2);
         server = new localServer(this);
 //        registerForContextMenu(resList);
