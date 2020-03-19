@@ -22,7 +22,7 @@ public class MusicApp extends AppCompatActivity {
     private EditText pass;
     private TextView mailTip;
     private TextView  passTip;
-    private String email;
+    public String email;
     public serverInterface server;
     public serverInterface local;
 

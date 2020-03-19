@@ -21,8 +21,6 @@ public class Login extends AppCompatActivity {
     private static final int SEARCH = Menu.FIRST;
     private AutoCompleteTextView shit;
     private serverInterface server;
-    private String user;
-    private String name;
     private HorizontalListView myPlaylist;
     public void onCreate(Bundle savedInstanceState) {
 
