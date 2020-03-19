@@ -11,7 +11,7 @@ public interface serverInterface  {
     int recover(String mail);
     int checkUser(String email);
     Cursor infoUser(String email);
-    int addSongToPlaylist(String playlist, String song,String author);
+    int addSongToPlaylist(String playlist, String song);
     long addSong(String name,String artist,String categoria);
     long addPlaylist(String playlist,String author);
     Cursor buscarCancion(String song);

@@ -97,7 +97,7 @@ public class remoteServer implements serverInterface {
 
 
     @Override
-    public int addSongToPlaylist(String playlist, String song,String author) {
+    public int addSongToPlaylist(String song, String playList) {
 
         return 0;
     }

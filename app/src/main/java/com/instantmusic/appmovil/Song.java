@@ -35,6 +35,7 @@ public class Song extends AppCompatActivity {
     private boolean isPaused = false;
     private boolean isLooped = false;
     private boolean isShuffled = false;
+    private String song;
     private Button add;
     private Button see;
     private LinearLayout searchMenu;
@@ -180,6 +181,7 @@ public class Song extends AppCompatActivity {
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
             songName = findViewById(R.id.SongName);
+            song=cancion;
             songName.setText(cancion);
             String autor = extras.getString(this.getPackageName() + ".String");
             autorName = findViewById(R.id.AutorName);
@@ -322,6 +324,7 @@ public class Song extends AppCompatActivity {
     private void addPlaylist(){
         Intent i=new Intent(this,addPlaylist.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("song",song);
         startActivityForResult(i, 1);
     }
     @Override

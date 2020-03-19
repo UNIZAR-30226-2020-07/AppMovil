@@ -183,11 +183,12 @@ public class UsersDbAdapter {
         return mDb.insert(DATABASE_TABLE_LIST_PLAYLISTS, null, initialValues);
     }
 
-    public long addSongToPlaylist(String playlist, String song,String author) {
+    public long addSongToPlaylist(String playlist,String song) {
         ContentValues args = new ContentValues();
+        String[] columns = new String[]{KEY_ID, KEY_NAME, KEY_ARTIST, KEY_CATEGORY};
         args.put(KEY_NAMEP, playlist);
+        args.put(KEY_AUTHOR, "Admin");
         args.put(KEY_NAME, song);
-        args.put(KEY_AUTHOR, author);
         return mDb.insert(DATABASE_TABLE_PLAYLISTS,null,args);
 
     }

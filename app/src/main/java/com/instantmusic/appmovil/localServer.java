@@ -76,11 +76,8 @@ public class localServer implements serverInterface {
         }
         return 1;
     }
-    public int songInfo(String name,String artist,String categoria) {
-        Cursor user = localDb.songInfo((name));
-        if (user == null) {
-            return 1;
-        }
+    public int songInfo(int id) {
+
         return 0;
 
     }
@@ -126,8 +123,8 @@ public class localServer implements serverInterface {
     }
 
     @Override
-    public int addSongToPlaylist(String playlist, String song,String author) {
-        localDb.addSongToPlaylist(playlist,song,author);
+    public int addSongToPlaylist(String song, String playlist) {
+        localDb.addSongToPlaylist(playlist,song);
         return 0;
     }
     public void close(){

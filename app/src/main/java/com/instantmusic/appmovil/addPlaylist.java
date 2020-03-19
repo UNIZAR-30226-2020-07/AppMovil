@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,6 +17,8 @@ public class addPlaylist extends AppCompatActivity {
     private serverInterface server;
     private String user;
     private String name;
+    private String song;
+    private String playList;
     private ListView myPlaylist;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,8 @@ public class addPlaylist extends AppCompatActivity {
 //        registerForContextMenu(resList);
         myPlaylist = findViewById(R.id.myPlayLists);
         //name = aux.getString(3);
+        Bundle extras = getIntent().getExtras();
+        song= extras.getString("song");
         Cursor shitCursor = server.allPlaylists("Admin");
         startManagingCursor(shitCursor);
         String[] from = new String[]{UsersDbAdapter.KEY_NAMEP};
@@ -36,6 +41,20 @@ public class addPlaylist extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 backScreen();
+            }
+        });
+        myPlaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
+               playList=search.getCursor().getString(1);
+               long out=server.addSongToPlaylist(song,playList);
+               System.out.println(song);
+               System.out.println(playList);
+               System.out.println(out);
+               backScreen();
             }
         });
 
