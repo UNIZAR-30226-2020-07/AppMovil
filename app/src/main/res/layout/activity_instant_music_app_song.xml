@@ -36,14 +36,13 @@
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/scrolldown"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:scaleType="center"
-                app:srcCompat="@drawable/scrolldown" />
+                android:layout_weight="0"
+                android:background="@drawable/flecha"
+                android:scaleType="center" />
 
             <Space
                 android:layout_width="120dp"

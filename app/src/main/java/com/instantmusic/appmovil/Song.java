@@ -71,6 +71,13 @@ public class Song extends AppCompatActivity {
                 }
 
             }
+        });
+        Button Button1 = findViewById(R.id.scrolldown);
+        Button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backScreen();
+            }
         });see.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,7 +231,12 @@ public class Song extends AppCompatActivity {
 
 
     }
-
+    private void backScreen(){
+        Intent i = new Intent();
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        setResult(RESULT_OK, i);
+        finish();
+    }
     public void playSong() {
 
         if (!isPlaying && !isPaused) {
