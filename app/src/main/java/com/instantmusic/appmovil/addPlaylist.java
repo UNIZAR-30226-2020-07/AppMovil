@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,5 +31,19 @@ public class addPlaylist extends AppCompatActivity {
         SimpleCursorAdapter search =
                 new SimpleCursorAdapter(this, R.layout.myplaylists2_row, shitCursor, from, to);
         myPlaylist.setAdapter(search);
+        Button back=findViewById(R.id.backButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backScreen();
+            }
+        });
+
+    }
+    private void backScreen(){
+        Intent i = new Intent();
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        setResult(RESULT_OK, i);
+        finish();
     }
 }
