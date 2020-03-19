@@ -45,7 +45,7 @@ public class UsersDbAdapter {
     private static final String DATABASE_CREATE_SONGS =
             "create table songs (_id integer primary key autoincrement," + "name text not null, _artist text not null, _categoria text not null);";
     private static final String DATABASE_CREATE_PLAYLISTS =
-            "create table playlists (_id integer primary key autoincrement," + "nameP text not null, autor text not null, name text not null);";
+            "create table playlists (_id integer primary key autoincrement," + "nameP text not null, autor text not null, name text not null,_artist text not null, _categoria text not null);";
     private static final String DATABASE_CREATE_LIST_PLAYLISTS =
             "create table listplaylists (_id integer primary key autoincrement," + "nameP text not null, autor text not null);";
 
@@ -68,6 +68,12 @@ public class UsersDbAdapter {
             if (mDbCursor.getCount() == 0) mDbCursor = null;
         }
         return mDbCursor;
+    }
+
+    public Cursor searchPlaylist(String playlist) {
+        String[] columns = new String[]{KEY_ID, KEY_NAMEP, KEY_AUTHOR, KEY_NAME, KEY_ARTIST,KEY_CATEGORY};
+        return mDb.query(true, DATABASE_TABLE_PLAYLISTS, columns, KEY_NAMEP + "=?", new String[]{playlist},
+                null, null, null, null);
     }
 
 

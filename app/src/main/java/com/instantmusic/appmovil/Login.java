@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -65,10 +66,25 @@ public class Login extends AppCompatActivity {
                 Settings();
             }
         });
+        myPlaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
+                String playList=search.getCursor().getString(1);
+                System.out.println(playList);
+                openPlaylist(playList);
+            }
+        });
     }
 
-
+    private void openPlaylist(String playlist){
+        Intent i = new Intent(this, Playlists.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("playlist",playlist);
+        startActivityForResult(i, 1);
+    }
     private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

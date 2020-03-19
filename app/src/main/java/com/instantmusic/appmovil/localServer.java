@@ -106,6 +106,11 @@ public class localServer implements serverInterface {
         return 0;
     }
 
+    @Override
+    public Cursor searchPlaylist(String playlist) {
+        return localDb.searchPlaylist(playlist);
+    }
+
     public int recover(String mail) {
         return 0;
     }

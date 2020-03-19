@@ -91,6 +91,11 @@ public class remoteServer implements serverInterface {
         return 0;
     }
 
+    @Override
+    public Cursor searchPlaylist(String playlist) {
+        return null;
+    }
+
     public int recover(String mail) {
         return 0;
     }

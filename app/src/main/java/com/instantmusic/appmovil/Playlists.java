@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.net.UnknownServiceException;
+
 public class Playlists extends AppCompatActivity {
     private ListView resList;
     private Button playB;
@@ -24,7 +26,7 @@ public class Playlists extends AppCompatActivity {
     private static final int RECOVER = Menu.FIRST + 1;
     private static final int LOGIN = Menu.FIRST + 2;
     private serverInterface server;
-
+    private String playList;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -32,7 +34,27 @@ public class Playlists extends AppCompatActivity {
         resList = findViewById(R.id.playlist);
         server = new localServer(this);
         playB = findViewById(R.id.playButton);
+        resList = findViewById(R.id.playlist);
+        Bundle extras = getIntent().getExtras();
+        playList= extras.getString("playlist");
+        search();
+        resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Song("Nombre de la cancion", "Nombre del artista");
+            }
+        });
+        server = new localServer(this);
+//        registerForContextMenu(resList);
+        playB.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+
+                resList.setSelection(0);
+                registerForContextMenu(resList);
+            }
+        });
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -40,6 +62,17 @@ public class Playlists extends AppCompatActivity {
                Song("Nombre de la cancion","Nombre del artista");
             }
         });
+    }
+
+    private void search() {
+        Cursor shitCursor = server.searchPlaylist(playList);
+        startManagingCursor(shitCursor);
+        String[] from = new String[]{UsersDbAdapter.KEY_NAMEP, UsersDbAdapter.KEY_AUTHOR,UsersDbAdapter.KEY_NAME,UsersDbAdapter.KEY_ARTIST,UsersDbAdapter.KEY_CATEGORY};
+        int[] to = new int[]{R.id.text1,R.id.text2,R.id.text3,R.id.text4,R.id.text5};
+        SimpleCursorAdapter search =
+                new SimpleCursorAdapter(this, R.layout.playlist_row, shitCursor, from, to);
+        resList.setAdapter(search);
+
     }
 
     private void Song(String songName, String autorName) {

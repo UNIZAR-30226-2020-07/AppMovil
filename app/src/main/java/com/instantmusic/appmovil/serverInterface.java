@@ -14,6 +14,7 @@ public interface serverInterface  {
     int addSongToPlaylist(String playlist, String song);
     long addSong(String name,String artist,String categoria);
     long addPlaylist(String playlist,String author);
+    Cursor searchPlaylist(String playlist);
     Cursor buscarCancion(String song);
     Cursor buscarArtista(String artist);
     Cursor allPlaylists(String user);
