@@ -1,20 +1,11 @@
 package com.instantmusic.appmovil;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +23,6 @@ public class MusicApp extends AppCompatActivity {
     private TextView mailTip;
     private TextView  passTip;
     private String email;
-    private String name;
-    private TextView aux;
     public serverInterface server;
     public serverInterface local;
 
@@ -80,10 +69,10 @@ public class MusicApp extends AppCompatActivity {
                 passTip = findViewById(R.id.Tip);
                 String userEmail = mail.getText().toString();
                 String password = pass.getText().toString();
-                String texto ="";
+                String texto;
 
                 if ( userEmail.isEmpty() ) {
-                    texto = "Email is empty";
+                    texto = "Email/User is empty";
                     mailTip.setText(texto);
                     mailTip.setTextColor(Color.RED);
                     mailTip.setVisibility(View.VISIBLE);
