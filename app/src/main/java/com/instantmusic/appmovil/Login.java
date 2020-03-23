@@ -73,16 +73,18 @@ public class Login extends AppCompatActivity {
 
                 SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
                 String playList=search.getCursor().getString(1);
+                String creador=search.getCursor().getString(2);
                 System.out.println(playList);
-                openPlaylist(playList);
+                openPlaylist(playList,creador);
             }
         });
     }
 
-    private void openPlaylist(String playlist){
+    private void openPlaylist(String playlist,String creador){
         Intent i = new Intent(this, Playlists.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("playlist",playlist);
+        i.putExtra("creador",creador);
         startActivityForResult(i, 1);
     }
     private void Search() {

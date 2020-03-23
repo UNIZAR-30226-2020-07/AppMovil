@@ -27,6 +27,7 @@ public class Playlists extends AppCompatActivity {
     private static final int LOGIN = Menu.FIRST + 2;
     private serverInterface server;
     private String playList;
+    private String creador;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -37,6 +38,11 @@ public class Playlists extends AppCompatActivity {
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
         playList= extras.getString("playlist");
+        creador= extras.getString("creador");
+        TextView name=findViewById(R.id.playlistName);
+        TextView creator=findViewById(R.id.playlistCreator);
+        name.setText(playList);
+        creator.setText(creador);
         search();
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
