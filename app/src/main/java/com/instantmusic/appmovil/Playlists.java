@@ -44,19 +44,17 @@ public class Playlists extends AppCompatActivity {
         name.setText(playList);
         creator.setText(creador);
         search();
-        resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        Button Button1 = findViewById(R.id.backButton);
+        Button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Song("Nombre de la cancion", "Nombre del artista");
+            public void onClick(View view) {
+                backScreen();
             }
         });
         server = new localServer(this);
 //        registerForContextMenu(resList);
         playB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
-
                 resList.setSelection(0);
                 registerForContextMenu(resList);
             }
@@ -65,7 +63,10 @@ public class Playlists extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Song("Nombre de la cancion","Nombre del artista");
+                SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
+                String cancion=search.getCursor().getString(1);
+                String artista=search.getCursor().getString(2);
+               Song(cancion,artista);
             }
         });
     }
@@ -80,7 +81,12 @@ public class Playlists extends AppCompatActivity {
         resList.setAdapter(search);
 
     }
-
+    private void backScreen(){
+        Intent i = new Intent();
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        setResult(RESULT_OK, i);
+        finish();
+    }
     private void Song(String songName, String autorName) {
         Intent i = new Intent(this, Song.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
