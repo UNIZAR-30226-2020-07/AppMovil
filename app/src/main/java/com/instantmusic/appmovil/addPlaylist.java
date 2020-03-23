@@ -50,10 +50,7 @@ public class addPlaylist extends AppCompatActivity {
 
                SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
                playList=search.getCursor().getString(1);
-               long out=server.addSongToPlaylist(song,playList);
-               System.out.println(song);
-               System.out.println(playList);
-               System.out.println(out);
+               server.addSongToPlaylist(song,playList);
                backScreen();
             }
         });

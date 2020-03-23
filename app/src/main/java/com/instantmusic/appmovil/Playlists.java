@@ -74,8 +74,8 @@ public class Playlists extends AppCompatActivity {
     private void search() {
         Cursor shitCursor = server.searchPlaylist(playList);
         startManagingCursor(shitCursor);
-        String[] from = new String[]{UsersDbAdapter.KEY_NAMEP, UsersDbAdapter.KEY_AUTHOR,UsersDbAdapter.KEY_NAME,UsersDbAdapter.KEY_ARTIST,UsersDbAdapter.KEY_CATEGORY};
-        int[] to = new int[]{R.id.text1,R.id.text2,R.id.text3,R.id.text4,R.id.text5};
+        String[] from = new String[]{UsersDbAdapter.KEY_NAME,UsersDbAdapter.KEY_ARTIST,UsersDbAdapter.KEY_CATEGORY};
+        int[] to = new int[]{R.id.text1,R.id.text2,R.id.text3};
         SimpleCursorAdapter search =
                 new SimpleCursorAdapter(this, R.layout.playlist_row, shitCursor, from, to);
         resList.setAdapter(search);

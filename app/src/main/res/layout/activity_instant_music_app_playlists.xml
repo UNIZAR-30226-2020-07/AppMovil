@@ -106,6 +106,10 @@
             android:text="@string/play"
             android:textColor="@color/backColor" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <ListView
             android:id="@+id/playlist"
             android:layout_width="match_parent"
