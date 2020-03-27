@@ -24,10 +24,15 @@ import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Search extends AppCompatActivity {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Search extends AppCompatActivity implements JSONConnection.Listener{
     private ListView resList;
     private EditText search;
     private TextView searchTip1;
@@ -46,23 +51,33 @@ public class Search extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        server=new remoteServer();
         setContentView(R.layout.activity_instant_music_app_search);
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
+        adapter = new ArrayAdapter<>(this, R.layout.search_row);
+        resList.setAdapter(adapter);
+        for(int i=0;i<resList.getCount();i++){
+            SimpleCursorAdapter search=(SimpleCursorAdapter)resList.getAdapter();
+            String categoria=search.getCursor().getString(3);
+            System.out.println(categoria);
 
+        }
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Song("Nombre de la cancion", "Nombre del artista");
+                SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
+                String nombre=search.getCursor().getString(1);
+                String artista=search.getCursor().getString(2);
+                Song(nombre, artista);
             }
         });
 
         search = findViewById(R.id.searchbar2);
-        server = new localServer(this);
 //        registerForContextMenu(resList);
         shit = findViewById(R.id.searchbar2);
         Button confirmButton = findViewById(R.id.search);
@@ -204,10 +219,9 @@ public class Search extends AppCompatActivity {
 
     private void search() {
         shit = findViewById(R.id.searchbar2);
-        Cursor shitCursor = null;
         switch (searchType) {
             case 1:
-                shitCursor = server.searchShit(shit.getText().toString());
+                server.searchShit(shit.getText().toString(),this);
                 break;
             case 2:
                 //shitcursor=server.searchCategory(shit.getText().toString());
@@ -219,7 +233,8 @@ public class Search extends AppCompatActivity {
                 //shitcursor=server.searchAlbum(shit.getText().toString());
                 break;
         }
-        if (shitCursor == null) {
+    }
+        /*if (shitCursor == null) {
             searchTip1.setVisibility(View.VISIBLE);
             searchTip2.setVisibility(View.VISIBLE);
             lupaGrande.setVisibility(View.VISIBLE);
@@ -248,6 +263,27 @@ public class Search extends AppCompatActivity {
             resList.setAdapter(search);
         }
 
+    }
+    */
+    @Override
+    public void onValidResponse(int responseCode, JSONObject data) {
+        try {
+            final JSONArray results = data.getJSONArray("results");
+
+            for (int i = 0; i < results.length(); i++) {
+                JSONObject song = results.getJSONObject(i);
+                JSONObject album = song.getJSONObject("album");
+                JSONObject artist = album.getJSONObject("artist");
+                adapter.add(song.getString("title") + " in " + album.getString("name") + " from " + artist.getString("name"));
+            }
+        } catch (JSONException e) {
+            onErrorResponse(e);
+        }
+    }
+
+    @Override
+    public void onErrorResponse(Throwable throwable) {
+        Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
     }
    /* public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

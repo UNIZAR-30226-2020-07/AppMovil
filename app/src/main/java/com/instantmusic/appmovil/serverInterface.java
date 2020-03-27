@@ -4,8 +4,10 @@ package com.instantmusic.appmovil;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.json.JSONObject;
+
 public interface serverInterface  {
-    Cursor searchShit(String shit);
+    void searchShit(String shit, JSONConnection.Listener listener );
     void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener);
     void login(String username_email, String password, JSONConnection.Listener listener);
     int recover(String mail);

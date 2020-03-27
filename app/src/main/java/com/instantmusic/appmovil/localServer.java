@@ -49,8 +49,7 @@ public class localServer implements serverInterface {
         localDb.open();
     }
 
-    public Cursor searchShit(String shit) {
-        return localDb.searchShit(shit);
+    public void searchShit(String shit,JSONConnection.Listener listener ) {
     }
 
     public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {

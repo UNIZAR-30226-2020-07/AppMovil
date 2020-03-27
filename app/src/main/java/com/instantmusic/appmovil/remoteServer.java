@@ -37,8 +37,12 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
-    public Cursor searchShit(String shit) {
-        return null;
+    public void searchShit(String title, JSONConnection.Listener listener ) {
+        initialize()
+                .setUrl("songs")
+                //.putParameter("title", title)
+                .setListener(listener)
+                .execute();
     }
 
     public static void getUserData(JSONConnection.Listener listener){

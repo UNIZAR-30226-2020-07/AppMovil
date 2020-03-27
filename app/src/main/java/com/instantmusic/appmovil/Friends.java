@@ -135,7 +135,8 @@ public class Friends extends AppCompatActivity {
     private void search() {
         shit = findViewById(R.id.searchbar2);
         System.out.println(shit.getText().toString());
-        Cursor shitCursor = server.searchShit(shit.getText().toString());
+        Cursor shitCursor=null;
+        //server.searchShit(shit.getText().toString(),this);
         if (shitCursor == null) {
             searchTip1.setVisibility(View.VISIBLE);
             searchTip2.setVisibility(View.VISIBLE);
