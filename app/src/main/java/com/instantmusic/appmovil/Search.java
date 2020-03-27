@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +41,8 @@ public class Search extends AppCompatActivity {
     private EditText shit;
     private serverInterface server;
     private String user;
-
+    private int currentPage = 1;
+    private ArrayAdapter<String> adapter;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
