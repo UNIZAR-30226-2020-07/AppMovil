@@ -51,13 +51,21 @@
         <ListView
             android:id="@+id/searchRes"
             android:layout_width="match_parent"
-            android:layout_height="601dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="visible">
 
         </ListView>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="444dp"
+        android:layout_height="75dp"
+        android:background="#00FFFFFF"
+        app:layout_anchor="@+id/linearLayout6"
+        app:layout_anchorGravity="bottom|center" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
