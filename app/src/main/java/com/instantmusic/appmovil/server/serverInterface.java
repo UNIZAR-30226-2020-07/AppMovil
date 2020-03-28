@@ -3,7 +3,7 @@ package com.instantmusic.appmovil.server;
 
 import android.database.Cursor;
 
-import com.instantmusic.appmovil.connect.JSONConnection;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 
 public interface serverInterface  {
     void searchShit(String shit, JSONConnection.Listener listener );

@@ -2,7 +2,7 @@ package com.instantmusic.appmovil.server;
 
 import android.database.Cursor;
 
-import com.instantmusic.appmovil.connect.JSONConnection;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 
 import org.json.JSONException;
 import org.json.JSONObject;

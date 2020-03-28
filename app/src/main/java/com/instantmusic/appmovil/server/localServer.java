@@ -3,7 +3,7 @@ package com.instantmusic.appmovil.server;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.instantmusic.appmovil.connect.JSONConnection;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 
 public class localServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;

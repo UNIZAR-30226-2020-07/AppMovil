@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.instantmusic.appmovil.connect.JSONConnection;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
