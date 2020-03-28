@@ -41,7 +41,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private serverInterface server;
     private String user;
     private int currentPage = 1;
-    private ArrayAdapter<String> adapter;
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
     private SongsAdapter adapterSong;
     public void onCreate(Bundle savedInstanceState) {
@@ -114,6 +113,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             }
         });
         Button Button6 = findViewById(R.id.optionSearch);
+
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,8 +125,10 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
             }
         });
+
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
+
         s1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +136,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 nameActivated();
             }
         });
+
         s2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +144,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 categoryActivated();
             }
         });
+
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
