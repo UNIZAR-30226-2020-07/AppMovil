@@ -1,10 +1,9 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.server;
 
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import org.json.JSONObject;
+import com.instantmusic.appmovil.connect.JSONConnection;
 
 public interface serverInterface  {
     void searchShit(String shit, JSONConnection.Listener listener );

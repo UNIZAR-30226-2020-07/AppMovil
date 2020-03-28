@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.connect;
 
 import org.json.JSONArray;
 import org.json.JSONException;

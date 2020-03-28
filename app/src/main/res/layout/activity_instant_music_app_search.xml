@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grade"
-    tools:context=".MusicApp">
+    tools:context=".main.MusicApp">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -324,7 +324,9 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_anchor="@+id/linearLayout4"
+        app:layout_anchorGravity="center">
 
         <Space
             android:layout_width="match_parent"

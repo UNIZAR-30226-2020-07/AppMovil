@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.adapter;
 public class Model {
 
     private String name;

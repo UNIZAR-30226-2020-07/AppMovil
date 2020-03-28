@@ -1,22 +1,23 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import com.instantmusic.appmovil.HorizontalListView;
+
+import com.instantmusic.appmovil.adapter.HorizontalListView;
+import com.instantmusic.appmovil.playlist.Playlists;
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.server.UsersDbAdapter;
+import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.serverInterface;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class Login extends AppCompatActivity {
     private static final int SEARCH = Menu.FIRST;

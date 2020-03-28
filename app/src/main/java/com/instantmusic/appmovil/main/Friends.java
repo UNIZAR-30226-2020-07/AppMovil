@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Settings extends AppCompatActivity {
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.server.UsersDbAdapter;
+import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.serverInterface;
+
+public class Friends extends AppCompatActivity {
     private ListView resList;
     private EditText search;
     private TextView searchTip1;
@@ -28,10 +33,11 @@ public class Settings extends AppCompatActivity {
     private EditText shit;
     private serverInterface server;
     private String user;
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instant_music_app_settings);
+        setContentView(R.layout.activity_instant_music_app_friends);
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
@@ -68,11 +74,11 @@ public class Settings extends AppCompatActivity {
                 Podcasts();
             }
         });
-        Button Button4 = findViewById(R.id.menuButton4);
-        Button4.setOnClickListener(new View.OnClickListener() {
+        Button Button5 = findViewById(R.id.menuButton5);
+        Button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Friends();
+                Settings();
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -92,6 +98,7 @@ public class Settings extends AppCompatActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivityForResult(i, 1);
+
     }
 
     private void Search() {
@@ -102,8 +109,8 @@ public class Settings extends AppCompatActivity {
 
     }
 
-    private void Friends() {
-        Intent i = new Intent(this, Friends.class);
+    private void Settings() {
+        Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivityForResult(i, 1);
@@ -111,12 +118,13 @@ public class Settings extends AppCompatActivity {
     }
 
     private void Podcasts() {
-        Intent i = new Intent(this, Settings.class);
+        Intent i = new Intent(this, Podcasts.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivityForResult(i, 1);
 
     }
+
 
 
     @Override
@@ -132,7 +140,8 @@ public class Settings extends AppCompatActivity {
     private void search() {
         shit = findViewById(R.id.searchbar2);
         System.out.println(shit.getText().toString());
-        Cursor shitCursor =null;// server.searchShit(shit.getText().toString());
+        Cursor shitCursor=null;
+        //server.searchShit(shit.getText().toString(),this);
         if (shitCursor == null) {
             searchTip1.setVisibility(View.VISIBLE);
             searchTip2.setVisibility(View.VISIBLE);

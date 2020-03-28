@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Podcasts extends AppCompatActivity {
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.server.UsersDbAdapter;
+import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.serverInterface;
+
+public class Settings extends AppCompatActivity {
     private ListView resList;
     private EditText search;
     private TextView searchTip1;
@@ -31,7 +36,7 @@ public class Podcasts extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instant_music_app_podcasts);
+        setContentView(R.layout.activity_instant_music_app_settings);
         resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
@@ -61,19 +66,18 @@ public class Podcasts extends AppCompatActivity {
             public void onClick(View view) {
                 Search();
             }
+        });Button Button3 = findViewById(R.id.menuButton3);
+        Button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Podcasts();
+            }
         });
         Button Button4 = findViewById(R.id.menuButton4);
         Button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Friends();
-            }
-        });
-        Button Button5 = findViewById(R.id.menuButton5);
-        Button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Settings();
             }
         });
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -106,16 +110,18 @@ public class Podcasts extends AppCompatActivity {
     private void Friends() {
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
         startActivityForResult(i, 1);
+
     }
 
-    private void Settings() {
+    private void Podcasts() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
         startActivityForResult(i, 1);
 
     }
-
 
 
     @Override

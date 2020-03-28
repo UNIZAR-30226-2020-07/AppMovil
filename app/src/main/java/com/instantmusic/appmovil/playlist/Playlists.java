@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.playlist;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +12,12 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.server.UsersDbAdapter;
+import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.serverInterface;
+import com.instantmusic.appmovil.song.SongActivity;
 
 public class Playlists extends AppCompatActivity {
     private ListView resList;

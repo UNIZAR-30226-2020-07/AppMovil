@@ -1,17 +1,20 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.playlist;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.server.UsersDbAdapter;
+import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.serverInterface;
 
 public class addPlaylist extends AppCompatActivity {
     private serverInterface server;

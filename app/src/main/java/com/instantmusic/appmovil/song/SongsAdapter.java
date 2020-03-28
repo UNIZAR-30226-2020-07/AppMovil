@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.song;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.song.Song;
+
 import java.util.ArrayList;
 
 public class SongsAdapter extends ArrayAdapter<Song> {

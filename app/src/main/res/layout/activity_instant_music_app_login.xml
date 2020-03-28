@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grade"
-    tools:context=".MusicApp">
+    tools:context=".main.MusicApp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp" />
 
-        <com.instantmusic.appmovil.HorizontalListView
+        <com.instantmusic.appmovil.adapter.HorizontalListView
             android:id="@+id/mySongs"
             android:layout_width="match_parent"
             android:layout_height="112dp"
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp" />
 
-        <com.instantmusic.appmovil.HorizontalListView
+        <com.instantmusic.appmovil.adapter.HorizontalListView
             android:id="@+id/myPlayLists"
             android:layout_width="match_parent"
             android:layout_height="112dp"

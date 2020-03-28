@@ -1,8 +1,10 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.main;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.R;
 
 public class Recover extends AppCompatActivity {
 

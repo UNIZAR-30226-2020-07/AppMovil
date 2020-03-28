@@ -1,7 +1,9 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.server;
 
-import android.content.Context;
 import android.database.Cursor;
+
+import com.instantmusic.appmovil.connect.JSONConnection;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;

@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.connect.JSONConnection;
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.connect.Utils;
+import com.instantmusic.appmovil.server.remoteServer;
+import com.instantmusic.appmovil.server.serverInterface;
 
 import org.json.JSONObject;
 

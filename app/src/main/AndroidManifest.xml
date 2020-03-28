@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MusicApp"
+            android:name=".main.MusicApp"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             tools:ignore="LockedOrientationActivity">
@@ -27,17 +27,17 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter></activity>
-        <activity android:name=".Login"></activity>
-        <activity android:name=".Recover"></activity>
-        <activity android:name=".Regist"></activity>
-        <activity android:name=".Search"></activity>
-        <activity android:name=".Friends"></activity>
-        <activity android:name=".Podcasts"></activity>
-        <activity android:name=".Settings"></activity>
-        <activity android:name=".SongActivity"></activity>
-        <activity android:name=".Playlists"></activity>
-        <activity android:name=".remoteServer"></activity>
-        <activity android:name=".addPlaylist"></activity>
+        <activity android:name=".main.Login"></activity>
+        <activity android:name=".main.Recover"></activity>
+        <activity android:name=".main.Regist"></activity>
+        <activity android:name=".main.Search"></activity>
+        <activity android:name=".main.Friends"></activity>
+        <activity android:name=".main.Podcasts"></activity>
+        <activity android:name=".main.Settings"></activity>
+        <activity android:name=".song.SongActivity"></activity>
+        <activity android:name=".playlist.Playlists"></activity>
+        <activity android:name=".server.remoteServer"></activity>
+        <activity android:name=".playlist.addPlaylist"></activity>
     </application>
 
 </manifest>

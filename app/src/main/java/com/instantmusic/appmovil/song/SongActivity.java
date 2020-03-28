@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.song;
 
 // Esta implementacion ha sido sacada de esta pagina: https://www.journaldev.com/22203/android-media-player-song-with-seekbar
 // Sobre dicha implementacion se han realizado cambios para adecuarlo al modelo que queremos seguir.
@@ -22,6 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.playlist.addPlaylist;
+import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.serverInterface;
 
 public class SongActivity extends AppCompatActivity {
     serverInterface server;
@@ -320,7 +324,7 @@ public class SongActivity extends AppCompatActivity {
         }
     };
     private void addPlaylist(){
-        Intent i=new Intent(this,addPlaylist.class);
+        Intent i=new Intent(this, addPlaylist.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("song",song);
         startActivityForResult(i, 1);

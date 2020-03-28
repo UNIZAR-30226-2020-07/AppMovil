@@ -1,14 +1,12 @@
-package com.instantmusic.appmovil;
+package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,13 +18,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.instantmusic.appmovil.connect.JSONConnection;
+import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
+import com.instantmusic.appmovil.song.SongsAdapter;
+import com.instantmusic.appmovil.server.remoteServer;
+import com.instantmusic.appmovil.server.serverInterface;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Search extends AppCompatActivity implements JSONConnection.Listener{
+public class Search extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
     private EditText search;
     private TextView searchTip1;
