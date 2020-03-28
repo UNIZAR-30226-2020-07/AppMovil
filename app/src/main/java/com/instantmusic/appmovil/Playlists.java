@@ -3,21 +3,15 @@ package com.instantmusic.appmovil;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.net.UnknownServiceException;
 
 public class Playlists extends AppCompatActivity {
     private ListView resList;
@@ -88,7 +82,7 @@ public class Playlists extends AppCompatActivity {
         finish();
     }
     private void Song(String songName, String autorName) {
-        Intent i = new Intent(this, Song.class);
+        Intent i = new Intent(this, SongActivity.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
         this.startActivity(i);

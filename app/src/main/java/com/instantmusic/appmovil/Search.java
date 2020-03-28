@@ -1,28 +1,19 @@
 package com.instantmusic.appmovil;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener{
     private ListView resList;
@@ -48,18 +41,21 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private String user;
     private int currentPage = 1;
     private ArrayAdapter<String> adapter;
+    private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
+    private SongsAdapter adapterSong;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         server=new remoteServer();
         setContentView(R.layout.activity_instant_music_app_search);
-        resList = findViewById(R.id.searchRes);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
-        adapter = new ArrayAdapter<>(this, R.layout.search_row);
-        resList.setAdapter(adapter);
+        resList = findViewById(R.id.searchRes);
+        adapterSong = new SongsAdapter(this, arrayOfSongs);
+        resList.setAdapter(adapterSong);
+
         for(int i=0;i<resList.getCount();i++){
             SimpleCursorAdapter search=(SimpleCursorAdapter)resList.getAdapter();
             String categoria=search.getCursor().getString(3);
@@ -83,7 +79,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
                 search();
                 resList.setSelection(0);
                 registerForContextMenu(resList);
@@ -203,7 +198,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Song(String songName, String autorName) {
-        Intent i = new Intent(this, Song.class);
+        Intent i = new Intent(this, SongActivity.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
         this.startActivity(i);
@@ -218,10 +213,14 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void search() {
+        adapterSong.clear();
         shit = findViewById(R.id.searchbar2);
         switch (searchType) {
             case 1:
                 server.searchShit(shit.getText().toString(),this);
+                searchTip1.setVisibility(View.INVISIBLE);
+                searchTip2.setVisibility(View.INVISIBLE);
+                lupaGrande.setVisibility(View.INVISIBLE);
                 break;
             case 2:
                 //shitcursor=server.searchCategory(shit.getText().toString());
@@ -268,15 +267,11 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
-            final JSONArray results = data.getJSONArray("results");
-
-            for (int i = 0; i < results.length(); i++) {
-                JSONObject song = results.getJSONObject(i);
-                JSONObject album = song.getJSONObject("album");
-                JSONObject artist = album.getJSONObject("artist");
-                adapter.add(song.getString("title") + " in " + album.getString("name") + " from " + artist.getString("name"));
-            }
-        } catch (JSONException e) {
+            JSONArray results = data.getJSONArray("results");
+            ArrayList<Song> newSongs = Song.fromJson(results);
+            adapterSong.addAll(newSongs);
+        }
+        catch (JSONException e) {
             onErrorResponse(e);
         }
     }

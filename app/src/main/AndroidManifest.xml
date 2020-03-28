@@ -34,7 +34,7 @@
         <activity android:name=".Friends"></activity>
         <activity android:name=".Podcasts"></activity>
         <activity android:name=".Settings"></activity>
-        <activity android:name=".Song"></activity>
+        <activity android:name=".SongActivity"></activity>
         <activity android:name=".Playlists"></activity>
         <activity android:name=".remoteServer"></activity>
         <activity android:name=".addPlaylist"></activity>
