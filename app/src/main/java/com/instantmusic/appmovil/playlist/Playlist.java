@@ -11,7 +11,6 @@ public class Playlist {
     // Constructor to convert JSON object into a Java class instance
     public Playlist(JSONObject object){
         try {
-            JSONObject album = object.getJSONObject("album");
             this.playlistName = object.getString("title");
         }
         catch (JSONException e) {

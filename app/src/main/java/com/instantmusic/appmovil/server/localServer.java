@@ -3,7 +3,10 @@ package com.instantmusic.appmovil.server;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
+
+import java.util.ArrayList;
 
 public class localServer implements serverInterface {
     private static final int ACTIVITY_CREATE = 0;
@@ -19,6 +22,11 @@ public class localServer implements serverInterface {
 
     public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {
         //return localDb.createUser(mail, pass,user);
+    }
+
+    @Override
+    public void getUserData(JSONConnection.Listener listener) {
+
     }
 
     public int checkUser(String mail) {
@@ -65,8 +73,7 @@ public class localServer implements serverInterface {
     }
 
     @Override
-    public long addPlaylist(String playlist,String author) {
-        localDb.addPlaylist(playlist,author);
+    public long addPlaylist(String playlist, ArrayList<Playlist> playlists, JSONConnection.Listener listener) {
         return 0;
     }
 

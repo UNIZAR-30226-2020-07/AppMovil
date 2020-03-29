@@ -49,6 +49,8 @@
     <string name="songMenu1">Add to playlist</string>
     <string name="songMenu2">See artist</string>
     <string name="addPlaylist_">Add to playlist</string>
+    <string name="createPlaylist">Create new playlist</string>
+    <string name="insertName">Insert title</string>
 
 
 </resources>

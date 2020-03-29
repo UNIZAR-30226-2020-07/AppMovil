@@ -8,6 +8,7 @@
     tools:context=".main.MusicApp">
 
     <LinearLayout
+        android:id="@+id/linearLayout11"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -393,26 +394,96 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/createPlaylist"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/ic_menu_add" />
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/addPlaylist"
-                android:textColor="@color/backColor"
-                android:textSize="11sp" />
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panelPlaylist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#007E7A80"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_anchor="@+id/linearLayout11"
+        app:layout_anchorGravity="end|center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/createPlaylist"
+                android:textColor="@color/backColor"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="110dp"
+                android:background="#00F8EBF0"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/insertName"
+                    android:textColor="@color/backColor"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/insertTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@color/backColor"
+                    android:editable="true"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textColor="@android:color/black"
+                    android:textColorHighlight="@android:color/black"
+                    android:textColorHint="@android:color/black"
+                    android:textColorLink="@android:color/black"
+                    android:textSize="16dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <Button
+                    android:id="@+id/acceptPlaylist"
+                    style="@android:style/Widget.Button.Small"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center"
+                    android:background="@color/backColor"
+                    android:clickable="false"
+                    android:text="@string/CreateAccount4" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="100dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

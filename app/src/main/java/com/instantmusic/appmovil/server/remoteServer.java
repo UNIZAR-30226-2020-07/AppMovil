@@ -2,12 +2,14 @@ package com.instantmusic.appmovil.server;
 
 import android.database.Cursor;
 
+import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +49,7 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public static void getUserData(JSONConnection.Listener listener){
+    public void getUserData(JSONConnection.Listener listener){
         initialize()
                 .setUrl("rest-auth/user")
                 .setListener(listener)
@@ -92,9 +94,23 @@ public class remoteServer implements serverInterface {
     }
 
     @Override
-    public long addPlaylist(String playlist,String author) {
-
-        return 0;
+    public long addPlaylist(String playlist, ArrayList<Playlist> playlists,JSONConnection.Listener listener) {
+        try {
+            JSONObject playlistN = new JSONObject();
+            playlistN.put("title", playlist);
+            Playlist newPlaylist=new Playlist(playlistN);
+            playlists.add(newPlaylist);
+            initialize()
+                    .setUrl("/rest-auth/user")
+                    .putData("playlists", playlist)
+                    .setListener(listener)
+                    .execute();
+            return 0;
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return 1;
+        }
     }
 
     @Override

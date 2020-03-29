@@ -51,9 +51,6 @@ public class MusicApp extends AppCompatActivity {
         local.addSong("Fighting Gold","Kazusou Oda","Rock");
         local.addSong("Me Gusta","Shakira","Reggaeton");
         local.addSong("Pikete italiano","Kvndy Swing","Trap");
-        local.addPlaylist("Jojos","Admin");
-        local.addPlaylist("Jojos1","Admin");
-        local.addPlaylist("Jojos2","Admin");
         Button confirmButton = findViewById(R.id.register);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
