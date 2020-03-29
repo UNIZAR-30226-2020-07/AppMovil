@@ -19,7 +19,7 @@ import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.SongActivity;
 
-public class Playlists extends AppCompatActivity {
+public class PlaylistActivity extends AppCompatActivity {
     private ListView resList;
     private Button playB;
     private static final int SEARCH = Menu.FIRST;

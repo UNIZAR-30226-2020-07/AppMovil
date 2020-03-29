@@ -11,16 +11,23 @@ import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 
 import com.instantmusic.appmovil.adapter.HorizontalListView;
-import com.instantmusic.appmovil.playlist.Playlists;
+import com.instantmusic.appmovil.playlist.PlaylistActivity;
+import com.instantmusic.appmovil.playlist.*;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.UsersDbAdapter;
 import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.serverInterface;
+import com.instantmusic.appmovil.song.PlaylistAdapter;
+import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongsAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class Login extends AppCompatActivity {
-    private static final int SEARCH = Menu.FIRST;
+    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<Playlist>();
+    private PlaylistAdapter adapterPlaylist;
     private AutoCompleteTextView shit;
     private serverInterface server;
     private HorizontalListView myPlaylist;
@@ -31,14 +38,16 @@ public class Login extends AppCompatActivity {
         server = new localServer(this);
 //        registerForContextMenu(resList);
         myPlaylist = findViewById(R.id.myPlayLists);
+        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist);
         //name = aux.getString(3);
-        Cursor shitCursor = server.allPlaylists("Admin");
+       /* Cursor shitCursor = server.allPlaylists("Admin");
         startManagingCursor(shitCursor);
         String[] from = new String[]{UsersDbAdapter.KEY_NAMEP};
         int[] to = new int[]{R.id.text1};
         SimpleCursorAdapter search =
                 new SimpleCursorAdapter(this, R.layout.myplaylists_row, shitCursor, from, to);
         myPlaylist.setAdapter(search);
+        */
         Button Button2 = findViewById(R.id.menuButton2);
         Button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +84,13 @@ public class Login extends AppCompatActivity {
                 SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
                 String playList=search.getCursor().getString(1);
                 String creador=search.getCursor().getString(2);
-                System.out.println(playList);
                 openPlaylist(playList,creador);
             }
         });
     }
 
     private void openPlaylist(String playlist,String creador){
-        Intent i = new Intent(this, Playlists.class);
+        Intent i = new Intent(this, PlaylistActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("playlist",playlist);
         i.putExtra("creador",creador);

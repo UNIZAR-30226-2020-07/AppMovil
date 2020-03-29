@@ -83,10 +83,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 }
             }
         });
-        for(int i=0;i<resList.getCount();i++){
-            SimpleCursorAdapter search=(SimpleCursorAdapter)resList.getAdapter();
-            String categoria=search.getCursor().getString(3);
-        }
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
