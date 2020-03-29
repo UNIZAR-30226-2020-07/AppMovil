@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST + 1;
     private static final int LOGIN = Menu.FIRST + 2;
+    private boolean flag_loading=false;
     private EditText shit;
     private serverInterface server;
     private String user;
@@ -61,12 +63,29 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList = findViewById(R.id.searchRes);
         adapterSong = new SongsAdapter(this, arrayOfSongs);
         resList.setAdapter(adapterSong);
+        resList.setOnScrollListener(new AbsListView.OnScrollListener() {
 
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+
+            }
+
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+                if(firstVisibleItem+visibleItemCount == totalItemCount && totalItemCount!=0)
+                {
+                    if(flag_loading == false)
+                    {
+                        flag_loading = true;
+                        additems();
+                    }
+                }
+            }
+        });
         for(int i=0;i<resList.getCount();i++){
             SimpleCursorAdapter search=(SimpleCursorAdapter)resList.getAdapter();
             String categoria=search.getCursor().getString(3);
-            System.out.println(categoria);
-
         }
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -161,6 +180,11 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 return false;
             }
         });
+    }
+
+    private void additems() {
+        resList.notify();
+        flag_loading=false;
     }
 
     private void nameActivated() {
