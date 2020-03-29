@@ -24,10 +24,17 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.playlist.addPlaylist;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.serverInterface;
 
-public class SongActivity extends AppCompatActivity {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class SongActivity extends AppCompatActivity implements JSONConnection.Listener  {
     serverInterface server;
     TextView songName;
     TextView autorName;
@@ -43,6 +50,7 @@ public class SongActivity extends AppCompatActivity {
     private Button add;
     private Button see;
     private LinearLayout searchMenu;
+    private String stream;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -251,7 +259,7 @@ public class SongActivity extends AppCompatActivity {
                 }
 
                 play.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_pause));
-                AssetFileDescriptor descriptor = getAssets().openFd("pikete-italiano.mp3");
+                AssetFileDescriptor descriptor = getAssets().openFd(stream);
                 mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
                 descriptor.close();
                 mediaPlayer.prepare();
@@ -354,5 +362,21 @@ public class SongActivity extends AppCompatActivity {
         }
         timerLabel += sec;
         return timerLabel;
+    }
+
+    @Override
+    public void onValidResponse(int responseCode, JSONObject data) {
+        try {
+            JSONArray results = data.getJSONArray("results");
+            ArrayList<Song> newSongs = Song.fromJson(results);
+            stream=results.getJSONObject(0).getString("stream_url");
+        } catch (JSONException e) {
+            onErrorResponse(e);
+        }
+    }
+
+    @Override
+    public void onErrorResponse(Throwable throwable) {
+
     }
 }

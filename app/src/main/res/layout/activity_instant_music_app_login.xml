@@ -415,7 +415,7 @@
         android:layout_height="wrap_content"
         android:background="#007E7A80"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_anchor="@+id/linearLayout11"
         app:layout_anchorGravity="end|center">
 

@@ -1,7 +1,6 @@
 package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -15,19 +14,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
+import com.instantmusic.appmovil.server.remoteServer;
+import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
-import com.instantmusic.appmovil.server.remoteServer;
-import com.instantmusic.appmovil.server.serverInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +47,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private EditText shit;
     private serverInterface server;
     private String user;
-    private int currentPage = 1;
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
     private SongsAdapter adapterSong;
 
@@ -88,8 +85,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-               Song cancion =(Song) search.getItem(position);
-                String name=cancion.songName;
+                Song cancion = (Song) search.getItem(position);
+                String name = cancion.songName;
                 String artista = cancion.artist;
                 Song(name, artista);
             }

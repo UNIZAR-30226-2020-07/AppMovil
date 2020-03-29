@@ -55,7 +55,6 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
-
     public int checkUser(String mail) {
 
         return 0;
@@ -90,6 +89,16 @@ public class remoteServer implements serverInterface {
     }
 
     public long addSong(String name,String artist,String category) {
+        return 0;
+    }
+
+    @Override
+    public long getSong(String title, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("/song")
+                .putData("title", title)
+                .setListener(listener)
+                .execute();
         return 0;
     }
 

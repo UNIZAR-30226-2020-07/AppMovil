@@ -73,6 +73,11 @@ public class localServer implements serverInterface {
     }
 
     @Override
+    public long getSong(String title, JSONConnection.Listener listener) {
+        return 0;
+    }
+
+    @Override
     public long addPlaylist(String playlist, ArrayList<Playlist> playlists, JSONConnection.Listener listener) {
         return 0;
     }
