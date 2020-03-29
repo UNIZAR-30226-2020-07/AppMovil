@@ -1,6 +1,7 @@
 package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,20 +43,20 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private ImageView lupaGrande;
     private LinearLayout searchMenu;
     private int searchType = 1;
-    private static final int SEARCH = Menu.FIRST;
     private static final int RECOVER = Menu.FIRST + 1;
     private static final int LOGIN = Menu.FIRST + 2;
-    private boolean flag_loading=false;
+    private boolean flag_loading = false;
     private EditText shit;
     private serverInterface server;
     private String user;
     private int currentPage = 1;
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
     private SongsAdapter adapterSong;
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        server=new remoteServer();
+        server = new remoteServer();
         setContentView(R.layout.activity_instant_music_app_search);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);
@@ -73,12 +75,10 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
 
-                if(firstVisibleItem+visibleItemCount == totalItemCount && totalItemCount!=0)
-                {
-                    if(flag_loading == false)
-                    {
+                if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
+                    if (flag_loading == false) {
                         flag_loading = true;
-                        additems();
+                        //additems();
                     }
                 }
             }
@@ -87,10 +87,11 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
-                String nombre=search.getCursor().getString(1);
-                String artista=search.getCursor().getString(2);
-                Song(nombre, artista);
+                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
+               Song cancion =(Song) search.getItem(position);
+                String name=cancion.songName;
+                String artista = cancion.artist;
+                Song(name, artista);
             }
         });
 
@@ -180,7 +181,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     private void additems() {
         resList.notify();
-        flag_loading=false;
+        flag_loading = false;
     }
 
     private void nameActivated() {
@@ -248,7 +249,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         shit = findViewById(R.id.searchbar2);
         switch (searchType) {
             case 1:
-                server.searchShit(shit.getText().toString(),this);
+                server.searchShit(shit.getText().toString(), this);
                 searchTip1.setVisibility(View.INVISIBLE);
                 searchTip2.setVisibility(View.INVISIBLE);
                 lupaGrande.setVisibility(View.INVISIBLE);
@@ -271,8 +272,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             JSONArray results = data.getJSONArray("results");
             ArrayList<Song> newSongs = Song.fromJson(results);
             adapterSong.addAll(newSongs);
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             onErrorResponse(e);
         }
     }
