@@ -96,7 +96,7 @@ public class remoteServer implements serverInterface {
     public long getSong(String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("/song")
-                .putData("title", title)
+                .putParameter("search", title)
                 .setListener(listener)
                 .execute();
         return 0;
