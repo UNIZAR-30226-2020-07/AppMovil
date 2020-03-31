@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -33,8 +35,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class SongActivity extends AppCompatActivity implements JSONConnection.Listener  {
+public class SongActivity extends AppCompatActivity  {
     serverInterface server;
     TextView songName;
     TextView autorName;
@@ -49,8 +53,9 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
     private String song;
     private Button add;
     private Button see;
+    private String urlSong;
+    private int durationSong;
     private LinearLayout searchMenu;
-    private String stream;
     FloatingActionButton play;
     FloatingActionButton next;
     FloatingActionButton previous;
@@ -197,6 +202,9 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
             String autor = extras.getString(this.getPackageName() + ".String");
             autorName = findViewById(R.id.AutorName);
             autorName.setText(autor);
+            durationSong = extras.getInt(this.getPackageName() + ".duration");
+            durationSong = durationSong*1000;
+            urlSong = extras.getString(this.getPackageName() + ".url");
         }
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,11 +216,13 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
         seekBar = findViewById(R.id.seekBar);
         seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        seekBar.setMax(mediaPlayer.getDuration());
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 seekBarHint.setVisibility(View.VISIBLE);
+                handler.removeCallbacks(moveSeekBarThread);
             }
             @SuppressLint("SetTextI18n")
             @Override
@@ -233,17 +243,29 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                handler.removeCallbacks(moveSeekBarThread);
                 if (mediaPlayer != null && isPlaying) {
                     mediaPlayer.seekTo(seekBar.getProgress());
                 }
                 else if (mediaPlayer != null && isPaused) {
                     mediaPlayer.seekTo(seekBar.getProgress());
                 }
+                handler.postDelayed(moveSeekBarThread, 100);
             }
         });
 
 
     }
+
+    private int progressToTimer(int progress, int totalDuration) {
+        int currentDuration = 0;
+        totalDuration = (int) (totalDuration / 1000);
+        currentDuration = (int) ((((double)progress) / 100) * totalDuration);
+
+        // return current duration in milliseconds
+        return currentDuration * 1000;
+    }
+
     private void backScreen(){
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -259,10 +281,9 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
                 }
 
                 play.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_pause));
-                AssetFileDescriptor descriptor = getAssets().openFd(stream);
-                mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
-                descriptor.close();
-                mediaPlayer.prepare();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.setDataSource(urlSong);
+                mediaPlayer.prepareAsync();
                 mediaPlayer.setVolume(0.5f, 0.5f);
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
@@ -277,7 +298,7 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
                 });
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     public void onPrepared(MediaPlayer mp) {
-                        seekBar.setMax(mediaPlayer.getDuration());
+                        seekBar.setMax(durationSong);
                         handler.removeCallbacks(moveSeekBarThread);
                         handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                         mediaPlayer.start();
@@ -292,7 +313,6 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
             play.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_play));
             if ( mediaPlayer != null ) {
                 mediaPlayer.pause();
-                handler.removeCallbacks(moveSeekBarThread);
                 handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                 isPlaying = false;
                 isPaused = true;
@@ -302,7 +322,6 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
             play.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_pause));
             if (mediaPlayer != null) {
                 mediaPlayer.start();
-                handler.removeCallbacks(moveSeekBarThread);
                 handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                 isPlaying = true;
                 isPaused = false;
@@ -323,7 +342,7 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
             if (mediaPlayer != null ) {
                 if(mediaPlayer.isPlaying()){
                     int mediaPos_new = mediaPlayer.getCurrentPosition();
-                    int mediaMax_new = mediaPlayer.getDuration();
+                    int mediaMax_new = durationSong;
                     seekBar.setMax(mediaMax_new);
                     seekBar.setProgress(mediaPos_new);
                     handler.postDelayed(this, 100); //Looping the thread after 0.1 second
@@ -342,7 +361,6 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
         super.onDestroy();
         clearMediaPlayer();
     }
-
     private void clearMediaPlayer() {
         if ( mediaPlayer != null ) {
             mediaPlayer.stop();
@@ -362,21 +380,5 @@ public class SongActivity extends AppCompatActivity implements JSONConnection.Li
         }
         timerLabel += sec;
         return timerLabel;
-    }
-
-    @Override
-    public void onValidResponse(int responseCode, JSONObject data) {
-        try {
-            JSONArray results = data.getJSONArray("results");
-            ArrayList<Song> newSongs = Song.fromJson(results);
-            stream=results.getJSONObject(0).getString("stream_url");
-        } catch (JSONException e) {
-            onErrorResponse(e);
-        }
-    }
-
-    @Override
-    public void onErrorResponse(Throwable throwable) {
-
     }
 }
