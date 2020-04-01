@@ -19,7 +19,7 @@ public interface serverInterface  {
     int addSongToPlaylist(String playlist, String song);
     long addSong(String name,String artist,String categoria);
     long getSong(String title,JSONConnection.Listener listener);
-    long addPlaylist(String playlist, ArrayList<Playlist> playlists,JSONConnection.Listener listener);
+    void addPlaylist(String playlist, JSONConnection.Listener listener);
     Cursor searchPlaylist(String playlist);
     Cursor buscarCancion(String song);
     Cursor buscarArtista(String artist);

@@ -55,6 +55,16 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
+
+    @Override
+    public void addPlaylist(String playlist, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("playlist")
+                .putData("name", playlist)
+                .setListener(listener)
+                .execute();
+    }
+
     public int checkUser(String mail) {
 
         return 0;
@@ -100,26 +110,6 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
         return 0;
-    }
-
-    @Override
-    public long addPlaylist(String playlist, ArrayList<Playlist> playlists,JSONConnection.Listener listener) {
-        try {
-            JSONObject playlistN = new JSONObject();
-            playlistN.put("title", playlist);
-            Playlist newPlaylist=new Playlist(playlistN);
-            playlists.add(newPlaylist);
-            initialize()
-                    .setUrl("/rest-auth/user")
-                    .putData("playlists", playlist)
-                    .setListener(listener)
-                    .execute();
-            return 0;
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return 1;
-        }
     }
 
     @Override

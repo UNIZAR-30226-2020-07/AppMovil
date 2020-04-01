@@ -1,5 +1,7 @@
 package com.instantmusic.appmovil.playlist;
 
+import com.instantmusic.appmovil.song.Song;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,11 +9,16 @@ import java.util.ArrayList;
 
 public class Playlist {
     public String playlistName;
+    public ArrayList<Song> songs;
+    public String user;
 
     // Constructor to convert JSON object into a Java class instance
     public Playlist(JSONObject object){
         try {
-            this.playlistName = object.getString("title");
+            this.playlistName = object.getString("name");
+            JSONArray playlistSongs = object.getJSONArray("songs");
+            this.songs = Song.fromJson(playlistSongs);
+            this.user = object.getString("user");
         }
         catch (JSONException e) {
             e.printStackTrace();

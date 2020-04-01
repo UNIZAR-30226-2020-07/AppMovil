@@ -16,7 +16,7 @@ import com.instantmusic.appmovil.server.UsersDbAdapter;
 import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.serverInterface;
 
-public class addPlaylist extends AppCompatActivity {
+public class addSongToPlaylist extends AppCompatActivity {
     private serverInterface server;
     private String user;
     private String name;

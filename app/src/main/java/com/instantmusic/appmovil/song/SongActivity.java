@@ -5,12 +5,10 @@ package com.instantmusic.appmovil.song;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,18 +23,9 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.playlist.addPlaylist;
-import com.instantmusic.appmovil.server.connect.JSONConnection;
+import com.instantmusic.appmovil.playlist.addSongToPlaylist;
 import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.serverInterface;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SongActivity extends AppCompatActivity  {
     serverInterface server;
@@ -351,7 +340,7 @@ public class SongActivity extends AppCompatActivity  {
         }
     };
     private void addPlaylist(){
-        Intent i=new Intent(this, addPlaylist.class);
+        Intent i=new Intent(this, addSongToPlaylist.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("song",song);
         startActivityForResult(i, 1);

@@ -78,9 +78,7 @@ public class localServer implements serverInterface {
     }
 
     @Override
-    public long addPlaylist(String playlist, ArrayList<Playlist> playlists, JSONConnection.Listener listener) {
-        return 0;
-    }
+    public void addPlaylist(String playlist, JSONConnection.Listener listener) {}
 
     @Override
     public Cursor searchPlaylist(String playlist) {

@@ -36,9 +36,9 @@
         <activity android:name=".main.Podcasts"></activity>
         <activity android:name=".main.Settings"></activity>
         <activity android:name=".song.SongActivity"></activity>
-        <activity android:name=".playlist.Playlists"></activity>
+        <activity android:name=".playlist.PlaylistActivity"></activity>
         <activity android:name=".server.remoteServer"></activity>
-        <activity android:name=".playlist.addPlaylist"></activity>
+        <activity android:name=".playlist.addSongToPlaylist"></activity>
     </application>
 
 </manifest>

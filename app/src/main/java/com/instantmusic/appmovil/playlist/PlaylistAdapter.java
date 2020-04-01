@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil.song;
+package com.instantmusic.appmovil.playlist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
