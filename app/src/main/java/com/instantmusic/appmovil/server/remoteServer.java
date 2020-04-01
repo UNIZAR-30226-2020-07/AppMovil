@@ -1,13 +1,16 @@
 package com.instantmusic.appmovil.server;
 
+import android.content.Context;
 import android.database.Cursor;
 
-import com.instantmusic.appmovil.playlist.Playlist;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.net.URLEncoder;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class remoteServer implements serverInterface {
+
 
     public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {
         initialize()
@@ -44,15 +48,16 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
-    public void searchShit(String title, JSONConnection.Listener listener ) {
+
+    public void searchShit(String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("songs")
-                .putParameter("page","1")
+                .putParameter("page", "1")
                 .setListener(listener)
                 .execute();
     }
 
-    public void getUserData(JSONConnection.Listener listener){
+    public void getUserData(JSONConnection.Listener listener) {
         initialize()
                 .setUrl("rest-auth/user")
                 .setListener(listener)
@@ -65,7 +70,7 @@ public class remoteServer implements serverInterface {
         initialize()
                 .setUrl("playlists")
                 .putData("name", playlist)
-                .putData("songs",canciones)
+                .putData("songs", canciones)
                 .setListener(listener)
                 .execute();
     }
@@ -80,10 +85,11 @@ public class remoteServer implements serverInterface {
         return null;
     }
 
-    public int deleteUser(String email){
+    public int deleteUser(String email) {
         return 1;
     }
-    public int songInfo(String name,String artist,String categoria) {
+
+    public int songInfo(String name, String artist, String categoria) {
 
         return 0;
 
@@ -103,7 +109,7 @@ public class remoteServer implements serverInterface {
 
     }
 
-    public long addSong(String name,String artist,String category) {
+    public long addSong(String name, String artist, String category) {
         return 0;
     }
 
@@ -132,8 +138,18 @@ public class remoteServer implements serverInterface {
 
         return 0;
     }
-    public void close(){
+
+    public void close() {
     }
+
+    // ------------------- Base data -------------------
+
+    private final RequestQueue queue;
+
+    public remoteServer(Context cntx) {
+        this.queue = Volley.newRequestQueue(cntx);
+    }
+
 
     // ------------------- To save data -------------------
 
@@ -145,8 +161,8 @@ public class remoteServer implements serverInterface {
      *
      * @return a petition object
      */
-    private static Petition initialize() {
-        Petition petition = new Petition();
+    private Petition initialize() {
+        Petition petition = new Petition(queue);
         if (key != null)
             petition.putHeader("Authorization", "Token " + key);
         return petition;
@@ -158,6 +174,15 @@ public class remoteServer implements serverInterface {
      * A petition object
      */
     private static class Petition implements JSONConnection.Listener {
+
+        /**
+         * Initializes a petition
+         *
+         * @param queue base context for the petition
+         */
+        private Petition(RequestQueue queue) {
+            this.queue = queue;
+        }
 
         /**
          * Sets the url for the petition
@@ -215,58 +240,80 @@ public class remoteServer implements serverInterface {
         }
 
         /**
-         * Adds an element to send (in the body)
+         * Adds a string to send (in the body)
          *
          * @param key   key
          * @param value value
          * @return this to chain
          */
         public Petition putData(String key, String value) {
-            if (body == null)
-                body = new JSONObject();
-
-            try {
-                body.put(key, value);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return this;
+            return _putData(key, value);
         }
 
+        /**
+         * Adds an array of ints to send (in the body)
+         *
+         * @param key   key
+         * @param value value (array of ints)
+         * @return this to chain
+         */
         public Petition putData(String key, List<Integer> value) {
-            if (body == null)
-                body = new JSONObject();
-
-            try {
-                body.put(key, new JSONArray(value));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return this;
+            return _putData(key, new JSONArray(value));
         }
 
-            /**
-             * Sets the listener where to notify
-             *
-             * @param listener where to notify
-             * @return this to chain
-             */
+        /**
+         * Adds an int to send (in the body)
+         *
+         * @param key   key
+         * @param value value (array of ints)
+         * @return this to chain
+         */
+        public Petition putData(String key, int value) {
+            return _putData(key, value);
+        }
+
+        /**
+         * Adds a boolean to send (in the body)
+         *
+         * @param key   key
+         * @param value value (array of ints)
+         * @return this to chain
+         */
+        public Petition putData(String key, boolean value) {
+            return _putData(key, value);
+        }
+
+        /**
+         * Sets the listener where to notify
+         *
+         * @param listener where to notify
+         * @return this to chain
+         */
         public Petition setListener(JSONConnection.Listener listener) {
             this.listener = listener;
             return this;
         }
 
         /**
+         * Specify the method to use. If not called GET or POST will be used whether data was added or not
+         *
+         * @param method method to use
+         */
+        public void setMethod(JSONConnection.METHOD method) {
+            this.method = method;
+        }
+
+        /**
          * Runs the petition
          */
         public void execute() {
-            JSONConnection.makePetition(url, body, headers, this);
+            JSONConnection.makePetition(url, method, body, headers, this, queue);
         }
 
         // ------------------- private fields -------------------
 
+        private RequestQueue queue;
+        private JSONConnection.METHOD method = null;
         private String url = BASE_URL;
         private JSONObject body = null;
         private Map<String, String> headers = null;
@@ -276,6 +323,19 @@ public class remoteServer implements serverInterface {
          * Base url of the api
          */
         private static final String BASE_URL = "https://ps-20-server-django-app.herokuapp.com/api/v1/";
+
+        private Petition _putData(String key, Object obj) {
+            if (body == null)
+                body = new JSONObject();
+
+            try {
+                body.put(key, obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return this;
+        }
 
         // ------------------- listener -------------------
 
@@ -297,6 +357,7 @@ public class remoteServer implements serverInterface {
 
         @Override
         public void onErrorResponse(Throwable throwable) {
+            throwable.printStackTrace(); // print by default
             if (listener != null)
                 listener.onErrorResponse(throwable);
         }

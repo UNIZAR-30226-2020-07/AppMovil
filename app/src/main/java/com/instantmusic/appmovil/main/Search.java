@@ -53,7 +53,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        server = new remoteServer();
+        server = new remoteServer(this);
         setContentView(R.layout.activity_instant_music_app_search);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);

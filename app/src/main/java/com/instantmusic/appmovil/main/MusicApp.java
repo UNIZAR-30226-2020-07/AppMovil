@@ -40,7 +40,7 @@ public class MusicApp extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
-        server = new remoteServer();
+        server = new remoteServer(this);
         local=new localServer(this);
         mail = findViewById(R.id.email);
         email = mail.getText().toString();

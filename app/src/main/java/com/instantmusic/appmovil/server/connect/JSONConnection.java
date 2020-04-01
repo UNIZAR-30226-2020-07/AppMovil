@@ -1,37 +1,124 @@
 package com.instantmusic.appmovil.server.connect;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Header;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
  * My own custom Http wrapper for JSON connections, because the existing ones are ugly, big size, with a lot of extra things that nobody uses, and hard to make them work.
+ * Edit: arg, why HttpConnection doesn't allow patch...now I need to use the ugly Volley
  */
 public class JSONConnection {
+
+    /**
+     * Different methods for the http connection
+     */
+    public enum METHOD {
+        GET(Request.Method.GET),
+        POST(Request.Method.POST),
+        PUT(Request.Method.PUT),
+        PATCH(Request.Method.PATCH),
+        DELETE(Request.Method.DELETE),
+        ;
+
+        public final int v; // internal Volley value
+
+        METHOD(int v) {
+            this.v = v;
+        }
+    }
 
     /**
      * Makes a petition
      *
      * @param url      the url to connect to
+     * @param method   the method to use
      * @param body     if null, a GET will be made. If not, a POST will be made with that Json data
      * @param headers  extra headers
      * @param listener where to notify
+     * @param queue    queue to launch the petition
      */
-    public static void makePetition(String url, JSONObject body, Map<String, String> headers, Listener listener) {
-        new CallAPI(listener).execute(new Petition(url, body, headers));
+    public static void makePetition(String url, METHOD method, JSONObject body, final Map<String, String> headers, final Listener listener, RequestQueue queue) {
+        JsonObjectRequest request = new JsonObjectRequest(
+                method == null ? Request.Method.DEPRECATED_GET_OR_POST : method.v,
+                url,
+                body,
+                new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // shouldn't run, but just in case
+                        listener.onValidResponse(200, response);
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error.networkResponse != null) {
+                            // a response, call listener
+                            try {
+                                listener.onValidResponse(
+                                        error.networkResponse.statusCode,
+                                        new JSONObject(new String(error.networkResponse.data))
+                                );
+                            } catch (JSONException e) {
+                                // json error
+                                listener.onErrorResponse(e);
+                            }
+                        } else {
+                            // no respone, error listener
+                            listener.onErrorResponse(error);
+                        }
+                    }
+                }) {
+            @Override
+            protected com.android.volley.Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                // convert valid responses into invalid ones, so that we can access the statusCode
+                return com.android.volley.Response.error(new VolleyError(new NetworkResponse(
+                        response.statusCode,
+                        response.data,
+                        response.notModified,
+                        response.networkTimeMs,
+                        response.allHeaders
+                )));
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                // return the headers
+                return headers == null ? Collections.<String, String>emptyMap() : headers;
+            }
+        };
+
+        // start
+        queue.add(request);
     }
 
     // ------------------- public classes -------------------
 
     /**
-     * To notify responses of {@link #makePetition(String, JSONObject, Map, Listener)}
+     * To notify responses of {@link #makePetition(String, METHOD, JSONObject, Map, Listener, RequestQueue)}
      */
     public interface Listener {
         /**
@@ -48,151 +135,5 @@ public class JSONConnection {
          * @param throwable the raw error
          */
         void onErrorResponse(Throwable throwable);
-    }
-
-    // ------------------- private classes -------------------
-
-    /**
-     * Wrapper for all the petition data
-     */
-    static private class Petition {
-
-        private String url;
-        private JSONObject body;
-        private Map<String, String> headers;
-
-        private Petition(String url, JSONObject body, Map<String, String> headers) {
-            this.url = url;
-            this.body = body;
-            this.headers = headers;
-        }
-
-    }
-
-    /**
-     * Wrapper for all the response data
-     */
-    static private class Response {
-        private boolean error; // whether this is an ErrorResponse or not
-
-        // only for Valid Response
-        private int reponseCode;
-        private JSONObject data;
-
-        private Response(int reponseCode, JSONObject data) {
-            this.reponseCode = reponseCode;
-            this.data = data;
-            error = false;
-        }
-
-        // only for Error Response
-        private Throwable throwable;
-
-        private Response(Throwable throwable) {
-            this.throwable = throwable;
-            error = true;
-        }
-
-    }
-
-    // ------------------- internal -------------------
-
-    /**
-     * The Async task that makes the petition in the background
-     */
-    public static class CallAPI extends AsyncTask<Petition, Void, Response> {
-
-        private Listener listener;
-
-        private CallAPI(Listener listener) {
-            this.listener = listener;
-        }
-
-        @Override
-        protected Response doInBackground(Petition... petitions) {
-            Petition petition = petitions[0];
-            try {
-
-                // initialize connection
-                HttpURLConnection urlConnection = (HttpURLConnection) new URL(petition.url).openConnection();
-                urlConnection.setUseCaches(false);
-                urlConnection.setRequestProperty("Accept", "application/json");
-                urlConnection.setDoInput(true);
-
-
-                // headers
-                if (petition.headers != null) {
-                    for (Map.Entry<String, String> item : petition.headers.entrySet()) {
-                        urlConnection.setRequestProperty(item.getKey(), item.getValue());
-                    }
-                }
-
-                if (petition.body == null) {
-                    // get
-                    urlConnection.setRequestMethod("GET");
-                } else {
-                    // post
-                    urlConnection.setRequestMethod("POST");
-                    urlConnection.setRequestProperty("charset", "utf-8");
-                    urlConnection.setRequestProperty("Content-Type", "application/json");
-                    urlConnection.setDoOutput(true);
-
-                    //write POST data
-                    byte[] postDataBytes = petition.body.toString().getBytes("UTF-8");
-                    urlConnection.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-                    urlConnection.getOutputStream().write(postDataBytes);
-                }
-
-                // connect
-                urlConnection.connect();
-
-                // server response code
-                int responseCode = urlConnection.getResponseCode();
-
-                // server response body
-                String responseBody;
-                try {
-                    responseBody = readInputStream(urlConnection.getInputStream());
-                } catch (final IOException e) {
-                    // This means that an error occurred, read the error from the ErrorStream
-                    try {
-                        responseBody = readInputStream(urlConnection.getErrorStream());
-                    } catch (IOException e1) {
-                        // this means also an error ocurred...just ignore as if no reponse was send
-                        responseBody = "{}";
-                    }
-                }
-
-                urlConnection.disconnect(); // disconnect connection
-
-                // callback success
-                return new Response(responseCode, new JSONObject(responseBody));
-
-            } catch (Throwable e) {
-                return new Response(e);
-            }
-        }
-
-        // util
-        private String readInputStream(final InputStream inputStream) throws IOException {
-            final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            final StringBuilder responseString = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                responseString.append(line);
-            }
-            bufferedReader.close();
-            return responseString.toString();
-        }
-
-        @Override
-        protected void onPostExecute(Response response) {
-            if (response.error) {
-                listener.onErrorResponse(response.throwable);
-            } else {
-                listener.onValidResponse(response.reponseCode, response.data);
-            }
-        }
-
     }
 }
