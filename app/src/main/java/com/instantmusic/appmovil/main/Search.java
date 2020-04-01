@@ -277,6 +277,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     @Override
     public void onErrorResponse(Throwable throwable) {
-        Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
+        throwable.printStackTrace();
     }
 }
