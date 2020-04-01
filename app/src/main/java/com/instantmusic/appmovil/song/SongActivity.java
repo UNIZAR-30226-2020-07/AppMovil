@@ -272,7 +272,7 @@ public class SongActivity extends AppCompatActivity  {
                 play.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_pause));
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mediaPlayer.setDataSource(urlSong);
-                mediaPlayer.prepareAsync();
+                mediaPlayer.prepare();
                 mediaPlayer.setVolume(0.5f, 0.5f);
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override

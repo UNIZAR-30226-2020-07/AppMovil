@@ -5,12 +5,15 @@ import android.database.Cursor;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class remoteServer implements serverInterface {
@@ -58,9 +61,11 @@ public class remoteServer implements serverInterface {
 
     @Override
     public void addPlaylist(String playlist, JSONConnection.Listener listener) {
+        ArrayList<Integer> canciones = new ArrayList<Integer>();
         initialize()
-                .setUrl("playlist")
+                .setUrl("playlists")
                 .putData("name", playlist)
+                .putData("songs",canciones)
                 .setListener(listener)
                 .execute();
     }
@@ -105,7 +110,7 @@ public class remoteServer implements serverInterface {
     @Override
     public long getSong(String title, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("/song")
+                .setUrl("songs")
                 .putParameter("search", title)
                 .setListener(listener)
                 .execute();
@@ -229,12 +234,25 @@ public class remoteServer implements serverInterface {
             return this;
         }
 
-        /**
-         * Sets the listener where to notify
-         *
-         * @param listener where to notify
-         * @return this to chain
-         */
+        public Petition putData(String key, List<Integer> value) {
+            if (body == null)
+                body = new JSONObject();
+
+            try {
+                body.put(key, new JSONArray(value));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return this;
+        }
+
+            /**
+             * Sets the listener where to notify
+             *
+             * @param listener where to notify
+             * @return this to chain
+             */
         public Petition setListener(JSONConnection.Listener listener) {
             this.listener = listener;
             return this;

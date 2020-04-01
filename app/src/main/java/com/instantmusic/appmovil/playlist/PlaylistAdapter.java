@@ -30,7 +30,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         }
         // Lookup view for data population
         TextView playlistName = (TextView) convertView.findViewById(R.id.text1);
-
+        System.out.println(playlist.playlistName);
         // Populate the data into the template view using the data object
         playlistName.setText(playlist.playlistName);
         // Return the completed view to render on screen

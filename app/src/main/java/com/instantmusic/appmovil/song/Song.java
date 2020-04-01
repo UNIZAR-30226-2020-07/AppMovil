@@ -28,7 +28,6 @@ public class Song {
     }
 
     // Factory method to convert an array of JSON objects into a list of objects
-    // User.fromJson(jsonArray);
     public static ArrayList<Song> fromJson(JSONArray jsonObjects) {
         ArrayList<Song> songs = new ArrayList<Song>();
         for (int i = 0; i < jsonObjects.length(); i++) {

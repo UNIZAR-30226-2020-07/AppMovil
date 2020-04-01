@@ -1,6 +1,7 @@
 package com.instantmusic.appmovil.main;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.*;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
+import com.instantmusic.appmovil.server.connect.Utils;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
@@ -38,6 +40,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
         server = new remoteServer();
         myPlaylist = findViewById(R.id.myPlayLists);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist);
+        myPlaylist.setAdapter(adapterPlaylist);
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
@@ -123,8 +126,15 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
         server.addPlaylist(title, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
-                Playlist newPlaylist = new Playlist(data);
-                adapterPlaylist.add(newPlaylist);
+                if (responseCode == 201 ) {
+                    Playlist newPlaylist = new Playlist(data);
+                    adapterPlaylist.add(newPlaylist);
+                }
+                else {
+                    new AlertDialog.Builder(Login.this)
+                            .setMessage(Utils.listifyErrors(data))
+                            .show();
+                }
             }
 
             @Override

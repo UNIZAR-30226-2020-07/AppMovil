@@ -9,16 +9,15 @@ import java.util.ArrayList;
 
 public class Playlist {
     public String playlistName;
-    public ArrayList<Song> songs;
+    public ArrayList<Integer> songs;
     public String user;
-
+    public int id;
     // Constructor to convert JSON object into a Java class instance
     public Playlist(JSONObject object){
         try {
             this.playlistName = object.getString("name");
-            JSONArray playlistSongs = object.getJSONArray("songs");
-            this.songs = Song.fromJson(playlistSongs);
             this.user = object.getString("user");
+
         }
         catch (JSONException e) {
             e.printStackTrace();
