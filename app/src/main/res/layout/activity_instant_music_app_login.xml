@@ -541,7 +541,8 @@
                                 android:layout_gravity="center"
                                 android:background="@drawable/edit_round"
                                 android:clickable="false"
-                                android:text="@string/CreateAccount4" />
+                                android:text="@string/CreateAccount4"
+                                android:textColor="@color/backColor" />
                         </LinearLayout>
 
                     </LinearLayout>
