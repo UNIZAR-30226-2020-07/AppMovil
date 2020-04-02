@@ -404,14 +404,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="@color/backColor"
+            android:background="#00F8EBF0"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="visible">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edit_round2"
                 android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -419,6 +429,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:text="@string/song"
+                    android:textAlignment="viewStart"
                     android:textSize="20sp" />
 
                 <Button
@@ -429,10 +440,20 @@
 
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="3dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/edit_round2"
                 android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -440,19 +461,30 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:text="@string/category"
+                    android:textAlignment="textStart"
                     android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/switchCategory"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/vacio" />
+                    android:background="#00FFFFFF" />
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="3dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/edit_round2"
                 android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -460,19 +492,30 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:text="@string/artist"
+                    android:textAlignment="viewStart"
                     android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/switchArtist"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/vacio" />
+                    android:background="#00F8EBF0" />
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="3dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/edit_round2"
                 android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -480,13 +523,14 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:text="@string/album"
+                    android:textAlignment="viewStart"
                     android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/switchAlbum"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/vacio" />
+                    android:background="#00F8EBF0" />
             </LinearLayout>
 
         </LinearLayout>
