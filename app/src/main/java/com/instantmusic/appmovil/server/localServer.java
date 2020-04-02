@@ -28,6 +28,13 @@ public class localServer implements serverInterface {
     public void getUserData(JSONConnection.Listener listener) {
 
     }
+    public void getPlaylistData(int idPlaylist, JSONConnection.Listener listener) {
+
+    }
+
+    public void getSongData(int idSong, JSONConnection.Listener listener) {
+
+    }
 
     public int checkUser(String mail) {
         Cursor user = localDb.checkUser((mail));
@@ -102,9 +109,7 @@ public class localServer implements serverInterface {
     }
 
     @Override
-    public int addSongToPlaylist(String song, String playlist) {
-        localDb.addSongToPlaylist(playlist,song);
-        return 0;
+    public void addSongToPlaylist(String namePlaylist, int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
     }
     public void close(){
         localDb.close();

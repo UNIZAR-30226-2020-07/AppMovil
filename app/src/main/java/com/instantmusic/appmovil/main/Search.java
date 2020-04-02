@@ -90,7 +90,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 String artista = cancion.artist;
                 int duracion = cancion.duration;
                 String url = cancion.url;
-                Song(name, artista,duracion,url);
+                int idSong = cancion.id;
+                Song(name, artista, duracion, url, idSong);
             }
         });
 
@@ -228,12 +229,13 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     }
 
-    private void Song(String songName, String autorName, int durationSong, String stream_url) {
+    private void Song(String songName, String autorName, int durationSong, String stream_url, int idSong) {
         Intent i = new Intent(this, SongActivity.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
         i.putExtra(this.getPackageName() + ".duration", durationSong);
         i.putExtra(this.getPackageName() + ".url", stream_url);
+        i.putExtra(this.getPackageName() + ".id", idSong);
         this.startActivity(i);
     }
 

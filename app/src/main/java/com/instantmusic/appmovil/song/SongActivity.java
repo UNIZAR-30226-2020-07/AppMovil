@@ -43,6 +43,7 @@ public class SongActivity extends AppCompatActivity  {
     private Button add;
     private Button see;
     private String urlSong;
+    private int idSong;
     private int durationSong;
     private LinearLayout searchMenu;
     FloatingActionButton play;
@@ -51,7 +52,6 @@ public class SongActivity extends AppCompatActivity  {
     ImageView loop;
     ImageView shuffle;
     RatingBar ratingBar;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_song);
@@ -194,6 +194,7 @@ public class SongActivity extends AppCompatActivity  {
             durationSong = extras.getInt(this.getPackageName() + ".duration");
             durationSong = durationSong*1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
+            idSong = extras.getInt(this.getPackageName() + ".id");
         }
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,8 +243,6 @@ public class SongActivity extends AppCompatActivity  {
                 handler.postDelayed(moveSeekBarThread, 100);
             }
         });
-
-
     }
 
     private int progressToTimer(int progress, int totalDuration) {
@@ -343,6 +342,7 @@ public class SongActivity extends AppCompatActivity  {
         Intent i=new Intent(this, addSongToPlaylist.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("song",song);
+        i.putExtra("id",idSong);
         startActivityForResult(i, 1);
     }
     @Override

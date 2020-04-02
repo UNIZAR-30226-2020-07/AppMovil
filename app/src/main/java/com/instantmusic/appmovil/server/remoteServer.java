@@ -64,13 +64,44 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void getPlaylistData(int idPlaylist, JSONConnection.Listener listener) {
+        String url = "playlists/";
+        url = url + String.valueOf(idPlaylist);
+        initialize()
+                .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
+    public void getSongData(int idSong, JSONConnection.Listener listener) {
+        String url = "songs/";
+        url = url + String.valueOf(idSong);
+        initialize()
+                .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
     @Override
     public void addPlaylist(String playlist, JSONConnection.Listener listener) {
-        ArrayList<Integer> canciones = new ArrayList<Integer>();
+        ArrayList<Integer> canciones = new ArrayList<>();
         initialize()
                 .setUrl("playlists")
                 .putData("name", playlist)
                 .putData("songs", canciones)
+                .setListener(listener)
+                .execute();
+    }
+
+    @Override
+    public void addSongToPlaylist(String namePlaylist, int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
+        String url = "playlists/";
+        url = url + String.valueOf(idPlaylist);
+        initialize()
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.PUT)
+                .putData("name",namePlaylist)
+                .putData("songs",songs)
                 .setListener(listener)
                 .execute();
     }
@@ -129,13 +160,6 @@ public class remoteServer implements serverInterface {
     }
 
     public int recover(String mail) {
-        return 0;
-    }
-
-
-    @Override
-    public int addSongToPlaylist(String song, String playList) {
-
         return 0;
     }
 
@@ -299,8 +323,9 @@ public class remoteServer implements serverInterface {
          *
          * @param method method to use
          */
-        public void setMethod(JSONConnection.METHOD method) {
+        public Petition setMethod(JSONConnection.METHOD method) {
             this.method = method;
+            return this;
         }
 
         /**

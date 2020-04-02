@@ -1,44 +1,60 @@
 package com.instantmusic.appmovil.playlist;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.server.UsersDbAdapter;
-import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
+import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.ArrayList;
 
 public class addSongToPlaylist extends AppCompatActivity {
     private serverInterface server;
-    private String user;
-    private String name;
     private String song;
     private String playList;
     private ListView myPlaylist;
+    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<Playlist>();
+    private PlaylistAdapter adapterPlaylist;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_addplaylist);
-        server = new localServer(this);
-//        registerForContextMenu(resList);
+        server = new remoteServer(this);
         myPlaylist = findViewById(R.id.myPlayLists);
-        //name = aux.getString(3);
         Bundle extras = getIntent().getExtras();
         song= extras.getString("song");
-        Cursor shitCursor = server.allPlaylists("Admin");
-        startManagingCursor(shitCursor);
-        String[] from = new String[]{UsersDbAdapter.KEY_NAMEP};
-        int[] to = new int[]{R.id.text1};
-        SimpleCursorAdapter search =
-                new SimpleCursorAdapter(this, R.layout.myplaylists2_row, shitCursor, from, to);
-        myPlaylist.setAdapter(search);
+        final int idSong = extras.getInt("id");
+        myPlaylist = findViewById(R.id.myPlayLists);
+        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,1);
+        myPlaylist.setAdapter(adapterPlaylist);
+
+        server.getUserData(new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) {
+                try {
+                    if ( responseCode == 200 ) {
+                        JSONArray playlistsUser = data.getJSONArray("playlists");
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
+                        adapterPlaylist.addAll(newPlaylists);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+                setTitle("Unknown user");
+            }
+        });
         Button back=findViewById(R.id.backButton);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,11 +66,23 @@ public class addSongToPlaylist extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-               SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
-               playList=search.getCursor().getString(1);
-               server.addSongToPlaylist(song,playList);
-               backScreen();
+                ArrayAdapter<Playlist> playlists = (ArrayAdapter<Playlist>) parent.getAdapter();
+                Playlist playlistSelected = (Playlist) playlists.getItem(position);
+                ArrayList<Integer> songs = playlistSelected.songs;
+                songs.add(idSong);
+                playlistSelected.songs.add(idSong);
+                server.addSongToPlaylist(playlistSelected.playlistName, playlistSelected.id, songs, new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if ( responseCode == 200 ) {
+                            backScreen();
+                        }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                        setTitle("Unknown user");
+                    }
+                });
             }
         });
 

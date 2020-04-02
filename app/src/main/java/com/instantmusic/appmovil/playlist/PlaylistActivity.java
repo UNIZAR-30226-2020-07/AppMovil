@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -15,9 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.UsersDbAdapter;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
+import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
+import com.instantmusic.appmovil.song.SongsAdapter;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class PlaylistActivity extends AppCompatActivity {
     private ListView resList;
@@ -28,22 +37,46 @@ public class PlaylistActivity extends AppCompatActivity {
     private serverInterface server;
     private String playList;
     private String creador;
+    private ArrayList<Integer> songs;
+    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
+    private SongsAdapter adapterSong;
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_playlists);
         resList = findViewById(R.id.playlist);
-        server = new localServer(this);
+        server = new remoteServer(this);
         playB = findViewById(R.id.playButton);
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
         playList= extras.getString("playlist");
         creador= extras.getString("creador");
+        adapterSong = new SongsAdapter(this, arrayOfSongs);
+        resList.setAdapter(adapterSong);
+        songs = extras.getIntegerArrayList("canciones");
+        if ( songs != null ) {
+            for (int i = 0; i < songs.size(); i++) {
+                server.getSongData(songs.get(i), new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if ( responseCode == 200 ) {
+                            Song newSong = new Song(data);
+                            adapterSong.add(newSong);
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+
+                    }
+                });
+            }
+        }
         TextView name=findViewById(R.id.playlistName);
         TextView creator=findViewById(R.id.playlistCreator);
         name.setText(playList);
         creator.setText(creador);
-        search();
         Button Button1 = findViewById(R.id.backButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +84,6 @@ public class PlaylistActivity extends AppCompatActivity {
                 backScreen();
             }
         });
-        server = new localServer(this);
-//        registerForContextMenu(resList);
         playB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 resList.setSelection(0);
@@ -63,34 +94,31 @@ public class PlaylistActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SimpleCursorAdapter search=(SimpleCursorAdapter)parent.getAdapter();
-                String cancion=search.getCursor().getString(1);
-                String artista=search.getCursor().getString(2);
-               Song(cancion,artista);
+                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
+                Song cancion = (Song) search.getItem(position);
+                if ( cancion != null ) {
+                    String name = cancion.songName;
+                    String artista = cancion.artist;
+                    int duracion = cancion.duration;
+                    String url = cancion.url;
+                    Song(name, artista,duracion,url);
+                }
             }
         });
     }
 
-    private void search() {
-        Cursor shitCursor = server.searchPlaylist(playList);
-        startManagingCursor(shitCursor);
-        String[] from = new String[]{UsersDbAdapter.KEY_NAME,UsersDbAdapter.KEY_ARTIST,UsersDbAdapter.KEY_CATEGORY};
-        int[] to = new int[]{R.id.text1,R.id.text2,R.id.text3};
-        SimpleCursorAdapter search =
-                new SimpleCursorAdapter(this, R.layout.playlist_row, shitCursor, from, to);
-        resList.setAdapter(search);
-
-    }
     private void backScreen(){
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         setResult(RESULT_OK, i);
         finish();
     }
-    private void Song(String songName, String autorName) {
+    private void Song(String songName, String autorName, int durationSong, String stream_url) {
         Intent i = new Intent(this, SongActivity.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
+        i.putExtra(this.getPackageName() + ".duration", durationSong);
+        i.putExtra(this.getPackageName() + ".url", stream_url);
         this.startActivity(i);
     }
 

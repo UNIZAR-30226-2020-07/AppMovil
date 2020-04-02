@@ -54,6 +54,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_weight="0"
+            android:gravity="center"
             android:textAlignment="center"
             android:textColor="@color/backColor"
             android:textSize="16sp"

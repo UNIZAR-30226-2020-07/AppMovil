@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.SimpleCursorAdapter;
 import com.instantmusic.appmovil.adapter.HorizontalListView;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.*;
@@ -39,16 +39,18 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
         setContentView(R.layout.activity_instant_music_app_login);
         server = new remoteServer(this);
         myPlaylist = findViewById(R.id.myPlayLists);
-        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist);
+        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,0);
         myPlaylist.setAdapter(adapterPlaylist);
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 try {
-                    username = data.getString("username");
-                    JSONArray playlistsUser = data.getJSONArray("playlists");
-                    ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
-                    adapterPlaylist.addAll(newPlaylists);
+                    if ( responseCode == 200 ) {
+                        username = data.getString("username");
+                        JSONArray playlistsUser = data.getJSONArray("playlists");
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
+                        adapterPlaylist.addAll(newPlaylists);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -98,10 +100,11 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SimpleCursorAdapter search = (SimpleCursorAdapter) parent.getAdapter();
-                String playList = search.getCursor().getString(1);
-                String creador = search.getCursor().getString(2);
-                openPlaylist(playList, creador);
+                ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
+                Playlist playlist = (Playlist) search.getItem(position);
+                String playlistName = playlist.playlistName;
+                String creador = playlist.user;
+                openPlaylist(playlistName, creador,playlist.songs);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
@@ -130,11 +133,6 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
                     Playlist newPlaylist = new Playlist(data);
                     adapterPlaylist.add(newPlaylist);
                 }
-                else {
-                    new AlertDialog.Builder(Login.this)
-                            .setMessage(Utils.listifyErrors(data))
-                            .show();
-                }
             }
 
             @Override
@@ -150,11 +148,12 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
         findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist).setClickable(true);
     }
 
-    private void openPlaylist (String playlist, String creador){
+    private void openPlaylist (String playlist, String creador, ArrayList<Integer> songs){
         Intent i = new Intent(this, PlaylistActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("playlist", playlist);
         i.putExtra("creador", creador);
+        i.putExtra("canciones",songs);
         startActivityForResult(i, 1);
     }
     private void Search () {
