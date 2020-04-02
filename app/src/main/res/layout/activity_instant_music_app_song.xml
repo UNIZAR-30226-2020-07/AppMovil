@@ -38,8 +38,8 @@
 
             <Button
                 android:id="@+id/scrolldown"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="0"
                 android:background="@drawable/flecha"
                 android:scaleType="center" />
