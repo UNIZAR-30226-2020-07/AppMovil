@@ -73,7 +73,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="0"
-                android:background="@drawable/points" />
+                android:background="@drawable/points"
+                android:scaleType="centerInside" />
 
         </LinearLayout>
 
@@ -140,7 +141,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/SongName"
+                android:id="@+id/songname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -173,7 +174,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/AutorName"
+                android:id="@+id/autorname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -1,7 +1,6 @@
 package com.instantmusic.appmovil.main;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.*;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
-import com.instantmusic.appmovil.server.connect.Utils;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
@@ -26,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity implements JSONConnection.Listener {
-    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<Playlist>();
+    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
     private PlaylistAdapter adapterPlaylist;
     private serverInterface server;
     private HorizontalListView myPlaylist;
@@ -103,7 +101,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
                 ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
                 Playlist playlist = (Playlist) search.getItem(position);
                 String playlistName = playlist.playlistName;
-                String creador = playlist.user;
+                String creador = username;
                 openPlaylist(playlistName, creador,playlist.songs);
             }
         });

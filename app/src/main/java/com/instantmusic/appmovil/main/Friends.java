@@ -13,9 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.UsersDbAdapter;
 import com.instantmusic.appmovil.server.localServer;

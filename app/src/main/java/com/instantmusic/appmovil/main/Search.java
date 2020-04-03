@@ -15,10 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -26,11 +23,9 @@ import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
@@ -41,8 +36,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private ImageView lupaGrande;
     private LinearLayout searchMenu;
     private int searchType = 1;
-    private static final int RECOVER = Menu.FIRST + 1;
-    private static final int LOGIN = Menu.FIRST + 2;
     private boolean flag_loading = false;
     private EditText shit;
     private serverInterface server;
