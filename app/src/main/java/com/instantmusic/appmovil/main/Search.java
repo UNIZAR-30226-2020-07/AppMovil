@@ -150,6 +150,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
 
         s1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +167,19 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 searchMenu.setVisibility(View.INVISIBLE);
                 categoryActivated();
             }
+        });s3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+                artistActivated();
+
+            }
+        });s4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+                albumActivated();
+            }
         });
 
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -179,22 +194,53 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         });
     }
 
-    private void additems() {
-        resList.notify();
-        flag_loading = false;
-    }
-
     private void nameActivated() {
-        Intent i = new Intent(this, Login.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivityForResult(i, 1);
-
+        searchType=1;
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        s1.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
+        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
     }
 
     private void categoryActivated() {
-        Intent i = new Intent(this, Login.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivityForResult(i, 1);
+        searchType=2;
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        s2.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
+        s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+    }
+
+    private void artistActivated() {
+        searchType=3;
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        s3.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
+        s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+
+    }
+
+    private void albumActivated() {
+        searchType=4;
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        s4.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
+        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
     }
 
     private void Home() {
