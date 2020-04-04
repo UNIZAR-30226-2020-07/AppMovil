@@ -54,7 +54,7 @@ public class SongActivity extends AppCompatActivity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_song);
-        server=new remoteServer(this);
+        server=new remoteServer();
         loop = findViewById(R.id.loop);
         previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);

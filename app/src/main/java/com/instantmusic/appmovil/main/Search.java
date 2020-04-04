@@ -3,7 +3,6 @@ package com.instantmusic.appmovil.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
@@ -46,7 +45,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        server = new remoteServer(this);
+        server = new remoteServer();
         setContentView(R.layout.activity_instant_music_app_search);
         searchTip1 = findViewById(R.id.searchTip1);
         searchTip2 = findViewById(R.id.searchTip2);

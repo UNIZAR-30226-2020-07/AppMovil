@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
-        server = new remoteServer(this);
+        server = new remoteServer();
         myPlaylist = findViewById(R.id.myPlayLists);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,0);
         myPlaylist.setAdapter(adapterPlaylist);

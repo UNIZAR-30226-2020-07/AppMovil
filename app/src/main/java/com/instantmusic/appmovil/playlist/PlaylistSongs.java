@@ -20,7 +20,6 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
-import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
@@ -59,7 +58,7 @@ public class PlaylistSongs extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_song);
-        server=new remoteServer(this);
+        server=new remoteServer();
         loop = findViewById(R.id.loop);
         previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);

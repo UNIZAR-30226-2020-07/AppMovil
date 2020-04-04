@@ -1,29 +1,20 @@
 package com.instantmusic.appmovil.server.connect;
 
-import android.content.Context;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Header;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,18 +27,11 @@ public class JSONConnection {
      * Different methods for the http connection
      */
     public enum METHOD {
-        GET(Request.Method.GET),
-        POST(Request.Method.POST),
-        PUT(Request.Method.PUT),
-        PATCH(Request.Method.PATCH),
-        DELETE(Request.Method.DELETE),
-        ;
-
-        public final int v; // internal Volley value
-
-        METHOD(int v) {
-            this.v = v;
-        }
+        GET,
+        POST,
+        PUT,
+        PATCH,
+        DELETE,
     }
 
     /**
@@ -58,67 +42,81 @@ public class JSONConnection {
      * @param body     if null, a GET will be made. If not, a POST will be made with that Json data
      * @param headers  extra headers
      * @param listener where to notify
-     * @param queue    queue to launch the petition
      */
-    public static void makePetition(String url, METHOD method, JSONObject body, final Map<String, String> headers, final Listener listener, RequestQueue queue) {
-        JsonObjectRequest request = new JsonObjectRequest(
-                method == null ? Request.Method.DEPRECATED_GET_OR_POST : method.v,
-                url,
-                body,
-                new com.android.volley.Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // shouldn't run, but just in case
-                        listener.onValidResponse(200, response);
-                    }
-                },
-                new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error.networkResponse != null) {
-                            // a response, call listener
-                            try {
-                                listener.onValidResponse(
-                                        error.networkResponse.statusCode,
-                                        new JSONObject(new String(error.networkResponse.data))
-                                );
-                            } catch (JSONException e) {
-                                // json error
-                                listener.onErrorResponse(e);
-                            }
-                        } else {
-                            // no respone, error listener
-                            listener.onErrorResponse(error);
-                        }
-                    }
-                }) {
+    public static void makePetition(String url, METHOD method, JSONObject body, final Map<String, String> headers, final Listener listener) {
+
+        // build headers
+        Headers.Builder headers_okhttp = new Headers.Builder();
+        if (headers != null) {
+            for (Map.Entry<String, String> header : headers.entrySet()) {
+                headers_okhttp.add(header.getKey(), header.getValue());
+            }
+        }
+
+        // prepare body
+        RequestBody body_okhttp = body == null
+                ? null
+                : RequestBody.create(JSON, body.toString());
+
+        // prepare method
+        if (method == null) {
+            method = body_okhttp != null ? METHOD.POST : METHOD.GET;
+        }
+
+        // prepare request
+        Request request = new Request.Builder()
+                .url(url)
+                .method(method.name(), body_okhttp)
+                .headers(headers_okhttp.build())
+                .build();
+
+        // prepare callback
+        Callback callback = new Callback() {
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+
             @Override
-            protected com.android.volley.Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                // convert valid responses into invalid ones, so that we can access the statusCode
-                return com.android.volley.Response.error(new VolleyError(new NetworkResponse(
-                        response.statusCode,
-                        response.data,
-                        response.notModified,
-                        response.networkTimeMs,
-                        response.allHeaders
-                )));
+            public void onFailure(Request request, final IOException throwable) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // failure
+                        listener.onErrorResponse(throwable);
+                    }
+                });
             }
 
             @Override
-            public Map<String, String> getHeaders() {
-                // return the headers
-                return headers == null ? Collections.<String, String>emptyMap() : headers;
+            public void onResponse(final Response response) {
+                try {
+                    final int code = response.code();
+                    final JSONObject json = new JSONObject(new String(response.body().bytes()));
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            // valid
+                            listener.onValidResponse(code, json);
+                        }
+                    });
+                } catch (final Throwable e) {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            // error
+                            listener.onErrorResponse(e);
+                        }
+                    });
+                }
             }
         };
 
-        // start
-        queue.add(request);
+        // run
+        client.newCall(request).enqueue(callback);
     }
 
     // ------------------- public classes -------------------
 
     /**
-     * To notify responses of {@link #makePetition(String, METHOD, JSONObject, Map, Listener, RequestQueue)}
+     * To notify responses of {@link #makePetition(String, METHOD, JSONObject, Map, Listener)}
      */
     public interface Listener {
         /**
@@ -136,4 +134,9 @@ public class JSONConnection {
          */
         void onErrorResponse(Throwable throwable);
     }
+
+    // ------------------- Private data -------------------
+
+    private static OkHttpClient client = new OkHttpClient();
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 }

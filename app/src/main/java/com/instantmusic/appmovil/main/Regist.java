@@ -39,7 +39,7 @@ public class Regist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
-        server=new remoteServer(this);
+        server=new remoteServer();
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 confirmSignUp();
@@ -67,7 +67,7 @@ public class Regist extends AppCompatActivity {
     private void back2() {
         setContentView(R.layout.activity_instant_music_app_regist);
         Button confirmButton = findViewById(R.id.create);
-        server=new remoteServer(this);
+        server=new remoteServer();
         mail=findViewById(R.id.emailSign);
         mail.setText(email);
         mail.setTextColor(Color.WHITE);

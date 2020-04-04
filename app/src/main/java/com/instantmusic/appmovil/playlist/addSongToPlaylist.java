@@ -27,7 +27,7 @@ public class addSongToPlaylist extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_addplaylist);
-        server = new remoteServer(this);
+        server = new remoteServer();
         myPlaylist = findViewById(R.id.myPlayLists);
         Bundle extras = getIntent().getExtras();
         song= extras.getString("song");

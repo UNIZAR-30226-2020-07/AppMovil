@@ -1,10 +1,7 @@
 package com.instantmusic.appmovil.server;
 
-import android.content.Context;
 import android.database.Cursor;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 
 import org.json.JSONArray;
@@ -12,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,8 +95,8 @@ public class remoteServer implements serverInterface {
         url = url + String.valueOf(idPlaylist);
         initialize()
                 .setUrl(url)
-                .setMethod(JSONConnection.METHOD.PUT)
-                .putData("name",namePlaylist)
+                .setMethod(JSONConnection.METHOD.PATCH)
+//                .putData("name",namePlaylist)
                 .putData("songs",songs)
                 .setListener(listener)
                 .execute();
@@ -166,15 +162,6 @@ public class remoteServer implements serverInterface {
     public void close() {
     }
 
-    // ------------------- Base data -------------------
-
-    private final RequestQueue queue;
-
-    public remoteServer(Context cntx) {
-        this.queue = Volley.newRequestQueue(cntx);
-    }
-
-
     // ------------------- To save data -------------------
 
     // saved data
@@ -186,7 +173,7 @@ public class remoteServer implements serverInterface {
      * @return a petition object
      */
     private Petition initialize() {
-        Petition petition = new Petition(queue);
+        Petition petition = new Petition();
         if (key != null)
             petition.putHeader("Authorization", "Token " + key);
         return petition;
@@ -198,15 +185,6 @@ public class remoteServer implements serverInterface {
      * A petition object
      */
     private static class Petition implements JSONConnection.Listener {
-
-        /**
-         * Initializes a petition
-         *
-         * @param queue base context for the petition
-         */
-        private Petition(RequestQueue queue) {
-            this.queue = queue;
-        }
 
         /**
          * Sets the url for the petition
@@ -332,12 +310,11 @@ public class remoteServer implements serverInterface {
          * Runs the petition
          */
         public void execute() {
-            JSONConnection.makePetition(url, method, body, headers, this, queue);
+            JSONConnection.makePetition(url, method, body, headers, this);
         }
 
         // ------------------- private fields -------------------
 
-        private RequestQueue queue;
         private JSONConnection.METHOD method = null;
         private String url = BASE_URL;
         private JSONObject body = null;
