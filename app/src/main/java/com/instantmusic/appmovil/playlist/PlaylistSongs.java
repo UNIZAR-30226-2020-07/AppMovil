@@ -23,10 +23,13 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static java.lang.Thread.sleep;
 
 public class PlaylistSongs extends AppCompatActivity {
     serverInterface server;
@@ -201,6 +204,7 @@ public class PlaylistSongs extends AppCompatActivity {
             songs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
             positionId = extras.getInt(this.getPackageName() + ".positionId");
         }
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,15 +254,6 @@ public class PlaylistSongs extends AppCompatActivity {
         });
     }
 
-    private int progressToTimer(int progress, int totalDuration) {
-        int currentDuration = 0;
-        totalDuration = (int) (totalDuration / 1000);
-        currentDuration = (int) ((((double)progress) / 100) * totalDuration);
-
-        // return current duration in milliseconds
-        return currentDuration * 1000;
-    }
-
     private void backScreen(){
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -279,12 +274,13 @@ public class PlaylistSongs extends AppCompatActivity {
                 mediaPlayer.setDataSource(urlSong);
                 mediaPlayer.prepare();
                 mediaPlayer.setVolume(0.5f, 0.5f);
+
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         clearMediaPlayer();
-                        PlaylistSongs.this.seekBar.setProgress(0);
-                        if ( songs.size() > 1 ) {
+                        seekBar.setProgress(0);
+                        if ( songs.size() >= positionId ) {
                             positionId = positionId + 1;
                             server.getSongData(songs.get(positionId), new JSONConnection.Listener() {
                                 @Override
@@ -296,8 +292,18 @@ public class PlaylistSongs extends AppCompatActivity {
                                         autorName = findViewById(R.id.autorname);
                                         autorName.setText(newSong.artist);
                                         durationSong = newSong.duration;
-                                        urlSong = newSong.url;
-
+                                        durationSong = durationSong*1000;
+                                        urlSong = "";
+                                        urlSong = urlSong+newSong.url;
+                                        if ( isPlaying ) {
+                                            isPlaying = false;
+                                            isPaused = false;
+                                            playSong();
+                                        }
+                                        else {
+                                            isPlaying = false;
+                                            isPaused = false;
+                                        }
                                     }
                                 }
                                 @Override
@@ -305,11 +311,17 @@ public class PlaylistSongs extends AppCompatActivity {
                                 }
                             });
                         }
+                        else {
+                            isPlaying = false;
+                            isPaused = false;
+                            play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                        }
                     }
                 });
+
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     public void onPrepared(MediaPlayer mp) {
-                        seekBar.setMax(durationSong);
+                        seekBar.setProgress(0);
                         handler.removeCallbacks(moveSeekBarThread);
                         handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                         mediaPlayer.start();

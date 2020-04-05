@@ -39,7 +39,7 @@ public class PlaylistActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         playList= extras.getString("playlist");
         creador= extras.getString("creador");
-        adapterSong = new SongsAdapter(this, arrayOfSongs,1);
+        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         resList.setAdapter(adapterSong);
         songs = extras.getIntegerArrayList("canciones");
         if ( songs != null ) {
@@ -52,10 +52,8 @@ public class PlaylistActivity extends AppCompatActivity {
                             adapterSong.add(newSong);
                         }
                     }
-
                     @Override
                     public void onErrorResponse(Throwable throwable) {
-
                     }
                 });
             }
