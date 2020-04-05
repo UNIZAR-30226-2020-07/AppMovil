@@ -14,9 +14,10 @@ import com.instantmusic.appmovil.song.Song;
 import java.util.ArrayList;
 
 public class SongsAdapter extends ArrayAdapter<Song> {
-
-    public SongsAdapter(Context context, ArrayList<Song> songs) {
+    private int tipoLayout;
+    public SongsAdapter(Context context, ArrayList<Song> songs,int n_) {
         super(context, 0, songs);
+        this.tipoLayout=n_;
     }
 
     @Override
@@ -25,7 +26,12 @@ public class SongsAdapter extends ArrayAdapter<Song> {
         Song song = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row, parent, false);
+            if ( this.tipoLayout == 0 ) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row, parent, false);
+            }
+            else if ( this.tipoLayout == 1 ) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.playlist_row, parent, false);
+            }
         }
         // Lookup view for data population
         TextView songName = (TextView) convertView.findViewById(R.id.text1);

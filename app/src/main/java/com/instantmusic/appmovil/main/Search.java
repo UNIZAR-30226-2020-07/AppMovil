@@ -52,7 +52,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
         resList = findViewById(R.id.searchRes);
-        adapterSong = new SongsAdapter(this, arrayOfSongs);
+        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         resList.setAdapter(adapterSong);
         resList.setOnScrollListener(new AbsListView.OnScrollListener() {
 
