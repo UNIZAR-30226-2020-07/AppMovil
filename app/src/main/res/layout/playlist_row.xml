@@ -12,24 +12,6 @@
         android:layout_height="50dp"
         android:background="#00FFFFFF" />
 
-    <TextView
-        android:id="@+id/text4"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:layout_weight="1"
-        android:textColor="@color/backColor"
-        android:visibility="invisible"
-        tools:text="Categoria" />
-
-    <TextView
-        android:id="@+id/text5"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:layout_weight="1"
-        android:textColor="@color/backColor"
-        android:visibility="invisible"
-        tools:text="Categoria" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -15,11 +15,12 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="5dp" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Space
@@ -42,10 +43,20 @@
                 android:textColorLink="#00FFFFFF" />
 
             <Space
-                android:layout_width="322dp"
+                android:layout_width="315dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
                 android:layout_weight="0" />
+
+            <ImageButton
+                android:id="@+id/points2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:background="#00FFFFFF"
+                android:scaleType="center"
+                app:srcCompat="@drawable/points" />
 
         </LinearLayout>
     </LinearLayout>
@@ -114,17 +125,5 @@
             android:layout_height="470dp" />
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/points2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
-        android:layout_weight="0"
-        android:background="#00FFFFFF"
-        android:scaleType="center"
-        app:layout_anchor="@+id/linearLayout13"
-        app:layout_anchorGravity="end|center"
-        app:srcCompat="@drawable/points" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
