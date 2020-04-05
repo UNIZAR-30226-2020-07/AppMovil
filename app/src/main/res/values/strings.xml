@@ -27,9 +27,9 @@
     <string name="passwordR">Recover password</string>
     <string name="Advise">Your email and password combination does not match an InstantMusic account. Please try again</string>
     <string name="accept">Log in</string>
-    <string name="search">Buscar cancion</string>
-    <string name="searchTip1">Encuentra tu musica favorita</string>
-    <string name="searchTip2">Busca por artistas, canciones, playlists o álbumes</string>
+    <string name="search">Search song</string>
+    <string name="searchTip1">Find your favourite music</string>
+    <string name="searchTip2">Search by artist, songs, playlists or albums</string>
     <string name="home">Home</string>
     <string name="searchButton">Search</string>
     <string name="podcasts">Podcasts</string>

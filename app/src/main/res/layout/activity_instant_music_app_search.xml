@@ -392,9 +392,9 @@
 
             <Button
                 android:id="@+id/optionSearch"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center|end"
                 android:layout_weight="0"
                 android:background="@drawable/downarrow" />
         </LinearLayout>

@@ -142,7 +142,11 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
 
     private void openCreate () {
         LinearLayout panel = findViewById(R.id.panelPlaylist);
-        panel.setVisibility(View.VISIBLE);
+        if(panel.getVisibility()==View.VISIBLE){
+            panel.setVisibility(View.INVISIBLE);
+        }else {
+            panel.setVisibility(View.VISIBLE);
+        }
         findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist).setClickable(true);
     }
 
