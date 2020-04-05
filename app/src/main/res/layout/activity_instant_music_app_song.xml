@@ -96,12 +96,12 @@
                     android:layout_height="wrap_content"
                     android:background="#007E7A80"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="invisible">
 
                     <Button
                         android:id="@+id/addPlaylist"
                         android:layout_width="130dp"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/edit_round2"
                         android:text="@string/songMenu1"
                         android:textAlignment="center"
@@ -116,7 +116,7 @@
                     <Button
                         android:id="@+id/seeArtist"
                         android:layout_width="130dp"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/edit_round2"
                         android:text="@string/songMenu2"
                         android:textAlignment="center"
@@ -130,7 +130,7 @@
 
             <Space
                 android:layout_width="60dp"
-                android:layout_height="90dp"
+                android:layout_height="110dp"
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
 

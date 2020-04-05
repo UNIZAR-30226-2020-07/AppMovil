@@ -406,7 +406,7 @@
             android:layout_gravity="right"
             android:background="#00F8EBF0"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <Space
                 android:layout_width="match_parent"
@@ -425,12 +425,13 @@
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_round2"
                     android:text="@string/song"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textColor="@color/backColor"
+                    android:textSize="16sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -446,8 +447,8 @@
 
                     <Button
                         android:id="@+id/switchName"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="@drawable/tick512" />
                 </LinearLayout>
@@ -471,12 +472,13 @@
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_round2"
                     android:text="@string/category"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textColor="@color/backColor"
+                    android:textSize="16sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -492,8 +494,8 @@
 
                     <Button
                         android:id="@+id/switchCategory"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:background="#00FFFFFF" />
                 </LinearLayout>
 
@@ -516,12 +518,13 @@
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_round2"
                     android:text="@string/artist"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textColor="@color/backColor"
+                    android:textSize="16sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -537,8 +540,8 @@
 
                     <Button
                         android:id="@+id/switchArtist"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="#00F8EBF0" />
                 </LinearLayout>
@@ -564,12 +567,13 @@
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="120dp"
-                    android:layout_height="30dp"
+                    android:layout_height="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_round2"
                     android:text="@string/album"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textColor="@color/backColor"
+                    android:textSize="16sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -585,8 +589,8 @@
 
                     <Button
                         android:id="@+id/switchAlbum"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="@color/secondaryColor" />
                 </LinearLayout>
