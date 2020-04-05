@@ -196,6 +196,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+
     }
 
     private void categoryActivated() {
