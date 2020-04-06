@@ -1,11 +1,15 @@
 package com.instantmusic.appmovil.playlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +31,9 @@ public class PlaylistActivity extends AppCompatActivity {
     private ArrayList<Integer> songs;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
+    private LinearLayout searchMenu;
+    private LinearLayout changeMenu;
+    private Button delete;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -40,6 +47,8 @@ public class PlaylistActivity extends AppCompatActivity {
         playList= extras.getString("playlist");
         creador= extras.getString("creador");
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
+        searchMenu=findViewById(R.id.searchMenu);
+        changeMenu=findViewById(R.id.changeMenu);
         resList.setAdapter(adapterSong);
         songs = extras.getIntegerArrayList("canciones");
         if ( songs != null ) {
@@ -59,6 +68,8 @@ public class PlaylistActivity extends AppCompatActivity {
             }
         }
         TextView name=findViewById(R.id.playlistName);
+        EditText change=findViewById(R.id.change);
+        change.setText(playList);
         TextView creator=findViewById(R.id.playlistCreator);
         name.setText(playList);
         creator.setText(creador);
@@ -90,6 +101,70 @@ public class PlaylistActivity extends AppCompatActivity {
                 }
             }
         });
+
+        delete=findViewById(R.id.addPlaylist);
+        Button Button6 = findViewById(R.id.optionSong);
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                } else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        Button Button7 = findViewById(R.id.changeName);
+        Button Button8 =findViewById(R.id.changeName2);
+        Button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (changeMenu.getVisibility() == View.VISIBLE) {
+                    changeMenu.setVisibility(View.INVISIBLE);
+                    findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
+                } else {
+                    changeMenu.setVisibility(View.VISIBLE);
+                    findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
+                }
+                EditText change=findViewById(R.id.change);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(change, InputMethodManager.SHOW_IMPLICIT);
+                change.requestFocus();
+                change.setSelection(change.getText().length());
+            }
+        });
+        Button8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (changeMenu.getVisibility() == View.VISIBLE) {
+                    changeMenu.setVisibility(View.INVISIBLE);
+                    findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
+                } else {
+                    changeMenu.setVisibility(View.VISIBLE);
+                    findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
+                }
+                EditText change=findViewById(R.id.change);
+                playList=change.getText().toString();
+                TextView playlistname= findViewById(R.id.playlistName);
+                playlistname.setText(playList);
+                //////////////////////////////////////////////////////////////////////////AQUI SE AÑADE LA OPERACION PARA CAMBIAR EL NOMBRE A LA PLAYLIST EN EL BACKEND
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                } else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+                deletePlaylist();
+            }
+        });
+    }
+
+    private void deletePlaylist() {//Aqui puedes hacer la funciona de borrar la playlist en la que se encuentra el usuario
+
     }
 
     private void backScreen(){

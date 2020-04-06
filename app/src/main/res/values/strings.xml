@@ -36,6 +36,7 @@
     <string name="friends">Friends</string>
     <string name="settings">Settings</string>
     <string name="play">Play</string>
+    <string name="changename">Edit playlist name</string>
     <string name="category">Category</string>
     <string name="artist">Artist</string>
     <string name="song">Song</string>
@@ -52,6 +53,8 @@
     <string name="addPlaylist_">Add to playlist</string>
     <string name="createPlaylist">Create new playlist</string>
     <string name="insertName">Insert title</string>
+    <string name="playlistMenu1">Delete playlist</string>
+    <string name="confirm">CONFIRM</string>
 
 
 </resources>

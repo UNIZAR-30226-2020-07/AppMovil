@@ -8,67 +8,6 @@
     tools:context=".main.MusicApp">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_vertical"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backColor"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <EditText
-                android:id="@+id/searchbar2"
-                android:layout_width="325dp"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                android:background="@color/backColor"
-                android:hint="@string/search"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/search"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                android:background="@drawable/searchicon"
-                android:backgroundTint="#000000"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/searchRes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/secondaryColor"
-            android:visibility="visible">
-
-        </ListView>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="444dp"
-        android:layout_height="75dp"
-        android:background="#00FFFFFF"
-        app:layout_anchor="@+id/linearLayout6"
-        app:layout_anchorGravity="bottom|center" />
-
-    <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -318,6 +257,67 @@
                 android:textSize="14dp"
                 tools:text="Settings" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="444dp"
+        android:layout_height="75dp"
+        android:background="#00FFFFFF"
+        app:layout_anchor="@+id/linearLayout6"
+        app:layout_anchorGravity="bottom|center" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backColor"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/searchbar2"
+                android:layout_width="325dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:background="@color/backColor"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/search"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:background="@drawable/searchicon"
+                android:backgroundTint="#000000"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/searchRes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/secondaryColor"
+            android:visibility="visible">
+
+        </ListView>
 
     </LinearLayout>
 
