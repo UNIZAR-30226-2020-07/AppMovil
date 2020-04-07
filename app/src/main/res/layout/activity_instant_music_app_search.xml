@@ -8,6 +8,59 @@
     tools:context=".main.MusicApp">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backColor"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/searchbar2"
+                android:layout_width="325dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:background="@color/backColor"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/search"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:background="@drawable/searchicon"
+                android:backgroundTint="#000000"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/searchRes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/secondaryColor"
+            android:visibility="visible">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,8 +68,8 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/menuButton"
+        <Button
+            android:id="@+id/menuButton1"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -30,8 +83,8 @@
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
-        <ImageView
-            android:id="@+id/menuButton11"
+        <Button
+            android:id="@+id/menuButton2"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -45,8 +98,8 @@
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
-        <ImageView
-            android:id="@+id/menuButton12"
+        <Button
+            android:id="@+id/menuButton3"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -60,8 +113,8 @@
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
-        <ImageView
-            android:id="@+id/menuButton13"
+        <Button
+            android:id="@+id/menuButton4"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -75,8 +128,8 @@
             android:layout_weight="1"
             android:background="@color/secondaryColor" />
 
-        <ImageView
-            android:id="@+id/menuButton14"
+        <Button
+            android:id="@+id/menuButton5"
             style="@android:style/ButtonBar"
             android:layout_width="80sp"
             android:layout_height="70sp"
@@ -113,8 +166,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <Button
-                android:id="@+id/menuButton1"
+            <ImageView
+                android:id="@+id/menuButton12"
                 style="@android:style/ButtonBar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -126,8 +179,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0" />
 
-            <Button
-                android:id="@+id/menuButton2"
+            <ImageView
+                android:id="@+id/menuButton23"
                 style="@android:style/ButtonBar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -139,8 +192,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <Button
-                android:id="@+id/menuButton3"
+            <ImageView
+                android:id="@+id/menuButton334"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
@@ -151,8 +204,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <Button
-                android:id="@+id/menuButton4"
+            <ImageView
+                android:id="@+id/menuButton434"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
@@ -163,8 +216,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <Button
-                android:id="@+id/menuButton5"
+            <ImageView
+                android:id="@+id/menuButton52"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
@@ -257,67 +310,6 @@
                 android:textSize="14dp"
                 tools:text="Settings" />
         </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="444dp"
-        android:layout_height="75dp"
-        android:background="#00FFFFFF"
-        app:layout_anchor="@+id/linearLayout6"
-        app:layout_anchorGravity="bottom|center" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_vertical"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backColor"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <EditText
-                android:id="@+id/searchbar2"
-                android:layout_width="325dp"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                android:background="@color/backColor"
-                android:hint="@string/search"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/search"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                android:background="@drawable/searchicon"
-                android:backgroundTint="#000000"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/searchRes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/secondaryColor"
-            android:visibility="visible">
-
-        </ListView>
 
     </LinearLayout>
 
