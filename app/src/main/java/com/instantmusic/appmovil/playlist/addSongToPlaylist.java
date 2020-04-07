@@ -19,19 +19,18 @@ import java.util.ArrayList;
 
 public class addSongToPlaylist extends AppCompatActivity {
     private serverInterface server;
-    private String song;
-    private String playList;
-    private ListView myPlaylist;
-    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<Playlist>();
+    private int idSong;
+    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
     private PlaylistAdapter adapterPlaylist;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_addplaylist);
         server = new remoteServer();
-        myPlaylist = findViewById(R.id.myPlayLists);
+        ListView myPlaylist;
         Bundle extras = getIntent().getExtras();
-        song= extras.getString("song");
-        final int idSong = extras.getInt("id");
+        if ( extras != null ) {
+            idSong = extras.getInt("id");
+        }
         myPlaylist = findViewById(R.id.myPlayLists);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,1);
         myPlaylist.setAdapter(adapterPlaylist);
@@ -67,22 +66,24 @@ public class addSongToPlaylist extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Playlist> playlists = (ArrayAdapter<Playlist>) parent.getAdapter();
-                Playlist playlistSelected = (Playlist) playlists.getItem(position);
-                ArrayList<Integer> songs = playlistSelected.songs;
-                songs.add(idSong);
-                playlistSelected.songs.add(idSong);
-                server.addSongToPlaylist(playlistSelected.playlistName, playlistSelected.id, songs, new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) {
-                        if ( responseCode == 200 ) {
-                            backScreen();
+                Playlist playlistSelected = playlists.getItem(position);
+                if ( playlistSelected != null ) {
+                    ArrayList<Integer> songs = playlistSelected.songs;
+                    songs.add(idSong);
+                    playlistSelected.songs.add(idSong);
+                    server.addSongToPlaylist(playlistSelected.playlistName, playlistSelected.id, songs, new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if ( responseCode == 200 ) {
+                                backScreen();
+                            }
                         }
-                    }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) {
-                        setTitle("Unknown user");
-                    }
-                });
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+                            setTitle("Unknown user");
+                        }
+                    });
+                }
             }
         });
 

@@ -24,8 +24,6 @@ import java.util.ArrayList;
 
 public class PlaylistActivity extends AppCompatActivity {
     private ListView resList;
-    private Button playB;
-    private serverInterface server;
     private String playList;
     private String creador;
     private ArrayList<Integer> songs;
@@ -33,24 +31,25 @@ public class PlaylistActivity extends AppCompatActivity {
     private SongsAdapter adapterSong;
     private LinearLayout searchMenu;
     private LinearLayout changeMenu;
-    private Button delete;
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_playlists);
         resList = findViewById(R.id.playlist);
-        server = new remoteServer();
-        playB = findViewById(R.id.playButton);
+        serverInterface server = new remoteServer();
+        Button playB = findViewById(R.id.playButton);
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
-        playList= extras.getString("playlist");
-        creador= extras.getString("creador");
+        if ( extras != null ) {
+            playList= extras.getString("playlist");
+            creador= extras.getString("creador");
+            songs = extras.getIntegerArrayList("canciones");
+        }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
         changeMenu=findViewById(R.id.changeMenu);
         resList.setAdapter(adapterSong);
-        songs = extras.getIntegerArrayList("canciones");
         if ( songs != null ) {
             for (int i = 0; i < songs.size(); i++) {
                 server.getSongData(songs.get(i), new JSONConnection.Listener() {
@@ -102,7 +101,7 @@ public class PlaylistActivity extends AppCompatActivity {
             }
         });
 
-        delete=findViewById(R.id.addPlaylist);
+        Button delete = findViewById(R.id.addPlaylist);
         Button Button6 = findViewById(R.id.optionSong);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +127,9 @@ public class PlaylistActivity extends AppCompatActivity {
                 }
                 EditText change=findViewById(R.id.change);
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(change, InputMethodManager.SHOW_IMPLICIT);
+                if ( imm != null ) {
+                    imm.showSoftInput(change, InputMethodManager.SHOW_IMPLICIT);
+                }
                 change.requestFocus();
                 change.setSelection(change.getText().length());
             }

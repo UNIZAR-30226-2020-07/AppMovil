@@ -13,12 +13,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.UsersDbAdapter;
-import com.instantmusic.appmovil.server.localServer;
+import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 
 public class Settings extends AppCompatActivity {
@@ -42,7 +40,7 @@ public class Settings extends AppCompatActivity {
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         search=findViewById(R.id.searchbar2);
-        server = new localServer(this);
+        server = new remoteServer();
 //        registerForContextMenu(resList);
         shit = findViewById(R.id.searchbar2);
         Button confirmButton = findViewById(R.id.search);

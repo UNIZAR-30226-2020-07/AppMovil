@@ -23,13 +23,8 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
-import com.instantmusic.appmovil.song.SongActivity;
-
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import static java.lang.Thread.sleep;
 
 public class PlaylistSongs extends AppCompatActivity {
     serverInterface server;
@@ -44,8 +39,6 @@ public class PlaylistSongs extends AppCompatActivity {
     private boolean isLooped = false;
     private boolean isShuffled = false;
     private String song;
-    private Button add;
-    private Button see;
     private String urlSong;
     private int idSong;
     private int durationSong;
@@ -71,8 +64,8 @@ public class PlaylistSongs extends AppCompatActivity {
         ratingScale = findViewById(R.id.tvRatingScale);
         searchMenu = findViewById(R.id.searchMenu);
         Bundle extras = getIntent().getExtras();
-        see =findViewById(R.id.seeArtist);
-        add =findViewById(R.id.addPlaylist);
+        Button see = findViewById(R.id.seeArtist);
+        Button add = findViewById(R.id.addPlaylist);
         Button Button6 = findViewById(R.id.optionSong);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,7 +334,7 @@ public class PlaylistSongs extends AppCompatActivity {
                 isPaused = true;
             }
         }
-        else if (isPaused) {
+        else {
             play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_pause));
             if (mediaPlayer != null) {
                 mediaPlayer.start();

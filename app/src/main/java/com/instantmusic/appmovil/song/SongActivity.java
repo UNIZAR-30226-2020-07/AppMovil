@@ -39,8 +39,6 @@ public class SongActivity extends AppCompatActivity  {
     private boolean isLooped = false;
     private boolean isShuffled = false;
     private String song;
-    private Button add;
-    private Button see;
     private String urlSong;
     private int idSong;
     private int durationSong;
@@ -64,8 +62,8 @@ public class SongActivity extends AppCompatActivity  {
         ratingScale = findViewById(R.id.tvRatingScale);
         searchMenu = findViewById(R.id.searchMenu);
         Bundle extras = getIntent().getExtras();
-        see =findViewById(R.id.seeArtist);
-        add=findViewById(R.id.addPlaylist);
+        Button see = findViewById(R.id.seeArtist);
+        Button add = findViewById(R.id.addPlaylist);
         Button Button6 = findViewById(R.id.optionSong);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,15 +240,6 @@ public class SongActivity extends AppCompatActivity  {
                 handler.postDelayed(moveSeekBarThread, 100);
             }
         });
-    }
-
-    private int progressToTimer(int progress, int totalDuration) {
-        int currentDuration = 0;
-        totalDuration = (int) (totalDuration / 1000);
-        currentDuration = (int) ((((double)progress) / 100) * totalDuration);
-
-        // return current duration in milliseconds
-        return currentDuration * 1000;
     }
 
     private void backScreen(){

@@ -1,13 +1,9 @@
 package com.instantmusic.appmovil.server;
 
-import android.database.Cursor;
-
 import com.instantmusic.appmovil.server.connect.JSONConnection;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -62,7 +58,7 @@ public class remoteServer implements serverInterface {
 
     public void getPlaylistData(int idPlaylist, JSONConnection.Listener listener) {
         String url = "playlists/";
-        url = url + String.valueOf(idPlaylist);
+        url = url + idPlaylist;
         initialize()
                 .setUrl(url)
                 .setListener(listener)
@@ -71,7 +67,7 @@ public class remoteServer implements serverInterface {
 
     public void getSongData(int idSong, JSONConnection.Listener listener) {
         String url = "songs/";
-        url = url + String.valueOf(idSong);
+        url = url + idSong;
         initialize()
                 .setUrl(url)
                 .setListener(listener)
@@ -92,74 +88,25 @@ public class remoteServer implements serverInterface {
     @Override
     public void addSongToPlaylist(String namePlaylist, int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
         String url = "playlists/";
-        url = url + String.valueOf(idPlaylist);
+        url = url + idPlaylist;
         initialize()
                 .setUrl(url)
                 .setMethod(JSONConnection.METHOD.PATCH)
-//                .putData("name",namePlaylist)
                 .putData("songs",songs)
                 .setListener(listener)
                 .execute();
     }
 
-    public int checkUser(String mail) {
-
-        return 0;
-    }
-
     @Override
-    public Cursor infoUser(String email) {
-        return null;
-    }
-
-    public int deleteUser(String email) {
-        return 1;
-    }
-
-    public int songInfo(String name, String artist, String categoria) {
-
-        return 0;
-
-    }
-
-    public Cursor buscarCancion(String song) {
-        return null;
-    }
-
-    public Cursor buscarArtista(String artist) {
-        return null;
-    }
-
-    @Override
-    public Cursor allPlaylists(String user) {
-        return null;
-
-    }
-
-    public long addSong(String name, String artist, String category) {
-        return 0;
-    }
-
-    @Override
-    public long getSong(String title, JSONConnection.Listener listener) {
+    public void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener) {
+        String url = "playlists/";
+        url = url + idPlaylist;
         initialize()
-                .setUrl("songs")
-                .putParameter("search", title)
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.PATCH)
+                .putData("name",namePlaylist)
                 .setListener(listener)
                 .execute();
-        return 0;
-    }
-
-    @Override
-    public Cursor searchPlaylist(String playlist) {
-        return null;
-    }
-
-    public int recover(String mail) {
-        return 0;
-    }
-
-    public void close() {
     }
 
     // ------------------- To save data -------------------

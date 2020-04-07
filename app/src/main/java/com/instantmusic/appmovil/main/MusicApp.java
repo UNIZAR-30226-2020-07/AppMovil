@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.Utils;
-import com.instantmusic.appmovil.server.localServer;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 
@@ -41,28 +40,18 @@ public class MusicApp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app);
         server = new remoteServer();
-        local=new localServer(this);
         mail = findViewById(R.id.email);
         email = mail.getText().toString();
         mail.setTextColor(Color.WHITE);
-        local.addSong("Pegamos tela","Omar Montes","Reggaeton");
-        local.addSong("Despacito","Luis Fonsi","Reggaeton");
-        local.addSong("Purpurina","Alberto Gambino","Hip-Hop");
-        local.addSong("Fighting Gold","Kazusou Oda","Rock");
-        local.addSong("Me Gusta","Shakira","Reggaeton");
-        local.addSong("Pikete italiano","Kvndy Swing","Trap");
         Button confirmButton = findViewById(R.id.register);
+
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 registInScreen();
             }
         });
+
         Button confirmButton2 = findViewById(R.id.forget);
-        confirmButton2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                server.recover(mail.getText().toString());
-            }
-        });
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
