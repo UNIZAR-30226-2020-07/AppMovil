@@ -13,53 +13,49 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="147dp"
+            android:layout_height="153dp"
             android:layout_weight="0" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
             android:layout_weight="0"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/changeName2"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center|left"
-                android:layout_weight="1"
-                android:background="@color/secondaryColor"
-                android:text="@string/confirm"
-                android:textColor="@color/backColor"
-                android:textSize="10sp" />
-
             <Space
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
 
             <EditText
                 android:id="@+id/change"
                 style="@android:style/Widget.DeviceDefault.EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@color/secondaryColor"
                 android:linksClickable="true"
                 android:longClickable="true"
                 android:textAlignment="center"
                 android:textColor="@color/backColor"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                tools:text="Nombre de playlist" />
 
-            <Space
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+            <Button
+                android:id="@+id/changeName2"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="0"
+                android:background="@drawable/tick512_2_lapiz"
+                android:textColor="@color/backColor" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -148,7 +144,7 @@
         android:id="@+id/linearLayout14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <Space
@@ -164,12 +160,12 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="40dp"
+                android:layout_width="23dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:layout_weight="0" />
@@ -178,19 +174,25 @@
                 android:id="@+id/playlistName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_weight="0"
                 android:textAlignment="center"
                 android:textColor="@color/backColor"
                 android:textSize="25sp"
                 tools:text="Nombre de playlist" />
 
+            <Space
+                android:layout_width="7dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
             <Button
                 android:id="@+id/changeName"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:background="@android:drawable/ic_menu_edit" />
+                android:background="@drawable/lapiz" />
         </LinearLayout>
 
         <Space
