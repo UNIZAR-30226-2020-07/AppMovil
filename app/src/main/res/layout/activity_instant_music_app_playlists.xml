@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <Space
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="50dp"
+                android:layout_width="51dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:layout_weight="0" />
@@ -45,16 +45,30 @@
                 android:textAlignment="center"
                 android:textColor="@color/backColor"
                 android:textSize="25sp"
+                android:visibility="invisible"
                 tools:text="Nombre de playlist" />
 
             <Button
+                android:id="@+id/changeName"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/lapiz" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
                 android:id="@+id/changeName2"
-                android:layout_width="55dp"
+                android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical|end"
                 android:layout_weight="0"
-                android:background="@drawable/tick512_2_lapiz"
-                android:textColor="@color/backColor" />
+                android:background="@drawable/tick512_2"
+                android:textColor="@color/backColor"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
@@ -164,12 +178,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <Space
-                android:layout_width="23dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:layout_weight="0" />
-
             <TextView
                 android:id="@+id/playlistName"
                 android:layout_width="wrap_content"
@@ -181,18 +189,6 @@
                 android:textSize="25sp"
                 tools:text="Nombre de playlist" />
 
-            <Space
-                android:layout_width="7dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/changeName"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:background="@drawable/lapiz" />
         </LinearLayout>
 
         <Space

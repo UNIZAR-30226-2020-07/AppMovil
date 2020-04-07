@@ -31,7 +31,8 @@ public class PlaylistActivity extends AppCompatActivity {
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
     private LinearLayout searchMenu;
-    private LinearLayout changeMenu;
+    private Button changeMenu2;
+    private EditText changeMenu;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -50,7 +51,8 @@ public class PlaylistActivity extends AppCompatActivity {
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
-        changeMenu=findViewById(R.id.changeMenu);
+        changeMenu2=findViewById(R.id.changeName2);
+        changeMenu=findViewById(R.id.change);
         resList.setAdapter(adapterSong);
         if ( songs != null ) {
             for (int i = 0; i < songs.size(); i++) {
@@ -69,8 +71,7 @@ public class PlaylistActivity extends AppCompatActivity {
             }
         }
         TextView name=findViewById(R.id.playlistName);
-        EditText change=findViewById(R.id.change);
-        change.setText(playList);
+        changeMenu.setText(playList);
         TextView creator=findViewById(R.id.playlistCreator);
         name.setText(playList);
         creator.setText(creador);
@@ -122,9 +123,11 @@ public class PlaylistActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (changeMenu.getVisibility() == View.VISIBLE) {
                     changeMenu.setVisibility(View.INVISIBLE);
+                    changeMenu2.setVisibility(View.INVISIBLE);
                     findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
                 } else {
                     changeMenu.setVisibility(View.VISIBLE);
+                    changeMenu2.setVisibility(View.VISIBLE);
                     findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
                 }
                 EditText change=findViewById(R.id.change);
@@ -141,10 +144,12 @@ public class PlaylistActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (changeMenu.getVisibility() == View.VISIBLE) {
                     changeMenu.setVisibility(View.INVISIBLE);
+                    changeMenu2.setVisibility(View.INVISIBLE);
                     findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
                 }
                 else {
                     changeMenu.setVisibility(View.VISIBLE);
+                    changeMenu2.setVisibility(View.VISIBLE);
                     findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
                 }
                 EditText change=findViewById(R.id.change);
