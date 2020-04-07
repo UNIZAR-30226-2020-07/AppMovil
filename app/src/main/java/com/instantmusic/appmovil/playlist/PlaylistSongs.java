@@ -77,8 +77,8 @@ public class PlaylistSongs extends AppCompatActivity {
                 }
             }
         });
-        Button Button1 = findViewById(R.id.scrolldown);
-        Button1.setOnClickListener(new View.OnClickListener() {
+        Button scroll = findViewById(R.id.scrolldown);
+        scroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 backScreen();
@@ -147,6 +147,50 @@ public class PlaylistSongs extends AppCompatActivity {
                 isPaused = false;
                 isPlaying = false;
                 PlaylistSongs.this.seekBar.setProgress(0);
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearMediaPlayer();
+                PlaylistSongs.this.seekBar.setProgress(0);
+                if ( songs.size() > positionId + 1 ) {
+                    positionId = positionId + 1;
+                    server.getSongData(songs.get(positionId), new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if ( responseCode == 200 ) {
+                                Song newSong = new Song(data);
+                                songName = findViewById(R.id.songname);
+                                songName.setText(newSong.songName);
+                                autorName = findViewById(R.id.autorname);
+                                autorName.setText(newSong.artist);
+                                durationSong = newSong.duration;
+                                durationSong = durationSong*1000;
+                                urlSong = "";
+                                urlSong = urlSong+newSong.url;
+                                if ( isPlaying ) {
+                                    isPlaying = false;
+                                    isPaused = false;
+                                    playSong();
+                                }
+                                else {
+                                    isPlaying = false;
+                                    isPaused = false;
+                                }
+                            }
+                        }
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+                        }
+                    });
+                }
+                else {
+                    play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                    isPlaying = false;
+                    isPaused = false;
+                }
             }
         });
 
@@ -273,7 +317,7 @@ public class PlaylistSongs extends AppCompatActivity {
                     public void onCompletion(MediaPlayer mp) {
                         clearMediaPlayer();
                         seekBar.setProgress(0);
-                        if ( songs.size() > positionId ) {
+                        if ( songs.size() > positionId + 1 ) {
                             positionId = positionId + 1;
                             server.getSongData(songs.get(positionId), new JSONConnection.Listener() {
                                 @Override
