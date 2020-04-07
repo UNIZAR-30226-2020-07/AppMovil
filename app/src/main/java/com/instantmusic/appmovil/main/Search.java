@@ -239,7 +239,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private void Home() {
         Intent i = new Intent(this, Login.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
         startActivityForResult(i, 1);
 
     }
@@ -247,7 +246,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private void Podcasts() {
         Intent i = new Intent(this, Podcasts.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
         startActivityForResult(i, 1);
 
     }
@@ -255,7 +253,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private void Friends() {
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
         startActivityForResult(i, 1);
 
     }
@@ -263,7 +260,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private void Settings() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
         startActivityForResult(i, 1);
 
     }

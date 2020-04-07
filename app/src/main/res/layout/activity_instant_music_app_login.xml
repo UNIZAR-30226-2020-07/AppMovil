@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mysong"
                 android:textColor="@color/backColor"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Space
                 android:layout_width="5dp"
@@ -85,7 +85,7 @@
             android:layout_gravity="clip_horizontal|center|top"
             android:text="@string/homeTitle"
             android:textColor="@color/backColor"
-            android:textSize="26sp" />
+            android:textSize="26dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mypodcast"
                 android:textColor="@color/backColor"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Space
                 android:layout_width="5dp"
@@ -403,13 +403,13 @@
                 tools:text="Friends" />
 
             <Space
-                android:layout_width="30dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0" />
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="62dp"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/settings"
@@ -447,7 +447,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/myplaylist"
                 android:textColor="@color/backColor"
-                android:textSize="20sp" />
+                android:textSize="20dp" />
 
             <Space
                 android:layout_width="5dp"
@@ -465,7 +465,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -513,7 +513,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/insertName"
                             android:textColor="@color/backColor"
-                            android:textSize="18sp" />
+                            android:textSize="18dp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

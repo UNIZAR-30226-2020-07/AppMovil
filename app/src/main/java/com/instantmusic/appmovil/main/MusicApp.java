@@ -8,15 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.Utils;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-
 import org.json.JSONObject;
 
 /**
@@ -30,7 +27,6 @@ public class MusicApp extends AppCompatActivity {
     private TextView  passTip;
     public String email;
     public serverInterface server;
-    public serverInterface local;
 
     /**
      * Called when the activity is first created.

@@ -26,6 +26,7 @@ public class PlaylistActivity extends AppCompatActivity {
     private ListView resList;
     private String playList;
     private String creador;
+    private int idPlaylist;
     private ArrayList<Integer> songs;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
@@ -37,7 +38,7 @@ public class PlaylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_playlists);
         resList = findViewById(R.id.playlist);
-        serverInterface server = new remoteServer();
+        final serverInterface server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
@@ -45,6 +46,7 @@ public class PlaylistActivity extends AppCompatActivity {
             playList= extras.getString("playlist");
             creador= extras.getString("creador");
             songs = extras.getIntegerArrayList("canciones");
+            idPlaylist = extras.getInt("idPlaylist");
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
@@ -90,7 +92,7 @@ public class PlaylistActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                Song cancion = (Song) search.getItem(position);
+                Song cancion = search.getItem(position);
                 if ( cancion != null ) {
                     String name = cancion.songName;
                     String artista = cancion.artist;
@@ -140,15 +142,24 @@ public class PlaylistActivity extends AppCompatActivity {
                 if (changeMenu.getVisibility() == View.VISIBLE) {
                     changeMenu.setVisibility(View.INVISIBLE);
                     findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
-                } else {
+                }
+                else {
                     changeMenu.setVisibility(View.VISIBLE);
                     findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
                 }
                 EditText change=findViewById(R.id.change);
                 playList=change.getText().toString();
                 TextView playlistname= findViewById(R.id.playlistName);
-                playlistname.setText(playList);
-                //////////////////////////////////////////////////////////////////////////AQUI SE AÑADE LA OPERACION PARA CAMBIAR EL NOMBRE A LA PLAYLIST EN EL BACKEND
+                playlistname.setText(change.getText().toString());
+
+                server.changeNamePlaylist(change.getText().toString(), idPlaylist, new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
@@ -156,16 +167,22 @@ public class PlaylistActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (searchMenu.getVisibility() == View.VISIBLE) {
                     searchMenu.setVisibility(View.INVISIBLE);
-                } else {
+                }
+                else {
                     searchMenu.setVisibility(View.VISIBLE);
                 }
-                deletePlaylist();
+
+                server.deletePlaylist(idPlaylist, new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        backScreen();
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
             }
         });
-    }
-
-    private void deletePlaylist() {//Aqui puedes hacer la funciona de borrar la playlist en la que se encuentra el usuario
-
     }
 
     private void backScreen(){

@@ -273,7 +273,7 @@ public class PlaylistSongs extends AppCompatActivity {
                     public void onCompletion(MediaPlayer mp) {
                         clearMediaPlayer();
                         seekBar.setProgress(0);
-                        if ( songs.size() >= positionId ) {
+                        if ( songs.size() > positionId ) {
                             positionId = positionId + 1;
                             server.getSongData(songs.get(positionId), new JSONConnection.Listener() {
                                 @Override

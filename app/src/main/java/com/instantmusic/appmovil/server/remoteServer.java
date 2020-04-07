@@ -13,7 +13,13 @@ import java.util.Map;
 
 public class remoteServer implements serverInterface {
 
-
+    /**
+     * Makes a petition to regist the user
+     * @param username username
+     * @param password1      Password 1
+     * @param password2      Password 2
+     * @param listener       where to notify
+     */
     public void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("rest-auth/registration")
@@ -49,6 +55,10 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    /**
+     * Makes a petition to get the object User of the user logged
+     * @param listener       where to notify
+     */
     public void getUserData(JSONConnection.Listener listener) {
         initialize()
                 .setUrl("rest-auth/user")
@@ -105,6 +115,17 @@ public class remoteServer implements serverInterface {
                 .setUrl(url)
                 .setMethod(JSONConnection.METHOD.PATCH)
                 .putData("name",namePlaylist)
+                .setListener(listener)
+                .execute();
+    }
+
+    @Override
+    public void deletePlaylist(int idPlaylist, JSONConnection.Listener listener) {
+        String url = "playlists/";
+        url = url + idPlaylist;
+        initialize()
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.DELETE)
                 .setListener(listener)
                 .execute();
     }
