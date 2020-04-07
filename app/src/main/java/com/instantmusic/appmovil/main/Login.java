@@ -100,9 +100,8 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
                 Playlist playlist = (Playlist) search.getItem(position);
-                String playlistName = playlist.playlistName;
                 String creador = username;
-                openPlaylist(playlistName, creador,playlist.songs);
+                openPlaylist(playlist.playlistName, creador,playlist.songs, playlist.id);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
@@ -111,9 +110,36 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
             public void onClick(View view) {
                 try {
                     createPlaylist();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();  // Always call the superclass method first
+        adapterPlaylist.clear();
+        server.getUserData(new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) {
+                try {
+                    if ( responseCode == 200 ) {
+                        username = data.getString("username");
+                        JSONArray playlistsUser = data.getJSONArray("playlists");
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
+                        adapterPlaylist.addAll(newPlaylists);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+                setTitle("Unknown user");
             }
         });
     }
@@ -150,12 +176,13 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
         findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist).setClickable(true);
     }
 
-    private void openPlaylist (String playlist, String creador, ArrayList<Integer> songs){
+    private void openPlaylist (String playlist, String creador, ArrayList<Integer> songs, int idPlaylist){
         Intent i = new Intent(this, PlaylistActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("playlist", playlist);
         i.putExtra("creador", creador);
         i.putExtra("canciones",songs);
+        i.putExtra("idPlaylist",idPlaylist);
         startActivityForResult(i, 1);
     }
     private void Search () {

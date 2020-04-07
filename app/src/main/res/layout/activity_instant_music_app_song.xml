@@ -101,7 +101,7 @@
                     <Button
                         android:id="@+id/addPlaylist"
                         android:layout_width="130dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:background="@drawable/edit_round2"
                         android:text="@string/songMenu1"
                         android:textAlignment="center"
@@ -111,12 +111,12 @@
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="5dp" />
+                        android:layout_height="3dp" />
 
                     <Button
                         android:id="@+id/seeArtist"
                         android:layout_width="130dp"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:background="@drawable/edit_round2"
                         android:text="@string/songMenu2"
                         android:textAlignment="center"

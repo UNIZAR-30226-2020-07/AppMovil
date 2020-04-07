@@ -38,7 +38,7 @@
                 style="@android:style/Widget.DeviceDefault.EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:linksClickable="true"
                 android:longClickable="true"
@@ -71,18 +71,18 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="70dp" />
+            android:layout_height="50dp" />
 
         <Button
             android:id="@+id/addPlaylist"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
+            android:layout_width="130dp"
+            android:layout_height="25dp"
             android:background="@drawable/edit_round2"
             android:text="@string/playlistMenu1"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/backColor"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

@@ -295,7 +295,7 @@
                 tools:text="Friends" />
 
             <Space
-                android:layout_width="30dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0" />
 
@@ -422,8 +422,9 @@
                     android:background="@drawable/edit_round2"
                     android:text="@string/song"
                     android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/backColor"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -469,8 +470,9 @@
                     android:background="@drawable/edit_round2"
                     android:text="@string/category"
                     android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/backColor"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -515,8 +517,9 @@
                     android:background="@drawable/edit_round2"
                     android:text="@string/artist"
                     android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/backColor"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <Space
                     android:layout_width="1dp"
@@ -564,8 +567,9 @@
                     android:background="@drawable/edit_round2"
                     android:text="@string/album"
                     android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/backColor"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <Space
                     android:layout_width="1dp"
