@@ -89,12 +89,18 @@ public class JSONConnection {
             public void onResponse(final Response response) {
                 try {
                     final int code = response.code();
-                    final JSONObject json = new JSONObject(new String(response.body().bytes()));
+                    JSONObject json;
+                    try {
+                        json = new JSONObject(new String(response.body().bytes()));
+                    }catch (JSONException e){
+                        json = new JSONObject();
+                    }
+                    final JSONObject json_final = json;
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             // valid
-                            listener.onValidResponse(code, json);
+                            listener.onValidResponse(code, json_final);
                         }
                     });
                 } catch (final Throwable e) {
