@@ -322,7 +322,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="0"
                 android:background="#F8EBF0"
-                android:hint="@string/search"
+                android:hint="@string/search1"
                 android:imeOptions="actionSearch"
                 android:inputType="text" />
 

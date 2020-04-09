@@ -196,6 +196,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        EditText barra=findViewById(R.id.searchbar2);
+        barra.setHint(getResources().getString(R.string.search1));
 
     }
 
@@ -209,6 +211,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        EditText barra=findViewById(R.id.searchbar2);
+        barra.setHint(getResources().getString(R.string.search3));
     }
 
     private void artistActivated() {
@@ -221,6 +225,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        EditText barra=findViewById(R.id.searchbar2);
+        barra.setHint(getResources().getString(R.string.search2));
 
     }
 
@@ -234,6 +240,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        EditText barra=findViewById(R.id.searchbar2);
+        barra.setHint(getResources().getString(R.string.search4));
     }
 
     private void Home() {
