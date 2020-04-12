@@ -21,10 +21,10 @@
     <string name="AutorName">Nombre del autor</string>
     <string name="fondo">FondoApp</string>
     <string name="icono">InstantMusicIcono</string>
-    <string name="register">Register</string>
+    <string name="register"><u>Register</u></string>
     <string name="emailAlreadyInUse">That email is already registered</string>
     <string name="emailNotRegistered">That email is not registered</string>
-    <string name="passwordR">Recover password</string>
+    <string name="passwordR"><u>Recover password</u></string>
     <string name="Advise">Your email and password combination does not match an InstantMusic account. Please try again</string>
     <string name="accept">Log in</string>
     <string name="search1">Search song</string>

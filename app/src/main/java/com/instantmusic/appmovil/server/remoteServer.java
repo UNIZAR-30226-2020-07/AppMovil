@@ -50,7 +50,7 @@ public class remoteServer implements serverInterface {
     public void searchShit(String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("songs")
-                .putParameter("page", "1")
+                .putParameter("search", title)
                 .setListener(listener)
                 .execute();
     }

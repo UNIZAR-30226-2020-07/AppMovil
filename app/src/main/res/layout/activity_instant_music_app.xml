@@ -17,16 +17,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="11dp" />
-
-        <TextView
-            android:id="@+id/accion"
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:text="@string/Accion2"
-            android:textColor="@color/color2"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="50dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -42,6 +33,10 @@
                 app:srcCompat="@drawable/logo_empresa2" />
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +96,7 @@
 
                 <Space
                     android:layout_width="17dp"
-                    android:layout_height="20dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1" />
 
                 <TextView
@@ -132,10 +127,6 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="11dp" />
 
             <EditText
                 android:id="@+id/password"
@@ -178,8 +169,8 @@
 
             <Button
                 android:id="@+id/accept"
-                android:layout_width="335dp"
-                android:layout_height="wrap_content"
+                android:layout_width="195dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:background="@drawable/edit_round"
                 android:text="@string/accept"
@@ -199,27 +190,27 @@
                 <Button
                     android:id="@+id/register"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="53dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="#003F51B5"
                     android:hint="@string/register"
                     android:importantForAutofill="no"
-                    android:inputType="none"
                     android:text="@string/register"
+                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/color2"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <Space
-                    android:layout_width="208dp"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/forget"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="112dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#00FFFFFF"
                     android:backgroundTint="@color/color3"
@@ -227,10 +218,16 @@
                     android:hint="@string/passwordR"
                     android:importantForAutofill="no"
                     android:text="@string/passwordR"
+                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/color2"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
             </LinearLayout>
         </LinearLayout>

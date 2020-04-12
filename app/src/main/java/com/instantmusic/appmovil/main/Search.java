@@ -306,6 +306,9 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             case 3:
                 //shitcursor=server.searchArtist(shit.getText().toString());
                 break;
+            case 4:
+
+                break;
         }
     }
 
