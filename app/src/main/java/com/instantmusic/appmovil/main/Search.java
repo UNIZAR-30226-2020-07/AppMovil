@@ -14,9 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -24,11 +22,9 @@ import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
@@ -42,7 +38,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private boolean flag_loading = false;
     private EditText shit;
     private serverInterface server;
-    private String user;
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
     private SongsAdapter adapterSong;
     private int cruz = 0;
@@ -95,7 +90,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         });
 
         search = findViewById(R.id.searchbar2);
-//        registerForContextMenu(resList);
         shit = findViewById(R.id.searchbar2);
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -323,10 +317,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList.setVisibility(View.VISIBLE);
         switch (searchType) {
             case 1:
-                server.searchShit(shit.getText().toString(), this);
-                searchTip1.setVisibility(View.INVISIBLE);
-                searchTip2.setVisibility(View.INVISIBLE);
-                lupaGrande.setVisibility(View.INVISIBLE);
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchSongs(shit.getText().toString(), this);
+                    searchTip1.setVisibility(View.INVISIBLE);
+                    searchTip2.setVisibility(View.INVISIBLE);
+                    lupaGrande.setVisibility(View.INVISIBLE);
+                }
                 break;
             case 2:
                 //shitcursor=server.searchCategory(shit.getText().toString());
