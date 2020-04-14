@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -22,9 +24,11 @@ import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
@@ -41,6 +45,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private String user;
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
     private SongsAdapter adapterSong;
+    private int cruz = 0;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -51,8 +56,10 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
+        resList=findViewById(R.id.searchRes);
+        resList.setVisibility(View.INVISIBLE);
         resList = findViewById(R.id.searchRes);
-        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
+        adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
         resList.setAdapter(adapterSong);
         resList.setOnScrollListener(new AbsListView.OnScrollListener() {
 
@@ -131,12 +138,23 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (searchMenu.getVisibility() == View.VISIBLE) {
-                    searchMenu.setVisibility(View.INVISIBLE);
-                } else {
-                    searchMenu.setVisibility(View.VISIBLE);
-                }
+                if (cruz == 0) {
+                    if (searchMenu.getVisibility() == View.VISIBLE) {
+                        searchMenu.setVisibility(View.INVISIBLE);
+                    } else {
+                        searchMenu.setVisibility(View.VISIBLE);
+                    }
 
+                } else {
+                    ListView search=findViewById(R.id.searchRes);
+                    search.setVisibility(View.INVISIBLE);
+                    searchTip1.setVisibility(View.VISIBLE);
+                    searchTip2.setVisibility(View.VISIBLE);
+                    lupaGrande.setVisibility(View.VISIBLE);
+                    Button cruzButton=findViewById(R.id.optionSearch);
+                    cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
+                    cruz=0;
+                }
             }
         });
 
@@ -159,14 +177,16 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 searchMenu.setVisibility(View.INVISIBLE);
                 categoryActivated();
             }
-        });s3.setOnClickListener(new View.OnClickListener() {
+        });
+        s3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
                 artistActivated();
 
             }
-        });s4.setOnClickListener(new View.OnClickListener() {
+        });
+        s4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchMenu.setVisibility(View.INVISIBLE);
@@ -187,7 +207,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void nameActivated() {
-        searchType=1;
+        searchType = 1;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
@@ -196,13 +216,13 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        EditText barra=findViewById(R.id.searchbar2);
+        EditText barra = findViewById(R.id.searchbar2);
         barra.setHint(getResources().getString(R.string.search1));
 
     }
 
     private void categoryActivated() {
-        searchType=2;
+        searchType = 2;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
@@ -211,12 +231,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        EditText barra=findViewById(R.id.searchbar2);
+        EditText barra = findViewById(R.id.searchbar2);
         barra.setHint(getResources().getString(R.string.search3));
     }
 
     private void artistActivated() {
-        searchType=3;
+        searchType = 3;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
@@ -225,13 +245,13 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        EditText barra=findViewById(R.id.searchbar2);
+        EditText barra = findViewById(R.id.searchbar2);
         barra.setHint(getResources().getString(R.string.search2));
 
     }
 
     private void albumActivated() {
-        searchType=4;
+        searchType = 4;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
@@ -240,7 +260,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        EditText barra=findViewById(R.id.searchbar2);
+        EditText barra = findViewById(R.id.searchbar2);
         barra.setHint(getResources().getString(R.string.search4));
     }
 
@@ -284,15 +304,23 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent();
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        setResult(RESULT_OK, i);
-        finish();
+        ListView search = findViewById(R.id.searchRes);
+        search.setVisibility(View.INVISIBLE);
+        searchTip1.setVisibility(View.VISIBLE);
+        searchTip2.setVisibility(View.VISIBLE);
+        lupaGrande.setVisibility(View.VISIBLE);
+        Button cruzButton=findViewById(R.id.optionSearch);
+        cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
+        cruz=0;
     }
 
     private void search() {
         adapterSong.clear();
         shit = findViewById(R.id.searchbar2);
+        cruz=1;
+        Button cruzButton=findViewById(R.id.optionSearch);
+        cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
+        resList.setVisibility(View.VISIBLE);
         switch (searchType) {
             case 1:
                 server.searchShit(shit.getText().toString(), this);
