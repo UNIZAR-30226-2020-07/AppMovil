@@ -58,6 +58,10 @@
     <string name="insertName">Insert title</string>
     <string name="playlistMenu1">Delete playlist</string>
     <string name="confirm">CONFIRM</string>
+    <string name="orderPlaylist">Order by: </string>
+    <string name="orderPlaylist1">Name</string>
+    <string name="orderPlaylist2">Category</string>
+    <string name="orderPlaylist3">Artist</string>
 
 
 </resources>

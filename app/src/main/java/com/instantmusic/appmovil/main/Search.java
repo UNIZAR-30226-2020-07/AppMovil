@@ -51,9 +51,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         searchTip2 = findViewById(R.id.searchTip2);
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
-        resList=findViewById(R.id.searchRes);
-        resList.setVisibility(View.INVISIBLE);
         resList = findViewById(R.id.searchRes);
+        resList.setVisibility(View.INVISIBLE);
         adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
         resList.setAdapter(adapterSong);
         resList.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -140,14 +139,14 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                     }
 
                 } else {
-                    ListView search=findViewById(R.id.searchRes);
+                    ListView search = findViewById(R.id.searchRes);
                     search.setVisibility(View.INVISIBLE);
                     searchTip1.setVisibility(View.VISIBLE);
                     searchTip2.setVisibility(View.VISIBLE);
                     lupaGrande.setVisibility(View.VISIBLE);
-                    Button cruzButton=findViewById(R.id.optionSearch);
+                    Button cruzButton = findViewById(R.id.optionSearch);
                     cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
-                    cruz=0;
+                    cruz = 0;
                 }
             }
         });
@@ -303,16 +302,16 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         searchTip1.setVisibility(View.VISIBLE);
         searchTip2.setVisibility(View.VISIBLE);
         lupaGrande.setVisibility(View.VISIBLE);
-        Button cruzButton=findViewById(R.id.optionSearch);
+        Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
-        cruz=0;
+        cruz = 0;
     }
 
     private void search() {
         adapterSong.clear();
         shit = findViewById(R.id.searchbar2);
-        cruz=1;
-        Button cruzButton=findViewById(R.id.optionSearch);
+        cruz = 1;
+        Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
         resList.setVisibility(View.VISIBLE);
         switch (searchType) {
