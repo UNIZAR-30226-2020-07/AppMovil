@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.JsonObject;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -21,6 +23,8 @@ import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongsAdapter;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Objects;
 
 public class PlaylistActivity extends AppCompatActivity {
     private ListView resList;
@@ -66,6 +70,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 if ( responseCode == 200 ) {
                     Playlist playlistSelected = new Playlist(data,false);
                     adapterSong.addAll(playlistSelected.songs);
+                    sortBy("titulo");
                 }
             }
             @Override
@@ -86,8 +91,15 @@ public class PlaylistActivity extends AppCompatActivity {
         });
         playB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                resList.setSelection(0);
-                registerForContextMenu(resList);
+                if ( !resList.getAdapter().isEmpty() ) {
+                    ArrayAdapter<Song> search = (ArrayAdapter<Song>) resList.getAdapter();
+                    Song cancion = search.getItem(0);
+                    String name = cancion.songName;
+                    String artista = cancion.artist;
+                    int duracion = cancion.duration;
+                    String url = cancion.url;
+                    Song(name, artista,duracion,url,0,true);
+                }
             }
         });
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,7 +113,7 @@ public class PlaylistActivity extends AppCompatActivity {
                     String artista = cancion.artist;
                     int duracion = cancion.duration;
                     String url = cancion.url;
-                    Song(name, artista,duracion,url,position);
+                    Song(name, artista,duracion,url,position,false);
                 }
             }
         });
@@ -196,8 +208,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
                 orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-
-                ////////////////////////////////////////FUNCION SORT DE LA PLAYLIST AQUI MARCOS//////////////////////////////////////////////////
+                sortBy("titulo");
             }
         });orderCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,8 +216,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-
-                ////////////////////////////////////////FUNCION SORT DE LA PLAYLIST AQUI MARCOS//////////////////////////////////////////////////
+                sortBy("categoria");
             }
         });orderArtist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,10 +224,38 @@ public class PlaylistActivity extends AppCompatActivity {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
-
-                ////////////////////////////////////////FUNCION SORT DE LA PLAYLIST AQUI MARCOS//////////////////////////////////////////////////
+                sortBy("artista");
             }
         });
+    }
+
+    private void sortBy(String comp) {
+        switch (comp) {
+            case "artista":
+                adapterSong.sort(new Comparator<Song>() {
+                    @Override
+                    public int compare(Song o1, Song o2) {
+                        return o1.artist.compareTo(o2.artist);
+                    }
+                });
+            break;
+            case "titulo":
+                adapterSong.sort(new Comparator<Song>() {
+                    @Override
+                    public int compare(Song o1, Song o2) {
+                        return o1.songName.compareTo(o2.songName);
+                    }
+                });
+            break;
+            case "categoria":
+                adapterSong.sort(new Comparator<Song>() {
+                    @Override
+                    public int compare(Song o1, Song o2) {
+                        return o1.category.compareTo(o2.category);
+                    }
+                });
+            break;
+        }
     }
 
     private void backScreen(){
@@ -226,14 +264,19 @@ public class PlaylistActivity extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
-    private void Song(String songName, String autorName, int durationSong, String stream_url, int position) {
+    private void Song(String songName, String autorName, int durationSong, String stream_url, int position, boolean botonPlay) {
         Intent i = new Intent(this, PlaylistSongs.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
         i.putExtra(this.getPackageName() + ".duration", durationSong);
         i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".songs", songs);
         i.putExtra(this.getPackageName() + ".positionId", position);
+        i.putExtra(this.getPackageName() + ".botonPlay", botonPlay);
+        ArrayList<Integer> idSongs = new ArrayList<>();
+        for ( int j = 0; j < adapterSong.getCount(); j++ ) {
+            idSongs.add(Objects.requireNonNull(adapterSong.getItem(j)).id);
+        }
+        i.putExtra(this.getPackageName() + ".songs", idSongs);
         this.startActivity(i);
     }
 

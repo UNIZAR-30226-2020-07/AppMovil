@@ -44,6 +44,7 @@ public class PlaylistSongs extends AppCompatActivity {
     private int durationSong;
     private ArrayList<Song> songs = new ArrayList<>();
     private int positionId;
+    private boolean botonPlay;
     private LinearLayout searchMenu;
     FloatingActionButton play;
     FloatingActionButton next;
@@ -228,26 +229,28 @@ public class PlaylistSongs extends AppCompatActivity {
             durationSong = durationSong*1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
             idSong = extras.getInt(this.getPackageName() + ".id");
-            ArrayList<Integer> canciones = extras.getIntegerArrayList(this.getPackageName() + ".songs");
-            if ( canciones != null ) {
-                for (int i = 0; i < canciones.size(); i++) {
-                    int id = canciones.get(i);
-                    server.getSongData(id, new JSONConnection.Listener() {
-                        @Override
-                        public void onValidResponse(int responseCode, JSONObject data) {
-                            if (responseCode == 200) {
-                                Song song = new Song(data);
-                                songs.add(song);
-                            }
-                        }
 
-                        @Override
-                        public void onErrorResponse(Throwable throwable) {
+            ArrayList<Integer> idSongs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
+            assert idSongs != null;
+            for (int i = 0; i < idSongs.size(); i++ ) {
+                server.getSongData(idSongs.get(i), new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if (responseCode == 200) {
+                            Song newSong = new Song(data);
+                            PlaylistSongs.this.songs.add(newSong);
                         }
-                    });
-                }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
             }
             positionId = extras.getInt(this.getPackageName() + ".positionId");
+            botonPlay = extras.getBoolean(this.getPackageName() + ".botonPlay");
+            if ( botonPlay ) {
+                playSong();
+            }
         }
 
         play.setOnClickListener(new View.OnClickListener() {
