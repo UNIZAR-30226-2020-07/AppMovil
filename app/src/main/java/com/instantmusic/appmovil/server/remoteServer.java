@@ -96,7 +96,7 @@ public class remoteServer implements serverInterface {
     }
 
     @Override
-    public void addSongToPlaylist(String namePlaylist, int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
+    public void addSongToPlaylist(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
         String url = "playlists/";
         url = url + idPlaylist;
         initialize()

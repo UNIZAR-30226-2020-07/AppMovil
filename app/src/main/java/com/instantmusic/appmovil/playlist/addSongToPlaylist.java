@@ -12,6 +12,8 @@ import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
+import com.instantmusic.appmovil.song.Song;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class addSongToPlaylist extends AppCompatActivity {
     private serverInterface server;
     private int idSong;
+    private Playlist playlistSelected;
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
     private PlaylistAdapter adapterPlaylist;
     public void onCreate(Bundle savedInstanceState) {
@@ -41,14 +44,13 @@ public class addSongToPlaylist extends AppCompatActivity {
                 try {
                     if ( responseCode == 200 ) {
                         JSONArray playlistsUser = data.getJSONArray("playlists");
-                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser,true);
                         adapterPlaylist.addAll(newPlaylists);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onErrorResponse(Throwable throwable) {
                 setTitle("Unknown user");
@@ -66,21 +68,35 @@ public class addSongToPlaylist extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Playlist> playlists = (ArrayAdapter<Playlist>) parent.getAdapter();
-                Playlist playlistSelected = playlists.getItem(position);
+                playlistSelected = playlists.getItem(position);
                 if ( playlistSelected != null ) {
-                    ArrayList<Integer> songs = playlistSelected.songs;
+                    final ArrayList<Integer> songs = new ArrayList<>();
+                    for ( int i = 0; i < playlistSelected.songs.size(); i++ ) {
+                        songs.add(playlistSelected.songs.get(i).id);
+                    }
                     songs.add(idSong);
-                    playlistSelected.songs.add(idSong);
-                    server.addSongToPlaylist(playlistSelected.playlistName, playlistSelected.id, songs, new JSONConnection.Listener() {
+                    server.getSongData(idSong, new JSONConnection.Listener() {
                         @Override
                         public void onValidResponse(int responseCode, JSONObject data) {
                             if ( responseCode == 200 ) {
-                                backScreen();
+                                Song newSong = new Song(data);
+                                playlistSelected.songs.add(newSong);
+                                server.addSongToPlaylist(playlistSelected.id, songs, new JSONConnection.Listener() {
+                                    @Override
+                                    public void onValidResponse(int responseCode, JSONObject data) {
+                                        if ( responseCode == 200 ) {
+                                            backScreen();
+                                        }
+                                    }
+                                    @Override
+                                    public void onErrorResponse(Throwable throwable) {
+                                        setTitle("Unknown user");
+                                    }
+                                });
                             }
                         }
                         @Override
                         public void onErrorResponse(Throwable throwable) {
-                            setTitle("Unknown user");
                         }
                     });
                 }

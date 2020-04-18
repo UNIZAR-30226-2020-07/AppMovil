@@ -42,7 +42,7 @@ public class PlaylistSongs extends AppCompatActivity {
     private String urlSong;
     private int idSong;
     private int durationSong;
-    private ArrayList<Integer> songs;
+    private ArrayList<Song> songs = new ArrayList<>();
     private int positionId;
     private LinearLayout searchMenu;
     FloatingActionButton play;
@@ -157,34 +157,24 @@ public class PlaylistSongs extends AppCompatActivity {
                 PlaylistSongs.this.seekBar.setProgress(0);
                 if ( songs.size() > positionId + 1 ) {
                     positionId = positionId + 1;
-                    server.getSongData(songs.get(positionId), new JSONConnection.Listener() {
-                        @Override
-                        public void onValidResponse(int responseCode, JSONObject data) {
-                            if ( responseCode == 200 ) {
-                                Song newSong = new Song(data);
-                                songName = findViewById(R.id.songname);
-                                songName.setText(newSong.songName);
-                                autorName = findViewById(R.id.autorname);
-                                autorName.setText(newSong.artist);
-                                durationSong = newSong.duration;
-                                durationSong = durationSong*1000;
-                                urlSong = "";
-                                urlSong = urlSong+newSong.url;
-                                if ( isPlaying ) {
-                                    isPlaying = false;
-                                    isPaused = false;
-                                    playSong();
-                                }
-                                else {
-                                    isPlaying = false;
-                                    isPaused = false;
-                                }
-                            }
-                        }
-                        @Override
-                        public void onErrorResponse(Throwable throwable) {
-                        }
-                    });
+                    Song newSong = songs.get(positionId);
+                    songName = findViewById(R.id.songname);
+                    songName.setText(newSong.songName);
+                    autorName = findViewById(R.id.autorname);
+                    autorName.setText(newSong.artist);
+                    durationSong = newSong.duration;
+                    durationSong = durationSong*1000;
+                    urlSong = "";
+                    urlSong = urlSong+newSong.url;
+                    if ( isPlaying ) {
+                        isPlaying = false;
+                        isPaused = false;
+                        playSong();
+                    }
+                    else {
+                        isPlaying = false;
+                        isPaused = false;
+                    }
                 }
                 else {
                     play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
@@ -238,7 +228,25 @@ public class PlaylistSongs extends AppCompatActivity {
             durationSong = durationSong*1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
             idSong = extras.getInt(this.getPackageName() + ".id");
-            songs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
+            ArrayList<Integer> canciones = extras.getIntegerArrayList(this.getPackageName() + ".songs");
+            if ( canciones != null ) {
+                for (int i = 0; i < canciones.size(); i++) {
+                    int id = canciones.get(i);
+                    server.getSongData(id, new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if (responseCode == 200) {
+                                Song song = new Song(data);
+                                songs.add(song);
+                            }
+                        }
+
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+                        }
+                    });
+                }
+            }
             positionId = extras.getInt(this.getPackageName() + ".positionId");
         }
 
@@ -319,34 +327,24 @@ public class PlaylistSongs extends AppCompatActivity {
                         seekBar.setProgress(0);
                         if ( songs.size() > positionId + 1 ) {
                             positionId = positionId + 1;
-                            server.getSongData(songs.get(positionId), new JSONConnection.Listener() {
-                                @Override
-                                public void onValidResponse(int responseCode, JSONObject data) {
-                                    if ( responseCode == 200 ) {
-                                        Song newSong = new Song(data);
-                                        songName = findViewById(R.id.songname);
-                                        songName.setText(newSong.songName);
-                                        autorName = findViewById(R.id.autorname);
-                                        autorName.setText(newSong.artist);
-                                        durationSong = newSong.duration;
-                                        durationSong = durationSong*1000;
-                                        urlSong = "";
-                                        urlSong = urlSong+newSong.url;
-                                        if ( isPlaying ) {
-                                            isPlaying = false;
-                                            isPaused = false;
-                                            playSong();
-                                        }
-                                        else {
-                                            isPlaying = false;
-                                            isPaused = false;
-                                        }
-                                    }
-                                }
-                                @Override
-                                public void onErrorResponse(Throwable throwable) {
-                                }
-                            });
+                            Song newSong = songs.get(positionId);
+                            songName = findViewById(R.id.songname);
+                            songName.setText(newSong.songName);
+                            autorName = findViewById(R.id.autorname);
+                            autorName.setText(newSong.artist);
+                            durationSong = newSong.duration;
+                            durationSong = durationSong*1000;
+                            urlSong = "";
+                            urlSong = urlSong+newSong.url;
+                            if ( isPlaying ) {
+                                isPlaying = false;
+                                isPaused = false;
+                                playSong();
+                            }
+                            else {
+                                isPlaying = false;
+                                isPaused = false;
+                            }
                         }
                         else {
                             isPlaying = false;

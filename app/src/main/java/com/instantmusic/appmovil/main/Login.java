@@ -23,7 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class Login extends AppCompatActivity implements JSONConnection.Listener {
+public class Login extends AppCompatActivity {
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
     private PlaylistAdapter adapterPlaylist;
     private serverInterface server;
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
                     if ( responseCode == 200 ) {
                         username = data.getString("username");
                         JSONArray playlistsUser = data.getJSONArray("playlists");
-                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
                     }
                 } catch (JSONException e) {
@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
                 ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
                 Playlist playlist = (Playlist) search.getItem(position);
                 String creador = username;
-                openPlaylist(playlist.playlistName, creador,playlist.songs, playlist.id);
+                openPlaylist(playlist.playlistName, creador, playlist.id);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
                     if ( responseCode == 200 ) {
                         username = data.getString("username");
                         JSONArray playlistsUser = data.getJSONArray("playlists");
-                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser,true);
                         adapterPlaylist.addAll(newPlaylists);
                     }
                 } catch (JSONException e) {
@@ -154,7 +154,7 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if (responseCode == 201 ) {
-                    Playlist newPlaylist = new Playlist(data);
+                    Playlist newPlaylist = new Playlist(data,true);
                     adapterPlaylist.add(newPlaylist);
                 }
             }
@@ -176,12 +176,11 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
         findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist).setClickable(true);
     }
 
-    private void openPlaylist (String playlist, String creador, ArrayList<Integer> songs, int idPlaylist){
+    private void openPlaylist (String playlist, String creador, int idPlaylist){
         Intent i = new Intent(this, PlaylistActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("playlist", playlist);
         i.putExtra("creador", creador);
-        i.putExtra("canciones",songs);
         i.putExtra("idPlaylist",idPlaylist);
         startActivityForResult(i, 1);
     }
@@ -212,18 +211,5 @@ public class Login extends AppCompatActivity implements JSONConnection.Listener 
     @Override
     public void onBackPressed () {}
 
-    @Override
-    public void onValidResponse ( int responseCode, JSONObject data){
-        try {
-            JSONArray playlistsUser = data.getJSONArray("playlists");
-            ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser);
-            adapterPlaylist.addAll(newPlaylists);
-        } catch (JSONException e) {
-            onErrorResponse(e);
-        }
-    }
 
-    @Override
-    public void onErrorResponse (Throwable throwable){
-    }
 }
