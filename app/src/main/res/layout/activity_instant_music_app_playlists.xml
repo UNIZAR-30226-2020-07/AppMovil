@@ -235,7 +235,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:text="@string/orderPlaylist"
                 android:textColor="@color/backColor"
+                android:textSize="14dp"
                 tools:text="@string/orderPlaylist" />
 
             <Space
@@ -251,10 +253,13 @@
 
                 <TextView
                     android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:layout_weight="0"
+                    android:text="@string/orderPlaylist1"
                     android:textColor="@color/backColor"
+                    android:textSize="14dp"
                     tools:text="@string/orderPlaylist1" />
 
                 <Button
@@ -262,14 +267,23 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="0"
-                    android:background="@android:drawable/checkbox_on_background" />
+                    android:background="@android:drawable/checkbox_on_background"
+                    android:textSize="14dp" />
+
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
 
                 <TextView
                     android:id="@+id/textView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:layout_weight="0"
+                    android:text="@string/orderPlaylist2"
                     android:textColor="@color/backColor"
+                    android:textSize="14dp"
                     tools:text="@string/orderPlaylist2" />
 
                 <Button
@@ -279,12 +293,20 @@
                     android:layout_weight="0"
                     android:background="@android:drawable/checkbox_off_background" />
 
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
                 <TextView
                     android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:layout_weight="0"
+                    android:text="@string/orderPlaylist3"
                     android:textColor="@color/backColor"
+                    android:textSize="14dp"
                     tools:text="@string/orderPlaylist3" />
 
                 <Button
