@@ -32,6 +32,9 @@ public class PlaylistActivity extends AppCompatActivity {
     private SongsAdapter adapterSong;
     private LinearLayout searchMenu;
     private Button changeMenu2;
+    private Button orderName;
+    private Button orderCategory;
+    private Button orderArtist;
     private EditText changeMenu;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,9 @@ public class PlaylistActivity extends AppCompatActivity {
             idPlaylist = extras.getInt("idPlaylist");
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
+        orderName=findViewById(R.id.orderName);
+        orderCategory=findViewById(R.id.orderCategory);
+        orderArtist=findViewById(R.id.orderArtist);
         searchMenu=findViewById(R.id.searchMenu);
         changeMenu2=findViewById(R.id.changeName2);
         changeMenu=findViewById(R.id.change);
@@ -186,6 +192,34 @@ public class PlaylistActivity extends AppCompatActivity {
                     public void onErrorResponse(Throwable throwable) {
                     }
                 });
+            }
+        });
+        orderName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
+                orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+                orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+
+                ////////////////////////////////////////FUNCION SORT DE LA PLAYLIST AQUI MARCOS//////////////////////////////////////////////////
+            }
+        });orderCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+                orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
+                orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+
+                ////////////////////////////////////////FUNCION SORT DE LA PLAYLIST AQUI MARCOS//////////////////////////////////////////////////
+            }
+        });orderArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+                orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+                orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
+
+                ////////////////////////////////////////FUNCION SORT DE LA PLAYLIST AQUI MARCOS//////////////////////////////////////////////////
             }
         });
     }
