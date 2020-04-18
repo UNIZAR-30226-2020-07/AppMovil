@@ -130,6 +130,18 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    @Override
+    public void rateASong(int idSong, int rate, JSONConnection.Listener listener) {
+        String url = "songs/";
+        url = url + idSong;
+        initialize()
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.PATCH)
+                .putData("user_valoration",rate)
+                .setListener(listener)
+                .execute();
+    }
+
     // ------------------- To save data -------------------
 
     // saved data

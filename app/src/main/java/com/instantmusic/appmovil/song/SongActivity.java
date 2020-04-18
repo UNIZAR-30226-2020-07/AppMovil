@@ -23,8 +23,11 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.playlist.addSongToPlaylist;
+import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
+
+import org.json.JSONObject;
 
 public class SongActivity extends AppCompatActivity  {
     serverInterface server;
@@ -42,6 +45,7 @@ public class SongActivity extends AppCompatActivity  {
     private String urlSong;
     private int idSong;
     private int durationSong;
+    private int rateSong;
     private LinearLayout searchMenu;
     FloatingActionButton play;
     FloatingActionButton next;
@@ -134,6 +138,14 @@ public class SongActivity extends AppCompatActivity  {
                     default:
                         ratingScale.setText(texto);
                 }
+                server.rateASong(idSong, (int) ratingBar.getRating(), new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if ( responseCode == 200 ) { }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) { }
+                });
             }
         });
 
@@ -192,6 +204,20 @@ public class SongActivity extends AppCompatActivity  {
             durationSong = durationSong*1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
             idSong = extras.getInt(this.getPackageName() + ".id");
+            server.getSongData(idSong, new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if ( responseCode == 200 ) {
+                                Song newSong = new Song(data);
+                                rateSong = newSong.rate;
+                                ratingBar.setRating(rateSong);
+                            }
+                        }
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+
+                        }
+            });
         }
         play.setOnClickListener(new View.OnClickListener() {
             @Override

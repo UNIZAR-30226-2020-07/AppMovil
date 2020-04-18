@@ -14,4 +14,5 @@ public interface serverInterface  {
     void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener);
     void addPlaylist(String playlist, JSONConnection.Listener listener);
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);
+    void rateASong(int idSong, int rate, JSONConnection.Listener listener);
 }

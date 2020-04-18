@@ -45,6 +45,7 @@ public class PlaylistSongs extends AppCompatActivity {
     private ArrayList<Song> songs = new ArrayList<>();
     private int positionId;
     private boolean botonPlay;
+    private int rateSong;
     private LinearLayout searchMenu;
     FloatingActionButton play;
     FloatingActionButton next;
@@ -137,6 +138,14 @@ public class PlaylistSongs extends AppCompatActivity {
                     default:
                         ratingScale.setText(texto);
                 }
+                server.rateASong(idSong, (int) ratingBar.getRating(), new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if ( responseCode == 200 ) { }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) { }
+                });
             }
         });
 
@@ -229,7 +238,6 @@ public class PlaylistSongs extends AppCompatActivity {
             durationSong = durationSong*1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
             idSong = extras.getInt(this.getPackageName() + ".id");
-
             ArrayList<Integer> idSongs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
             assert idSongs != null;
             for (int i = 0; i < idSongs.size(); i++ ) {
@@ -246,6 +254,20 @@ public class PlaylistSongs extends AppCompatActivity {
                     }
                 });
             }
+            server.getSongData(idSong, new JSONConnection.Listener() {
+                @Override
+                public void onValidResponse(int responseCode, JSONObject data) {
+                    if ( responseCode == 200 ) {
+                        Song newSong = new Song(data);
+                        rateSong = newSong.rate;
+                        ratingBar.setRating(rateSong);
+                    }
+                }
+                @Override
+                public void onErrorResponse(Throwable throwable) {
+
+                }
+            });
             positionId = extras.getInt(this.getPackageName() + ".positionId");
             botonPlay = extras.getBoolean(this.getPackageName() + ".botonPlay");
             if ( botonPlay ) {

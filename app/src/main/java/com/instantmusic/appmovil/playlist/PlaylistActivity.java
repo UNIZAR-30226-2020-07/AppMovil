@@ -94,11 +94,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 if ( !resList.getAdapter().isEmpty() ) {
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) resList.getAdapter();
                     Song cancion = search.getItem(0);
-                    String name = cancion.songName;
-                    String artista = cancion.artist;
-                    int duracion = cancion.duration;
-                    String url = cancion.url;
-                    Song(name, artista,duracion,url,0,true);
+                    Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,0,true);
                 }
             }
         });
@@ -109,11 +105,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                 Song cancion = search.getItem(position);
                 if ( cancion != null ) {
-                    String name = cancion.songName;
-                    String artista = cancion.artist;
-                    int duracion = cancion.duration;
-                    String url = cancion.url;
-                    Song(name, artista,duracion,url,position,false);
+                    Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,position,false);
                 }
             }
         });
@@ -264,7 +256,7 @@ public class PlaylistActivity extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
-    private void Song(String songName, String autorName, int durationSong, String stream_url, int position, boolean botonPlay) {
+    private void Song(String songName, String autorName, int durationSong, String stream_url, int id, int position, boolean botonPlay) {
         Intent i = new Intent(this, PlaylistSongs.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
@@ -272,6 +264,7 @@ public class PlaylistActivity extends AppCompatActivity {
         i.putExtra(this.getPackageName() + ".url", stream_url);
         i.putExtra(this.getPackageName() + ".positionId", position);
         i.putExtra(this.getPackageName() + ".botonPlay", botonPlay);
+        i.putExtra(this.getPackageName() + ".id", id);
         ArrayList<Integer> idSongs = new ArrayList<>();
         for ( int j = 0; j < adapterSong.getCount(); j++ ) {
             idSongs.add(Objects.requireNonNull(adapterSong.getItem(j)).id);
