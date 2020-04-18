@@ -27,7 +27,8 @@ public class PlaylistActivity extends AppCompatActivity {
     private String playList;
     private String creador;
     private int idPlaylist;
-    Playlist selectedPlaylist;
+    private ArrayList<Integer> songs;
+    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
     private LinearLayout searchMenu;
     private Button changeMenu2;
@@ -45,26 +46,30 @@ public class PlaylistActivity extends AppCompatActivity {
         if ( extras != null ) {
             playList= extras.getString("playlist");
             creador= extras.getString("creador");
+            songs = extras.getIntegerArrayList("canciones");
             idPlaylist = extras.getInt("idPlaylist");
         }
-        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
-            @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
-                if ( responseCode == 200 ) {
-                    selectedPlaylist = new Playlist(data,false);
-                    adapterSong = new SongsAdapter(PlaylistActivity.this, selectedPlaylist.songs,0);
-                    resList.setAdapter(adapterSong);
-                }
-            }
-
-            @Override
-            public void onErrorResponse(Throwable throwable) {
-            }
-        });
+        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
         changeMenu2=findViewById(R.id.changeName2);
         changeMenu=findViewById(R.id.change);
-
+        resList.setAdapter(adapterSong);
+        if ( songs != null ) {
+            for (int i = 0; i < songs.size(); i++) {
+                server.getSongData(songs.get(i), new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if ( responseCode == 200 ) {
+                            Song newSong = new Song(data);
+                            adapterSong.add(newSong);
+                        }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
+            }
+        }
         TextView name=findViewById(R.id.playlistName);
         changeMenu.setText(playList);
         TextView creator=findViewById(R.id.playlistCreator);
@@ -197,10 +202,6 @@ public class PlaylistActivity extends AppCompatActivity {
         i.putExtra(this.getPackageName() + ".String", autorName);
         i.putExtra(this.getPackageName() + ".duration", durationSong);
         i.putExtra(this.getPackageName() + ".url", stream_url);
-        final ArrayList<Integer> songs = new ArrayList<>();
-        for ( int j = 0; j < selectedPlaylist.songs.size(); j++ ) {
-            songs.add(selectedPlaylist.songs.get(j).id);
-        }
         i.putExtra(this.getPackageName() + ".songs", songs);
         i.putExtra(this.getPackageName() + ".positionId", position);
         this.startActivity(i);
