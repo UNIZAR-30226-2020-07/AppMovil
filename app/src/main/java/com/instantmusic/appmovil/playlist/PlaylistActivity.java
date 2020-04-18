@@ -54,22 +54,18 @@ public class PlaylistActivity extends AppCompatActivity {
         changeMenu2=findViewById(R.id.changeName2);
         changeMenu=findViewById(R.id.change);
         resList.setAdapter(adapterSong);
-        if ( songs != null ) {
-            for (int i = 0; i < songs.size(); i++) {
-                server.getSongData(songs.get(i), new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) {
-                        if ( responseCode == 200 ) {
-                            Song newSong = new Song(data);
-                            adapterSong.add(newSong);
-                        }
-                    }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) {
-                    }
-                });
+        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) {
+                if ( responseCode == 200 ) {
+                    Playlist playlistSelected = new Playlist(data,false);
+                    adapterSong.addAll(playlistSelected.songs);
+                }
             }
-        }
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+            }
+        });
         TextView name=findViewById(R.id.playlistName);
         changeMenu.setText(playList);
         TextView creator=findViewById(R.id.playlistCreator);
