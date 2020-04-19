@@ -47,9 +47,10 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public void searchSongs(String title, JSONConnection.Listener listener) {
+    public void searchSongs(int page,String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("songs")
+                .putParameter("page",Integer.toString(page))
                 .putParameter("search", title)
                 .setListener(listener)
                 .execute();

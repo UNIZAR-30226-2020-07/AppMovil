@@ -2,6 +2,8 @@ package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.sax.EndElementListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -14,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
@@ -41,6 +45,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
     private SongsAdapter adapterSong;
     private int cruz = 0;
+    private int page=1;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -93,9 +98,9 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                search();
-                resList.setSelection(0);
                 registerForContextMenu(resList);
+                lupaGrande.setVisibility(View.INVISIBLE);
+                search();
             }
         });
         Button Button1 = findViewById(R.id.menuButton1);
@@ -197,6 +202,11 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 return false;
             }
         });
+    }
+
+    private void searchNextPage() {
+        page=page+1;
+        server.searchSongs(page,shit.getText().toString(),this);
     }
 
     private void nameActivated() {
@@ -317,7 +327,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         switch (searchType) {
             case 1:
                 if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchSongs(shit.getText().toString(), this);
+                    page=1;
+                    server.searchSongs(page,shit.getText().toString(), this);
                     searchTip1.setVisibility(View.INVISIBLE);
                     searchTip2.setVisibility(View.INVISIBLE);
                     lupaGrande.setVisibility(View.INVISIBLE);
@@ -333,6 +344,18 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
                 break;
         }
+        resList.setOnScrollListener(new AbsListView.OnScrollListener(){
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1) {
+                    searchNextPage();
+                }
+            }
+        });
     }
 
     @Override
