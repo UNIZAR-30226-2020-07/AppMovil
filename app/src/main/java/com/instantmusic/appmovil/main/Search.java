@@ -99,6 +99,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 registerForContextMenu(resList);
+                searchTip1.setVisibility(View.INVISIBLE);
+                searchTip2.setVisibility(View.INVISIBLE);
                 lupaGrande.setVisibility(View.INVISIBLE);
                 search();
             }
@@ -329,9 +331,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 if ( !(shit.getText().toString().equals("")) ) {
                     page=1;
                     server.searchSongs(page,shit.getText().toString(), this);
-                    searchTip1.setVisibility(View.INVISIBLE);
-                    searchTip2.setVisibility(View.INVISIBLE);
-                    lupaGrande.setVisibility(View.INVISIBLE);
                 }
                 break;
             case 2:

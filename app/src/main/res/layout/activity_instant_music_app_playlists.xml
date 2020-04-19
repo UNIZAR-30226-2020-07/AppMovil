@@ -338,7 +338,7 @@
             android:id="@+id/playlist"
             android:layout_width="match_parent"
             android:layout_height="430dp"
-            android:layout_marginBottom="?attr/actionBarSize">
+            android:transcriptMode="alwaysScroll">
 
         </ListView>
 
