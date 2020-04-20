@@ -190,7 +190,28 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     private void searchNextPage() {
         page=page+1;
-        server.searchSongs(page,shit.getText().toString(),this);
+        switch (searchType) {
+            case 1:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchSongs(page,shit.getText().toString(), this);
+                }
+                break;
+            case 2:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchGenres(page,shit.getText().toString(), this);
+                }
+                break;
+            case 3:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchArtists(page,shit.getText().toString(), this);
+                }
+                break;
+            case 4:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchAlbums(page,shit.getText().toString(), this);
+                }
+                break;
+        }
     }
 
     private void nameActivated() {
