@@ -416,10 +416,17 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
-            resList.setAdapter(adapterSong);
-            JSONArray results = data.getJSONArray("results");
-            ArrayList<Song> newSongs = Song.fromJson(results);
-            adapterSong.addAll(newSongs);
+            if(searchType==4){
+                JSONArray results = data.getJSONArray("results");
+                ArrayList<Album> newSongs = Album.fromJson(results);
+                adapterAlbum.addAll(newSongs);
+            }else {
+                resList.setAdapter(adapterSong);
+
+                JSONArray results = data.getJSONArray("results");
+                ArrayList<Song> newSongs = Song.fromJson(results);
+                adapterSong.addAll(newSongs);
+            }
         }
         catch (JSONException e) {
             onErrorResponse(e);
