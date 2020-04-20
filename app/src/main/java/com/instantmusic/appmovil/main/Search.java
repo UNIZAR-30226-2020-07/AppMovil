@@ -189,6 +189,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchMenu.setVisibility(View.INVISIBLE);
                     search();
                     return true;
                 }
