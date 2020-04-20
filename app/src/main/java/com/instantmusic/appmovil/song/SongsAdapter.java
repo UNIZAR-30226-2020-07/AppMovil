@@ -36,14 +36,11 @@ public class SongsAdapter extends ArrayAdapter<Song> {
         // Lookup view for data population
         TextView songName = (TextView) convertView.findViewById(R.id.text1);
         TextView artist = (TextView) convertView.findViewById(R.id.text2);
-        TextView category = (TextView) convertView.findViewById(R.id.text3);
         ImageView categoryImage = convertView.findViewById(R.id.iconoSong);
 
         // Populate the data into the template view using the data object
         songName.setText(song.songName);
         artist.setText(song.artist);
-        category.setText(song.category);
-
         switch(song.category) {
             case "90s":
                 categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.noventasicon));

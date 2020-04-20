@@ -60,24 +60,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList.setVisibility(View.INVISIBLE);
         adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
         resList.setAdapter(adapterSong);
-        resList.setOnScrollListener(new AbsListView.OnScrollListener() {
-
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-
-            }
-
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
-
-                if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
-                    if (flag_loading == false) {
-                        flag_loading = true;
-                        //additems();
-                    }
-                }
-            }
-        });
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
