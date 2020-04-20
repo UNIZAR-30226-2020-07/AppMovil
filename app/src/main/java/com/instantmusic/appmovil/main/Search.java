@@ -356,7 +356,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1) {
+                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
                     searchNextPage();
                 }
             }
