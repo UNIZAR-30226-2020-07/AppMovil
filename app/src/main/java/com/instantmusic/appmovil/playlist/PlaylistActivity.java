@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class PlaylistActivity extends AppCompatActivity {
     private Button orderCategory;
     private Button orderArtist;
     private EditText changeMenu;
-
+    private int page=1;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -220,8 +221,8 @@ public class PlaylistActivity extends AppCompatActivity {
                 sortBy("artista");
             }
         });
-    }
 
+    }
     private void sortBy(String comp) {
         switch (comp) {
             case "artista":
