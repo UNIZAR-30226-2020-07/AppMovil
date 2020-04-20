@@ -17,6 +17,9 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
+import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongsAdapter;
+
 import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +29,11 @@ import java.util.ArrayList;
 public class Login extends AppCompatActivity {
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
     private PlaylistAdapter adapterPlaylist;
+    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
+    private SongsAdapter adapterSongs;
     private serverInterface server;
     private HorizontalListView myPlaylist;
+    private HorizontalListView mySongs;
     private String username;
 
     @SuppressLint("WrongViewCast")
@@ -37,8 +43,11 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_login);
         server = new remoteServer();
         myPlaylist = findViewById(R.id.myPlayLists);
+        mySongs = findViewById(R.id.mySongs);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,0);
+        adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
         myPlaylist.setAdapter(adapterPlaylist);
+        mySongs.setAdapter(adapterSongs);
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
@@ -57,6 +66,25 @@ public class Login extends AppCompatActivity {
             @Override
             public void onErrorResponse(Throwable throwable) {
                 setTitle("Unknown user");
+            }
+        });
+        server.songsRecommended(new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) {
+                if ( responseCode == 200 ) {
+                    try {
+                        JSONArray songsRecommended = data.getJSONArray("results");
+                        ArrayList<Song> newSongs = Song.fromJson(songsRecommended);
+                        adapterSongs.addAll(newSongs);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+
             }
         });
         Button createP = findViewById(R.id.createPlaylist);

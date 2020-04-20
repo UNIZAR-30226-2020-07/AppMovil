@@ -32,15 +32,20 @@ public class SongsAdapter extends ArrayAdapter<Song> {
             else if ( this.tipoLayout == 1 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.playlist_row, parent, false);
             }
+            else if ( this.tipoLayout == 2 ) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists_row, parent, false);
+            }
         }
-        // Lookup view for data population
-        TextView songName = (TextView) convertView.findViewById(R.id.text1);
-        TextView artist = (TextView) convertView.findViewById(R.id.text2);
         ImageView categoryImage = convertView.findViewById(R.id.iconoSong);
-
+        TextView songName = (TextView) convertView.findViewById(R.id.text1);
+        if ( this.tipoLayout == 0 || this.tipoLayout == 1 ) {
+            TextView artist = (TextView) convertView.findViewById(R.id.text2);
+            artist.setText(song.artist);
+        }
+        else {
+        }
         // Populate the data into the template view using the data object
         songName.setText(song.songName);
-        artist.setText(song.artist);
         switch(song.category) {
             case "90s":
                 categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.noventasicon));

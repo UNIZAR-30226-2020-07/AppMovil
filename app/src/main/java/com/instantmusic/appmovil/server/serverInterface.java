@@ -21,4 +21,5 @@ public interface serverInterface  {
     void addPlaylist(String playlist, JSONConnection.Listener listener);
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);
     void rateASong(int idSong, int rate, JSONConnection.Listener listener);
+    void songsRecommended(JSONConnection.Listener listener);
 }

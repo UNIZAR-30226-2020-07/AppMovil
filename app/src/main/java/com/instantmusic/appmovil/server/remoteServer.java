@@ -191,6 +191,14 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void songsRecommended(JSONConnection.Listener listener) {
+        String url = "songs/recommended";
+        initialize()
+                .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
     // ------------------- To save data -------------------
 
     // saved data
