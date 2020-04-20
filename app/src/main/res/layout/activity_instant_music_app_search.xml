@@ -66,7 +66,7 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|center"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -147,6 +147,46 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/linearLayout4"
+        app:layout_anchorGravity="center">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="220sp" />
+
+        <ImageView
+            android:id="@+id/lupaGrande"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="center"
+            app:srcCompat="@drawable/lupagrande" />
+
+        <TextView
+            android:id="@+id/searchTip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/searchTip1"
+            android:textColor="@color/secondaryColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/searchTip2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/searchTip2"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryColor"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -168,58 +208,62 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <ImageView
-                android:id="@+id/menuButton12"
+            <Button
+                android:id="@+id/menuButton1555555"
                 style="@android:style/ButtonBar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/home480" />
+                android:background="@drawable/home480"
+                android:clickable="false" />
 
             <Space
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0" />
 
-            <ImageView
-                android:id="@+id/menuButton23"
+            <Button
+                android:id="@+id/menuButton255555"
                 style="@android:style/ButtonBar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/lupagrande2" />
+                android:background="@drawable/lupagrande2"
+                android:clickable="false" />
 
             <Space
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <ImageView
-                android:id="@+id/menuButton334"
+            <Button
+                android:id="@+id/menuButton3555555"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/microphone100" />
+                android:background="@drawable/microphone100"
+                android:clickable="false" />
 
             <Space
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <ImageView
-                android:id="@+id/menuButton434"
+            <Button
+                android:id="@+id/menuButton4555555"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/friends100" />
+                android:background="@drawable/friends100"
+                android:clickable="false" />
 
             <Space
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0" />
 
-            <ImageView
-                android:id="@+id/menuButton52"
+            <Button
+                android:id="@+id/menuButton5555555"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
@@ -231,6 +275,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_gravity="bottom"
+            android:background="#00FFFFFF"
             android:orientation="horizontal">
 
             <Space
@@ -303,7 +348,7 @@
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="62dp"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/settings"
@@ -312,46 +357,6 @@
                 android:textSize="14dp"
                 tools:text="Settings" />
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_anchor="@+id/linearLayout4"
-        app:layout_anchorGravity="center">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="220sp" />
-
-        <ImageView
-            android:id="@+id/lupaGrande"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="center"
-            app:srcCompat="@drawable/lupagrande" />
-
-        <TextView
-            android:id="@+id/searchTip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/searchTip1"
-            android:textColor="@color/secondaryColor"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/searchTip2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/searchTip2"
-            android:textAlignment="center"
-            android:textColor="@color/secondaryColor"
-            android:textSize="13sp" />
 
     </LinearLayout>
 
