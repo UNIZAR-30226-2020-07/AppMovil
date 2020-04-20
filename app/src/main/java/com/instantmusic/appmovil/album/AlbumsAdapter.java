@@ -32,7 +32,7 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
         // Populate the data into the template view using the data object
         albumName.setText(album.name);
         artistAlbum.setText(album.artistName);
-        iconImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.noventasicon));
+        iconImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.album));
         // Return the completed view to render on screen
         return convertView;
     }
