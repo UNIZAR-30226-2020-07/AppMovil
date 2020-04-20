@@ -58,20 +58,18 @@ public class remoteServer implements serverInterface {
 
     public void searchAlbums(int page, String title, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("songs")
+                .setUrl("albums")
                 .putParameter("page",Integer.toString(page))
                 .putParameter("search", title)
-                .putParameter("search_for", "album")
                 .setListener(listener)
                 .execute();
     }
 
     public void searchArtists(int page, String title, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("songs")
+                .setUrl("artists")
                 .putParameter("page",Integer.toString(page))
                 .putParameter("search", title)
-                .putParameter("search_for", "artist")
                 .setListener(listener)
                 .execute();
     }

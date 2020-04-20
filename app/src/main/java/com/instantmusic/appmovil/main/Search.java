@@ -2,8 +2,6 @@ package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.sax.EndElementListener;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
@@ -43,7 +41,9 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private EditText shit;
     private serverInterface server;
     private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
+    private ArrayList<Album> arrayOfAlbums = new ArrayList<>();
     private SongsAdapter adapterSong;
+    private AlbumsAdapter adapterAlbum;
     private int cruz = 0;
     private int page=1;
 
@@ -59,19 +59,28 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList = findViewById(R.id.searchRes);
         resList.setVisibility(View.INVISIBLE);
         adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
+        adapterAlbum = new AlbumsAdapter(this, arrayOfAlbums);
         resList.setAdapter(adapterSong);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                Song cancion = (Song) search.getItem(position);
-                String name = cancion.songName;
-                String artista = cancion.artist;
-                int duracion = cancion.duration;
-                String url = cancion.url;
-                int idSong = cancion.id;
-                Song(name, artista, duracion, url, idSong);
+                if ( searchType == 1 || searchType == 2 ) {
+                    ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
+                    Song cancion = (Song) search.getItem(position);
+                    String name = cancion.songName;
+                    String artista = cancion.artist;
+                    int duracion = cancion.duration;
+                    String url = cancion.url;
+                    int idSong = cancion.id;
+                    Song(name, artista, duracion, url, idSong);
+                }
+                else if ( searchType == 3 ) {
+
+                }
+                else if ( searchType == 4 ) {
+
+                }
             }
         });
 
@@ -348,14 +357,45 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 if ( !(shit.getText().toString().equals("")) ) {
                     resList.setVisibility(View.VISIBLE);
                     page=1;
-                    server.searchArtists(page,shit.getText().toString(), this);
+                    server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if ( responseCode == 200 ) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+
+                        }
+                    });
                 }
                 break;
             case 4:
                 if ( !(shit.getText().toString().equals("")) ) {
                     resList.setVisibility(View.VISIBLE);
                     page=1;
-                    server.searchAlbums(page,shit.getText().toString(), this);
+                    server.searchAlbums(page, shit.getText().toString(), new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if ( responseCode == 200 ) {
+                                try {
+                                    resList.setAdapter(adapterAlbum);
+                                    JSONArray results = data.getJSONArray("results");
+                                    ArrayList<Album> newAlbums = Album.fromJson(results);
+                                    adapterAlbum.addAll(newAlbums);
+                                } catch (JSONException e) {
+                                    onErrorResponse(e);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+
+                        }
+                    });
                 }
                 break;
         }
@@ -376,10 +416,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
+            resList.setAdapter(adapterSong);
             JSONArray results = data.getJSONArray("results");
             ArrayList<Song> newSongs = Song.fromJson(results);
             adapterSong.addAll(newSongs);
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             onErrorResponse(e);
         }
     }

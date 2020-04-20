@@ -61,6 +61,7 @@ public class PlaylistSongs extends AppCompatActivity {
         previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
+        next.setImageResource(android.R.drawable.ic_media_next);
         shuffle = findViewById(R.id.shuffle);
         ratingBar = findViewById(R.id.ratingBar);
         ratingScale = findViewById(R.id.tvRatingScale);

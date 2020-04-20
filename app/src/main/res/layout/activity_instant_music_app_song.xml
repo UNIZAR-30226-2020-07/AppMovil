@@ -318,8 +318,8 @@
                 app:backgroundTint="#7E7A80"
                 app:fabSize="auto"
                 app:maxImageSize="50dp"
-                app:rippleColor="#FFFFFF"
-                app:srcCompat="@android:drawable/ic_media_next" />
+                app:rippleColor="#009C3232"
+                app:srcCompat="@drawable/ic_skip_next_black_24dp" />
 
             <Space
                 android:layout_width="10dp"

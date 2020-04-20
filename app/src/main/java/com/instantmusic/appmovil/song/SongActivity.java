@@ -61,6 +61,7 @@ public class SongActivity extends AppCompatActivity  {
         previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
+        next.setEnabled(false);
         shuffle = findViewById(R.id.shuffle);
         ratingBar = findViewById(R.id.ratingBar);
         ratingScale = findViewById(R.id.tvRatingScale);
