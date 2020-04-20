@@ -4,7 +4,12 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import java.util.ArrayList;
 
 public interface serverInterface  {
-    void searchSongs(int page,String shit, JSONConnection.Listener listener );
+    void searchSongs(int page, String shit, JSONConnection.Listener listener );
+    void searchAlbums(int page, String title, JSONConnection.Listener listener);
+    void searchArtists(int page, String title, JSONConnection.Listener listener);
+    void searchGenres(int page, String title, JSONConnection.Listener listener);
+    void searchAFriend(String name, JSONConnection.Listener listener);
+    void searchPodcasts(String title, JSONConnection.Listener listener );
     void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener);
     void getUserData(JSONConnection.Listener listener);
     void getPlaylistData(int idPlaylist, JSONConnection.Listener listener);
@@ -12,6 +17,7 @@ public interface serverInterface  {
     void login(String username_email, String password, JSONConnection.Listener listener);
     void addSongToPlaylist(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener);
     void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener);
+    void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener);
     void addPlaylist(String playlist, JSONConnection.Listener listener);
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);
     void rateASong(int idSong, int rate, JSONConnection.Listener listener);

@@ -326,21 +326,27 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
         resList.setVisibility(View.VISIBLE);
+        page=1;
         switch (searchType) {
             case 1:
                 if ( !(shit.getText().toString().equals("")) ) {
-                    page=1;
                     server.searchSongs(page,shit.getText().toString(), this);
                 }
                 break;
             case 2:
-                //shitcursor=server.searchCategory(shit.getText().toString());
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchGenres(page,shit.getText().toString(), this);
+                }
                 break;
             case 3:
-                //shitcursor=server.searchArtist(shit.getText().toString());
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchArtists(page,shit.getText().toString(), this);
+                }
                 break;
             case 4:
-
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchAlbums(page,shit.getText().toString(), this);
+                }
                 break;
         }
         resList.setOnScrollListener(new AbsListView.OnScrollListener(){

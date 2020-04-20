@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil.playlist;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

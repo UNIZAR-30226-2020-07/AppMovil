@@ -47,11 +47,57 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public void searchSongs(int page,String title, JSONConnection.Listener listener) {
+    public void searchSongs(int page, String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("songs")
                 .putParameter("page",Integer.toString(page))
                 .putParameter("search", title)
+                .setListener(listener)
+                .execute();
+    }
+
+    public void searchAlbums(int page, String title, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("songs")
+                .putParameter("page",Integer.toString(page))
+                .putParameter("search", title)
+                .putParameter("search_for", "album")
+                .setListener(listener)
+                .execute();
+    }
+
+    public void searchArtists(int page, String title, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("songs")
+                .putParameter("page",Integer.toString(page))
+                .putParameter("search", title)
+                .putParameter("search_for", "artist")
+                .setListener(listener)
+                .execute();
+    }
+
+    public void searchGenres(int page, String title, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("songs")
+                .putParameter("page",Integer.toString(page))
+                .putParameter("search", title)
+                .putParameter("search_for", "genre")
+                .setListener(listener)
+                .execute();
+    }
+
+    public void searchAFriend(String name, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("friends")
+                .putParameter("search", name)
+                .setListener(listener)
+                .execute();
+    }
+
+    public void searchPodcasts(String name, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("podcasts")
+                .putParameter("search", name)
                 .setListener(listener)
                 .execute();
     }
@@ -85,7 +131,7 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    @Override
+
     public void addPlaylist(String playlist, JSONConnection.Listener listener) {
         ArrayList<Integer> canciones = new ArrayList<>();
         initialize()
@@ -96,7 +142,7 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    @Override
+
     public void addSongToPlaylist(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
         String url = "playlists/";
         url = url + idPlaylist;
@@ -108,7 +154,7 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    @Override
+
     public void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener) {
         String url = "playlists/";
         url = url + idPlaylist;
@@ -120,7 +166,11 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    @Override
+    public void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener) {
+
+    }
+
+
     public void deletePlaylist(int idPlaylist, JSONConnection.Listener listener) {
         String url = "playlists/";
         url = url + idPlaylist;
@@ -131,7 +181,7 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    @Override
+
     public void rateASong(int idSong, int rate, JSONConnection.Listener listener) {
         String url = "songs/";
         url = url + idSong;
