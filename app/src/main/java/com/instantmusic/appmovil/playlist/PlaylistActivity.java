@@ -34,6 +34,7 @@ public class PlaylistActivity extends AppCompatActivity {
     private String creador;
     private int idPlaylist;
     private ArrayList<Integer> songs;
+    private serverInterface server;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
     private LinearLayout searchMenu;
@@ -41,14 +42,15 @@ public class PlaylistActivity extends AppCompatActivity {
     private Button orderName;
     private Button orderCategory;
     private Button orderArtist;
+    int searchType = 1;
     private EditText changeMenu;
     private int page=1;
-    public void onCreate(Bundle savedInstanceState) {
 
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_playlists);
         resList = findViewById(R.id.playlist);
-        final serverInterface server = new remoteServer();
+        server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
@@ -124,6 +126,9 @@ public class PlaylistActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button removeSong = findViewById(R.id.removeSong);
+
         Button Button7 = findViewById(R.id.changeName);
         Button Button8 =findViewById(R.id.changeName2);
         Button7.setOnClickListener(new View.OnClickListener() {
@@ -196,12 +201,25 @@ public class PlaylistActivity extends AppCompatActivity {
                 });
             }
         });
+        removeSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+                removeSong();
+            }
+        });
         orderName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
                 orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+                searchType = 1;
                 sortBy("titulo");
             }
         });orderCategory.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +228,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+                searchType = 2;
                 sortBy("categoria");
             }
         });orderArtist.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +237,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
+                searchType = 3;
                 sortBy("artista");
             }
         });
@@ -252,6 +272,32 @@ public class PlaylistActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapterSong.clear();
+        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) {
+                if ( responseCode == 200 ) {
+                    Playlist playlistSelected = new Playlist(data,false);
+                    adapterSong.addAll(playlistSelected.songs);
+                    if ( searchType == 1 ) {
+                        sortBy("titulo");
+                    }
+                    else if ( searchType == 2 ) {
+                        sortBy("categoria");
+                    }
+                    else if ( searchType == 3 ) {
+                        sortBy("artista");
+                    }
+                }
+            }
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+            }
+        });
+    }
     private void backScreen(){
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -273,6 +319,13 @@ public class PlaylistActivity extends AppCompatActivity {
         }
         i.putExtra(this.getPackageName() + ".songs", idSongs);
         this.startActivity(i);
+    }
+
+    private void removeSong() {
+        Intent i=new Intent(this, removeSongFromPlaylist.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        i.putExtra("id", idPlaylist);
+        startActivityForResult(i, 1);
     }
 
 }

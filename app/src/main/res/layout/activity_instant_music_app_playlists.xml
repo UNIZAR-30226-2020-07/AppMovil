@@ -98,6 +98,21 @@
             android:textColor="@color/backColor"
             android:textSize="14sp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+
+        <Button
+            android:id="@+id/removeSong"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@drawable/edit_round2"
+            android:text="@string/removeSong_"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/backColor"
+            android:textSize="14sp" />
+
     </LinearLayout>
 
     <LinearLayout

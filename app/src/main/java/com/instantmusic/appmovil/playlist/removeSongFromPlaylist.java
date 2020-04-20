@@ -13,38 +13,42 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongsAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class addSongToPlaylist extends AppCompatActivity {
+public class removeSongFromPlaylist extends AppCompatActivity {
     private serverInterface server;
+    private int idPlaylist;
     private int idSong;
     private Playlist playlistSelected;
-    private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
-    private PlaylistAdapter adapterPlaylist;
+    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
+    private SongsAdapter adapterSong;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instant_music_app_addplaylist);
+        setContentView(R.layout.activity_instant_music_app_removesong);
         server = new remoteServer();
-        ListView myPlaylist;
+        ListView mySongs;
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
-            idSong = extras.getInt("id");
+            idPlaylist = extras.getInt("id");
         }
-        myPlaylist = findViewById(R.id.myPlayLists);
-        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,1);
-        myPlaylist.setAdapter(adapterPlaylist);
+        mySongs = findViewById(R.id.myPlayLists);
+        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
+        mySongs.setAdapter(adapterSong);
 
-        server.getUserData(new JSONConnection.Listener() {
+        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 try {
                     if ( responseCode == 200 ) {
-                        JSONArray playlistsUser = data.getJSONArray("playlists");
-                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser,true);
-                        adapterPlaylist.addAll(newPlaylists);
+                        playlistSelected = new Playlist(data, false);
+                        ArrayList<Song> newSongs = Song.fromJson(data.getJSONArray("songs"));
+                        adapterSong.addAll(newSongs);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -62,36 +66,24 @@ public class addSongToPlaylist extends AppCompatActivity {
                 backScreen();
             }
         });
-        myPlaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mySongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Playlist> playlists = (ArrayAdapter<Playlist>) parent.getAdapter();
-                playlistSelected = playlists.getItem(position);
+                ArrayAdapter<Song> song = (ArrayAdapter<Song>) parent.getAdapter();
+                idSong = song.getItem(position).id;
                 if ( playlistSelected != null ) {
                     final ArrayList<Integer> songs = new ArrayList<>();
                     for ( int i = 0; i < playlistSelected.songs.size(); i++ ) {
-                        songs.add(playlistSelected.songs.get(i).id);
+                        if ( !(playlistSelected.songs.get(i).id == idSong) ) {
+                            songs.add(playlistSelected.songs.get(i).id);
+                        }
                     }
-                    songs.add(idSong);
-                    server.getSongData(idSong, new JSONConnection.Listener() {
+                    server.addOrRemoveSong(playlistSelected.id, songs, new JSONConnection.Listener() {
                         @Override
                         public void onValidResponse(int responseCode, JSONObject data) {
-                            if ( responseCode == 200 ) {
-                                Song newSong = new Song(data);
-                                playlistSelected.songs.add(newSong);
-                                server.addOrRemoveSong(playlistSelected.id, songs, new JSONConnection.Listener() {
-                                    @Override
-                                    public void onValidResponse(int responseCode, JSONObject data) {
-                                        if ( responseCode == 200 ) {
-                                            backScreen();
-                                        }
-                                    }
-                                    @Override
-                                    public void onErrorResponse(Throwable throwable) {
-                                        setTitle("Unknown user");
-                                    }
-                                });
+                            if (responseCode == 200 ) {
+                                backScreen();
                             }
                         }
                         @Override

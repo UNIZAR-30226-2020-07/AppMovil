@@ -141,7 +141,7 @@ public class remoteServer implements serverInterface {
     }
 
 
-    public void addSongToPlaylist(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
+    public void addOrRemoveSong(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
         String url = "playlists/";
         url = url + idPlaylist;
         initialize()

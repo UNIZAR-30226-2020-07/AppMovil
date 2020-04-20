@@ -401,10 +401,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 break;
         }
         resList.setOnScrollListener(new AbsListView.OnScrollListener(){
-
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {}
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0) {

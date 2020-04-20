@@ -26,7 +26,6 @@ import com.instantmusic.appmovil.playlist.addSongToPlaylist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-
 import org.json.JSONObject;
 
 public class SongActivity extends AppCompatActivity  {
@@ -53,6 +52,7 @@ public class SongActivity extends AppCompatActivity  {
     ImageView loop;
     ImageView shuffle;
     RatingBar ratingBar;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_song);
