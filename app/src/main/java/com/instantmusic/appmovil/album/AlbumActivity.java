@@ -49,16 +49,16 @@ public class AlbumActivity extends AppCompatActivity {
                 if ( responseCode == 200 ) {
                     albumSelected = new Album(data);
                     adapterSong.addAll(albumSelected.songs);
+                    TextView name=findViewById(R.id.albumName);
+                    TextView creator=findViewById(R.id.albumCreator);
+                    name.setText(albumSelected.name);
+                    creator.setText(albumSelected.artistName);
                 }
             }
             @Override
             public void onErrorResponse(Throwable throwable) {
             }
         });
-        TextView name=findViewById(R.id.albumName);
-        TextView creator=findViewById(R.id.albumCreator);
-        name.setText(albumSelected.name);
-        creator.setText(albumSelected.artistName);
         Button Button1 = findViewById(R.id.backButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,9 +21,11 @@ public class Song {
                 JSONObject album = object.getJSONObject("album");
                 this.artist = album.getJSONObject("artist").getString("name");
             }
-            else {
-                this.artist = object.getString("name");
+            /*else {
+               this.artist = object.getString("name");
             }
+
+             */
             this.songName = object.getString("title");
             this.category = object.getString("genre");
             this.duration = object.getInt("duration");
