@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.album.AlbumActivity;
 import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -64,7 +65,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long idt) {
                 if ( searchType == 1 || searchType == 2 ) {
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                     Song cancion = (Song) search.getItem(position);
@@ -79,7 +80,13 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
                 }
                 else if ( searchType == 4 ) {
-
+                    ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
+                    Album cancion = (Album) search.getItem(position);
+                    String name = cancion.name;
+                    String artist = cancion.artistName;
+                    ArrayList<Song> songs=cancion.songs;
+                    int id = cancion.id;
+                    Album(name, artist,id,songs);
                 }
             }
         });
@@ -317,6 +324,14 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         i.putExtra(this.getPackageName() + ".duration", durationSong);
         i.putExtra(this.getPackageName() + ".url", stream_url);
         i.putExtra(this.getPackageName() + ".id", idSong);
+        this.startActivity(i);
+    }
+    private void Album(String songName, String autorName, int idSong, ArrayList<Song> songs) {
+        Intent i = new Intent(this, AlbumActivity.class);
+        i.putExtra(this.getPackageName() + ".name", songName);
+        i.putExtra(this.getPackageName() + ".artist", autorName);
+        i.putExtra(this.getPackageName() + ".id", idSong);
+        i.putExtra(this.getPackageName() + ".songs", songs);
         this.startActivity(i);
     }
 
