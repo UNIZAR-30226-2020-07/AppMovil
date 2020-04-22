@@ -14,6 +14,7 @@ public interface serverInterface  {
     void getUserData(JSONConnection.Listener listener);
     void getPlaylistData(int idPlaylist, JSONConnection.Listener listener);
     void getSongData(int idSong, JSONConnection.Listener listener);
+    void getAlbumData(int idAlbum, JSONConnection.Listener listener);
     void login(String username_email, String password, JSONConnection.Listener listener);
     void addOrRemoveSong(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener);
     void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener);

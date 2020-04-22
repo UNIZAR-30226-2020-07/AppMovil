@@ -20,7 +20,7 @@ public class Album {
             this.artistName = object.getJSONObject("artist").getString("name");
             JSONArray canciones = object.getJSONArray("songs");
             for ( int i = 0; i < canciones.length(); i++ ) {
-                Song cancion = new Song(canciones.getJSONObject(i));
+                Song cancion = new Song(canciones.getJSONObject(i), false);
                 this.songs.add(cancion);
             }
         }

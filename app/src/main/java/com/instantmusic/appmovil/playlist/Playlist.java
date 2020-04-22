@@ -32,7 +32,7 @@ public class Playlist {
                         if ( responseCode == 200 ) {
                             try {
                                 for ( int i = 0; i < data.getJSONArray("songs").length(); i++ ) {
-                                    Song cancion = new Song(data.getJSONArray("songs").getJSONObject(i));
+                                    Song cancion = new Song(data.getJSONArray("songs").getJSONObject(i), true);
                                     Playlist.this.songs.add(cancion);
                                 }
                             }
@@ -50,7 +50,7 @@ public class Playlist {
             else {
                 JSONArray canciones = object.getJSONArray("songs");
                 for ( int i = 0; i < canciones.length(); i++ ) {
-                    Song cancion = new Song(canciones.getJSONObject(i));
+                    Song cancion = new Song(canciones.getJSONObject(i), true);
                     this.songs.add(cancion);
                 }
             }

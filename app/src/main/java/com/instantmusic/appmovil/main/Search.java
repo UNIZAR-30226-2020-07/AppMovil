@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.album.AlbumActivity;
 import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -31,16 +32,14 @@ import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
-    private EditText search;
     private TextView searchTip1;
     private TextView searchTip2;
     private ImageView lupaGrande;
     private LinearLayout searchMenu;
     private int searchType = 1;
-    private boolean flag_loading = false;
     private EditText shit;
     private serverInterface server;
-    private ArrayList<Song> arrayOfSongs = new ArrayList<Song>();
+    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private ArrayList<Album> arrayOfAlbums = new ArrayList<>();
     private SongsAdapter adapterSong;
     private AlbumsAdapter adapterAlbum;
@@ -67,25 +66,26 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if ( searchType == 1 || searchType == 2 ) {
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                    Song cancion = (Song) search.getItem(position);
-                    String name = cancion.songName;
-                    String artista = cancion.artist;
-                    int duracion = cancion.duration;
-                    String url = cancion.url;
-                    int idSong = cancion.id;
-                    Song(name, artista, duracion, url, idSong);
+                    Song cancion = search.getItem(position);
+                    if ( cancion != null ) {
+                        Song(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
+                    }
                 }
                 else if ( searchType == 3 ) {
 
                 }
                 else if ( searchType == 4 ) {
-
+                    ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
+                    Album album = search.getItem(position);
+                    if ( album != null ) {
+                        Album(album.id);
+                    }
                 }
             }
         });
 
-        search = findViewById(R.id.searchbar2);
-        shit = findViewById(R.id.searchbar2);
+        EditText search = findViewById(R.id.searchbar2);
+        shit = search;
         Button confirmButton = findViewById(R.id.search);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -320,6 +320,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         this.startActivity(i);
     }
 
+    private void Album(int idAlbum) {
+        Intent i = new Intent(this, AlbumActivity.class);
+        i.putExtra(this.getPackageName() + ".id", idAlbum);
+        this.startActivity(i);
+    }
+
     @Override
     public void onBackPressed() {
         ListView search = findViewById(R.id.searchRes);
@@ -423,7 +429,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 resList.setAdapter(adapterSong);
 
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Song> newSongs = Song.fromJson(results);
+                ArrayList<Song> newSongs = Song.fromJson(results, true);
                 adapterSong.addAll(newSongs);
             }
         }

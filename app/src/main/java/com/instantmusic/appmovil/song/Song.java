@@ -15,16 +15,21 @@ public class Song {
     public int rate;
 
     // Constructor to convert JSON object into a Java class instance
-    public Song(JSONObject object){
+    public Song(JSONObject object, boolean esInicio){
         try {
-            JSONObject album = object.getJSONObject("album");
+            if ( esInicio ) {
+                JSONObject album = object.getJSONObject("album");
+                this.artist = album.getJSONObject("artist").getString("name");
+            }
+            else {
+                this.artist = object.getString("name");
+            }
             this.songName = object.getString("title");
-            this.artist = album.getJSONObject("artist").getString("name");
             this.category = object.getString("genre");
             this.duration = object.getInt("duration");
             this.url = object.getString("stream_url");
             this.id = object.getInt("id");
-            this.rate = object.getInt("user_valoration");
+            this.rate = object.optInt("user_valoration",0);
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -32,11 +37,11 @@ public class Song {
     }
 
     // Factory method to convert an array of JSON objects into a list of objects
-    public static ArrayList<Song> fromJson(JSONArray jsonObjects) {
+    public static ArrayList<Song> fromJson(JSONArray jsonObjects, boolean esInicio) {
         ArrayList<Song> songs = new ArrayList<Song>();
         for (int i = 0; i < jsonObjects.length(); i++) {
             try {
-                songs.add(new Song(jsonObjects.getJSONObject(i)));
+                songs.add(new Song(jsonObjects.getJSONObject(i), esInicio));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

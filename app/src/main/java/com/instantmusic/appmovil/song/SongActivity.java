@@ -209,7 +209,7 @@ public class SongActivity extends AppCompatActivity  {
                         @Override
                         public void onValidResponse(int responseCode, JSONObject data) {
                             if ( responseCode == 200 ) {
-                                Song newSong = new Song(data);
+                                Song newSong = new Song(data, true);
                                 rateSong = newSong.rate;
                                 ratingBar.setRating(rateSong);
                             }

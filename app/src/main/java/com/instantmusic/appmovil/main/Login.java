@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
                 if ( responseCode == 200 ) {
                     try {
                         JSONArray songsRecommended = data.getJSONArray("results");
-                        ArrayList<Song> newSongs = Song.fromJson(songsRecommended);
+                        ArrayList<Song> newSongs = Song.fromJson(songsRecommended, true);
                         adapterSongs.addAll(newSongs);
                     }
                     catch (JSONException e) {

@@ -41,6 +41,7 @@
         <activity android:name=".playlist.addSongToPlaylist"></activity>
         <activity android:name=".playlist.PlaylistSongs"></activity>
         <activity android:name=".playlist.removeSongFromPlaylist"></activity>
+        <activity android:name=".album.AlbumActivity"></activity>
     </application>
 
 </manifest>

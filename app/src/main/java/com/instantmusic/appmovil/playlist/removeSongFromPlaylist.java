@@ -47,7 +47,7 @@ public class removeSongFromPlaylist extends AppCompatActivity {
                 try {
                     if ( responseCode == 200 ) {
                         playlistSelected = new Playlist(data, false);
-                        ArrayList<Song> newSongs = Song.fromJson(data.getJSONArray("songs"));
+                        ArrayList<Song> newSongs = Song.fromJson(data.getJSONArray("songs"), false);
                         adapterSong.addAll(newSongs);
                     }
                 } catch (JSONException e) {

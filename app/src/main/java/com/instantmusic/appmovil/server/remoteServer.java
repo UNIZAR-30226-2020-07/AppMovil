@@ -120,6 +120,15 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void getAlbumData(int idAlbum, JSONConnection.Listener listener) {
+        String url = "albums/";
+        url = url + idAlbum;
+        initialize()
+                .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
     public void getSongData(int idSong, JSONConnection.Listener listener) {
         String url = "songs/";
         url = url + idSong;
