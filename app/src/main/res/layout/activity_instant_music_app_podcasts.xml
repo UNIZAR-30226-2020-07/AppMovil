@@ -8,356 +8,156 @@
     tools:context=".main.MusicApp">
 
     <LinearLayout
-    android:id="@+id/linearLayout6"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:orientation="horizontal"
-    android:visibility="visible">
-
-    <ImageView
-            android:id="@+id/menuButton"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton11"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton12"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton13"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton14"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
+        android:id="@+id/searchMenu"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
+        android:layout_gravity="right"
+        android:background="#007E7A80"
         android:orientation="vertical"
-        app:layout_anchor="@+id/linearLayout6"
-        app:layout_anchorGravity="center">
+        android:visibility="invisible">
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:visibility="visible">
+            android:layout_height="50dp" />
 
-            <Space
-                android:layout_width="17dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton1"
-                style="@android:style/ButtonBar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/home480" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton2"
-                style="@android:style/ButtonBar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/lupagrande" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/microphone100_2" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/friends100" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/settings100" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="13dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/home"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Home" />
-
-            <Space
-                android:layout_width="33dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/searchButton"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Search" />
-
-            <Space
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/podcasts"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp" />
-
-            <Space
-                android:layout_width="33dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/friends"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Friends" />
-
-            <Space
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="62dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/settings"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Settings" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/seeArtist2"
+            android:layout_width="130dp"
+            android:layout_height="25dp"
+            android:background="@drawable/edit_round2"
+            android:text="@string/songMenu2"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/backColor"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="220sp" />
+            android:layout_height="10dp" />
 
-        <ImageView
-            android:id="@+id/lupaGrande"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="center"
-            app:srcCompat="@drawable/lupagrande2" />
-
-        <TextView
-            android:id="@+id/searchTip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/searchTip1"
-            android:textColor="@color/secondaryColor"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/searchTip2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/searchTip2"
-            android:textAlignment="center"
-            android:textColor="@color/secondaryColor"
-            android:textSize="21sp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
+            <Space
+                android:layout_width="14dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:background="@drawable/flecha"
+                android:shadowColor="#00FFFFFF"
+                android:textColor="#00FFFFFF"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorHint="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
+
+            <Space
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/optionSong"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:background="@drawable/points"
+                android:scaleType="center"
+                app:srcCompat="@drawable/points" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout14"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|center_vertical"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/podcasticon" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backColor"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/searchbar2"
-                android:layout_width="341dp"
-                android:layout_height="56dp"
+            <TextView
+                android:id="@+id/albumName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="0"
-                android:background="#F8EBF0"
-                android:hint="@string/search1"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/search"
-                android:layout_width="53dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:background="@drawable/searchicon"
-                android:backgroundTint="#000000"
-                android:visibility="visible" />
+                android:textAlignment="center"
+                android:textColor="@color/backColor"
+                android:textSize="25sp"
+                tools:text="Nombre de podcast" />
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/searchRes"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/albumCreator"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/secondaryColor"
-            android:visibility="visible">
+            android:textColor="@color/backColor"
+            android:textSize="15sp"
+            tools:text="Artista" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="127dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_round"
+            android:text="@string/play"
+            android:textColor="@color/backColor" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <ListView
+            android:id="@+id/cancionesAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="387dp"
+            android:transcriptMode="alwaysScroll">
 
         </ListView>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/secondaryColor"
-        tools:visibility="visible" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
