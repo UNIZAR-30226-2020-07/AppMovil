@@ -32,10 +32,9 @@ public class AlbumActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_album);
-        resList = findViewById(R.id.playlist);
+        resList = findViewById(R.id.cancionesAlbum);
         serverInterface server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
-        resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
             idAlbum = extras.getInt("idAlbum");

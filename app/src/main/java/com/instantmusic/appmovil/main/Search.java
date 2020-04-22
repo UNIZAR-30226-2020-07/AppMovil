@@ -321,8 +321,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Album(int idAlbum) {
-        Intent i = new Intent(this, AlbumActivity.class);
-        i.putExtra(this.getPackageName() + ".id", idAlbum);
+        Intent i = new Intent(Search.this, AlbumActivity.class);
+        i.putExtra("idAlbum", idAlbum);
         this.startActivity(i);
     }
 
@@ -423,11 +423,11 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         try {
             if(searchType==4){
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Album> newSongs = Album.fromJson(results);
-                adapterAlbum.addAll(newSongs);
-            }else {
+                ArrayList<Album> newAlbums = Album.fromJson(results);
+                adapterAlbum.addAll(newAlbums);
+            }
+            else {
                 resList.setAdapter(adapterSong);
-
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Song> newSongs = Song.fromJson(results, true);
                 adapterSong.addAll(newSongs);

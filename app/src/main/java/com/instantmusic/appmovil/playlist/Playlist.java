@@ -4,8 +4,6 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
-import com.instantmusic.appmovil.song.SongsAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +12,12 @@ import java.util.ArrayList;
 public class Playlist {
     public String playlistName;
     public ArrayList<Song> songs = new ArrayList<>();
-    private serverInterface server;
     public String user;
     public int id;
     // Constructor to convert JSON object into a Java class instance
     public Playlist(JSONObject object, boolean esInicio){
         try {
-            server = new remoteServer();
+            serverInterface server = new remoteServer();
             this.songs = new ArrayList<>();
             this.playlistName = object.getString("name");
             this.user = object.getString("user");
