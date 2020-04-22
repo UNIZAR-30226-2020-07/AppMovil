@@ -33,7 +33,9 @@
         <activity android:name=".main.Regist"></activity>
         <activity android:name=".main.Search"></activity>
         <activity android:name=".main.Friends"></activity>
-        <activity android:name=".main.Podcasts"></activity>
+        <activity android:name=".podcast.PodcastSearch"></activity>
+        <activity android:name=".podcast.PodcastActivity"></activity>
+        <activity android:name=".podcast.PodcastSongs"></activity>
         <activity android:name=".main.Settings"></activity>
         <activity android:name=".song.SongActivity"></activity>
         <activity android:name=".playlist.PlaylistActivity"></activity>

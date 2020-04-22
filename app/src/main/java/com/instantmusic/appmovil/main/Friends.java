@@ -15,6 +15,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.UsersDbAdapter;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
@@ -116,7 +117,7 @@ public class Friends extends AppCompatActivity {
     }
 
     private void Podcasts() {
-        Intent i = new Intent(this, Podcasts.class);
+        Intent i = new Intent(this, PodcastSearch.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivityForResult(i, 1);
