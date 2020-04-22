@@ -52,16 +52,15 @@ public class PodcastActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_podcasts);
-        resList = findViewById(R.id.playlist);
+        resList = findViewById(R.id.cancionesAlbum);
         server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
-        resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
-            playList= extras.getString("playlist");
-            creador= extras.getString("creador");
-            songs = extras.getIntegerArrayList("canciones");
-            idPlaylist = extras.getInt("idPlaylist");
+            playList= extras.getString("name");
+            creador= extras.getString("user");
+            songs = extras.getIntegerArrayList("songs");
+            idPlaylist = extras.getInt("id");
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
@@ -84,9 +83,8 @@ public class PodcastActivity extends AppCompatActivity {
             public void onErrorResponse(Throwable throwable) {
             }
         });
-        TextView name=findViewById(R.id.playlistName);
-        changeMenu.setText(playList);
-        TextView creator=findViewById(R.id.playlistCreator);
+        TextView name=findViewById(R.id.albumName);
+        TextView creator=findViewById(R.id.albumCreator);
         name.setText(playList);
         creator.setText(creador);
         Button Button1 = findViewById(R.id.backButton);
@@ -116,8 +114,6 @@ public class PodcastActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Button delete = findViewById(R.id.addPlaylist);
         Button Button6 = findViewById(R.id.optionSong);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,93 +125,6 @@ public class PodcastActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Button removeSong = findViewById(R.id.removeSong);
-
-        Button Button7 = findViewById(R.id.changeName);
-        Button Button8 =findViewById(R.id.changeName2);
-        Button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (changeMenu.getVisibility() == View.VISIBLE) {
-                    changeMenu.setVisibility(View.INVISIBLE);
-                    changeMenu2.setVisibility(View.INVISIBLE);
-                    findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
-                } else {
-                    changeMenu.setVisibility(View.VISIBLE);
-                    changeMenu2.setVisibility(View.VISIBLE);
-                    findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
-                }
-                EditText change=findViewById(R.id.change);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if ( imm != null ) {
-                    imm.showSoftInput(change, InputMethodManager.SHOW_IMPLICIT);
-                }
-                change.requestFocus();
-                change.setSelection(change.getText().length());
-            }
-        });
-        Button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (changeMenu.getVisibility() == View.VISIBLE) {
-                    changeMenu.setVisibility(View.INVISIBLE);
-                    changeMenu2.setVisibility(View.INVISIBLE);
-                    findViewById(R.id.playlistName).setVisibility(View.VISIBLE);
-                }
-                else {
-                    changeMenu.setVisibility(View.VISIBLE);
-                    changeMenu2.setVisibility(View.VISIBLE);
-                    findViewById(R.id.playlistName).setVisibility(View.INVISIBLE);
-                }
-                EditText change=findViewById(R.id.change);
-                playList=change.getText().toString();
-                TextView playlistname= findViewById(R.id.playlistName);
-                playlistname.setText(change.getText().toString());
-
-                server.changeNamePlaylist(change.getText().toString(), idPlaylist, new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) {
-                    }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) {
-                    }
-                });
-            }
-        });
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchMenu.getVisibility() == View.VISIBLE) {
-                    searchMenu.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    searchMenu.setVisibility(View.VISIBLE);
-                }
-
-                server.deletePlaylist(idPlaylist, new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) {
-                        backScreen();
-                    }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) {
-                    }
-                });
-            }
-        });
-        removeSong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (searchMenu.getVisibility() == View.VISIBLE) {
-                    searchMenu.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    searchMenu.setVisibility(View.VISIBLE);
-                }
-                removeSong();
-            }
-        });
         orderName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,16 +134,8 @@ public class PodcastActivity extends AppCompatActivity {
                 searchType = 1;
                 sortBy("titulo");
             }
-        });orderCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-                orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
-                orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-                searchType = 2;
-                sortBy("categoria");
-            }
-        });orderArtist.setOnClickListener(new View.OnClickListener() {
+        });
+        orderArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
@@ -264,14 +165,6 @@ public class PodcastActivity extends AppCompatActivity {
                     }
                 });
             break;
-            case "categoria":
-                adapterSong.sort(new Comparator<Song>() {
-                    @Override
-                    public int compare(Song o1, Song o2) {
-                        return o1.category.compareTo(o2.category);
-                    }
-                });
-            break;
         }
     }
 
@@ -287,9 +180,6 @@ public class PodcastActivity extends AppCompatActivity {
                     adapterSong.addAll(playlistSelected.songs);
                     if ( searchType == 1 ) {
                         sortBy("titulo");
-                    }
-                    else if ( searchType == 2 ) {
-                        sortBy("categoria");
                     }
                     else if ( searchType == 3 ) {
                         sortBy("artista");
@@ -322,13 +212,6 @@ public class PodcastActivity extends AppCompatActivity {
         }
         i.putExtra(this.getPackageName() + ".songs", idSongs);
         this.startActivity(i);
-    }
-
-    private void removeSong() {
-        Intent i=new Intent(this, removeSongFromPlaylist.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("id", idPlaylist);
-        startActivityForResult(i, 1);
     }
 
 }

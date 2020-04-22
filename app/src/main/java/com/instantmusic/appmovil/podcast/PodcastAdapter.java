@@ -16,7 +16,7 @@ public class PodcastAdapter extends ArrayAdapter<Podcast> {
     private int tipoLayout;
     public PodcastAdapter(Context context, ArrayList<Podcast> playlists, int n) {
         super(context, 0, playlists);
-        this.tipoLayout = n;
+        this.tipoLayout = 0;
     }
 
     @Override
@@ -26,16 +26,18 @@ public class PodcastAdapter extends ArrayAdapter<Podcast> {
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             if ( this.tipoLayout == 0 ) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists_row, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row2, parent, false);
             }
             else if ( this.tipoLayout == 1 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists2_row, parent, false);
             }
         }
         // Lookup view for data population
-        TextView playlistName = (TextView) convertView.findViewById(R.id.text1);
+        TextView podcastName = (TextView) convertView.findViewById(R.id.text1);
+        TextView podcastCreator = (TextView) convertView.findViewById(R.id.text2);
         // Populate the data into the template view using the data object
-        playlistName.setText(playlist.playlistName);
+        podcastName.setText(playlist.playlistName);
+        podcastCreator.setText(playlist.user);
         // Return the completed view to render on screen
         return convertView;
     }

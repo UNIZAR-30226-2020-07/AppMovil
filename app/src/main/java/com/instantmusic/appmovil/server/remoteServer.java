@@ -92,10 +92,12 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public void searchPodcasts(String name, JSONConnection.Listener listener) {
+    public void searchPodcasts(int page,String name, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("podcasts")
+                .setUrl("songs")
                 .putParameter("search", name)
+                .putParameter("podcast", Boolean.toString(true))
+                .putParameter("page",Integer.toString(page))
                 .setListener(listener)
                 .execute();
     }
@@ -204,6 +206,16 @@ public class remoteServer implements serverInterface {
         String url = "songs/recommended";
         initialize()
                 .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
+    @Override
+    public void searchArtistsPodcasts(int page, String toString, JSONConnection.Listener listener) {
+        initialize()
+                .setUrl("artists")
+                .putParameter("page",Integer.toString(page))
+                .putParameter("search", toString)
                 .setListener(listener)
                 .execute();
     }

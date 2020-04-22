@@ -33,6 +33,8 @@
     <string name="search4">Search album</string>
     <string name="searchTip1">Find your favourite music</string>
     <string name="searchTip2">Search by artist, songs, albums or genre</string>
+    <string name="searchTip3">Find your favourite podcasts</string>
+    <string name="searchTip4">Search by name or artist</string>
     <string name="home">Home</string>
     <string name="searchButton">Search</string>
     <string name="podcasts">Podcasts</string>

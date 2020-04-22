@@ -171,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/searchTip1"
+            android:text="@string/searchTip3"
             android:textColor="@color/secondaryColor"
             android:textSize="14sp" />
 
@@ -179,7 +179,7 @@
             android:id="@+id/searchTip2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/searchTip2"
+            android:text="@string/searchTip4"
             android:textAlignment="center"
             android:textColor="@color/secondaryColor"
             android:textSize="13sp" />
@@ -228,7 +228,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/lupagrande2"
+                android:background="@drawable/lupagrande"
                 android:clickable="false" />
 
             <Space
@@ -241,7 +241,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0"
-                android:background="@drawable/microphone100"
+                android:background="@drawable/microphone100_2"
                 android:clickable="false" />
 
             <Space
@@ -467,53 +467,6 @@
                 <Space
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_round2"
-                    android:text="@string/category"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textColor="@color/backColor"
-                    android:textSize="14sp" />
-
-                <Space
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:background="@color/secondaryColor"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/switchCategory"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="#00FFFFFF" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="3dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <TextView
@@ -546,56 +499,6 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="#00F8EBF0" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="3dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/secondaryColor"
-                    android:foreground="@color/secondaryColor" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="120dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_round2"
-                    android:text="@string/album"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textColor="@color/backColor"
-                    android:textSize="14sp" />
-
-                <Space
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/secondaryColor"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/switchAlbum"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:background="@color/secondaryColor" />
                 </LinearLayout>
 
             </LinearLayout>

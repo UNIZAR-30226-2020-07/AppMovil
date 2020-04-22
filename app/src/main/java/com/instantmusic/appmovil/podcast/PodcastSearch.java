@@ -1,14 +1,19 @@
 package com.instantmusic.appmovil.podcast;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +21,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.main.Friends;
+import com.instantmusic.appmovil.main.Login;
+import com.instantmusic.appmovil.main.Search;
+import com.instantmusic.appmovil.main.Settings;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistSongs;
 import com.instantmusic.appmovil.playlist.removeSongFromPlaylist;
@@ -23,24 +33,30 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class PodcastSearch extends AppCompatActivity {
+public class PodcastSearch extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
+    private TextView searchTip1;
+    private TextView searchTip2;
+    private ImageView lupaGrande;
+    private LinearLayout searchMenu;
     private String playList;
     private String creador;
     private int idPlaylist;
     private ArrayList<Integer> songs;
     private serverInterface server;
-    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
-    private SongsAdapter adapterSong;
-    private LinearLayout searchMenu;
+    private ArrayList<Podcast> arrayOfSongs = new ArrayList<>();
+    private PodcastAdapter adapterSong;
     private Button changeMenu2;
     private Button orderName;
     private Button orderCategory;
@@ -48,13 +64,18 @@ public class PodcastSearch extends AppCompatActivity {
     int searchType = 1;
     private EditText changeMenu;
     private int page=1;
-
+    private int cruz = 0;
+    private EditText shit;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_search_podcast);
         resList = findViewById(R.id.searchRes);
         server = new remoteServer();
         resList = findViewById(R.id.searchRes);
+        searchTip1 = findViewById(R.id.searchTip1);
+        searchTip2 = findViewById(R.id.searchTip2);
+        lupaGrande = findViewById(R.id.lupaGrande);
+        searchMenu = findViewById(R.id.searchMenu);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
             playList= extras.getString("playlist");
@@ -62,117 +83,269 @@ public class PodcastSearch extends AppCompatActivity {
             songs = extras.getIntegerArrayList("canciones");
             idPlaylist = extras.getInt("idPlaylist");
         }
-        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
+        adapterSong = new PodcastAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
         resList.setAdapter(adapterSong);
-        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
-            @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
-                if ( responseCode == 200 ) {
-                    Podcast playlistSelected = new Podcast(data,false);
-                    adapterSong.addAll(playlistSelected.songs);
-                    sortBy("titulo");
-                }
-            }
-            @Override
-            public void onErrorResponse(Throwable throwable) {
-            }
-        });
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                Song cancion = search.getItem(position);
+                ArrayAdapter<Podcast> search = (ArrayAdapter<Podcast>) parent.getAdapter();
+                Podcast cancion = search.getItem(position);
                 if ( cancion != null ) {
-                    Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,position,false);
+                    Podcast(cancion.playlistName, cancion.user, cancion.id,cancion.songs);
+                }
+            }
+        });
+        EditText search = findViewById(R.id.searchbar2);
+        shit = search;
+        Button confirmButton = findViewById(R.id.search);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                registerForContextMenu(resList);
+                searchTip1.setVisibility(View.INVISIBLE);
+                searchTip2.setVisibility(View.INVISIBLE);
+                lupaGrande.setVisibility(View.INVISIBLE);
+                search();
+            }
+        });
+        Button Button1 = findViewById(R.id.menuButton1);
+        Button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Home();
+            }
+        });
+        Button Button3 = findViewById(R.id.menuButton3);
+        Button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Podcasts();
+            }
+        });
+        Button Button4 = findViewById(R.id.menuButton4);
+        Button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Friends();
+            }
+        });
+        Button Button5 = findViewById(R.id.menuButton5);
+        Button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings();
+            }
+        });
+        Button Button6 = findViewById(R.id.optionSearch);
+
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cruz == 0) {
+                    if (searchMenu.getVisibility() == View.VISIBLE) {
+                        searchMenu.setVisibility(View.INVISIBLE);
+                    } else {
+                        searchMenu.setVisibility(View.VISIBLE);
+                    }
+
+                } else {
+                    ListView search = findViewById(R.id.searchRes);
+                    search.setVisibility(View.INVISIBLE);
+                    searchTip1.setVisibility(View.VISIBLE);
+                    searchTip2.setVisibility(View.VISIBLE);
+                    lupaGrande.setVisibility(View.VISIBLE);
+                    Button cruzButton = findViewById(R.id.optionSearch);
+                    cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
+                    cruz = 0;
+                }
+            }
+        });
+
+        Button s1 = findViewById(R.id.switchName);
+        Button s3 = findViewById(R.id.switchArtist);
+        s1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+                nameActivated();
+            }
+        });
+        s3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMenu.setVisibility(View.INVISIBLE);
+                artistActivated();
+
+            }
+        });
+
+
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                    search();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+    private void nameActivated() {
+        searchType = 1;
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        s1.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
+        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        EditText barra = findViewById(R.id.searchbar2);
+        barra.setHint(getResources().getString(R.string.search1));
+
+    }
+    private void artistActivated() {
+        searchType = 3;
+        Button s1 = findViewById(R.id.switchName);
+        Button s2 = findViewById(R.id.switchCategory);
+        Button s3 = findViewById(R.id.switchArtist);
+        Button s4 = findViewById(R.id.switchAlbum);
+        s3.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
+        s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
+        EditText barra = findViewById(R.id.searchbar2);
+        barra.setHint(getResources().getString(R.string.search2));
+
+    }
+
+    private void Home() {
+        Intent i = new Intent(this, Login.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Podcasts() {
+        Intent i = new Intent(this, Search.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Friends() {
+        Intent i = new Intent(this, Friends.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivityForResult(i, 1);
+
+    }
+
+    private void Settings() {
+        Intent i = new Intent(this, Settings.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivityForResult(i, 1);
+
+    }
+    @Override
+    public void onBackPressed() {
+        ListView search = findViewById(R.id.searchRes);
+        search.setVisibility(View.INVISIBLE);
+        searchTip1.setVisibility(View.VISIBLE);
+        searchTip2.setVisibility(View.VISIBLE);
+        lupaGrande.setVisibility(View.VISIBLE);
+        Button cruzButton = findViewById(R.id.optionSearch);
+        cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
+        cruz = 0;
+    }
+    private void Podcast(String songName, String autorName,  int idSong,ArrayList<Song> songs) {
+        Intent i = new Intent(this, PodcastActivity.class);
+        i.putExtra(this.getPackageName() + ".name", songName);
+        i.putExtra(this.getPackageName() + ".user", autorName);
+        i.putExtra(this.getPackageName() + ".id", idSong);
+        i.putExtra(this.getPackageName() + ".songs", songs);
+        this.startActivity(i);
+    }
+    private void searchNextPage() {
+        page=page+1;
+        switch (searchType) {
+            case 1:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchPodcasts(page,shit.getText().toString(), this);
+                }
+                break;
+            case 3:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    server.searchArtistsPodcasts(page,shit.getText().toString(), this);
+                }
+                break;
+        }
+    }
+    private void search() {
+        adapterSong.clear();
+        shit = findViewById(R.id.searchbar2);
+        cruz = 1;
+        Button cruzButton = findViewById(R.id.optionSearch);
+        cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
+
+        switch (searchType) {
+            case 1:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    resList.setVisibility(View.VISIBLE);
+                    page=1;
+                    server.searchPodcasts(page,shit.getText().toString(), this);
+                }
+                break;
+            case 3:
+                if ( !(shit.getText().toString().equals("")) ) {
+                    resList.setVisibility(View.VISIBLE);
+                    page=1;
+                    server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
+                        @Override
+                        public void onValidResponse(int responseCode, JSONObject data) {
+                            if ( responseCode == 200 ) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onErrorResponse(Throwable throwable) {
+
+                        }
+                    });
+                }
+                break;
+        }
+        resList.setOnScrollListener(new AbsListView.OnScrollListener(){
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
+                    searchNextPage();
                 }
             }
         });
     }
-    private void sortBy(String comp) {
-        switch (comp) {
-            case "artista":
-                adapterSong.sort(new Comparator<Song>() {
-                    @Override
-                    public int compare(Song o1, Song o2) {
-                        return o1.artist.compareTo(o2.artist);
-                    }
-                });
-            break;
-            case "titulo":
-                adapterSong.sort(new Comparator<Song>() {
-                    @Override
-                    public int compare(Song o1, Song o2) {
-                        return o1.songName.compareTo(o2.songName);
-                    }
-                });
-            break;
-            case "categoria":
-                adapterSong.sort(new Comparator<Song>() {
-                    @Override
-                    public int compare(Song o1, Song o2) {
-                        return o1.category.compareTo(o2.category);
-                    }
-                });
-            break;
+
+    @Override
+    public void onValidResponse(int responseCode, JSONObject data) {
+        try {
+                resList.setAdapter(adapterSong);
+                JSONArray results = data.getJSONArray("results");
+                ArrayList<Podcast> newSongs = Podcast.fromJson(results, true);
+                adapterSong.addAll(newSongs);
+
+        }
+        catch (JSONException e) {
+            onErrorResponse(e);
         }
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        adapterSong.clear();
-        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
-            @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
-                if ( responseCode == 200 ) {
-                    Playlist playlistSelected = new Playlist(data,false);
-                    adapterSong.addAll(playlistSelected.songs);
-                    if ( searchType == 1 ) {
-                        sortBy("titulo");
-                    }
-                    else if ( searchType == 2 ) {
-                        sortBy("categoria");
-                    }
-                    else if ( searchType == 3 ) {
-                        sortBy("artista");
-                    }
-                }
-            }
-            @Override
-            public void onErrorResponse(Throwable throwable) {
-            }
-        });
-    }
-    private void backScreen(){
-        Intent i = new Intent();
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        setResult(RESULT_OK, i);
-        finish();
-    }
-    private void Song(String songName, String autorName, int durationSong, String stream_url, int id, int position, boolean botonPlay) {
-        Intent i = new Intent(this, PlaylistSongs.class);
-        i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".String", autorName);
-        i.putExtra(this.getPackageName() + ".duration", durationSong);
-        i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".positionId", position);
-        i.putExtra(this.getPackageName() + ".botonPlay", botonPlay);
-        i.putExtra(this.getPackageName() + ".id", id);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        for ( int j = 0; j < adapterSong.getCount(); j++ ) {
-            idSongs.add(Objects.requireNonNull(adapterSong.getItem(j)).id);
-        }
-        i.putExtra(this.getPackageName() + ".songs", idSongs);
-        this.startActivity(i);
-    }
+    public void onErrorResponse(Throwable throwable) {
 
-    private void removeSong() {
-        Intent i=new Intent(this, removeSongFromPlaylist.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("id", idPlaylist);
-        startActivityForResult(i, 1);
     }
-
 }

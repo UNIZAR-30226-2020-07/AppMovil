@@ -62,11 +62,11 @@ public class Podcast {
 
     // Factory method to convert an array of JSON objects into a list of objects
     // User.fromJson(jsonArray);
-    public static ArrayList<Playlist> fromJson(JSONArray jsonObjects, boolean esInicio) {
-        ArrayList<Playlist> playlists = new ArrayList<>();
+    public static ArrayList<Podcast> fromJson(JSONArray jsonObjects, boolean esInicio) {
+        ArrayList<Podcast> playlists = new ArrayList<>();
         for (int i = 0; i < jsonObjects.length(); i++) {
             try {
-                playlists.add(new Playlist(jsonObjects.getJSONObject(i), esInicio));
+                playlists.add(new Podcast(jsonObjects.getJSONObject(i), esInicio));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
