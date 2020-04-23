@@ -147,6 +147,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:maxLines="1"
                 android:text="@string/SongName"
                 android:textColor="@color/color2"
                 android:textSize="30sp"

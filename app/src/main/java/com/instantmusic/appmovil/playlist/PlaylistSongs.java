@@ -30,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class PlaylistSongs extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class PlaylistSongs extends AppCompatActivity {
     SeekBar seekBar;
     private int lastSong = -1;
     private ArrayList<Integer> idSongs;
+    private ArrayList<Song> randomSongs;
     private boolean isPlaying = false;
     private boolean isPaused = false;
     private boolean isLooped = false;
@@ -52,6 +55,7 @@ public class PlaylistSongs extends AppCompatActivity {
     private int durationSong;
     private ArrayList<Song> songs = new ArrayList<>();
     private int positionId;
+    private int positionRandomId = 0;
     private boolean botonPlay;
     private int rateSong;
     private LinearLayout searchMenu;
@@ -167,11 +171,140 @@ public class PlaylistSongs extends AppCompatActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearMediaPlayer();
-                play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
-                isPaused = false;
-                isPlaying = false;
-                PlaylistSongs.this.seekBar.setProgress(0);
+                if ( isShuffled ) {
+                    if ( mediaPlayer != null ) {
+                        if ( mediaPlayer.getCurrentPosition() < 1000 ) {
+                            if ( (positionId - 1) >= 0  ) {
+                                positionId = positionId - 1;
+                                Song newSong = randomSongs.get(positionRandomId);
+                                songName.setText(newSong.songName);
+                                autorName.setText(newSong.artist);
+                                durationSong = newSong.duration;
+                                durationSong = durationSong * 1000;
+                                urlSong = "";
+                                urlSong = urlSong + newSong.url;
+                                if (isPlaying) {
+                                    isPlaying = false;
+                                    isPaused = false;
+                                    playSong();
+                                }
+                                else {
+                                    isPlaying = false;
+                                    isPaused = false;
+                                }
+                            }
+                            else {
+                                clearMediaPlayer();
+                                play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                                isPaused = false;
+                                isPlaying = false;
+                                PlaylistSongs.this.seekBar.setProgress(0);
+                            }
+                        }
+                        else {
+                            clearMediaPlayer();
+                            play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                            isPaused = false;
+                            isPlaying = false;
+                            PlaylistSongs.this.seekBar.setProgress(0);
+                        }
+                    }
+                    else {
+                        if ( (positionRandomId - 1) >= 0 ) {
+                            positionRandomId = positionRandomId - 1;
+                            Song newSong = randomSongs.get(positionRandomId);
+                            songName.setText(newSong.songName);
+                            autorName.setText(newSong.artist);
+                            durationSong = newSong.duration;
+                            durationSong = durationSong * 1000;
+                            urlSong = "";
+                            urlSong = urlSong + newSong.url;
+                            if (isPlaying) {
+                                isPlaying = false;
+                                isPaused = false;
+                                playSong();
+                            }
+                            else {
+                                isPlaying = false;
+                                isPaused = false;
+                            }
+                        }
+                        else {
+                            clearMediaPlayer();
+                            play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                            isPaused = false;
+                            isPlaying = false;
+                            PlaylistSongs.this.seekBar.setProgress(0);
+                        }
+                    }
+                }
+                else {
+                    if ( mediaPlayer != null ) {
+                        if ( mediaPlayer.getCurrentPosition() < 1000 ) {
+                            if ( (positionId - 1) >= 0  ) {
+                                positionId = positionId - 1;
+                                Song newSong = songs.get(positionRandomId);
+                                songName.setText(newSong.songName);
+                                autorName.setText(newSong.artist);
+                                durationSong = newSong.duration;
+                                durationSong = durationSong * 1000;
+                                urlSong = "";
+                                urlSong = urlSong + newSong.url;
+                                if (isPlaying) {
+                                    isPlaying = false;
+                                    isPaused = false;
+                                    playSong();
+                                }
+                                else {
+                                    isPlaying = false;
+                                    isPaused = false;
+                                }
+                            }
+                            else {
+                                clearMediaPlayer();
+                                play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                                isPaused = false;
+                                isPlaying = false;
+                                PlaylistSongs.this.seekBar.setProgress(0);
+                            }
+                        }
+                        else {
+                            clearMediaPlayer();
+                            play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                            isPaused = false;
+                            isPlaying = false;
+                            PlaylistSongs.this.seekBar.setProgress(0);
+                        }
+                    }
+                    else {
+                        if ( (positionId - 1) >= 0 ) {
+                            positionId = positionId - 1;
+                            Song newSong = songs.get(positionId);
+                            songName.setText(newSong.songName);
+                            autorName.setText(newSong.artist);
+                            durationSong = newSong.duration;
+                            durationSong = durationSong * 1000;
+                            urlSong = "";
+                            urlSong = urlSong + newSong.url;
+                            if (isPlaying) {
+                                isPlaying = false;
+                                isPaused = false;
+                                playSong();
+                            }
+                            else {
+                                isPlaying = false;
+                                isPaused = false;
+                            }
+                        }
+                        else {
+                            clearMediaPlayer();
+                            play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                            isPaused = false;
+                            isPlaying = false;
+                            PlaylistSongs.this.seekBar.setProgress(0);
+                        }
+                    }
+                }
             }
         });
 
@@ -179,25 +312,48 @@ public class PlaylistSongs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if ( isShuffled ) {
-                    clearMediaPlayer();
-                    PlaylistSongs.this.seekBar.setProgress(0);
-                    if ( lastSong == -1 ) {
-                        lastSong = positionId;
+                    boolean dale = true;
+                    if ( positionRandomId == 0 ) {
+                        desordenar();
+                        dale = false;
                     }
-                    else {
-                        Random r = new Random();
-                        int nextSong = r.nextInt(idSongs.size());
-                        while ( nextSong == lastSong ) {
-                            nextSong = r.nextInt(idSongs.size());
-                        }
-                        lastSong = nextSong;
-                        Song newSong = songs.get(nextSong);
+                    if ( positionRandomId  > 0 && randomSongs.size() > (positionRandomId + 1) ) {
+                        positionRandomId = positionRandomId + 1;
+                        clearMediaPlayer();
+                        PlaylistSongs.this.seekBar.setProgress(0);
+                        Song newSong = randomSongs.get(positionRandomId);
                         songName.setText(newSong.songName);
                         autorName.setText(newSong.artist);
                         durationSong = newSong.duration;
                         durationSong = durationSong * 1000;
                         urlSong = "";
                         urlSong = urlSong + newSong.url;
+                        if (isPlaying) {
+                            isPlaying = false;
+                            isPaused = false;
+                            playSong();
+                        }
+                        else {
+                            isPlaying = false;
+                            isPaused = false;
+                        }
+                    }
+                    else if ( randomSongs.size() == positionRandomId + 1 ) {
+                        play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
+                        isPlaying = false;
+                        isPaused = false;
+                    }
+                    else {
+                        clearMediaPlayer();
+                        PlaylistSongs.this.seekBar.setProgress(0);
+                        Song newSong = randomSongs.get(positionRandomId);
+                        songName.setText(newSong.songName);
+                        autorName.setText(newSong.artist);
+                        durationSong = newSong.duration;
+                        durationSong = durationSong * 1000;
+                        urlSong = "";
+                        urlSong = urlSong + newSong.url;
+                        positionRandomId = positionRandomId + 1;
                         if (isPlaying) {
                             isPlaying = false;
                             isPaused = false;
@@ -359,6 +515,11 @@ public class PlaylistSongs extends AppCompatActivity {
                 handler.postDelayed(moveSeekBarThread, 100);
             }
         });
+    }
+
+    private void desordenar() {
+        randomSongs = songs;
+        Collections.shuffle(randomSongs);
     }
 
     private void backScreen() {
