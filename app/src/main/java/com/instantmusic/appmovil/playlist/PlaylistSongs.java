@@ -15,16 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlaylistSongs extends AppCompatActivity {
     serverInterface server;
@@ -53,10 +58,11 @@ public class PlaylistSongs extends AppCompatActivity {
     ImageView loop;
     ImageView shuffle;
     RatingBar ratingBar;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_song);
-        server=new remoteServer();
+        server = new remoteServer();
         loop = findViewById(R.id.loop);
         previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);
@@ -142,10 +148,13 @@ public class PlaylistSongs extends AppCompatActivity {
                 server.rateASong(idSong, (int) ratingBar.getRating(), new JSONConnection.Listener() {
                     @Override
                     public void onValidResponse(int responseCode, JSONObject data) {
-                        if ( responseCode == 200 ) { }
+                        if (responseCode == 200) {
+                        }
                     }
+
                     @Override
-                    public void onErrorResponse(Throwable throwable) { }
+                    public void onErrorResponse(Throwable throwable) {
+                    }
                 });
             }
         });
@@ -166,7 +175,7 @@ public class PlaylistSongs extends AppCompatActivity {
             public void onClick(View v) {
                 clearMediaPlayer();
                 PlaylistSongs.this.seekBar.setProgress(0);
-                if ( songs.size() > positionId + 1 ) {
+                if (songs.size() > positionId + 1) {
                     positionId = positionId + 1;
                     Song newSong = songs.get(positionId);
                     songName = findViewById(R.id.songname);
@@ -174,20 +183,18 @@ public class PlaylistSongs extends AppCompatActivity {
                     autorName = findViewById(R.id.autorname);
                     autorName.setText(newSong.artist);
                     durationSong = newSong.duration;
-                    durationSong = durationSong*1000;
+                    durationSong = durationSong * 1000;
                     urlSong = "";
-                    urlSong = urlSong+newSong.url;
-                    if ( isPlaying ) {
+                    urlSong = urlSong + newSong.url;
+                    if (isPlaying) {
                         isPlaying = false;
                         isPaused = false;
                         playSong();
-                    }
-                    else {
+                    } else {
                         isPlaying = false;
                         isPaused = false;
                     }
-                }
-                else {
+                } else {
                     play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
                     isPlaying = false;
                     isPaused = false;
@@ -198,13 +205,12 @@ public class PlaylistSongs extends AppCompatActivity {
         loop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( mediaPlayer != null ) {
-                    if ( isLooped ) {
+                if (mediaPlayer != null) {
+                    if (isLooped) {
                         loop.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, R.drawable.repeat));
                         mediaPlayer.setLooping(false);
                         isLooped = false;
-                    }
-                    else {
+                    } else {
                         loop.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, R.drawable.repeat2));
                         mediaPlayer.setLooping(true);
                         isLooped = true;
@@ -216,11 +222,10 @@ public class PlaylistSongs extends AppCompatActivity {
         shuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( isShuffled ) {
+                if (isShuffled) {
                     shuffle.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, R.drawable.shuffle2));
                     isShuffled = false;
-                }
-                else {
+                } else {
                     shuffle.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, R.drawable.shufflewhite));
                     isShuffled = true;
                 }
@@ -230,48 +235,41 @@ public class PlaylistSongs extends AppCompatActivity {
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
             songName = findViewById(R.id.songname);
-            song=cancion;
+            song = cancion;
             songName.setText(cancion);
             String autor = extras.getString(this.getPackageName() + ".String");
             autorName = findViewById(R.id.autorname);
             autorName.setText(autor);
             durationSong = extras.getInt(this.getPackageName() + ".duration");
-            durationSong = durationSong*1000;
+            durationSong = durationSong * 1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
             idSong = extras.getInt(this.getPackageName() + ".id");
             ArrayList<Integer> idSongs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
+            positionId = extras.getInt(this.getPackageName() + ".positionId");
+            botonPlay = extras.getBoolean(this.getPackageName() + ".botonPlay");
             assert idSongs != null;
-            for (int i = 0; i < idSongs.size(); i++ ) {
+            while(songs.size()<idSongs.size())songs.add(null);
+            for (int i = 0; i < idSongs.size(); i++) {
+                final int finalI = i;
                 server.getSongData(idSongs.get(i), new JSONConnection.Listener() {
                     @Override
                     public void onValidResponse(int responseCode, JSONObject data) {
                         if (responseCode == 200) {
                             Song newSong = new Song(data, true);
-                            PlaylistSongs.this.songs.add(newSong);
+                            PlaylistSongs.this.songs.set(finalI, newSong);
+                            if(finalI==positionId){
+                                rateSong = songs.get(positionId).rate;
+                                ratingBar.setRating(rateSong);
+                            }
                         }
                     }
+
                     @Override
                     public void onErrorResponse(Throwable throwable) {
                     }
                 });
             }
-            server.getSongData(idSong, new JSONConnection.Listener() {
-                @Override
-                public void onValidResponse(int responseCode, JSONObject data) {
-                    if ( responseCode == 200 ) {
-                        Song newSong = new Song(data, true);
-                        rateSong = newSong.rate;
-                        ratingBar.setRating(rateSong);
-                    }
-                }
-                @Override
-                public void onErrorResponse(Throwable throwable) {
-
-                }
-            });
-            positionId = extras.getInt(this.getPackageName() + ".positionId");
-            botonPlay = extras.getBoolean(this.getPackageName() + ".botonPlay");
-            if ( botonPlay ) {
+            if (botonPlay) {
                 playSong();
             }
         }
@@ -294,6 +292,7 @@ public class PlaylistSongs extends AppCompatActivity {
                 seekBarHint.setVisibility(View.VISIBLE);
                 handler.removeCallbacks(moveSeekBarThread);
             }
+
             @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
@@ -316,8 +315,7 @@ public class PlaylistSongs extends AppCompatActivity {
                 handler.removeCallbacks(moveSeekBarThread);
                 if (mediaPlayer != null && isPlaying) {
                     mediaPlayer.seekTo(seekBar.getProgress());
-                }
-                else if (mediaPlayer != null && isPaused) {
+                } else if (mediaPlayer != null && isPaused) {
                     mediaPlayer.seekTo(seekBar.getProgress());
                 }
                 handler.postDelayed(moveSeekBarThread, 100);
@@ -325,7 +323,7 @@ public class PlaylistSongs extends AppCompatActivity {
         });
     }
 
-    private void backScreen(){
+    private void backScreen() {
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         setResult(RESULT_OK, i);
@@ -351,28 +349,25 @@ public class PlaylistSongs extends AppCompatActivity {
                     public void onCompletion(MediaPlayer mp) {
                         clearMediaPlayer();
                         seekBar.setProgress(0);
-                        if ( songs.size() > positionId + 1 ) {
+                        if (songs.size() > positionId + 1) {
                             positionId = positionId + 1;
                             Song newSong = songs.get(positionId);
-                            songName = findViewById(R.id.songname);
                             songName.setText(newSong.songName);
-                            autorName = findViewById(R.id.autorname);
                             autorName.setText(newSong.artist);
                             durationSong = newSong.duration;
-                            durationSong = durationSong*1000;
+                            durationSong = durationSong * 1000;
                             urlSong = "";
-                            urlSong = urlSong+newSong.url;
-                            if ( isPlaying ) {
+                            urlSong = urlSong + newSong.url;
+                            if (isPlaying) {
                                 isPlaying = false;
                                 isPaused = false;
+                                songName.setText("loading...");
                                 playSong();
-                            }
-                            else {
+                            } else {
                                 isPlaying = false;
                                 isPaused = false;
                             }
-                        }
-                        else {
+                        } else {
                             isPlaying = false;
                             isPaused = false;
                             play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
@@ -392,25 +387,22 @@ public class PlaylistSongs extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else if ( isPlaying ) {
+        } else if (isPlaying) {
             play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
-            if ( mediaPlayer != null ) {
+            if (mediaPlayer != null) {
                 mediaPlayer.pause();
                 handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                 isPlaying = false;
                 isPaused = true;
             }
-        }
-        else {
+        } else {
             play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_pause));
             if (mediaPlayer != null) {
                 mediaPlayer.start();
                 handler.postDelayed(moveSeekBarThread, 100); //cal the thread after 100 milliseconds
                 isPlaying = true;
                 isPaused = false;
-            }
-            else {
+            } else {
                 isPlaying = false;
                 isPaused = false;
             }
@@ -423,8 +415,8 @@ public class PlaylistSongs extends AppCompatActivity {
      */
     private Runnable moveSeekBarThread = new Runnable() {
         public void run() {
-            if (mediaPlayer != null ) {
-                if(mediaPlayer.isPlaying()){
+            if (mediaPlayer != null) {
+                if (mediaPlayer.isPlaying()) {
                     int mediaPos_new = mediaPlayer.getCurrentPosition();
                     int mediaMax_new = durationSong;
                     seekBar.setMax(mediaMax_new);
@@ -435,11 +427,11 @@ public class PlaylistSongs extends AppCompatActivity {
         }
     };
 
-    private void addPlaylist(){
-        Intent i=new Intent(this, addSongToPlaylist.class);
+    private void addPlaylist() {
+        Intent i = new Intent(this, addSongToPlaylist.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("song",song);
-        i.putExtra("id",idSong);
+        i.putExtra("song", song);
+        i.putExtra("id", idSong);
         startActivityForResult(i, 1);
     }
 
@@ -450,7 +442,7 @@ public class PlaylistSongs extends AppCompatActivity {
     }
 
     private void clearMediaPlayer() {
-        if ( mediaPlayer != null ) {
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.reset();
             mediaPlayer.release();
@@ -463,7 +455,7 @@ public class PlaylistSongs extends AppCompatActivity {
         int min = duration / 1000 / 60;
         int sec = duration / 1000 % 60;
         timerLabel += min + ":";
-        if ( sec < 10 ) {
+        if (sec < 10) {
             timerLabel += "0";
         }
         timerLabel += sec;

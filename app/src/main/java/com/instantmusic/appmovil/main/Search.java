@@ -197,6 +197,16 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 return false;
             }
         });
+        resList.setOnScrollListener(new AbsListView.OnScrollListener(){
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0 ) {
+                    searchNextPage();
+                }
+            }
+        });
     }
 
     private void searchNextPage() {
@@ -340,7 +350,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void search() {
-        adapterSong.clear();
         shit = findViewById(R.id.searchbar2);
         cruz = 1;
         Button cruzButton = findViewById(R.id.optionSearch);
@@ -384,45 +393,17 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 if ( !(shit.getText().toString().equals("")) ) {
                     resList.setVisibility(View.VISIBLE);
                     page=1;
-                    server.searchAlbums(page, shit.getText().toString(), new JSONConnection.Listener() {
-                        @Override
-                        public void onValidResponse(int responseCode, JSONObject data) {
-                            if ( responseCode == 200 ) {
-                                try {
-                                    resList.setAdapter(adapterAlbum);
-                                    JSONArray results = data.getJSONArray("results");
-                                    ArrayList<Album> newAlbums = Album.fromJson(results);
-                                    adapterAlbum.addAll(newAlbums);
-                                } catch (JSONException e) {
-                                    onErrorResponse(e);
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onErrorResponse(Throwable throwable) {
-
-                        }
-                    });
+                    server.searchAlbums(page, shit.getText().toString(), this);
                 }
                 break;
         }
-        resList.setOnScrollListener(new AbsListView.OnScrollListener(){
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {}
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
-                    searchNextPage();
-                }
-            }
-        });
     }
 
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
             if(searchType==4){
+                resList.setAdapter(adapterAlbum);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Album> newAlbums = Album.fromJson(results);
                 adapterAlbum.addAll(newAlbums);
