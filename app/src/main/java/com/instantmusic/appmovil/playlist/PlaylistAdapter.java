@@ -32,7 +32,17 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         // Lookup view for data population
         TextView playlistName = (TextView) convertView.findViewById(R.id.text1);
         // Populate the data into the template view using the data object
-        playlistName.setText(playlist.playlistName);
+        if ( playlist.playlistName.length() > 15 && this.tipoLayout == 0) {
+            String aux = playlist.playlistName;
+            StringBuilder texto = new StringBuilder(aux);
+            texto.setCharAt(12, '.');
+            texto.setCharAt(13, '.');
+            texto.setCharAt(14, '.');
+            playlistName.setText(texto);
+        }
+        else {
+            playlistName.setText(playlist.playlistName);
+        }
         // Return the completed view to render on screen
         return convertView;
     }

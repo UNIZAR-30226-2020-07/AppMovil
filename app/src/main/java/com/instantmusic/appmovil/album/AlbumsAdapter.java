@@ -1,6 +1,7 @@
 package com.instantmusic.appmovil.album;
 
 import android.content.Context;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +24,15 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
         Album album = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_album_row, parent, false);
         }
         // Lookup view for data population
         TextView albumName = (TextView) convertView.findViewById(R.id.text1);
         TextView artistAlbum = (TextView) convertView.findViewById(R.id.text2);
         ImageView iconImage = convertView.findViewById(R.id.iconoSong);
         // Populate the data into the template view using the data object
-        albumName.setText(album.name);
         artistAlbum.setText(album.artistName);
+        albumName.setText(album.name);
         iconImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.album));
         // Return the completed view to render on screen
         return convertView;

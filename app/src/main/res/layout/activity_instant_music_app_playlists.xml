@@ -199,6 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0"
+                android:minLines="1"
                 android:textAlignment="center"
                 android:textColor="@color/backColor"
                 android:textSize="25sp"
@@ -211,6 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:minLines="1"
             android:textColor="@color/backColor"
             android:textSize="15sp"
             tools:text="Creador de la playlist" />

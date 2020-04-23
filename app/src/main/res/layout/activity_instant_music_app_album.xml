@@ -113,10 +113,12 @@
 
             <TextView
                 android:id="@+id/albumName"
-                android:layout_width="wrap_content"
+                android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0"
+                android:gravity="center"
+                android:minLines="1"
                 android:textAlignment="center"
                 android:textColor="@color/backColor"
                 android:textSize="25sp"
@@ -126,9 +128,11 @@
 
         <TextView
             android:id="@+id/albumCreator"
-            android:layout_width="wrap_content"
+            android:layout_width="229dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="1"
             android:textColor="@color/backColor"
             android:textSize="15sp"
             tools:text="Artista" />
