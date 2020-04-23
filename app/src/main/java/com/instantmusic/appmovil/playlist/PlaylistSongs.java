@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class PlaylistSongs extends AppCompatActivity {
     serverInterface server;
@@ -39,6 +40,8 @@ public class PlaylistSongs extends AppCompatActivity {
     Handler handler = new Handler();
     MediaPlayer mediaPlayer = new MediaPlayer();
     SeekBar seekBar;
+    private int lastSong = -1;
+    private ArrayList<Integer> idSongs;
     private boolean isPlaying = false;
     private boolean isPaused = false;
     private boolean isLooped = false;
@@ -64,6 +67,8 @@ public class PlaylistSongs extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_song);
         server = new remoteServer();
         loop = findViewById(R.id.loop);
+        songName = findViewById(R.id.songname);
+        autorName = findViewById(R.id.autorname);
         previous = findViewById(R.id.previousSong);
         play = findViewById(R.id.play);
         next = findViewById(R.id.nextSong);
@@ -173,31 +178,64 @@ public class PlaylistSongs extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearMediaPlayer();
-                PlaylistSongs.this.seekBar.setProgress(0);
-                if (songs.size() > positionId + 1) {
-                    positionId = positionId + 1;
-                    Song newSong = songs.get(positionId);
-                    songName = findViewById(R.id.songname);
-                    songName.setText(newSong.songName);
-                    autorName = findViewById(R.id.autorname);
-                    autorName.setText(newSong.artist);
-                    durationSong = newSong.duration;
-                    durationSong = durationSong * 1000;
-                    urlSong = "";
-                    urlSong = urlSong + newSong.url;
-                    if (isPlaying) {
-                        isPlaying = false;
-                        isPaused = false;
-                        playSong();
-                    } else {
+                if ( isShuffled ) {
+                    clearMediaPlayer();
+                    PlaylistSongs.this.seekBar.setProgress(0);
+                    if ( lastSong == -1 ) {
+                        lastSong = positionId;
+                    }
+                    else {
+                        Random r = new Random();
+                        int nextSong = r.nextInt(idSongs.size());
+                        while ( nextSong == lastSong ) {
+                            nextSong = r.nextInt(idSongs.size());
+                        }
+                        lastSong = nextSong;
+                        Song newSong = songs.get(nextSong);
+                        songName.setText(newSong.songName);
+                        autorName.setText(newSong.artist);
+                        durationSong = newSong.duration;
+                        durationSong = durationSong * 1000;
+                        urlSong = "";
+                        urlSong = urlSong + newSong.url;
+                        if (isPlaying) {
+                            isPlaying = false;
+                            isPaused = false;
+                            playSong();
+                        }
+                        else {
+                            isPlaying = false;
+                            isPaused = false;
+                        }
+                    }
+                }
+                else {
+                    clearMediaPlayer();
+                    PlaylistSongs.this.seekBar.setProgress(0);
+                    if (songs.size() > positionId + 1) {
+                        positionId = positionId + 1;
+                        Song newSong = songs.get(positionId);
+                        songName.setText(newSong.songName);
+                        autorName.setText(newSong.artist);
+                        durationSong = newSong.duration;
+                        durationSong = durationSong * 1000;
+                        urlSong = "";
+                        urlSong = urlSong + newSong.url;
+                        if (isPlaying) {
+                            isPlaying = false;
+                            isPaused = false;
+                            playSong();
+                        }
+                        else {
+                            isPlaying = false;
+                            isPaused = false;
+                        }
+                    }
+                    else {
+                        play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
                         isPlaying = false;
                         isPaused = false;
                     }
-                } else {
-                    play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
-                    isPlaying = false;
-                    isPaused = false;
                 }
             }
         });
@@ -234,17 +272,15 @@ public class PlaylistSongs extends AppCompatActivity {
 
         if (extras != null) {
             String cancion = extras.getString(this.getPackageName() + ".dataString");
-            songName = findViewById(R.id.songname);
             song = cancion;
             songName.setText(cancion);
             String autor = extras.getString(this.getPackageName() + ".String");
-            autorName = findViewById(R.id.autorname);
             autorName.setText(autor);
             durationSong = extras.getInt(this.getPackageName() + ".duration");
             durationSong = durationSong * 1000;
             urlSong = extras.getString(this.getPackageName() + ".url");
             idSong = extras.getInt(this.getPackageName() + ".id");
-            ArrayList<Integer> idSongs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
+            idSongs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
             positionId = extras.getInt(this.getPackageName() + ".positionId");
             botonPlay = extras.getBoolean(this.getPackageName() + ".botonPlay");
             assert idSongs != null;

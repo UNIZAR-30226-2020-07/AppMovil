@@ -14,6 +14,7 @@ public class Song {
     public String url;
     public int id;
     public int rate;
+    public double rate_average;
 
     // Constructor to convert JSON object into a Java class instance
     public Song(JSONObject object) {
@@ -26,6 +27,7 @@ public class Song {
             this.url = object.getString("stream_url");
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration",0);
+            this.rate_average = object.optDouble("avg_valoration",0);
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -41,6 +43,7 @@ public class Song {
             this.url = object.getString("stream_url");
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration",0);
+            this.rate_average = object.optDouble("avg_valoration",0);
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -56,6 +59,7 @@ public class Song {
             this.url = object.getString("stream_url");
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration",0);
+            this.rate_average = object.optDouble("avg_valoration",0);
         }
         catch (JSONException e) {
             e.printStackTrace();

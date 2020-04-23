@@ -41,8 +41,12 @@ public class SongsAdapter extends ArrayAdapter<Song> {
         if ( this.tipoLayout == 0 || this.tipoLayout == 1 ) {
             TextView artist = (TextView) convertView.findViewById(R.id.text2);
             artist.setText(song.artist);
-        }
-        else {
+            if ( this.tipoLayout == 0 ) {
+                TextView rateAverage = (TextView) convertView.findViewById(R.id.rate_average);
+                String rate = "Rate: ";
+                rate = rate + song.rate_average + "☆";
+                rateAverage.setText(rate);
+            }
         }
         // Populate the data into the template view using the data object
         songName.setText(song.songName);
