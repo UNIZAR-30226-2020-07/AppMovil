@@ -255,7 +255,7 @@ public class PlaylistSongs extends AppCompatActivity {
                     @Override
                     public void onValidResponse(int responseCode, JSONObject data) {
                         if (responseCode == 200) {
-                            Song newSong = new Song(data, true);
+                            Song newSong = new Song(data);
                             PlaylistSongs.this.songs.set(finalI, newSong);
                             if(finalI==positionId){
                                 rateSong = songs.get(positionId).rate;

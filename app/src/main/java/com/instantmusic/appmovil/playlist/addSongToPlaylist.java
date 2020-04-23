@@ -78,7 +78,7 @@ public class addSongToPlaylist extends AppCompatActivity {
                         @Override
                         public void onValidResponse(int responseCode, JSONObject data) {
                             if ( responseCode == 200 ) {
-                                Song newSong = new Song(data, true);
+                                Song newSong = new Song(data);
                                 playlistSelected.songs.add(newSong);
                                 server.addOrRemoveSong(playlistSelected.id, songs, new JSONConnection.Listener() {
                                     @Override

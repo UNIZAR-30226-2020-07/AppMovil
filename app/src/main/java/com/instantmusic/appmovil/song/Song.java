@@ -1,10 +1,6 @@
 package com.instantmusic.appmovil.song;
 
 import com.instantmusic.appmovil.album.Album;
-import com.instantmusic.appmovil.server.connect.JSONConnection;
-import com.instantmusic.appmovil.server.remoteServer;
-import com.instantmusic.appmovil.server.serverInterface;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,29 +16,40 @@ public class Song {
     public int rate;
 
     // Constructor to convert JSON object into a Java class instance
-    public Song(JSONObject object, boolean esInicio){
+    public Song(JSONObject object) {
         try {
-            serverInterface server = new remoteServer();
-            if ( esInicio ) {
-                JSONObject album = object.getJSONObject("album");
-                this.artist = album.getJSONObject("artist").getString("name");
-            }
-            else {
-                server.getAlbumData(object.getInt("album"), new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) {
-                        if ( responseCode == 200 ) {
-                            Album albumSelected = new Album(data);
-                            Song.this.artist = albumSelected.artistName;
-                        }
-                    }
+            JSONObject album = object.getJSONObject("album");
+            this.artist = album.getJSONObject("artist").getString("name");
+            this.songName = object.getString("title");
+            this.category = object.getString("genre");
+            this.duration = object.getInt("duration");
+            this.url = object.getString("stream_url");
+            this.id = object.getInt("id");
+            this.rate = object.optInt("user_valoration",0);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-                    @Override
-                    public void onErrorResponse(Throwable throwable) {
+    public Song(JSONObject object, Album album) {
+        try {
+            this.artist = album.artistName;
+            this.songName = object.getString("title");
+            this.category = object.getString("genre");
+            this.duration = object.getInt("duration");
+            this.url = object.getString("stream_url");
+            this.id = object.getInt("id");
+            this.rate = object.optInt("user_valoration",0);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-                    }
-                });
-            }
+    public Song(JSONObject object, String artistName) {
+        try {
+            this.artist = artistName;
             this.songName = object.getString("title");
             this.category = object.getString("genre");
             this.duration = object.getInt("duration");
@@ -56,12 +63,18 @@ public class Song {
     }
 
     // Factory method to convert an array of JSON objects into a list of objects
-    public static ArrayList<Song> fromJson(JSONArray jsonObjects, boolean esInicio) {
+    public static ArrayList<Song> fromJson(JSONArray jsonObjects, boolean tieneObjeto, Album album) {
         ArrayList<Song> songs = new ArrayList<>();
         for (int i = 0; i < jsonObjects.length(); i++) {
             try {
-                songs.add(new Song(jsonObjects.getJSONObject(i), esInicio));
-            } catch (JSONException e) {
+                if ( tieneObjeto ) {
+                    songs.add(new Song(jsonObjects.getJSONObject(i)));
+                }
+                else {
+                    songs.add(new Song(jsonObjects.getJSONObject(i), album));
+                }
+            }
+            catch (JSONException e) {
                 e.printStackTrace();
             }
         }

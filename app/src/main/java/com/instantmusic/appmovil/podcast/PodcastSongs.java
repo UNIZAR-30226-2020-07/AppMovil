@@ -252,7 +252,7 @@ public class PodcastSongs extends AppCompatActivity {
                     @Override
                     public void onValidResponse(int responseCode, JSONObject data) {
                         if (responseCode == 200) {
-                            Song newSong = new Song(data, true);
+                            Song newSong = new Song(data);
                             PodcastSongs.this.songs.add(newSong);
                         }
                     }
@@ -265,7 +265,7 @@ public class PodcastSongs extends AppCompatActivity {
                 @Override
                 public void onValidResponse(int responseCode, JSONObject data) {
                     if ( responseCode == 200 ) {
-                        Song newSong = new Song(data, true);
+                        Song newSong = new Song(data);
                         rateSong = newSong.rate;
                         ratingBar.setRating(rateSong);
                     }

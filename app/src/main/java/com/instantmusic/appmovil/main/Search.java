@@ -411,7 +411,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             else {
                 resList.setAdapter(adapterSong);
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Song> newSongs = Song.fromJson(results, true);
+                ArrayList<Song> newSongs = Song.fromJson(results, true, null);
                 adapterSong.addAll(newSongs);
             }
         }
