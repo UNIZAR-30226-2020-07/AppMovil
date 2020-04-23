@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil.album;
+package com.instantmusic.appmovil.artist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,30 +8,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.Album;
 import java.util.ArrayList;
 
-public class AlbumsAdapter extends ArrayAdapter<Album> {
+public class ArtistsAdapter extends ArrayAdapter<Artist> {
 
-    public AlbumsAdapter(Context context, ArrayList<Album> albums) {
-        super(context, 0, albums);
+    public ArtistsAdapter(Context context, ArrayList<Artist> artists) {
+        super(context, 0, artists);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Album album = getItem(position);
+        Artist artist = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_album_row, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_artist_row, parent, false);
         }
         // Lookup view for data population
-        TextView albumName = (TextView) convertView.findViewById(R.id.text1);
-        TextView artistAlbum = (TextView) convertView.findViewById(R.id.text2);
+        TextView artistName = (TextView) convertView.findViewById(R.id.artistName);
         ImageView iconImage = convertView.findViewById(R.id.iconoSong);
         // Populate the data into the template view using the data object
-        artistAlbum.setText(album.artistName);
-        albumName.setText(album.name);
-        iconImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.album));
+        artistName.setText(artist.name);
+        iconImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.account));
         // Return the completed view to render on screen
         return convertView;
     }

@@ -21,6 +21,8 @@ import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.album.AlbumActivity;
 import com.instantmusic.appmovil.album.AlbumsAdapter;
+import com.instantmusic.appmovil.artist.Artist;
+import com.instantmusic.appmovil.artist.ArtistsAdapter;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -46,8 +48,10 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private serverInterface server;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private ArrayList<Album> arrayOfAlbums = new ArrayList<>();
+    private ArrayList<Artist> arrayOfArtists = new ArrayList<>();
     private SongsAdapter adapterSong;
     private AlbumsAdapter adapterAlbum;
+    private ArtistsAdapter adapterArtist;
     private int cruz = 0;
     private int page = 1;
     private boolean ultima = false;
@@ -65,6 +69,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList.setVisibility(View.INVISIBLE);
         adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
         adapterAlbum = new AlbumsAdapter(this, arrayOfAlbums);
+        adapterArtist = new ArtistsAdapter(this, arrayOfArtists);
         resList.setAdapter(adapterSong);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -76,9 +81,15 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                     if (cancion != null) {
                         Song(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
                     }
-                } else if (searchType == 3) {
-
-                } else if (searchType == 4) {
+                }
+                else if (searchType == 3) {
+                    ArrayAdapter<Artist> search = (ArrayAdapter<Artist>) parent.getAdapter();
+                    Artist artista = search.getItem(position);
+                    if (artista != null) {
+                        Artist(artista.id);
+                    }
+                }
+                else if (searchType == 4) {
                     ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
                     Album album = search.getItem(position);
                     if (album != null) {
@@ -344,6 +355,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         this.startActivity(i);
     }
 
+    private void Artist(int idArtist) {
+        Intent i = new Intent(Search.this, AlbumActivity.class);
+        i.putExtra("idArtist", idArtist);
+        this.startActivity(i);
+    }
+
     @Override
     public void onBackPressed() {
         ListView search = findViewById(R.id.searchRes);
@@ -403,7 +420,14 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Album> newAlbums = Album.fromJson(results);
                 adapterAlbum.addAll(newAlbums);
-            } else if (!ultima) {
+            }
+            else if (searchType == 3 && !ultima) {
+                resList.setAdapter(adapterArtist);
+                JSONArray results = data.getJSONArray("results");
+                ArrayList<Artist> newArtists = Artist.fromJson(results);
+                adapterArtist.addAll(newArtists);
+            }
+            else if (!ultima) {
                 resList.setAdapter(adapterSong);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Song> newSongs = Song.fromJson(results, true, null);
@@ -412,7 +436,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             if (data.isNull("next")) {
                 ultima = true;
             }
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             onErrorResponse(e);
         }
     }
