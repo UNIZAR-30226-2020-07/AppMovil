@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.album.AlbumActivity;
@@ -26,9 +28,11 @@ import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
@@ -45,7 +49,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     private SongsAdapter adapterSong;
     private AlbumsAdapter adapterAlbum;
     private int cruz = 0;
-    private int page=1;
+    private int page = 1;
+    private boolean ultima = false;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -65,20 +70,18 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if ( searchType == 1 || searchType == 2 ) {
+                if (searchType == 1 || searchType == 2) {
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                     Song cancion = search.getItem(position);
-                    if ( cancion != null ) {
+                    if (cancion != null) {
                         Song(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
                     }
-                }
-                else if ( searchType == 3 ) {
+                } else if (searchType == 3) {
 
-                }
-                else if ( searchType == 4 ) {
+                } else if (searchType == 4) {
                     ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
                     Album album = search.getItem(position);
-                    if ( album != null ) {
+                    if (album != null) {
                         Album(album.id);
                     }
                 }
@@ -197,12 +200,14 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 return false;
             }
         });
-        resList.setOnScrollListener(new AbsListView.OnScrollListener(){
+        resList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0 ) {
+                if (resList.getLastVisiblePosition() == resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
                     searchNextPage();
                 }
             }
@@ -210,28 +215,30 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void searchNextPage() {
-        page=page+1;
-        switch (searchType) {
-            case 1:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchSongs(page,shit.getText().toString(), this);
-                }
-                break;
-            case 2:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchGenres(page,shit.getText().toString(), this);
-                }
-                break;
-            case 3:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchArtists(page,shit.getText().toString(), this);
-                }
-                break;
-            case 4:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchAlbums(page,shit.getText().toString(), this);
-                }
-                break;
+        if (!ultima) {
+            page = page + 1;
+            switch (searchType) {
+                case 1:
+                    if (!(shit.getText().toString().equals(""))) {
+                        server.searchSongs(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 2:
+                    if (!(shit.getText().toString().equals(""))) {
+                        server.searchGenres(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 3:
+                    if (!(shit.getText().toString().equals(""))) {
+                        server.searchArtists(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 4:
+                    if (!(shit.getText().toString().equals(""))) {
+                        server.searchAlbums(page, shit.getText().toString(), this);
+                    }
+                    break;
+            }
         }
     }
 
@@ -354,68 +361,70 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         cruz = 1;
         Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
+        if (!ultima) {
+            switch (searchType) {
+                case 1:
+                    if (!(shit.getText().toString().equals(""))) {
+                        resList.setVisibility(View.VISIBLE);
+                        page = 1;
+                        server.searchSongs(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 2:
+                    if (!(shit.getText().toString().equals(""))) {
+                        resList.setVisibility(View.VISIBLE);
+                        page = 1;
+                        server.searchGenres(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 3:
+                    if (!(shit.getText().toString().equals(""))) {
+                        resList.setVisibility(View.VISIBLE);
+                        page = 1;
+                        server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
+                            @Override
+                            public void onValidResponse(int responseCode, JSONObject data) {
+                                if (responseCode == 200) {
 
-        switch (searchType) {
-            case 1:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    resList.setVisibility(View.VISIBLE);
-                    page=1;
-                    server.searchSongs(page,shit.getText().toString(), this);
-                }
-                break;
-            case 2:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    resList.setVisibility(View.VISIBLE);
-                    page=1;
-                    server.searchGenres(page,shit.getText().toString(), this);
-                }
-                break;
-            case 3:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    resList.setVisibility(View.VISIBLE);
-                    page=1;
-                    server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
-                        @Override
-                        public void onValidResponse(int responseCode, JSONObject data) {
-                            if ( responseCode == 200 ) {
+                                }
+                            }
+
+                            @Override
+                            public void onErrorResponse(Throwable throwable) {
 
                             }
-                        }
-
-                        @Override
-                        public void onErrorResponse(Throwable throwable) {
-
-                        }
-                    });
-                }
-                break;
-            case 4:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    resList.setVisibility(View.VISIBLE);
-                    page=1;
-                    server.searchAlbums(page, shit.getText().toString(), this);
-                }
-                break;
+                        });
+                    }
+                    break;
+                case 4:
+                    if (!(shit.getText().toString().equals(""))) {
+                        resList.setVisibility(View.VISIBLE);
+                        page = 1;
+                        server.searchAlbums(page, shit.getText().toString(), this);
+                    }
+                    break;
+            }
         }
     }
 
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
-            if(searchType==4){
+            if (searchType == 4 && !ultima) {
                 resList.setAdapter(adapterAlbum);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Album> newAlbums = Album.fromJson(results);
                 adapterAlbum.addAll(newAlbums);
-            }
-            else {
+            } else if (!ultima) {
                 resList.setAdapter(adapterSong);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Song> newSongs = Song.fromJson(results, true, null);
                 adapterSong.addAll(newSongs);
             }
-        }
-        catch (JSONException e) {
+            if (data.isNull("next")) {
+                ultima = true;
+            }
+        } catch (JSONException e) {
             onErrorResponse(e);
         }
     }
