@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.song.Song;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SongsAdapter extends ArrayAdapter<Song> {
@@ -43,8 +44,9 @@ public class SongsAdapter extends ArrayAdapter<Song> {
             artist.setText(song.artist);
             if ( this.tipoLayout == 0 ) {
                 TextView rateAverage = (TextView) convertView.findViewById(R.id.rate_average);
+                DecimalFormat formato = new DecimalFormat("#.##");
                 String rate = "Rate: ";
-                rate = rate + song.rate_average + "☆";
+                rate = rate + formato.format(song.rate_average) + "☆";
                 rateAverage.setText(rate);
             }
         }

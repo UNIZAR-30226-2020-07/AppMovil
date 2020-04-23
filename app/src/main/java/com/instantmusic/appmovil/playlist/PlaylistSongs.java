@@ -236,6 +236,8 @@ public class PlaylistSongs extends AppCompatActivity {
                         isPlaying = false;
                         isPaused = false;
                     }
+                    rateSong = songs.get(positionId).rate;
+                    ratingBar.setRating(rateSong);
                 }
             }
         });
@@ -403,11 +405,14 @@ public class PlaylistSongs extends AppCompatActivity {
                                 isPlaying = false;
                                 isPaused = false;
                             }
-                        } else {
+                        }
+                        else {
                             isPlaying = false;
                             isPaused = false;
                             play.setImageDrawable(ContextCompat.getDrawable(PlaylistSongs.this, android.R.drawable.ic_media_play));
                         }
+                        rateSong = songs.get(positionId).rate;
+                        ratingBar.setRating(rateSong);
                     }
                 });
 
