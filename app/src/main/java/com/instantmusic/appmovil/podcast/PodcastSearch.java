@@ -63,9 +63,10 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     private Button orderArtist;
     int searchType = 1;
     private EditText changeMenu;
-    private int page=1;
+    private int page = 1;
     private int cruz = 0;
     private EditText shit;
+    private boolean ultima = false;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_search_podcast);
@@ -77,14 +78,14 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         lupaGrande = findViewById(R.id.lupaGrande);
         searchMenu = findViewById(R.id.searchMenu);
         Bundle extras = getIntent().getExtras();
-        if ( extras != null ) {
-            playList= extras.getString("playlist");
-            creador= extras.getString("creador");
+        if (extras != null) {
+            playList = extras.getString("playlist");
+            creador = extras.getString("creador");
             songs = extras.getIntegerArrayList("canciones");
             idPlaylist = extras.getInt("idPlaylist");
         }
-        adapterSong = new PodcastAdapter(this, arrayOfSongs,0);
-        searchMenu=findViewById(R.id.searchMenu);
+        adapterSong = new PodcastAdapter(this, arrayOfSongs, 0);
+        searchMenu = findViewById(R.id.searchMenu);
         resList.setAdapter(adapterSong);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -92,8 +93,8 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Podcast> search = (ArrayAdapter<Podcast>) parent.getAdapter();
                 Podcast cancion = search.getItem(position);
-                if ( cancion != null ) {
-                    Podcast(cancion.playlistName, cancion.user, cancion.id,cancion.songs);
+                if (cancion != null) {
+                    Podcast(cancion.playlistName, cancion.user, cancion.id, cancion.songs);
                 }
             }
         });
@@ -106,6 +107,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 searchTip1.setVisibility(View.INVISIBLE);
                 searchTip2.setVisibility(View.INVISIBLE);
                 lupaGrande.setVisibility(View.INVISIBLE);
+                ultima = false;
                 search();
             }
         });
@@ -193,32 +195,26 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
             }
         });
     }
+
     private void nameActivated() {
         searchType = 1;
         Button s1 = findViewById(R.id.switchName);
-        Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
         s1.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
-        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         s3.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         EditText barra = findViewById(R.id.searchbar2);
-        barra.setHint(getResources().getString(R.string.search1));
+        barra.setHint("Search by title");
 
     }
+
     private void artistActivated() {
         searchType = 3;
         Button s1 = findViewById(R.id.switchName);
-        Button s2 = findViewById(R.id.switchCategory);
         Button s3 = findViewById(R.id.switchArtist);
-        Button s4 = findViewById(R.id.switchAlbum);
         s3.setBackgroundDrawable(getResources().getDrawable(R.drawable.tick512));
         s1.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        s2.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
-        s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         EditText barra = findViewById(R.id.searchbar2);
-        barra.setHint(getResources().getString(R.string.search2));
+        barra.setHint("Search by creator");
 
     }
 
@@ -249,6 +245,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         startActivityForResult(i, 1);
 
     }
+
     @Override
     public void onBackPressed() {
         ListView search = findViewById(R.id.searchRes);
@@ -260,7 +257,8 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.downarrow));
         cruz = 0;
     }
-    private void Podcast(String songName, String autorName,  int idSong,ArrayList<Song> songs) {
+
+    private void Podcast(String songName, String autorName, int idSong, ArrayList<Song> songs) {
         Intent i = new Intent(this, PodcastActivity.class);
         i.putExtra(this.getPackageName() + ".name", songName);
         i.putExtra(this.getPackageName() + ".user", autorName);
@@ -268,21 +266,23 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         i.putExtra(this.getPackageName() + ".songs", songs);
         this.startActivity(i);
     }
+
     private void searchNextPage() {
-        page=page+1;
+        page = page + 1;
         switch (searchType) {
             case 1:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchPodcasts(page,shit.getText().toString(), this);
+                if (!(shit.getText().toString().equals(""))) {
+                    server.searchPodcasts(page, shit.getText().toString(), this);
                 }
                 break;
             case 3:
-                if ( !(shit.getText().toString().equals("")) ) {
-                    server.searchArtistsPodcasts(page,shit.getText().toString(), this);
+                if (!(shit.getText().toString().equals(""))) {
+                    server.searchArtistsPodcasts(page, shit.getText().toString(), this);
                 }
                 break;
         }
     }
+
     private void search() {
         adapterSong.clear();
         shit = findViewById(R.id.searchbar2);
@@ -292,20 +292,20 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
 
         switch (searchType) {
             case 1:
-                if ( !(shit.getText().toString().equals("")) ) {
+                if (!(shit.getText().toString().equals(""))) {
                     resList.setVisibility(View.VISIBLE);
-                    page=1;
-                    server.searchPodcasts(page,shit.getText().toString(), this);
+                    page = 1;
+                    server.searchPodcasts(page, shit.getText().toString(), this);
                 }
                 break;
             case 3:
-                if ( !(shit.getText().toString().equals("")) ) {
+                if (!(shit.getText().toString().equals(""))) {
                     resList.setVisibility(View.VISIBLE);
-                    page=1;
+                    page = 1;
                     server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
                         @Override
                         public void onValidResponse(int responseCode, JSONObject data) {
-                            if ( responseCode == 200 ) {
+                            if (responseCode == 200) {
 
                             }
                         }
@@ -318,12 +318,14 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 }
                 break;
         }
-        resList.setOnScrollListener(new AbsListView.OnScrollListener(){
+        resList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (resList.getLastVisiblePosition() ==resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
+                if (resList.getLastVisiblePosition() == resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
                     searchNextPage();
                 }
             }
@@ -333,13 +335,12 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
-                resList.setAdapter(adapterSong);
-                JSONArray results = data.getJSONArray("results");
-                ArrayList<Podcast> newSongs = Podcast.fromJson(results, true);
-                adapterSong.addAll(newSongs);
+            resList.setAdapter(adapterSong);
+            JSONArray results = data.getJSONArray("results");
+            ArrayList<Podcast> newSongs = Podcast.fromJson(results, true);
+            adapterSong.addAll(newSongs);
 
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             onErrorResponse(e);
         }
     }

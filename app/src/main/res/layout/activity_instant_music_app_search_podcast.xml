@@ -427,9 +427,9 @@
                     android:layout_height="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_round2"
-                    android:text="@string/song"
-                    android:textAlignment="center"
                     android:gravity="center"
+                    android:text="@string/song1"
+                    android:textAlignment="center"
                     android:textColor="@color/backColor"
                     android:textSize="14sp" />
 
@@ -475,9 +475,9 @@
                     android:layout_height="25dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_round2"
-                    android:text="@string/artist"
-                    android:textAlignment="center"
                     android:gravity="center"
+                    android:text="@string/artist1"
+                    android:textAlignment="center"
                     android:textColor="@color/backColor"
                     android:textSize="14sp" />
 

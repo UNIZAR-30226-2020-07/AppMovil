@@ -22,8 +22,8 @@ public class Podcast {
         try {
             serverInterface server = new remoteServer();
             this.songs = new ArrayList<>();
-            this.playlistName = object.getString("name");
-            this.user = object.getString("user");
+            this.playlistName = object.getString("title");
+            this.user = object.getJSONObject("artist").getString("name");
             this.id = object.getInt("id");
             if ( esInicio ) {
                 server.getPlaylistData(this.id, new JSONConnection.Listener() {

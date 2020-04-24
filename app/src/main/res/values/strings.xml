@@ -44,7 +44,9 @@
     <string name="changename">Edit playlist name</string>
     <string name="category">Genre</string>
     <string name="artist">Artist</string>
+    <string name="artist1">Creator</string>
     <string name="song">Song</string>
+    <string name="song1">Title</string>
     <string name="album">Album</string>
     <string name="vacio"></string>
     <string name="artistAlbums">Albums</string>

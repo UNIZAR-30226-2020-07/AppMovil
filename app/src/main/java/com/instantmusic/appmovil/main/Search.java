@@ -82,15 +82,13 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                     if (cancion != null) {
                         Song(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
                     }
-                }
-                else if (searchType == 3) {
+                } else if (searchType == 3) {
                     ArrayAdapter<Artist> search = (ArrayAdapter<Artist>) parent.getAdapter();
                     Artist artista = search.getItem(position);
                     if (artista != null) {
                         Artist(artista.id);
                     }
-                }
-                else if (searchType == 4) {
+                } else if (searchType == 4) {
                     ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
                     Album album = search.getItem(position);
                     if (album != null) {
@@ -109,6 +107,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 searchTip1.setVisibility(View.INVISIBLE);
                 searchTip2.setVisibility(View.INVISIBLE);
                 lupaGrande.setVisibility(View.INVISIBLE);
+                ultima = false;
                 search();
             }
         });
@@ -409,6 +408,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                         server.searchAlbums(page, shit.getText().toString(), this);
                     }
                     break;
+
             }
         }
     }
@@ -419,16 +419,14 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             if (searchType == 4 && !ultima) {
                 resList.setAdapter(adapterAlbum);
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Album> newAlbums = Album.fromJson(results,false, null);
+                ArrayList<Album> newAlbums = Album.fromJson(results, false, null);
                 adapterAlbum.addAll(newAlbums);
-            }
-            else if (searchType == 3 && !ultima) {
+            } else if (searchType == 3 && !ultima) {
                 resList.setAdapter(adapterArtist);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Artist> newArtists = Artist.fromJson(results);
                 adapterArtist.addAll(newArtists);
-            }
-            else if (!ultima) {
+            } else if (!ultima) {
                 resList.setAdapter(adapterSong);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Song> newSongs = Song.fromJson(results, true, null);
@@ -437,8 +435,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             if (data.isNull("next")) {
                 ultima = true;
             }
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             onErrorResponse(e);
         }
     }
