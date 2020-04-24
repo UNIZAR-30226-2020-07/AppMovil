@@ -102,6 +102,11 @@
             android:layout_height="28dp"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="0" />
+
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
@@ -133,6 +138,11 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:orientation="horizontal">
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="0" />
 
             <TextView
                 android:id="@+id/textView9"
