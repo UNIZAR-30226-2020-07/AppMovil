@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public interface serverInterface  {
     void searchSongs(int page, String shit, JSONConnection.Listener listener );
+    void searchSongsByArtist(int page, String shit, JSONConnection.Listener listener );
     void searchAlbums(int page, String title, JSONConnection.Listener listener);
     void searchArtists(int page, String title, JSONConnection.Listener listener);
     void searchGenres(int page, String title, JSONConnection.Listener listener);
@@ -16,6 +17,7 @@ public interface serverInterface  {
     void getPlaylistData(int idPlaylist, JSONConnection.Listener listener);
     void getSongData(int idSong, JSONConnection.Listener listener);
     void getAlbumData(int idAlbum, JSONConnection.Listener listener);
+    void getArtistData(int idArtist, JSONConnection.Listener listener);
     void login(String username_email, String password, JSONConnection.Listener listener);
     void addOrRemoveSong(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener);
     void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener);

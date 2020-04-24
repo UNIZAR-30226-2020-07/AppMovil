@@ -19,7 +19,7 @@ public class Artist {
             this.name = object.getString("name");
             JSONArray albumes = object.getJSONArray("albums");
             for ( int i = 0; i < albumes.length(); i++ ) {
-                Album album = new Album(albumes.getJSONObject(i));
+                Album album = new Album(albumes.getJSONObject(i), this.name);
                 this.albums.add(album);
             }
         }

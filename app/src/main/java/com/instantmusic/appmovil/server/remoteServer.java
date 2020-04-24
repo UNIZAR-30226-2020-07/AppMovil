@@ -56,6 +56,16 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void searchSongsByArtist(int page, String shit, JSONConnection.Listener listener ) {
+        initialize()
+                .setUrl("songs")
+                .putParameter("page",Integer.toString(page))
+                .putParameter("search", shit)
+                .putParameter("search_for", "artist")
+                .setListener(listener)
+                .execute();
+    }
+
     public void searchAlbums(int page, String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("albums")
@@ -140,6 +150,14 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void getArtistData(int idArtist, JSONConnection.Listener listener) {
+        String url = "artists/";
+        url = url + idArtist;
+        initialize()
+                .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
 
     public void addPlaylist(String playlist, JSONConnection.Listener listener) {
         ArrayList<Integer> canciones = new ArrayList<>();
@@ -150,7 +168,6 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
-
 
     public void addOrRemoveSong(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener) {
         String url = "playlists/";

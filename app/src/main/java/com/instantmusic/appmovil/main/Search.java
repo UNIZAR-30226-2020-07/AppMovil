@@ -22,6 +22,7 @@ import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.album.AlbumActivity;
 import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.artist.Artist;
+import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.artist.ArtistsAdapter;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
@@ -68,7 +69,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         resList = findViewById(R.id.searchRes);
         resList.setVisibility(View.INVISIBLE);
         adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
-        adapterAlbum = new AlbumsAdapter(this, arrayOfAlbums);
+        adapterAlbum = new AlbumsAdapter(this, arrayOfAlbums, 0);
         adapterArtist = new ArtistsAdapter(this, arrayOfArtists);
         resList.setAdapter(adapterSong);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -356,7 +357,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Artist(int idArtist) {
-        Intent i = new Intent(Search.this, AlbumActivity.class);
+        Intent i = new Intent(Search.this, ArtistActivity.class);
         i.putExtra("idArtist", idArtist);
         this.startActivity(i);
     }
@@ -418,7 +419,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             if (searchType == 4 && !ultima) {
                 resList.setAdapter(adapterAlbum);
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Album> newAlbums = Album.fromJson(results);
+                ArrayList<Album> newAlbums = Album.fromJson(results,false, null);
                 adapterAlbum.addAll(newAlbums);
             }
             else if (searchType == 3 && !ultima) {

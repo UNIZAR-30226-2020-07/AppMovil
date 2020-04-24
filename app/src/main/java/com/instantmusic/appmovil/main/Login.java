@@ -19,6 +19,7 @@ import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -123,6 +124,7 @@ public class Login extends AppCompatActivity {
                 Settings();
             }
         });
+
         myPlaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -131,6 +133,16 @@ public class Login extends AppCompatActivity {
                 Playlist playlist = (Playlist) search.getItem(position);
                 String creador = username;
                 openPlaylist(playlist.playlistName, creador, playlist.id);
+            }
+        });
+
+        mySongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
+                Song cancion =  search.getItem(position);
+                openSongRecommended(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
@@ -213,6 +225,17 @@ public class Login extends AppCompatActivity {
         i.putExtra("idPlaylist",idPlaylist);
         startActivityForResult(i, 1);
     }
+
+    private void openSongRecommended(String songName, String autorName, int durationSong, String stream_url, int idSong) {
+        Intent i = new Intent(this, SongActivity.class);
+        i.putExtra(this.getPackageName() + ".dataString", songName);
+        i.putExtra(this.getPackageName() + ".String", autorName);
+        i.putExtra(this.getPackageName() + ".duration", durationSong);
+        i.putExtra(this.getPackageName() + ".url", stream_url);
+        i.putExtra(this.getPackageName() + ".id", idSong);
+        this.startActivity(i);
+    }
+
     private void Search () {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

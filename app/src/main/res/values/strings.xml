@@ -47,6 +47,8 @@
     <string name="song">Song</string>
     <string name="album">Album</string>
     <string name="vacio"></string>
+    <string name="artistAlbums">Albums</string>
+    <string name="artistSongs">Songs</string>
     <string name="myplaylist">My playlists</string>
     <string name="mypodcast">My Podcasts</string>
     <string name="mysong">Recommendations</string>
