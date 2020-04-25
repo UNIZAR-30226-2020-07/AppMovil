@@ -1,12 +1,10 @@
 package com.instantmusic.appmovil.playlist;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.JsonObject;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;

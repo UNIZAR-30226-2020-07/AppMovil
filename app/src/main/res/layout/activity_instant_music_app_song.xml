@@ -323,6 +323,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="auto"
+                android:onClick="onButtonClick"
                 app:backgroundTint="#7E7A80"
                 app:fabSize="auto"
                 app:maxImageSize="50dp"

@@ -1,10 +1,8 @@
 package com.instantmusic.appmovil.podcast;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistSongs;
-import com.instantmusic.appmovil.playlist.removeSongFromPlaylist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
