@@ -69,6 +69,7 @@
     <string name="orderPlaylist1">Name</string>
     <string name="orderPlaylist2">Category</string>
     <string name="orderPlaylist3">Artist</string>
+    <string name="loading">Loading...</string>
 
 
 </resources>

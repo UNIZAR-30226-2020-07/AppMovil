@@ -361,7 +361,7 @@ public class remoteServer implements serverInterface {
         }
 
         /**
-         * Sets the listener where to notify
+         * Sets the listener where to notify. Can be null for no listener.
          *
          * @param listener where to notify
          * @return this to chain
