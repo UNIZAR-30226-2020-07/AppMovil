@@ -1,13 +1,10 @@
 package com.instantmusic.appmovil.podcast;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,28 +18,20 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.main.Friends;
 import com.instantmusic.appmovil.main.Login;
 import com.instantmusic.appmovil.main.Search;
 import com.instantmusic.appmovil.main.Settings;
-import com.instantmusic.appmovil.playlist.Playlist;
-import com.instantmusic.appmovil.playlist.PlaylistSongs;
-import com.instantmusic.appmovil.playlist.removeSongFromPlaylist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
-import com.instantmusic.appmovil.song.SongActivity;
-import com.instantmusic.appmovil.song.SongsAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
 
 public class PodcastSearch extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;

@@ -42,6 +42,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="0"
                 android:background="@drawable/flecha"
+                android:onClick="onButtonClick"
                 android:scaleType="center" />
 
             <Space
@@ -74,6 +75,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="0"
                 android:background="@drawable/points"
+                android:onClick="onButtonClick"
                 android:scaleType="centerInside" />
 
         </LinearLayout>
@@ -103,6 +105,7 @@
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:background="@drawable/edit_round2"
+                        android:onClick="onButtonClick"
                         android:text="@string/songMenu1"
                         android:textAlignment="center"
                         android:textAllCaps="false"
@@ -118,6 +121,7 @@
                         android:layout_width="130dp"
                         android:layout_height="25dp"
                         android:background="@drawable/edit_round2"
+                        android:onClick="onButtonClick"
                         android:text="@string/songMenu2"
                         android:textAlignment="center"
                         android:textAllCaps="false"
@@ -265,6 +269,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
+                android:onClick="onButtonClick"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/repeat" />
 
@@ -280,6 +285,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:onClick="onButtonClick"
                 app:backgroundTint="#7E7A80"
                 app:maxImageSize="50dp"
                 app:srcCompat="@android:drawable/ic_media_previous" />
@@ -297,6 +303,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="auto"
+                android:onClick="onButtonClick"
                 android:scaleType="center"
                 app:backgroundTint="#7E7A80"
                 app:fabSize="auto"
@@ -320,7 +327,8 @@
                 app:fabSize="auto"
                 app:maxImageSize="50dp"
                 app:rippleColor="#009C3232"
-                app:srcCompat="@drawable/ic_skip_next_black_24dp" />
+                app:srcCompat="@drawable/ic_skip_next_black_24dp"
+                tools:ignore="VectorDrawableCompat" />
 
             <Space
                 android:layout_width="10dp"
@@ -334,6 +342,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
+                android:onClick="onButtonClick"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/shuffle2" />
 
