@@ -170,11 +170,11 @@ public class PodcastActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         adapterSong.clear();
-        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
+        server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if ( responseCode == 200 ) {
-                    Playlist playlistSelected = new Playlist(data,false);
+                    Album playlistSelected = new Album(data);
                     adapterSong.addAll(playlistSelected.songs);
                     if ( searchType == 1 ) {
                         sortBy("titulo");
