@@ -104,7 +104,7 @@ public class remoteServer implements serverInterface {
 
     public void searchPodcasts(int page,String name, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("songs")
+                .setUrl("albums")
                 .putParameter("search", name)
                 .putParameter("podcast", Boolean.toString(true))
                 .putParameter("page",Integer.toString(page))

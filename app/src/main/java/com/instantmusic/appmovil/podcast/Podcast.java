@@ -21,10 +21,10 @@ public class Podcast {
     public Podcast(JSONObject object, boolean esInicio){
         try {
             serverInterface server = new remoteServer();
-            JSONObject album = object.getJSONObject("album");
+            JSONObject album = object.getJSONObject("artist");
             this.songs = new ArrayList<>();
-            this.playlistName = object.getString("title");
-            this.user = album.getJSONObject("artist").getString("name");
+            this.playlistName = object.getString("name");
+            this.user = album.getString("name");
             System.out.println(this.user);
             this.id = object.getInt("id");
             if ( esInicio ) {

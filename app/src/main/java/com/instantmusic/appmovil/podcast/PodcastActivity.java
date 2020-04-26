@@ -126,7 +126,7 @@ public class PodcastActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
-                orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
                 searchType = 1;
                 sortBy("titulo");
@@ -136,7 +136,7 @@ public class PodcastActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-                orderCategory.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
+
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
                 searchType = 3;
                 sortBy("artista");
