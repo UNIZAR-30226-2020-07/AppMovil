@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -54,10 +55,10 @@ public class PodcastActivity extends AppCompatActivity {
         Button playB = findViewById(R.id.playButton);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
-            playList= extras.getString("name");
-            creador= extras.getString("user");
-            songs = extras.getIntegerArrayList("songs");
-            idPlaylist = extras.getInt("id");
+            playList= extras.getString(this.getPackageName() + ".name");
+            creador= extras.getString(this.getPackageName() + ".user");
+            songs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
+            idPlaylist = extras.getInt(this.getPackageName() + ".id");
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
@@ -67,11 +68,11 @@ public class PodcastActivity extends AppCompatActivity {
         orderName=findViewById(R.id.orderName);
         orderCategory=findViewById(R.id.orderCategory);
         orderArtist=findViewById(R.id.orderArtist);
-        server.getPlaylistData(idPlaylist, new JSONConnection.Listener() {
+        server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if ( responseCode == 200 ) {
-                    Playlist playlistSelected = new Playlist(data,false);
+                    Album playlistSelected = new Album(data);
                     adapterSong.addAll(playlistSelected.songs);
                     sortBy("titulo");
                 }
