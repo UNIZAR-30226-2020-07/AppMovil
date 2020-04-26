@@ -21,9 +21,11 @@ public class Podcast {
     public Podcast(JSONObject object, boolean esInicio){
         try {
             serverInterface server = new remoteServer();
+            JSONObject album = object.getJSONObject("album");
             this.songs = new ArrayList<>();
             this.playlistName = object.getString("title");
-            this.user = object.getJSONObject("artist").getString("name");
+            this.user = album.getJSONObject("artist").getString("name");
+            System.out.println(this.user);
             this.id = object.getInt("id");
             if ( esInicio ) {
                 server.getPlaylistData(this.id, new JSONConnection.Listener() {
