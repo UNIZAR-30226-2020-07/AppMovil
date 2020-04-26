@@ -37,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
@@ -346,6 +347,11 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         i.putExtra(this.getPackageName() + ".duration", durationSong);
         i.putExtra(this.getPackageName() + ".url", stream_url);
         i.putExtra(this.getPackageName() + ".id", idSong);
+        i.putExtra(this.getPackageName() + ".botonPlay", false);
+        i.putExtra(this.getPackageName() + ".positionId", 0);
+        ArrayList<Integer> idSongs = new ArrayList<>();
+        idSongs.add(idSong);
+        i.putExtra(this.getPackageName() + ".songs", idSongs);
         this.startActivity(i);
     }
 

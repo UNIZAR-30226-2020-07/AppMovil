@@ -15,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.playlist.Playlist;
-import com.instantmusic.appmovil.playlist.PlaylistSongs;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
 import org.json.JSONObject;
@@ -195,7 +195,7 @@ public class PodcastActivity extends AppCompatActivity {
         finish();
     }
     private void Song(String songName, String autorName, int durationSong, String stream_url, int id, int position, boolean botonPlay) {
-        Intent i = new Intent(this, PlaylistSongs.class);
+        Intent i = new Intent(this, SongActivity.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
         i.putExtra(this.getPackageName() + ".duration", durationSong);

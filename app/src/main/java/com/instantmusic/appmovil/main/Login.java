@@ -231,8 +231,13 @@ public class Login extends AppCompatActivity {
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
         i.putExtra(this.getPackageName() + ".duration", durationSong);
+        i.putExtra(this.getPackageName() + ".positionId", 0);
         i.putExtra(this.getPackageName() + ".url", stream_url);
         i.putExtra(this.getPackageName() + ".id", idSong);
+        i.putExtra(this.getPackageName() + ".botonPlay", false);
+        ArrayList<Integer> idSongs = new ArrayList<>();
+        idSongs.add(idSong);
+        i.putExtra(this.getPackageName() + ".songs", idSongs);
         this.startActivity(i);
     }
 
