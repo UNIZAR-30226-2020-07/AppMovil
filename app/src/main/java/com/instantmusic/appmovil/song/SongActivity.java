@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.offline.Downloader;
+import com.instantmusic.appmovil.offline.Fixes;
 import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.playlist.addSongToPlaylist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
@@ -31,6 +33,8 @@ import com.instantmusic.appmovil.server.serverInterface;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -248,6 +252,14 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
                 // add to playlist option
                 toggleOptionsMenu();
                 addPlaylist();
+                break;
+            case R.id.offline:
+                toggleOptionsMenu();
+                try {
+                    Downloader.downloadSong(new Song(new JSONObject(Fixes.dataToJson(artist, song, "unknown", durationSong, urlSong, idSong, rateSong, rateSong))), this);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
 
             // song buttons
@@ -535,7 +547,19 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
             autorName.setText(R.string.loading);
             play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             play.setEnabled(false);
-            mediaPlayer.setDataSource(urlSong);
+
+            if (urlSong.startsWith("http")) {
+                mediaPlayer.setDataSource(urlSong);
+            } else {
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(urlSong);
+                    mediaPlayer.setDataSource(fileInputStream.getFD());
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             mediaPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
