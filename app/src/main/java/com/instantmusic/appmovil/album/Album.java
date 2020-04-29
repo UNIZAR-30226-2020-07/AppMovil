@@ -14,6 +14,7 @@ public class Album {
     public int id;
     public String name;
     public String artistName;
+    public int artistId;
     public ArrayList<Song> songs = new ArrayList<>();
 
     // Constructor to convert JSON object into a Java class instance
@@ -22,6 +23,7 @@ public class Album {
             this.id = object.getInt("id");
             this.name = object.getString("name");
             this.artistName = object.getJSONObject("artist").getString("name");
+            this.artistId=object.getJSONObject("artist").getInt("id");
             JSONArray canciones = object.getJSONArray("songs");
             for ( int i = 0; i < canciones.length(); i++ ) {
                 Song cancion = new Song(canciones.getJSONObject(i), this.artistName);

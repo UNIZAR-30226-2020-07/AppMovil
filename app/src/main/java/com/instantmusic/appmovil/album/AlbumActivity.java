@@ -11,12 +11,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -99,8 +102,31 @@ public class AlbumActivity extends AppCompatActivity {
                 }
             }
         });
+        Button artist=findViewById(R.id.seeArtist2);
+        artist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleOptionsMenu();
+                try {
+                    seeArtist();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-
+    private void seeArtist() throws JSONException {
+        Intent i = new Intent(this, ArtistActivity.class);
+        i.putExtra("idArtist",albumSelected.artistId);
+        startActivityForResult(i, 1);
+    }
+    private void toggleOptionsMenu() {
+        searchMenu.setVisibility(
+                searchMenu.getVisibility() == View.VISIBLE
+                        ? View.INVISIBLE
+                        : View.VISIBLE
+        );
+    }
     private void backScreen(){
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

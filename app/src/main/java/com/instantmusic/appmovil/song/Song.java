@@ -15,11 +15,12 @@ public class Song {
     public int id;
     public int rate;
     public double rate_average;
+    public JSONObject album;
 
     // Constructor to convert JSON object into a Java class instance
     public Song(JSONObject object) {
         try {
-            JSONObject album = object.getJSONObject("album");
+            album = object.getJSONObject("album");
             this.artist = album.getJSONObject("artist").getString("name");
             this.songName = object.getString("title");
             this.category = object.getString("genre");

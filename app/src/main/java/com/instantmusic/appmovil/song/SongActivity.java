@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -20,12 +21,18 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.AlbumActivity;
+import com.instantmusic.appmovil.artist.Artist;
+import com.instantmusic.appmovil.artist.ArtistActivity;
+import com.instantmusic.appmovil.main.Search;
+import com.instantmusic.appmovil.main.Settings;
 import com.instantmusic.appmovil.playlist.addSongToPlaylist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -63,7 +70,8 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     private int durationSong;
     private int rateSong;
     private int positionId;
-
+    private Button seeArtist;
+    public Song thisSong;
     // arrays
     private ArrayList<Song> songs = new ArrayList<>();
     private ArrayList<Integer> idSongs;
@@ -91,7 +99,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         seekBarHint = findViewById(R.id.minuto);
         songName = findViewById(R.id.songname);
         autorName = findViewById(R.id.autorname);
-
+        seeArtist=findViewById(R.id.seeArtist);
 
         // other initializations
         initRatingBar();
@@ -136,6 +144,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
             public void onValidResponse(int responseCode, JSONObject data) {
                 if (responseCode == 200) {
                     Song newSong = new Song(data);
+                    thisSong=newSong;
                     artist = newSong.artist;
                     rateSong = newSong.rate;
                     reloadRating();
@@ -188,7 +197,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
      *
      * @param view clicked button
      */
-    public void onButtonClick(View view) {
+    public void onButtonClick(View view) throws JSONException {
         switch (view.getId()) {
             // bar
             case R.id.scrolldown: // top-left back arrow
@@ -204,6 +213,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
             case R.id.seeArtist:
                 // see artist option
                 toggleOptionsMenu();
+                seeArtist();
                 break;
             case R.id.addPlaylist:
                 // add to playlist option
@@ -356,7 +366,12 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
                 isShuffled ? R.drawable.shufflewhite : R.drawable.shuffle2
         ));
     }
-
+    private void seeArtist() throws JSONException {
+        Intent i = new Intent(this, ArtistActivity.class);
+        int idArtist=thisSong.album.getJSONObject("artist").getInt("id");
+        i.putExtra("idArtist",idArtist);
+        startActivityForResult(i, 1);
+    }
     // ------------------- MediaPlayer -------------------
 
     /**
