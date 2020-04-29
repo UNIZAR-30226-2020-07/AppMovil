@@ -56,6 +56,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     private int cruz = 0;
     private EditText shit;
     private boolean ultima = false;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_search_podcast);
@@ -276,6 +277,9 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         adapterSong.clear();
         shit = findViewById(R.id.searchbar2);
         cruz = 1;
+        if (page == 1) {
+            adapterSong.clear();
+        }
         Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
 

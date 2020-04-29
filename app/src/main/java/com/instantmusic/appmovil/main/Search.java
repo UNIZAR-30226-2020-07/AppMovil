@@ -200,18 +200,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 albumActivated();
             }
         });
-
-        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    searchMenu.setVisibility(View.INVISIBLE);
-                    search();
-                    return true;
-                }
-                return false;
-            }
-        });
         resList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -381,6 +369,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     private void search() {
         shit = findViewById(R.id.searchbar2);
+        String busqueda=shit.getText().toString();
+        if (page == 1) {
+            adapterSong.clear();
+            adapterAlbum.clear();
+            adapterArtist.clear();
+        }
         cruz = 1;
         Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
@@ -390,28 +384,28 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                     if (!(shit.getText().toString().equals(""))) {
                         resList.setVisibility(View.VISIBLE);
                         page = 1;
-                        server.searchSongs(page, shit.getText().toString(), this);
+                        server.searchSongs(page, busqueda, this);
                     }
                     break;
                 case 2:
                     if (!(shit.getText().toString().equals(""))) {
                         resList.setVisibility(View.VISIBLE);
                         page = 1;
-                        server.searchGenres(page, shit.getText().toString(), this);
+                        server.searchGenres(page, busqueda, this);
                     }
                     break;
                 case 3:
                     if (!(shit.getText().toString().equals(""))) {
                         resList.setVisibility(View.VISIBLE);
                         page = 1;
-                        server.searchArtists(page, shit.getText().toString(), this);
+                        server.searchArtists(page, busqueda, this);
                     }
                     break;
                 case 4:
                     if (!(shit.getText().toString().equals(""))) {
                         resList.setVisibility(View.VISIBLE);
                         page = 1;
-                        server.searchAlbums(page, shit.getText().toString(), this);
+                        server.searchAlbums(page, busqueda, this);
                     }
                     break;
 
