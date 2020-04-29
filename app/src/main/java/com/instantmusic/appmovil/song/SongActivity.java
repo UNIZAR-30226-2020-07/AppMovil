@@ -190,6 +190,41 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if ( mediaPlayer.isPlaying() || mediaPlayer.getCurrentPosition() == 0 ) {
+            server.getUserData(new JSONConnection.Listener() {
+                @Override
+                public void onValidResponse(int responseCode, JSONObject data) {
+                    if ( isShuffled ) {
+                        try {
+                            server.saveMinutesSong(data.getInt("id"), mediaPlayer.getCurrentPosition() / 1000, randomIdSongs.get(positionRandomId), new JSONConnection.Listener() {
+                                @Override
+                                public void onValidResponse(int responseCode, JSONObject data) { }
+                                @Override
+                                public void onErrorResponse(Throwable throwable) { }
+                            });
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            server.saveMinutesSong(data.getInt("id"), mediaPlayer.getCurrentPosition() / 1000, idSongs.get(positionId), new JSONConnection.Listener() {
+                                @Override
+                                public void onValidResponse(int responseCode, JSONObject data) { }
+                                @Override
+                                public void onErrorResponse(Throwable throwable) { }
+                            });
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                @Override
+                public void onErrorResponse(Throwable throwable) { }
+            });
+        }
         stopSong();
     }
 
@@ -533,6 +568,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
             playSong();
         }
     }
+
 
     /**
      * The song ends

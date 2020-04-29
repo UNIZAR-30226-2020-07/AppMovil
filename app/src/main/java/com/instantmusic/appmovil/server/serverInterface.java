@@ -2,6 +2,8 @@ package com.instantmusic.appmovil.server;
 
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
+import com.instantmusic.appmovil.song.Song;
+
 import java.util.ArrayList;
 
 public interface serverInterface  {
@@ -26,6 +28,6 @@ public interface serverInterface  {
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);
     void rateASong(int idSong, int rate, JSONConnection.Listener listener);
     void songsRecommended(JSONConnection.Listener listener);
-
+    void saveMinutesSong(int idUser, int seconds, int idSong, JSONConnection.Listener listener);
     void searchArtistsPodcasts(int page, String toString, JSONConnection.Listener listener);
 }

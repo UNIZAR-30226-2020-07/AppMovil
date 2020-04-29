@@ -1,6 +1,8 @@
 package com.instantmusic.appmovil.server;
 
 import com.instantmusic.appmovil.server.connect.JSONConnection;
+import com.instantmusic.appmovil.song.Song;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -223,6 +225,18 @@ public class remoteServer implements serverInterface {
         String url = "songs/recommended";
         initialize()
                 .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
+    public void saveMinutesSong(int idUser, int seconds, int idSong, JSONConnection.Listener listener) {
+        String url = "users/";
+        url = url + idUser;
+        initialize()
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.PATCH)
+                .putData("pause_second",seconds)
+                .putData("pause_song",idSong)
                 .setListener(listener)
                 .execute();
     }
