@@ -229,16 +229,25 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public void saveMinutesSong(int idUser, int seconds, int idSong, JSONConnection.Listener listener) {
-        String url = "users/";
-        url = url + idUser;
-        initialize()
-                .setUrl(url)
-                .setMethod(JSONConnection.METHOD.PATCH)
-                .putData("pause_second",seconds)
-                .putData("pause_song",idSong)
-                .setListener(listener)
-                .execute();
+    public void saveMinutesSong(int seconds, int idSong, JSONConnection.Listener listener) {
+        if ( seconds == -1 ) {
+            initialize()
+                    .setUrl("rest-auth/user")
+                    .setMethod(JSONConnection.METHOD.PATCH)
+                    .putData("pause_second",seconds)
+                    .putData("pause_song",idSong)
+                    .setListener(listener)
+                    .execute();
+        }
+        else {
+            initialize()
+                    .setUrl("rest-auth/user")
+                    .setMethod(JSONConnection.METHOD.PATCH)
+                    .putData("pause_second",seconds)
+                    .putData("pause_song",idSong)
+                    .setListener(listener)
+                    .execute();
+        }
     }
 
     @Override
