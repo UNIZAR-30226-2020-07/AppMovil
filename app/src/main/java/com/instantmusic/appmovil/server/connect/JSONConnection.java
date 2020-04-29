@@ -100,7 +100,11 @@ public class JSONConnection {
                         @Override
                         public void run() {
                             // valid
-                            listener.onValidResponse(code, json_final);
+                            try {
+                                listener.onValidResponse(code, json_final);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 } catch (final Throwable e) {
@@ -131,7 +135,7 @@ public class JSONConnection {
          * @param responseCode the returned response code
          * @param data         the returned data
          */
-        void onValidResponse(int responseCode, JSONObject data);
+        void onValidResponse(int responseCode, JSONObject data) throws JSONException;
 
         /**
          * An error ocurred (any error)

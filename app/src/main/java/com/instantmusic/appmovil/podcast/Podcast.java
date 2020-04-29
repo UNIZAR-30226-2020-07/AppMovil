@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil.podcast;
 
+import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -17,14 +18,15 @@ public class Podcast {
     public ArrayList<Song> songs = new ArrayList<>();
     public String user;
     public int id;
+    public JSONObject artist;
     // Constructor to convert JSON object into a Java class instance
     public Podcast(JSONObject object, boolean esInicio){
         try {
             serverInterface server = new remoteServer();
-            JSONObject album = object.getJSONObject("artist");
+            artist = object.getJSONObject("artist");
             this.songs = new ArrayList<>();
             this.playlistName = object.getString("name");
-            this.user = album.getString("name");
+            this.user = artist.getString("name");
             System.out.println(this.user);
             this.id = object.getInt("id");
             if ( esInicio ) {

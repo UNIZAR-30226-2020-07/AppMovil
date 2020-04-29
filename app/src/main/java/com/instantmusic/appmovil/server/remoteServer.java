@@ -417,7 +417,7 @@ public class remoteServer implements serverInterface {
         // ------------------- listener -------------------
 
         @Override
-        public void onValidResponse(int responseCode, JSONObject data) {
+        public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
 
             // get the key parameter for autologin
             // this may be problematic, consider change

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -23,6 +24,7 @@ import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ public class PodcastActivity extends AppCompatActivity {
     int searchType = 1;
     private EditText changeMenu;
     private int page=1;
+    private int artist;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +73,10 @@ public class PodcastActivity extends AppCompatActivity {
         orderArtist=findViewById(R.id.orderArtist);
         server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
             @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
+            public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
                     Album playlistSelected = new Album(data);
+                    artist=data.getInt("id");
                     adapterSong.addAll(playlistSelected.songs);
                     sortBy("titulo");
                 }
@@ -140,18 +144,34 @@ public class PodcastActivity extends AppCompatActivity {
 
                 orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
                 searchType = 3;
-                sortBy("artista");
+                sortBy("date");
+            }
+        });
+        final Button seeArtist=findViewById(R.id.seeArtist2);
+        seeArtist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    seeArtist();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
     }
+    private void seeArtist() throws JSONException {
+        Intent i = new Intent(this, ArtistActivity.class);
+        i.putExtra("idArtist",artist);
+        startActivityForResult(i, 1);
+    }
     private void sortBy(String comp) {
         switch (comp) {
-            case "artista":
+            case "date":
                 adapterSong.sort(new Comparator<Song>() {
                     @Override
                     public int compare(Song o1, Song o2) {
-                        return o1.artist.compareTo(o2.artist);
+                        return Integer.toString(o1.id).compareTo(Integer.toString(o2.id));
                     }
                 });
             break;
