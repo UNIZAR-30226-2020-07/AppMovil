@@ -1,7 +1,6 @@
 package com.instantmusic.appmovil.server;
 
 import com.instantmusic.appmovil.server.connect.JSONConnection;
-import com.instantmusic.appmovil.song.Song;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -234,8 +233,8 @@ public class remoteServer implements serverInterface {
             initialize()
                     .setUrl("rest-auth/user")
                     .setMethod(JSONConnection.METHOD.PATCH)
-                    .putData("pause_second",seconds)
-                    .putData("pause_song",idSong)
+                    .putNullData("pause_second")
+                    .putNullData("pause_song")
                     .setListener(listener)
                     .execute();
         }
@@ -381,6 +380,16 @@ public class remoteServer implements serverInterface {
          */
         public Petition putData(String key, boolean value) {
             return _putData(key, value);
+        }
+
+        /**
+         * Adds a null to send (in the body)
+         *
+         * @param key key
+         * @return this to chain
+         */
+        public Petition putNullData(String key) {
+            return _putData(key, JSONObject.NULL);
         }
 
         /**
