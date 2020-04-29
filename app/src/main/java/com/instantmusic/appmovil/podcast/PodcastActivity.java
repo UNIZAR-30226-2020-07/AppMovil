@@ -147,7 +147,7 @@ public class PodcastActivity extends AppCompatActivity {
                 sortBy("date");
             }
         });
-        final Button seeArtist=findViewById(R.id.seeArtist2);
+        Button seeArtist=findViewById(R.id.seeArtist2);
         seeArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +156,7 @@ public class PodcastActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                searchMenu.setVisibility(View.INVISIBLE);
             }
         });
 
