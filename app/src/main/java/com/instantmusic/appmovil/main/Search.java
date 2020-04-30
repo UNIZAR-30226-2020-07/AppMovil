@@ -2,9 +2,7 @@ package com.instantmusic.appmovil.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.album.AlbumActivity;
@@ -37,7 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Collections;
 
 public class Search extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
@@ -81,7 +80,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                     Song cancion = search.getItem(position);
                     if (cancion != null) {
-                        Song(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
+                        Song(cancion);
                     }
                 } else if (searchType == 3) {
                     ArrayAdapter<Artist> search = (ArrayAdapter<Artist>) parent.getAdapter();
@@ -328,19 +327,12 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
 
     }
 
-    private void Song(String songName, String autorName, int durationSong, String stream_url, int idSong) {
-        Intent i = new Intent(this, SongActivity.class);
-        i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".String", autorName);
-        i.putExtra(this.getPackageName() + ".duration", durationSong);
-        i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".id", idSong);
-        i.putExtra(this.getPackageName() + ".botonPlay", false);
-        i.putExtra(this.getPackageName() + ".positionId", 0);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        idSongs.add(idSong);
-        i.putExtra(this.getPackageName() + ".songs", idSongs);
-        this.startActivity(i);
+    private void Song(Song song) {
+        IntentTransfer.setData("songs", Collections.singletonList(song));
+        IntentTransfer.setData("positionId", 0);
+        IntentTransfer.setData("botonPlay", false);
+
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
     private void Album(int idAlbum) {

@@ -1,7 +1,5 @@
 package com.instantmusic.appmovil.offline;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -11,6 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
@@ -30,6 +31,7 @@ public class OfflineActivity extends AppCompatActivity implements AdapterView.On
     private ListView lv_files;
     private OfflinePrefs prefs;
     private SongsAdapter adapter;
+    private ArrayList<Song> songs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class OfflineActivity extends AppCompatActivity implements AdapterView.On
         registerForContextMenu(lv_files);
 
         // initalize data
-        ArrayList<Song> songs = prefs.getSongs();
+        songs = prefs.getSongs();
         adapter = new SongsAdapter(this, songs, 0);
         lv_files.setAdapter(adapter);
 
@@ -66,23 +68,17 @@ public class OfflineActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // when clicked song, play song
+        // when clicked song, play song (treat as playlist)
+        ArrayList<Song> offlineSongs = new ArrayList<>(songs);
+        for (Song song : offlineSongs) {
+            // convert the url to the offline one
+            song.url = Downloader.getFilePath(song.id, this);
+        }
+        IntentTransfer.setData("songs", offlineSongs);
+        IntentTransfer.setData("positionId", position);
+        IntentTransfer.setData("botonPlay", false);
 
-        Song song = adapter.getItem(position);
-        if (song == null) return; // just in case, but should never happen
-
-        Intent i = new Intent(this, SongActivity.class);
-        i.putExtra(getPackageName() + ".dataString", song.songName);
-        i.putExtra(getPackageName() + ".String", song.artist);
-        i.putExtra(getPackageName() + ".duration", song.duration);
-        i.putExtra(getPackageName() + ".positionId", 0);
-        i.putExtra(getPackageName() + ".url", Downloader.getFilePath(song.id, this)); // special
-        i.putExtra(getPackageName() + ".id", song.id);
-        i.putExtra(getPackageName() + ".botonPlay", false);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        idSongs.add(song.id);
-        i.putExtra(getPackageName() + ".songs", idSongs);
-        this.startActivity(i);
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
     // ------------------- Menu -------------------

@@ -22,6 +22,7 @@ public class Song {
     public double rate_average;
     public JSONObject album;
     public Date fecha;
+
     // Constructor to convert JSON object into a Java class instance
     public Song(JSONObject object) {
         try {
@@ -34,7 +35,7 @@ public class Song {
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration", 0);
             this.rate_average = object.optDouble("avg_valoration", 0);
-            this.fecha=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'").parse(object.getString("created_at"));
+            this.fecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'").parse(object.getString("created_at"));
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
         }
@@ -85,5 +86,23 @@ public class Song {
             }
         }
         return songs;
+    }
+
+    public String toJson() throws JSONException {
+        return new JSONObject()
+                .put("album", new JSONObject().put(
+                        "artist", new JSONObject().put(
+                                "name", artist
+                        )
+                        )
+                )
+                .put("title", songName)
+                .put("genre", category)
+                .put("duration", duration)
+                .put("stream_url", url)
+                .put("id", id)
+                .put("user_valoration", rate)
+                .put("avg_valoration", rate_average)
+                .toString();
     }
 }

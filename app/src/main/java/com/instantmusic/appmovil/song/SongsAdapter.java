@@ -1,7 +1,7 @@
 package com.instantmusic.appmovil.song;
 
 import android.content.Context;
-import android.text.InputFilter;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +10,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.song.Song;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SongsAdapter extends ArrayAdapter<Song> {
     private int tipoLayout;
-    public SongsAdapter(Context context, ArrayList<Song> songs,int n_) {
+
+    public SongsAdapter(Context context, ArrayList<Song> songs, int n_) {
         super(context, 0, songs);
-        this.tipoLayout=n_;
+        this.tipoLayout = n_;
+    }
+
+    public ArrayList<Song> getSongs() {
+        final ArrayList<Song> songs = new ArrayList<>(getCount());
+        for (int i = 0; i < getCount(); i++) {
+            songs.add(getItem(i));
+        }
+        return songs;
     }
 
     @Override
@@ -28,106 +36,77 @@ public class SongsAdapter extends ArrayAdapter<Song> {
         Song song = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            if ( this.tipoLayout == 0 ) {
+            if (this.tipoLayout == 0) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row, parent, false);
-            }
-            else if ( this.tipoLayout == 1 ) {
+            } else if (this.tipoLayout == 1) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.playlist_row, parent, false);
-            }
-            else if ( this.tipoLayout == 2 ) {
+            } else if (this.tipoLayout == 2) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists_row, parent, false);
             }
         }
         ImageView categoryImage = convertView.findViewById(R.id.iconoSong);
         TextView songName = (TextView) convertView.findViewById(R.id.text1);
-        if ( this.tipoLayout == 0 || this.tipoLayout == 1 ) {
+        if (this.tipoLayout == 0 || this.tipoLayout == 1) {
             TextView artist = (TextView) convertView.findViewById(R.id.text2);
             artist.setText(song.artist);
-            if ( this.tipoLayout == 0 ) {
+            if (this.tipoLayout == 0) {
                 TextView rateAverage = (TextView) convertView.findViewById(R.id.rate_average);
                 DecimalFormat formato = new DecimalFormat("#.##");
                 String rate = "Rate: ";
                 rate = rate + formato.format(song.rate_average) + "☆";
                 rateAverage.setText(rate);
             }
-            if ( song.songName.length() > 22 && this.tipoLayout == 0) {
+            if (song.songName.length() > 22 && this.tipoLayout == 0) {
                 String aux = song.songName;
                 StringBuilder texto = new StringBuilder(aux);
                 texto.setCharAt(19, '.');
                 texto.setCharAt(20, '.');
                 texto.setCharAt(21, '.');
                 songName.setText(texto);
-            }
-            else {
+            } else {
                 songName.setText(song.songName);
             }
-        }
-        else if ( this.tipoLayout == 2 ) {
-            if ( song.songName.length() > 15 ) {
+        } else if (this.tipoLayout == 2) {
+            if (song.songName.length() > 15) {
                 String aux = song.songName;
                 StringBuilder texto = new StringBuilder(aux);
                 texto.setCharAt(12, '.');
                 texto.setCharAt(13, '.');
                 texto.setCharAt(14, '.');
                 songName.setText(texto);
-            }
-            else {
+            } else {
                 songName.setText(song.songName);
             }
         }
 
-        switch(song.category) {
-            case "90s":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.noventasicon));
-            break;
-            case "Classic":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boomerericon));
-            break;
-            case "Electronic":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.electronicicon));
-            break;
-            case "Reggae":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.notweedicon));
-            break;
-            case "R&B":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.rricon));
-            break;
-            case "Latin":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.maracasicon));
-            break;
-            case "Oldies":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.boomericon));
-            break;
-            case "Country":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.texasicom));
-            break;
-            case "Rap":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.rapicom));
-            break;
-            case "Rock":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.piedraicon));
-            break;
-            case "Metal":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.metalicon));
-            break;
-            case "Pop":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.popicon));
-            break;
-            case "Blues":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.azulicon));
-            break;
-            case "Jazz":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.jazzicon));
-            break;
-            case "Folk":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.folkicon));
-            break;
-            case "80s":
-                categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ochentasicon));
-            break;
-        }
+        if (categoriesMap.containsKey(song.category))
+            categoryImage.setImageDrawable(getContext().getResources().getDrawable(categoriesMap.get(song.category)));
 
         // Return the completed view to render on screen
         return convertView;
     }
+
+    private static ArrayMap<String, Integer> categoriesMap = initCategoriesMap();
+
+    static private ArrayMap<String, Integer> initCategoriesMap() {
+        ArrayMap<String, Integer> map = new ArrayMap<>();
+        map.put("90s", R.drawable.noventasicon);
+        map.put("Classic", R.drawable.boomerericon);
+        map.put("Electronic", R.drawable.electronicicon);
+        map.put("Reggae", R.drawable.notweedicon);
+        map.put("R&B", R.drawable.rricon);
+        map.put("Latin", R.drawable.maracasicon);
+        map.put("Oldies", R.drawable.boomericon);
+        map.put("Country", R.drawable.texasicom);
+        map.put("Rap", R.drawable.rapicom);
+        map.put("Rock", R.drawable.piedraicon);
+        map.put("Metal", R.drawable.metalicon);
+        map.put("Pop", R.drawable.popicon);
+        map.put("Blues", R.drawable.azulicon);
+        map.put("Jazz", R.drawable.jazzicon);
+        map.put("Folk", R.drawable.folkicon);
+        map.put("80s", R.drawable.ochentasicon);
+        return map;
+    }
+
 }

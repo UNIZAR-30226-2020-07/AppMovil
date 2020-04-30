@@ -67,7 +67,7 @@ class OfflinePrefs {
 
         try {
             prefs.edit()
-                    .putString(SONG + id, Fixes.songToJson(song))
+                    .putString(SONG + id, song.toJson())
                     .putStringSet(IDS, ids)
                     .apply();
         } catch (JSONException e) {

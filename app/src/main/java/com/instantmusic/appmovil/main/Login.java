@@ -9,24 +9,29 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import com.instantmusic.appmovil.adapter.HorizontalListView;
-import com.instantmusic.appmovil.playlist.PlaylistActivity;
-import com.instantmusic.appmovil.playlist.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.adapter.HorizontalListView;
+import com.instantmusic.appmovil.playlist.Playlist;
+import com.instantmusic.appmovil.playlist.PlaylistActivity;
+import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
-import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Login extends AppCompatActivity {
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
@@ -142,7 +147,7 @@ public class Login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                 Song cancion =  search.getItem(position);
-                openSongRecommended(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
+                openSongRecommended(cancion);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
@@ -226,19 +231,12 @@ public class Login extends AppCompatActivity {
         startActivityForResult(i, 1);
     }
 
-    private void openSongRecommended(String songName, String autorName, int durationSong, String stream_url, int idSong) {
-        Intent i = new Intent(this, SongActivity.class);
-        i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".String", autorName);
-        i.putExtra(this.getPackageName() + ".duration", durationSong);
-        i.putExtra(this.getPackageName() + ".positionId", 0);
-        i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".id", idSong);
-        i.putExtra(this.getPackageName() + ".botonPlay", false);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        idSongs.add(idSong);
-        i.putExtra(this.getPackageName() + ".songs", idSongs);
-        this.startActivity(i);
+    private void openSongRecommended(Song song) {
+        IntentTransfer.setData("songs", Collections.singletonList(song));
+        IntentTransfer.setData("positionId", 0);
+        IntentTransfer.setData("botonPlay", false);
+
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
     private void Search () {

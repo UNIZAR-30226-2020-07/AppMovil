@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -20,24 +19,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.offline.Downloader;
-import com.instantmusic.appmovil.offline.Fixes;
 import com.instantmusic.appmovil.artist.ArtistActivity;
+import com.instantmusic.appmovil.offline.Downloader;
 import com.instantmusic.appmovil.playlist.addSongToPlaylist;
-import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 
-
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 public class SongActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, SeekBar.OnSeekBarChangeListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener {
@@ -64,21 +60,11 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     private boolean autoPlay;
     private boolean isShuffled = false;
     private boolean isPrepared = false;
-    private String song;
-    private String artist;
-    private String urlSong;
-    private int idSong;
-    private int positionRandomId = 0;
-    private int durationSong;
-    private int rateSong;
-    private int positionId;
-    private Button seeArtist;
-    public Song thisSong;
+    private int currentPos;
 
     // arrays
-    private ArrayList<Song> songs = new ArrayList<>();
-    private ArrayList<Integer> idSongs;
-    private ArrayList<Integer> randomIdSongs;
+    private List<Song> original_songs_list;
+    private List<Song> songs_list;
 
     // ------------------- activity -------------------
 
@@ -103,7 +89,6 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         seekBarHint = findViewById(R.id.minuto);
         songName = findViewById(R.id.songname);
         autorName = findViewById(R.id.autorname);
-        seeArtist=findViewById(R.id.seeArtist);
 
         // other initializations
         initRatingBar();
@@ -111,57 +96,26 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         initMediaPlayer();
 
         // continue loading
-        onNewIntent(getIntent());
+        loadData();
     }
 
     /**
      * Load the song
-     *
-     * @param intent must have the song info
      */
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
+    protected void loadData() {
 
         // get data
-        song = intent.getStringExtra(getPackageName() + ".dataString");
-        String autor = intent.getStringExtra(getPackageName() + ".String");
-        durationSong = 1000 * intent.getIntExtra(getPackageName() + ".duration", 0);
-        urlSong = intent.getStringExtra(getPackageName() + ".url");
-        idSong = intent.getIntExtra(getPackageName() + ".id", 0);
-        idSongs = intent.getIntegerArrayListExtra(getPackageName() + ".songs");
-        positionId = intent.getIntExtra(getPackageName() + ".positionId", 0);
-        boolean botonPlay = intent.getBooleanExtra(getPackageName() + ".botonPlay", false);
+        original_songs_list = songs_list = IntentTransfer.getData("songs");
+        currentPos = IntentTransfer.getData("positionId");
+        boolean botonPlay = IntentTransfer.getData("botonPlay");
 
         // set data
-        songName.setText(song);
-        autorName.setText(autor);
-        if (idSongs.size() > 1) {
+        if (songs_list.size() > 1) {
             next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_next));
-        }
-        else {
+        } else {
             next.setEnabled(false);
+            shuffle.setEnabled(false);
         }
-
-        desordenar();
-
-        // set rate of the song
-        server.getSongData(idSong, new JSONConnection.Listener() {
-            @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
-                if (responseCode == 200) {
-                    Song newSong = new Song(data);
-                    thisSong=newSong;
-                    artist = newSong.artist;
-                    rateSong = newSong.rate;
-                    reloadRating();
-                }
-            }
-
-            @Override
-            public void onErrorResponse(Throwable throwable) {
-            }
-        });
 
         // load the song
         loadSong(botonPlay);
@@ -183,8 +137,8 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     private void addPlaylist() {
         Intent i = new Intent(this, addSongToPlaylist.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        i.putExtra("song", song);
-        i.putExtra("id", idSong);
+        i.putExtra("song", getCurrentSong().songName);
+        i.putExtra("id", getCurrentSong().id);
         startActivityForResult(i, 1);
     }
 
@@ -194,31 +148,12 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if ( mediaPlayer.isPlaying() || mediaPlayer.getCurrentPosition() > 0 ) {
-            if ( isShuffled ) {
-                server.saveMinutesSong(mediaPlayer.getCurrentPosition() / 1000, randomIdSongs.get(positionRandomId), new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) { }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) { }
-                });
-            }
-            else {
-                server.saveMinutesSong(mediaPlayer.getCurrentPosition() / 1000, idSongs.get(positionId), new JSONConnection.Listener() {
-                    @Override
-                    public void onValidResponse(int responseCode, JSONObject data) { }
-                    @Override
-                    public void onErrorResponse(Throwable throwable) { }
-                });
-            }
-        }
-        else if ( mediaPlayer.getCurrentPosition() == 0 ) {
-            server.saveMinutesSong(-1, -1, new JSONConnection.Listener() {
-                @Override
-                public void onValidResponse(int responseCode, JSONObject data) { }
-                @Override
-                public void onErrorResponse(Throwable throwable) { }
-            });
+        if (!isOnline()) {
+            // offline mode, can't save
+        } else if (mediaPlayer.isPlaying() || mediaPlayer.getCurrentPosition() > 0) {
+            server.saveMinutesSong(mediaPlayer.getCurrentPosition() / 1000, getCurrentSong().id, null);
+        } else if (mediaPlayer.getCurrentPosition() == 0) {
+            server.saveMinutesSong(-1, -1, null);
         }
         stopSong();
     }
@@ -255,11 +190,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
                 break;
             case R.id.offline:
                 toggleOptionsMenu();
-                try {
-                    Downloader.downloadSong(new Song(new JSONObject(Fixes.dataToJson(artist, song, "unknown", durationSong, urlSong, idSong, rateSong, rateSong))), this);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Downloader.downloadSong(getCurrentSong(), this);
                 break;
 
             // song buttons
@@ -305,6 +236,20 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     // ------------------- Song -------------------
 
     /**
+     * @return the current playing song
+     */
+    private Song getCurrentSong() {
+        return songs_list.get(currentPos);
+    }
+
+    /**
+     * @return true iff the current playing song is an online one
+     */
+    private boolean isOnline() {
+        return getCurrentSong().url.startsWith("http");
+    }
+
+    /**
      * Starts/Continues playing the song
      */
     private void playSong() {
@@ -347,46 +292,18 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         boolean auto = mediaPlayer.isPlaying();
         stopSong();
 
-        if ( isShuffled ) {
-            if (mediaPlayer.getCurrentPosition() < 1000 && positionRandomId != 0) {
-                // go prev
-                positionRandomId--;
+        if (mediaPlayer.getCurrentPosition() < 1000 && currentPos != 0) {
+            // go prev
+            currentPos--;
 
-                // check if now is not last song of list
-                if (positionRandomId != (randomIdSongs.size() - 1)) {
-                    next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_next));
-                    next.setEnabled(true);
-                }
+            updateNextUI();
 
-                loadSongData(auto);
+            loadSong(auto);
 
-            }
-            else {
-                // continue (or not)
-                if (auto) {
-                    playSong();
-                }
-            }
-        }
-        else {
-            if (mediaPlayer.getCurrentPosition() < 1000 && positionId != 0) {
-                // go prev
-                positionId--;
-
-                // check if now is not last song of list
-                if (positionId != (idSongs.size() - 1)) {
-                    next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_next));
-                    next.setEnabled(true);
-                }
-
-                loadSongData(auto);
-
-            }
-            else {
-                // continue (or not)
-                if (auto) {
-                    playSong();
-                }
+        } else {
+            // continue (or not)
+            if (auto) {
+                playSong();
             }
         }
     }
@@ -399,32 +316,24 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         boolean auto = mediaPlayer.isPlaying();
         stopSong();
 
+        // go next
+        currentPos++;
 
-        if ( isShuffled ) {
-            // go next
-            positionRandomId++;
+        updateNextUI();
 
-            // check if now is last song of list
-            if (positionRandomId == (randomIdSongs.size() - 1)) {
-                next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, R.drawable.ic_skip_next_black_24dp));
-                next.setEnabled(false);
-            }
+        // load next
+        loadSong(auto);
+    }
 
-            // load next
-            loadSongData(auto);
-        }
-        else {
-            // go next
-            positionId++;
-
-            // check if now is last song of list
-            if (positionId == (idSongs.size() - 1)) {
-                next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, R.drawable.ic_skip_next_black_24dp));
-                next.setEnabled(false);
-            }
-
-            // load next
-            loadSongData(auto);
+    private void updateNextUI() {
+        if (currentPos == (songs_list.size() - 1)) {
+            // now is the last song
+            next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, R.drawable.ic_skip_next_black_24dp));
+            next.setEnabled(false);
+        } else {
+            // not the last song anymore
+            next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_next));
+            next.setEnabled(true);
         }
     }
 
@@ -446,11 +355,26 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         shuffle.setImageDrawable(ContextCompat.getDrawable(this,
                 isShuffled ? R.drawable.shufflewhite : R.drawable.shuffle2
         ));
+        if (isShuffled) {
+            // shuffle now
+            Song currentSong = getCurrentSong();
+            songs_list = new ArrayList<>(original_songs_list);
+            Collections.shuffle(songs_list);
+            songs_list.remove(currentSong);
+            songs_list.add(0, currentSong);
+            currentPos = 0;
+        } else {
+            // unshuffle
+            currentPos = original_songs_list.indexOf(getCurrentSong());
+            songs_list = original_songs_list;
+        }
+        updateNextUI();
     }
+
     private void seeArtist() throws JSONException {
         Intent i = new Intent(this, ArtistActivity.class);
-        int idArtist=thisSong.album.getJSONObject("artist").getInt("id");
-        i.putExtra("idArtist",idArtist);
+        int idArtist = getCurrentSong().album.getJSONObject("artist").getInt("id");
+        i.putExtra("idArtist", idArtist);
         startActivityForResult(i, 1);
     }
     // ------------------- MediaPlayer -------------------
@@ -466,76 +390,6 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     }
 
     /**
-     * Makes petition to server to get the song data
-     */
-    private void loadSongData(final boolean auto) {
-        if ( isShuffled ) {
-            final int loadedPosition = positionRandomId;
-            server.getSongData(idSongs.get(positionRandomId), new JSONConnection.Listener() {
-                @Override
-                public void onValidResponse(int responseCode, JSONObject data) {
-                    if (responseCode == 200) {
-
-                        // another petition
-                        if (loadedPosition != positionRandomId) return;
-
-                        // get data
-                        Song nextSong = new Song(data);
-                        song = nextSong.songName;
-                        artist = nextSong.artist;
-                        durationSong = nextSong.duration;
-                        urlSong = nextSong.url;
-
-                        // set data
-                        songName.setText(song);
-                        autorName.setText(artist);
-
-                        // continue loading
-                        loadSong(auto);
-                    }
-                }
-
-                @Override
-                public void onErrorResponse(Throwable throwable) {
-
-                }
-            });
-        }
-        else {
-            final int loadedPosition = positionId;
-            server.getSongData(idSongs.get(positionId), new JSONConnection.Listener() {
-                @Override
-                public void onValidResponse(int responseCode, JSONObject data) {
-                    if (responseCode == 200) {
-
-                        // another petition
-                        if (loadedPosition != positionId) return;
-
-                        // get data
-                        Song nextSong = new Song(data);
-                        song = nextSong.songName;
-                        artist = nextSong.artist;
-                        durationSong = nextSong.duration;
-                        urlSong = nextSong.url;
-
-                        // set data
-                        songName.setText(song);
-                        autorName.setText(artist);
-
-                        // continue loading
-                        loadSong(auto);
-                    }
-                }
-
-                @Override
-                public void onErrorResponse(Throwable throwable) {
-                }
-            });
-        }
-
-    }
-
-    /**
      * Starts the loading of the song
      */
     public void loadSong(boolean auto) {
@@ -548,11 +402,11 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
             play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             play.setEnabled(false);
 
-            if (urlSong.startsWith("http")) {
-                mediaPlayer.setDataSource(urlSong);
+            if (isOnline()) {
+                mediaPlayer.setDataSource(getCurrentSong().url);
             } else {
                 try {
-                    FileInputStream fileInputStream = new FileInputStream(urlSong);
+                    FileInputStream fileInputStream = new FileInputStream(getCurrentSong().url);
                     mediaPlayer.setDataSource(fileInputStream.getFD());
                     fileInputStream.close();
                 } catch (IOException e) {
@@ -573,11 +427,12 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     @Override
     public void onPrepared(MediaPlayer mp) {
         // song ready to play
-        songName.setText(song);
-        autorName.setText(artist);
+        songName.setText(getCurrentSong().songName);
+        autorName.setText(getCurrentSong().artist);
         play.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         play.setEnabled(true);
         reloadSeekBar();
+        reloadRating();
         isPrepared = true;
         if (autoPlay) {
             playSong();
@@ -590,19 +445,11 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
      */
     @Override
     public void onCompletion(MediaPlayer mp) {
-        if ((positionId + 1) < idSongs.size()) {
+        if ((currentPos + 1) < songs_list.size()) {
             nextSong();
         } else {
             stopSong();
         }
-    }
-
-    /**
-     *
-     */
-    private void desordenar() {
-        randomIdSongs = new ArrayList<>(idSongs);
-        Collections.shuffle(randomIdSongs);
     }
 
     // ------------------- Rating bar -------------------
@@ -623,7 +470,8 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
      * Reloads the rating
      */
     private void reloadRating() {
-        ratingBar.setRating(rateSong);
+        ratingBar.setRating(getCurrentSong().rate);
+        ratingBar.setEnabled(isOnline());
     }
 
     /**
@@ -632,10 +480,17 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     @Override
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
         final int rating_int = Math.round(rating);
-        ratingScale.setText(ratings[rating_int - 1]);
-        ratingScale.setVisibility(View.VISIBLE);
-        if (fromUser) {
-            server.rateASong(idSong, rating_int, null);
+        if (rating_int == 0) {
+            // no rating
+            ratingScale.setVisibility(View.INVISIBLE);
+        } else {
+            // rating
+            ratingScale.setText(ratings[rating_int - 1]);
+            ratingScale.setVisibility(View.VISIBLE);
+            if (fromUser && isOnline()) {
+                server.rateASong(getCurrentSong().id, rating_int, null);
+                getCurrentSong().rate = rating_int;
+            }
         }
     }
 
@@ -694,7 +549,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
      * Reloads the seekbar from current song
      */
     private void reloadSeekBar() {
-        seekBar.setMax(mediaPlayer.getDuration() == -1 ? durationSong : mediaPlayer.getDuration());
+        seekBar.setMax(mediaPlayer.getDuration() == -1 ? getCurrentSong().duration : mediaPlayer.getDuration());
         seekBarHint.setVisibility(View.INVISIBLE);
     }
 
