@@ -72,8 +72,10 @@
     <string name="orderPlaylist3">Artist</string>
     <string name="orderPlaylist4">Date</string>
     <string name="loading">Loading...</string>
-    <string name="off_nosongs">No saved songs. Downloaded ones will be shown here.</string>
-    <string name="download_progress">Downloading \"%s\"</string>
+    <string name="off_nosongs">No saved songs.\nDownloaded ones will be shown here.</string>
+    <string name="off_downloading">Downloading \"%s\"</string>
+    <string name="off_downloaded">Downloaded</string>
+    <string name="off_error">Can\'t download, try again later</string>
 
 
 </resources>
