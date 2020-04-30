@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,16 +19,16 @@ import java.util.prefs.Preferences;
 public class OfflinePrefs {
 
     private SharedPreferences prefs;
+    private static final String IDS = "ids";
+    private static final String SONG = "song";
 
     OfflinePrefs(Context cntx) {
-        this.prefs = cntx.getSharedPreferences("Offline", Context.MODE_PRIVATE);
+        this.prefs = cntx.getSharedPreferences("offline", Context.MODE_PRIVATE);
     }
 
-    private static final String IDS = "ids";
 
     ArrayList<Song> getSongs() {
-        Set<String> set = prefs.getStringSet(IDS, null);
-        if (set == null) return null;
+        Set<String> set = prefs.getStringSet(IDS, Collections.<String>emptySet());
 
         ArrayList<Song> ids = new ArrayList<>(set.size());
         for (String s : set) {
@@ -36,7 +37,14 @@ public class OfflinePrefs {
         return ids;
     }
 
-    private static final String SONG = "song";
+    Song getSong(int id) {
+        try {
+            return new Song(new JSONObject(prefs.getString(SONG + id, "")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     void saveSong(Song song) {
         int id = song.id;
@@ -54,13 +62,14 @@ public class OfflinePrefs {
         }
     }
 
-    Song getSong(int id) {
-        try {
-            return new Song(new JSONObject(prefs.getString(SONG + id, "")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
+    void deleteSong(int id) {
+        Set<String> ids = prefs.getStringSet(IDS, new HashSet<String>());
+        ids.remove(Integer.toString(id));
+
+        prefs.edit()
+                .remove(SONG + id)
+                .putStringSet(IDS, ids)
+                .apply();
     }
 
 }

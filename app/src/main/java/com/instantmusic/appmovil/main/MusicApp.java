@@ -113,12 +113,6 @@ public class MusicApp extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.offline).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), OfflineActivity.class));
-            }
-        });
     }
 
     private void logInScreen() {
@@ -134,6 +128,13 @@ public class MusicApp extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+    }
 
+    public void onButtonClick(View view) {
+        switch (view.getId()) {
+            case R.id.offline:
+                startActivity(new Intent(getApplicationContext(), OfflineActivity.class));
+                break;
+        }
     }
 }
