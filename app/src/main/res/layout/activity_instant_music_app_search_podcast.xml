@@ -34,7 +34,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="0"
                 android:background="@color/backColor"
-                android:hint="@string/search1"
+                android:hint="@string/search5"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:selectAllOnFocus="false" />

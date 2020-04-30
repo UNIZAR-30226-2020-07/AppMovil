@@ -172,7 +172,7 @@ public class PodcastActivity extends AppCompatActivity {
                 adapterSong.sort(new Comparator<Song>() {
                     @Override
                     public int compare(Song o1, Song o2) {
-                        return Integer.toString(o1.id).compareTo(Integer.toString(o2.id));
+                        return o1.fecha.compareTo(o2.fecha);
                     }
                 });
             break;
