@@ -1,7 +1,6 @@
 package com.instantmusic.appmovil.server;
 
 import com.instantmusic.appmovil.server.connect.JSONConnection;
-import com.instantmusic.appmovil.song.Song;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -229,16 +228,25 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public void saveMinutesSong(int idUser, int seconds, int idSong, JSONConnection.Listener listener) {
-        String url = "users/";
-        url = url + idUser;
-        initialize()
-                .setUrl(url)
-                .setMethod(JSONConnection.METHOD.PATCH)
-                .putData("pause_second",seconds)
-                .putData("pause_song",idSong)
-                .setListener(listener)
-                .execute();
+    public void saveMinutesSong(int seconds, int idSong, JSONConnection.Listener listener) {
+        if ( seconds == -1 ) {
+            initialize()
+                    .setUrl("rest-auth/user")
+                    .setMethod(JSONConnection.METHOD.PATCH)
+                    .putNullData("pause_second")
+                    .putNullData("pause_song")
+                    .setListener(listener)
+                    .execute();
+        }
+        else {
+            initialize()
+                    .setUrl("rest-auth/user")
+                    .setMethod(JSONConnection.METHOD.PATCH)
+                    .putData("pause_second",seconds)
+                    .putData("pause_song",idSong)
+                    .setListener(listener)
+                    .execute();
+        }
     }
 
     @Override
@@ -372,6 +380,16 @@ public class remoteServer implements serverInterface {
          */
         public Petition putData(String key, boolean value) {
             return _putData(key, value);
+        }
+
+        /**
+         * Adds a null to send (in the body)
+         *
+         * @param key key
+         * @return this to chain
+         */
+        public Petition putNullData(String key) {
+            return _putData(key, JSONObject.NULL);
         }
 
         /**
