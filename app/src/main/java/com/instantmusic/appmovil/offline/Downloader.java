@@ -16,7 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Functions to download songs
+ * Functions to download and manage downloaded songs
  */
 public class Downloader {
 
@@ -28,6 +28,16 @@ public class Downloader {
      */
     public static void downloadSong(Song song, Context cntx) {
         new DownloadFile(song, cntx).execute();
+    }
+
+    /**
+     * Removes a downloaded song
+     *
+     * @param id   id of the song to remove
+     * @param cntx base context
+     */
+    public static void removeSong(int id, Context cntx) {
+        cntx.deleteFile(getFileName(id));
     }
 
     // ------------------- Internal -------------------

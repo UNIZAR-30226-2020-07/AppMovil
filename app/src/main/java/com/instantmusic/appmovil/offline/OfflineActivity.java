@@ -102,6 +102,7 @@ public class OfflineActivity extends AppCompatActivity implements AdapterView.On
                 if (song != null) {
                     adapter.remove(song);
                     prefs.removeSong(song.id);
+                    Downloader.removeSong(song.id, this);
                     updateUI();
                 }
                 return true;
