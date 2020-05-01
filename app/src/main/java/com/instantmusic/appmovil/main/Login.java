@@ -3,7 +3,9 @@ package com.instantmusic.appmovil.main;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.view.ViewStructure;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,6 +39,11 @@ public class Login extends AppCompatActivity {
     private HorizontalListView myPlaylist;
     private HorizontalListView mySongs;
     private String username;
+    private Button pausedSong;
+    private Button pausedSong2;
+    private LinearLayout layoutPaused;
+    private Song paused_song;
+    private int pause_seconds;
 
     @SuppressLint("WrongViewCast")
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,14 @@ public class Login extends AppCompatActivity {
         server = new remoteServer();
         myPlaylist = findViewById(R.id.myPlayLists);
         mySongs = findViewById(R.id.mySongs);
+        pausedSong = findViewById(R.id.button);
+        pausedSong2 = findViewById(R.id.button3);
+        layoutPaused = findViewById(R.id.layout);
+        layoutPaused.setVisibility(View.INVISIBLE);
+        pausedSong.setVisibility(View.INVISIBLE);
+        pausedSong.setEnabled(false);
+        pausedSong2.setVisibility(View.INVISIBLE);
+        pausedSong2.setEnabled(false);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,0);
         adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
         myPlaylist.setAdapter(adapterPlaylist);
@@ -59,8 +74,21 @@ public class Login extends AppCompatActivity {
                         JSONArray playlistsUser = data.getJSONArray("playlists");
                         ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
+                        String text = "Continue playback: ";
+                        if ( data.getJSONObject("pause_song" ) != null ) {
+                            paused_song = new Song(data.getJSONObject("pause_song"));
+                            text = text + paused_song.songName;
+                            pause_seconds = data.optInt("pause_second" , 0);
+                            layoutPaused.setVisibility(View.VISIBLE);
+                            pausedSong.setVisibility(View.VISIBLE);
+                            pausedSong.setEnabled(true);
+                            pausedSong2.setVisibility(View.VISIBLE);
+                            pausedSong2.setEnabled(true);
+                            pausedSong.setText(text);
+                        }
                     }
-                } catch (JSONException e) {
+                }
+                catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -103,6 +131,21 @@ public class Login extends AppCompatActivity {
                 Search();
             }
         });
+
+        pausedSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSong(paused_song.songName, paused_song.artist, paused_song.duration, paused_song.url, paused_song.id, true);
+            }
+        });
+
+        pausedSong2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSong(paused_song.songName, paused_song.artist, paused_song.duration, paused_song.url, paused_song.id, true);
+            }
+        });
+
         Button Button3 = findViewById(R.id.menuButton3);
         Button3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,19 +185,14 @@ public class Login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                 Song cancion =  search.getItem(position);
-                openSongRecommended(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id);
+                openSong(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id, false);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    createPlaylist();
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                createPlaylist();
             }
         });
     }
@@ -172,6 +210,18 @@ public class Login extends AppCompatActivity {
                         JSONArray playlistsUser = data.getJSONArray("playlists");
                         ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser,true);
                         adapterPlaylist.addAll(newPlaylists);
+                        String text = "Continue playback: ";
+                        if ( data.getJSONObject("pause_song" ) != null ) {
+                            paused_song = new Song(data.getJSONObject("pause_song"));
+                            text = text + paused_song.songName;
+                            pause_seconds = data.optInt("pause_second" , 0);
+                            layoutPaused.setVisibility(View.VISIBLE);
+                            pausedSong.setVisibility(View.VISIBLE);
+                            pausedSong.setEnabled(true);
+                            pausedSong2.setVisibility(View.VISIBLE);
+                            pausedSong2.setEnabled(true);
+                            pausedSong.setText(text);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -185,7 +235,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void createPlaylist() throws JSONException {
+    private void createPlaylist() {
         LinearLayout panel = findViewById(R.id.panelPlaylist);
         EditText insert = findViewById(R.id.insertTitle);
         String title = insert.getText().toString();
@@ -226,7 +276,7 @@ public class Login extends AppCompatActivity {
         startActivityForResult(i, 1);
     }
 
-    private void openSongRecommended(String songName, String autorName, int durationSong, String stream_url, int idSong) {
+    private void openSong(String songName, String autorName, int durationSong, String stream_url, int idSong, boolean seguirReproduccion) {
         Intent i = new Intent(this, SongActivity.class);
         i.putExtra(this.getPackageName() + ".dataString", songName);
         i.putExtra(this.getPackageName() + ".String", autorName);
@@ -238,6 +288,10 @@ public class Login extends AppCompatActivity {
         ArrayList<Integer> idSongs = new ArrayList<>();
         idSongs.add(idSong);
         i.putExtra(this.getPackageName() + ".songs", idSongs);
+        if ( seguirReproduccion ) {
+            i.putExtra(this.getPackageName() + ".pause_second", pause_seconds);
+        }
+        i.putExtra(this.getPackageName() + ".continue", seguirReproduccion);
         this.startActivity(i);
     }
 

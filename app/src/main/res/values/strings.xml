@@ -72,6 +72,7 @@
     <string name="orderPlaylist3">Artist</string>
     <string name="orderPlaylist4">Date</string>
     <string name="loading">Loading...</string>
+    <string name="pausedSong">Continue playback: nombre_cancion</string>
 
 
 </resources>

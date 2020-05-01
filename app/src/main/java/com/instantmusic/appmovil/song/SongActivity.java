@@ -58,6 +58,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
 
     // vars
     private boolean autoPlay;
+    private boolean seguirReproduccion;
     private boolean isShuffled = false;
     private boolean isPrepared = false;
     private String song;
@@ -68,6 +69,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     private int durationSong;
     private int rateSong;
     private int positionId;
+    private int pause_second;
     private Button seeArtist;
     public Song thisSong;
 
@@ -128,6 +130,10 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         idSongs = intent.getIntegerArrayListExtra(getPackageName() + ".songs");
         positionId = intent.getIntExtra(getPackageName() + ".positionId", 0);
         boolean botonPlay = intent.getBooleanExtra(getPackageName() + ".botonPlay", false);
+        seguirReproduccion = intent.getBooleanExtra(getPackageName() + ".continue", false);
+        if ( seguirReproduccion ) {
+            pause_second = intent.getIntExtra(getPackageName() + ".pause_second", 0);
+        }
 
         // set data
         songName.setText(song);
@@ -555,6 +561,10 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         play.setEnabled(true);
         reloadSeekBar();
         isPrepared = true;
+        if ( seguirReproduccion ) {
+            mediaPlayer.seekTo(pause_second*1000);
+            reloadSeekBar();
+        }
         if (autoPlay) {
             playSong();
         }
