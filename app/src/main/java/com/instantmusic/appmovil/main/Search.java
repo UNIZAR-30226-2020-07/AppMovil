@@ -243,6 +243,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void nameActivated() {
+        page = 1;
         searchType = 1;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
@@ -258,6 +259,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void categoryActivated() {
+        page = 1;
         searchType = 2;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
@@ -272,6 +274,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void artistActivated() {
+        page = 1;
         searchType = 3;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
@@ -287,6 +290,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void albumActivated() {
+        page = 1;
         searchType = 4;
         Button s1 = findViewById(R.id.switchName);
         Button s2 = findViewById(R.id.switchCategory);
@@ -301,6 +305,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Home() {
+        nameActivated();
         Intent i = new Intent(this, Login.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
@@ -308,6 +313,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Podcasts() {
+        nameActivated();
         Intent i = new Intent(this, PodcastSearch.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
@@ -315,6 +321,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Friends() {
+        nameActivated();
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
@@ -322,6 +329,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Settings() {
+        nameActivated();
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
