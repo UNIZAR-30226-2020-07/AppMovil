@@ -8,12 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.offline.OfflineActivity;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.Utils;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
+
 import org.json.JSONObject;
 
 /**
@@ -24,7 +28,7 @@ public class MusicApp extends AppCompatActivity {
     private EditText mail;
     private EditText pass;
     private TextView mailTip;
-    private TextView  passTip;
+    private TextView passTip;
     public String email;
     public serverInterface server;
 
@@ -60,48 +64,46 @@ public class MusicApp extends AppCompatActivity {
                 String password = pass.getText().toString();
                 String texto;
 
-                if ( userEmail.isEmpty() ) {
+                if (userEmail.isEmpty()) {
                     texto = "Email/User is empty";
                     mailTip.setText(texto);
                     mailTip.setTextColor(Color.RED);
                     mailTip.setVisibility(View.VISIBLE);
                     seguir = false;
-                }
-                else {
+                } else {
                     texto = "";
                     mailTip.setText(texto);
                 }
 
-                if ( password.isEmpty() ) {
+                if (password.isEmpty()) {
                     texto = "Password is empty";
                     passTip.setText(texto);
                     passTip.setTextColor(Color.RED);
                     passTip.setVisibility(View.VISIBLE);
                     seguir = false;
-                }
-                else {
+                } else {
                     texto = "";
                     passTip.setText(texto);
                 }
 
-                if ( seguir ) {
+                if (seguir) {
                     server.login(mail.getText().toString(), pass.getText().toString(), new JSONConnection.Listener() {
                         @Override
                         public void onValidResponse(int responseCode, JSONObject data) {
-                            if(responseCode == 200) {
+                            if (responseCode == 200) {
                                 logInScreen();
-                            }
-                            else{
+                            } else {
                                 String error = Utils.listifyErrors(data);
-                                if ( error.equals("Unable to log in with provided credentials.")) {
+                                if (error.equals("Unable to log in with provided credentials.")) {
                                     String texto = "Your email and password combination does not match an InstantMusic account. Please try again";
-                                    passTip=findViewById(R.id.Tip);
+                                    passTip = findViewById(R.id.Tip);
                                     passTip.setText(texto);
                                     passTip.setTextColor(Color.RED);
                                     passTip.setVisibility(View.VISIBLE);
                                 }
                             }
                         }
+
                         @Override
                         public void onErrorResponse(Throwable throwable) {
                             Toast.makeText(getBaseContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
@@ -110,6 +112,7 @@ public class MusicApp extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void logInScreen() {
@@ -125,6 +128,13 @@ public class MusicApp extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+    }
 
+    public void onButtonClick(View view) {
+        switch (view.getId()) {
+            case R.id.offline:
+                startActivity(new Intent(getApplicationContext(), OfflineActivity.class));
+                break;
+        }
     }
 }

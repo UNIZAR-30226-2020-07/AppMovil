@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
@@ -21,8 +23,8 @@ import com.instantmusic.appmovil.song.SongsAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class AlbumActivity extends AppCompatActivity {
     private ListView resList;
@@ -39,24 +41,25 @@ public class AlbumActivity extends AppCompatActivity {
         serverInterface server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
         Bundle extras = getIntent().getExtras();
-        if ( extras != null ) {
+        if (extras != null) {
             idAlbum = extras.getInt("idAlbum");
         }
-        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
-        searchMenu=findViewById(R.id.searchMenu);
+        adapterSong = new SongsAdapter(this, arrayOfSongs, 0);
+        searchMenu = findViewById(R.id.searchMenu);
         resList.setAdapter(adapterSong);
         server.getAlbumData(idAlbum, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
-                if ( responseCode == 200 ) {
+                if (responseCode == 200) {
                     albumSelected = new Album(data);
                     adapterSong.addAll(albumSelected.songs);
-                    TextView name=findViewById(R.id.albumName);
-                    TextView creator=findViewById(R.id.albumCreator);
+                    TextView name = findViewById(R.id.albumName);
+                    TextView creator = findViewById(R.id.albumCreator);
                     name.setText(albumSelected.name);
                     creator.setText(albumSelected.artistName);
                 }
             }
+
             @Override
             public void onErrorResponse(Throwable throwable) {
             }
@@ -70,12 +73,8 @@ public class AlbumActivity extends AppCompatActivity {
         });
         playB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if ( !resList.getAdapter().isEmpty() ) {
-                    ArrayAdapter<Song> search = (ArrayAdapter<Song>) resList.getAdapter();
-                    Song cancion = search.getItem(0);
-                    if ( cancion != null ) {
-                        Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,0,true);
-                    }
+                if (!resList.getAdapter().isEmpty()) {
+                    Song(0, true);
                 }
             }
         });
@@ -83,11 +82,8 @@ public class AlbumActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                Song cancion = search.getItem(position);
-                if ( cancion != null ) {
-                    Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,position,false);
-                }
+
+                Song(position, false);
             }
         });
 
@@ -102,7 +98,7 @@ public class AlbumActivity extends AppCompatActivity {
                 }
             }
         });
-        Button artist=findViewById(R.id.seeArtist2);
+        Button artist = findViewById(R.id.seeArtist2);
         artist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,11 +111,13 @@ public class AlbumActivity extends AppCompatActivity {
             }
         });
     }
+
     private void seeArtist() throws JSONException {
         Intent i = new Intent(this, ArtistActivity.class);
-        i.putExtra("idArtist",albumSelected.artistId);
+        i.putExtra("idArtist", albumSelected.artistId);
         startActivityForResult(i, 1);
     }
+
     private void toggleOptionsMenu() {
         searchMenu.setVisibility(
                 searchMenu.getVisibility() == View.VISIBLE
@@ -127,28 +125,21 @@ public class AlbumActivity extends AppCompatActivity {
                         : View.VISIBLE
         );
     }
-    private void backScreen(){
+
+    private void backScreen() {
         Intent i = new Intent();
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         setResult(RESULT_OK, i);
         finish();
     }
 
-    private void Song(String songName, String autorName, int durationSong, String stream_url, int id, int position, boolean botonPlay) {
-        Intent i = new Intent(this, SongActivity.class);
-        i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".String", autorName);
-        i.putExtra(this.getPackageName() + ".duration", durationSong);
-        i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".positionId", position);
-        i.putExtra(this.getPackageName() + ".botonPlay", botonPlay);
-        i.putExtra(this.getPackageName() + ".id", id);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        for ( int j = 0; j < adapterSong.getCount(); j++ ) {
-            idSongs.add(Objects.requireNonNull(adapterSong.getItem(j)).id);
-        }
-        i.putExtra(this.getPackageName() + ".songs", idSongs);
-        this.startActivity(i);
+    private void Song(int position, boolean botonPlay) {
+
+        IntentTransfer.setData("songs", adapterSong.getSongs());
+        IntentTransfer.setData("positionId", position);
+        IntentTransfer.setData("botonPlay", botonPlay);
+
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
 }

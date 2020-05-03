@@ -3,32 +3,35 @@ package com.instantmusic.appmovil.main;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.view.ViewStructure;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import com.instantmusic.appmovil.adapter.HorizontalListView;
-import com.instantmusic.appmovil.playlist.PlaylistActivity;
-import com.instantmusic.appmovil.playlist.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.adapter.HorizontalListView;
+import com.instantmusic.appmovil.playlist.Playlist;
+import com.instantmusic.appmovil.playlist.PlaylistActivity;
+import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
-import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Login extends AppCompatActivity {
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
@@ -61,7 +64,7 @@ public class Login extends AppCompatActivity {
         pausedSong.setEnabled(false);
         pausedSong2.setVisibility(View.INVISIBLE);
         pausedSong2.setEnabled(false);
-        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist,0);
+        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist, 0);
         adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
         myPlaylist.setAdapter(adapterPlaylist);
         mySongs.setAdapter(adapterSongs);
@@ -69,16 +72,16 @@ public class Login extends AppCompatActivity {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 try {
-                    if ( responseCode == 200 ) {
+                    if (responseCode == 200) {
                         username = data.getString("username");
                         JSONArray playlistsUser = data.getJSONArray("playlists");
                         ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
                         String text = "Continue playback: ";
-                        if ( data.getJSONObject("pause_song" ) != null ) {
+                        if (data.getJSONObject("pause_song") != null) {
                             paused_song = new Song(data.getJSONObject("pause_song"));
                             text = text + paused_song.songName;
-                            pause_seconds = data.optInt("pause_second" , 0);
+                            pause_seconds = data.optInt("pause_second", 0);
                             layoutPaused.setVisibility(View.VISIBLE);
                             pausedSong.setVisibility(View.VISIBLE);
                             pausedSong.setEnabled(true);
@@ -87,8 +90,7 @@ public class Login extends AppCompatActivity {
                             pausedSong.setText(text);
                         }
                     }
-                }
-                catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -101,17 +103,17 @@ public class Login extends AppCompatActivity {
         server.songsRecommended(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
-                if ( responseCode == 200 ) {
+                if (responseCode == 200) {
                     try {
                         JSONArray songsRecommended = data.getJSONArray("results");
                         ArrayList<Song> newSongs = Song.fromJson(songsRecommended, true, null);
                         adapterSongs.addAll(newSongs);
-                    }
-                    catch (JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             }
+
             @Override
             public void onErrorResponse(Throwable throwable) {
 
@@ -135,14 +137,14 @@ public class Login extends AppCompatActivity {
         pausedSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSong(paused_song.songName, paused_song.artist, paused_song.duration, paused_song.url, paused_song.id, true);
+                openSong(paused_song, true);
             }
         });
 
         pausedSong2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSong(paused_song.songName, paused_song.artist, paused_song.duration, paused_song.url, paused_song.id, true);
+                openSong(paused_song, true);
             }
         });
 
@@ -184,8 +186,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                Song cancion =  search.getItem(position);
-                openSong(cancion.songName, cancion.artist, cancion.duration, cancion.url, cancion.id, false);
+                Song cancion = search.getItem(position);
+                openSong(cancion, false);
             }
         });
         Button Button6 = findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist);
@@ -205,16 +207,16 @@ public class Login extends AppCompatActivity {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 try {
-                    if ( responseCode == 200 ) {
+                    if (responseCode == 200) {
                         username = data.getString("username");
                         JSONArray playlistsUser = data.getJSONArray("playlists");
-                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser,true);
+                        ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
                         String text = "Continue playback: ";
-                        if ( data.getJSONObject("pause_song" ) != null ) {
+                        if (data.getJSONObject("pause_song") != null) {
                             paused_song = new Song(data.getJSONObject("pause_song"));
                             text = text + paused_song.songName;
-                            pause_seconds = data.optInt("pause_second" , 0);
+                            pause_seconds = data.optInt("pause_second", 0);
                             layoutPaused.setVisibility(View.VISIBLE);
                             pausedSong.setVisibility(View.VISIBLE);
                             pausedSong.setEnabled(true);
@@ -244,8 +246,8 @@ public class Login extends AppCompatActivity {
         server.addPlaylist(title, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
-                if (responseCode == 201 ) {
-                    Playlist newPlaylist = new Playlist(data,true);
+                if (responseCode == 201) {
+                    Playlist newPlaylist = new Playlist(data, true);
                     adapterPlaylist.add(newPlaylist);
                 }
             }
@@ -257,70 +259,62 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void openCreate () {
+    private void openCreate() {
         LinearLayout panel = findViewById(R.id.panelPlaylist);
-        if(panel.getVisibility()==View.VISIBLE){
+        if (panel.getVisibility() == View.VISIBLE) {
             panel.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             panel.setVisibility(View.VISIBLE);
         }
         findViewById(com.instantmusic.appmovil.R.id.acceptPlaylist).setClickable(true);
     }
 
-    private void openPlaylist (String playlist, String creador, int idPlaylist){
+    private void openPlaylist(String playlist, String creador, int idPlaylist) {
         Intent i = new Intent(this, PlaylistActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         i.putExtra("playlist", playlist);
         i.putExtra("creador", creador);
-        i.putExtra("idPlaylist",idPlaylist);
+        i.putExtra("idPlaylist", idPlaylist);
         startActivityForResult(i, 1);
     }
 
-    private void openSong(String songName, String autorName, int durationSong, String stream_url, int idSong, boolean seguirReproduccion) {
-        Intent i = new Intent(this, SongActivity.class);
-        i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".String", autorName);
-        i.putExtra(this.getPackageName() + ".duration", durationSong);
-        i.putExtra(this.getPackageName() + ".positionId", 0);
-        i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".id", idSong);
-        i.putExtra(this.getPackageName() + ".botonPlay", false);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        idSongs.add(idSong);
-        i.putExtra(this.getPackageName() + ".songs", idSongs);
-        if ( seguirReproduccion ) {
-            i.putExtra(this.getPackageName() + ".pause_second", pause_seconds);
-        }
-        i.putExtra(this.getPackageName() + ".continue", seguirReproduccion);
-        this.startActivity(i);
+    private void openSong(Song song, boolean seguirReproduccion) {
+        IntentTransfer.setData("songs", Collections.singletonList(song));
+        IntentTransfer.setData("positionId", 0);
+        IntentTransfer.setData("botonPlay", false);
+        if (seguirReproduccion)
+            IntentTransfer.setData("pauseSecond", pause_seconds);
+
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
-    private void Search () {
+    private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }
 
-    private void Podcasts () {
+    private void Podcasts() {
         Intent i = new Intent(this, PodcastSearch.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }
 
-    private void Friends () {
+    private void Friends() {
         Intent i = new Intent(this, Friends.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }
 
-    private void Settings () {
+    private void Settings() {
         Intent i = new Intent(this, Settings.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }
 
     @Override
-    public void onBackPressed () {}
+    public void onBackPressed() {
+    }
 
 
 }

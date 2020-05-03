@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -21,10 +23,11 @@ import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Objects;
 
 public class PlaylistActivity extends AppCompatActivity {
     private ListView resList;
@@ -96,7 +99,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 if ( !resList.getAdapter().isEmpty() ) {
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) resList.getAdapter();
                     Song cancion = search.getItem(0);
-                    Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,0,true);
+                    Song(0, true);
                 }
             }
         });
@@ -107,7 +110,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
                 Song cancion = search.getItem(position);
                 if ( cancion != null ) {
-                    Song(cancion.songName, cancion.artist,cancion.duration,cancion.url, cancion.id,position,false);
+                    Song(position, false);
                 }
             }
         });
@@ -302,21 +305,13 @@ public class PlaylistActivity extends AppCompatActivity {
         setResult(RESULT_OK, i);
         finish();
     }
-    private void Song(String songName, String autorName, int durationSong, String stream_url, int id, int position, boolean botonPlay) {
-        Intent i = new Intent(this, SongActivity.class);
-        i.putExtra(this.getPackageName() + ".dataString", songName);
-        i.putExtra(this.getPackageName() + ".String", autorName);
-        i.putExtra(this.getPackageName() + ".duration", durationSong);
-        i.putExtra(this.getPackageName() + ".url", stream_url);
-        i.putExtra(this.getPackageName() + ".positionId", position);
-        i.putExtra(this.getPackageName() + ".botonPlay", botonPlay);
-        i.putExtra(this.getPackageName() + ".id", id);
-        ArrayList<Integer> idSongs = new ArrayList<>();
-        for ( int j = 0; j < adapterSong.getCount(); j++ ) {
-            idSongs.add(Objects.requireNonNull(adapterSong.getItem(j)).id);
-        }
-        i.putExtra(this.getPackageName() + ".songs", idSongs);
-        this.startActivity(i);
+
+    private void Song(int position, boolean botonPlay) {
+        IntentTransfer.setData("songs", adapterSong.getSongs());
+        IntentTransfer.setData("positionId", position);
+        IntentTransfer.setData("botonPlay", botonPlay);
+
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
     private void removeSong() {

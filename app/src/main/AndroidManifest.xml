@@ -1,49 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.instantmusic.appmovil"
-    >
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    package="com.instantmusic.appmovil">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <supports-screens
         android:largeScreens="true"
-        android:smallScreens="true"
         android:normalScreens="true"
+        android:smallScreens="true"
         android:xlargeScreens="true" />
-    <application
 
+    <application
         android:allowBackup="true"
         android:icon="@drawable/unknown"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".offline.OfflineActivity"></activity>
         <activity
             android:name=".main.MusicApp"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
-        <activity android:name=".main.Login"></activity>
-        <activity android:name=".main.Recover"></activity>
-        <activity android:name=".main.Regist"></activity>
-        <activity android:name=".main.Search"></activity>
-        <activity android:name=".main.Friends"></activity>
-        <activity android:name=".podcast.PodcastSearch"></activity>
-        <activity android:name=".podcast.PodcastActivity"></activity>
-        <activity android:name=".podcast.PodcastSongs"></activity>
-        <activity android:name=".main.Settings"></activity>
-        <activity android:name=".song.SongActivity"></activity>
-        <activity android:name=".playlist.PlaylistActivity"></activity>
-        <activity android:name=".server.remoteServer"></activity>
-        <activity android:name=".playlist.addSongToPlaylist"></activity>
-        <activity android:name=".playlist.removeSongFromPlaylist"></activity>
-        <activity android:name=".album.AlbumActivity"></activity>
-        <activity android:name=".artist.ArtistActivity"></activity>
+            </intent-filter>
+        </activity>
+        <activity android:name=".main.Login" />
+        <activity android:name=".main.Recover" />
+        <activity android:name=".main.Regist" />
+        <activity android:name=".main.Search" />
+        <activity android:name=".main.Friends" />
+        <activity android:name=".podcast.PodcastSearch" />
+        <activity android:name=".podcast.PodcastActivity" />
+        <activity android:name=".podcast.PodcastSongs" />
+        <activity android:name=".main.Settings" />
+        <activity android:name=".song.SongActivity" />
+        <activity android:name=".playlist.PlaylistActivity" />
+        <activity android:name=".server.remoteServer" />
+        <activity android:name=".playlist.addSongToPlaylist" />
+        <activity android:name=".playlist.removeSongFromPlaylist" />
+        <activity android:name=".album.AlbumActivity" />
+        <activity android:name=".artist.ArtistActivity" />
     </application>
 
 </manifest>
