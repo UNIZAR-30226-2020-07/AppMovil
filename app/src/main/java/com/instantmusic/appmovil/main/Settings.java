@@ -15,6 +15,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.server.UsersDbAdapter;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
@@ -106,7 +107,7 @@ public class Settings extends AppCompatActivity {
     }
 
     private void Friends() {
-        Intent i = new Intent(this, Friends.class);
+        Intent i = new Intent(this, FriendsSearch.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivityForResult(i, 1);

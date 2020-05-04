@@ -36,7 +36,7 @@
         <activity android:name=".main.Recover" />
         <activity android:name=".main.Regist" />
         <activity android:name=".main.Search" />
-        <activity android:name=".main.Friends" />
+        <activity android:name=".friends.FriendsSearch" />
         <activity android:name=".podcast.PodcastSearch" />
         <activity android:name=".podcast.PodcastActivity" />
         <activity android:name=".podcast.PodcastSongs" />

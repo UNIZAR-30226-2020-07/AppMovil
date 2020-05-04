@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.main.Friends;
+import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.main.Login;
 import com.instantmusic.appmovil.main.Search;
 import com.instantmusic.appmovil.main.Settings;
@@ -223,7 +223,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     }
 
     private void Friends() {
-        Intent i = new Intent(this, Friends.class);
+        Intent i = new Intent(this, FriendsSearch.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
 

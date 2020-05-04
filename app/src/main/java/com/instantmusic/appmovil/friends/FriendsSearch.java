@@ -1,4 +1,4 @@
-package com.instantmusic.appmovil.main;
+package com.instantmusic.appmovil.friends;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.IntentTransfer;
@@ -23,7 +22,8 @@ import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.artist.Artist;
 import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.artist.ArtistsAdapter;
-import com.instantmusic.appmovil.friends.FriendsSearch;
+import com.instantmusic.appmovil.main.Login;
+import com.instantmusic.appmovil.main.Settings;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -39,7 +39,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Search extends AppCompatActivity implements JSONConnection.Listener {
+public class FriendsSearch extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
     private TextView searchTip1;
     private TextView searchTip2;
@@ -345,13 +345,13 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void Album(int idAlbum) {
-        Intent i = new Intent(Search.this, AlbumActivity.class);
+        Intent i = new Intent(FriendsSearch.this, AlbumActivity.class);
         i.putExtra("idAlbum", idAlbum);
         this.startActivity(i);
     }
 
     private void Artist(int idArtist) {
-        Intent i = new Intent(Search.this, ArtistActivity.class);
+        Intent i = new Intent(FriendsSearch.this, ArtistActivity.class);
         i.putExtra("idArtist", idArtist);
         this.startActivity(i);
     }

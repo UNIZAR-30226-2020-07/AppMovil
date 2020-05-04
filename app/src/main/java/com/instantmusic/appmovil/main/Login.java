@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.adapter.HorizontalListView;
+import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
@@ -301,7 +302,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void Friends() {
-        Intent i = new Intent(this, Friends.class);
+        Intent i = new Intent(this, FriendsSearch.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }

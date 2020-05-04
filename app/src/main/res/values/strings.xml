@@ -32,6 +32,7 @@
     <string name="search3">Search genre</string>
     <string name="search4">Search album</string>
     <string name="search5">Search by title</string>
+    <string name="search6">Filter by username</string>
     <string name="searchTip1">Find your favourite music</string>
     <string name="searchTip2">Search by artist, songs, albums or genre</string>
     <string name="searchTip3">Find your favourite podcasts</string>
@@ -77,6 +78,6 @@
     <string name="off_downloading">Downloading \"%s\"</string>
     <string name="off_downloaded">Downloaded</string>
     <string name="off_error">Can\'t download, try again later</string>
-
+    <string name="friendsTitle">Friends</string>
 
 </resources>
