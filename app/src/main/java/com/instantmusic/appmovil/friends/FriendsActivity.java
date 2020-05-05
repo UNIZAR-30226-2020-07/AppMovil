@@ -51,7 +51,7 @@ public class FriendsActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instant_music_app_podcasts);
+        setContentView(R.layout.activity_instant_music_app_friends);
         resList = findViewById(R.id.cancionesAlbum);
         server = new remoteServer();
         Button playB = findViewById(R.id.playButton);

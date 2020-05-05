@@ -19,6 +19,8 @@ import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
+import com.instantmusic.appmovil.podcast.Podcast;
+import com.instantmusic.appmovil.podcast.PodcastAdapter;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -36,12 +38,15 @@ import java.util.Collections;
 
 public class Login extends AppCompatActivity {
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
+    private ArrayList<Podcast> arrayOfPodcast = new ArrayList<>();
     private PlaylistAdapter adapterPlaylist;
+    private PodcastAdapter adapterPodcast;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSongs;
     private serverInterface server;
     private HorizontalListView myPlaylist;
     private HorizontalListView mySongs;
+    private HorizontalListView myPodcast;
     private String username;
     private Button pausedSong;
     private Button pausedSong2;
@@ -57,6 +62,7 @@ public class Login extends AppCompatActivity {
         server = new remoteServer();
         myPlaylist = findViewById(R.id.myPlayLists);
         mySongs = findViewById(R.id.mySongs);
+        myPodcast = findViewById(R.id.myPodcasts);
         pausedSong = findViewById(R.id.button);
         pausedSong2 = findViewById(R.id.button3);
         layoutPaused = findViewById(R.id.layout);
@@ -67,8 +73,10 @@ public class Login extends AppCompatActivity {
         pausedSong2.setEnabled(false);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist, 0);
         adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
+        adapterPodcast = new PodcastAdapter(this, arrayOfPodcast, 2);
         myPlaylist.setAdapter(adapterPlaylist);
         mySongs.setAdapter(adapterSongs);
+        mySongs.setAdapter(adapterPodcast);
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
@@ -177,6 +185,15 @@ public class Login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
                 Playlist playlist = (Playlist) search.getItem(position);
+                String creador = username;
+                openPlaylist(playlist.playlistName, creador, playlist.id);
+            }
+        });myPodcast.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ArrayAdapter<Podcast> search = (ArrayAdapter<Podcast>) parent.getAdapter();
+                Podcast playlist = (Podcast) search.getItem(position);
                 String creador = username;
                 openPlaylist(playlist.playlistName, creador, playlist.id);
             }

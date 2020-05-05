@@ -14,7 +14,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="135dp" />
+            android:layout_height="180dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -299,13 +299,17 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="40dp" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:srcCompat="@drawable/friends100_2" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
         <TextView
             android:id="@+id/textView21"
@@ -318,7 +322,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="25dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
@@ -349,12 +353,11 @@
                     android:background="@color/backColor"
                     android:orientation="horizontal">
 
-                    <Button
+                    <ImageView
                         android:id="@+id/search"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="center"
-                        android:layout_weight="0"
                         android:background="@drawable/fab_add"
                         android:backgroundTint="#000000"
                         android:visibility="visible" />
@@ -412,14 +415,19 @@
 
         <ImageView
             android:id="@+id/imageView11"
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="5dp"
+            android:layout_gravity="center"
             app:srcCompat="@color/secondaryColor" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
 
         <ListView
             android:id="@+id/searchRes"
-            android:layout_width="400dp"
-            android:layout_height="436dp"
+            android:layout_width="wrap_content"
+            android:layout_height="357dp"
             android:layout_gravity="center"
             android:background="@color/secondaryColor"
             android:visibility="invisible">

@@ -34,7 +34,6 @@ public class PlaylistActivity extends AppCompatActivity {
     private String playList;
     private String creador;
     private int idPlaylist;
-    private ArrayList<Integer> songs;
     private serverInterface server;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
@@ -58,7 +57,6 @@ public class PlaylistActivity extends AppCompatActivity {
         if ( extras != null ) {
             playList= extras.getString("playlist");
             creador= extras.getString("creador");
-            songs = extras.getIntegerArrayList("canciones");
             idPlaylist = extras.getInt("idPlaylist");
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);

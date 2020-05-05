@@ -97,7 +97,7 @@ public class remoteServer implements serverInterface {
 
     public void searchAFriend(String name, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("friends")
+                .setUrl("users")
                 .putParameter("search", name)
                 .setListener(listener)
                 .execute();

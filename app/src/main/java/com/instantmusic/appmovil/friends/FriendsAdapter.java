@@ -34,10 +34,9 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
         }
         // Lookup view for data population
         TextView podcastName = (TextView) convertView.findViewById(R.id.text1);
-        TextView podcastCreator = (TextView) convertView.findViewById(R.id.text2);
+
         // Populate the data into the template view using the data object
-        podcastName.setText(playlist.id);
-        podcastCreator.setText(playlist.artist);
+        podcastName.setText(playlist.username);
         // Return the completed view to render on screen
         return convertView;
     }
