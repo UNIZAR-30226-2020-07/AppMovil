@@ -74,7 +74,7 @@ public class PodcastActivity extends AppCompatActivity {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
-                    Album playlistSelected = new Album(data);
+                    Album playlistSelected = new Album(data, false);
                     artist=data.getInt("id");
                     adapterSong.addAll(playlistSelected.songs);
                     sortBy("titulo");
@@ -194,7 +194,7 @@ public class PodcastActivity extends AppCompatActivity {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if ( responseCode == 200 ) {
-                    Album playlistSelected = new Album(data);
+                    Album playlistSelected = new Album(data, false);
                     adapterSong.addAll(playlistSelected.songs);
                     if ( searchType == 1 ) {
                         sortBy("titulo");

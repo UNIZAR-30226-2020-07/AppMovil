@@ -62,7 +62,7 @@ public class ArtistActivity extends AppCompatActivity {
                         TextView name=findViewById(R.id.artisName2);
                         name.setText(data.getString("name"));
                         JSONArray albumsArtist = data.getJSONArray("albums");
-                        adapterAlbums.addAll(Album.fromJson(albumsArtist, true, artista));
+                        adapterAlbums.addAll(Album.fromJson(albumsArtist, true, artista, false));
 
                         server.searchSongsByArtist(1, artista.name, new JSONConnection.Listener() {
                             @Override

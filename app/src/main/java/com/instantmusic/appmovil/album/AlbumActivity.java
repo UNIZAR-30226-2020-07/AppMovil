@@ -51,7 +51,7 @@ public class AlbumActivity extends AppCompatActivity {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if (responseCode == 200) {
-                    albumSelected = new Album(data);
+                    albumSelected = new Album(data,false);
                     adapterSong.addAll(albumSelected.songs);
                     TextView name = findViewById(R.id.albumName);
                     TextView creator = findViewById(R.id.albumCreator);

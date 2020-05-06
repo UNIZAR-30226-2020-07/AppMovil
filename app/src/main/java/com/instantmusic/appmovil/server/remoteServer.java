@@ -113,6 +113,15 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void getUserById(int userId, JSONConnection.Listener listener) {
+        String url = "users/";
+        url = url + userId;
+        initialize()
+                .setUrl(url)
+                .setListener(listener)
+                .execute();
+    }
+
     /**
      * Makes a petition to get the object User of the user logged
      * @param listener       where to notify

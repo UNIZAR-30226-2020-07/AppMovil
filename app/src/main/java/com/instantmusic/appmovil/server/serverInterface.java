@@ -15,6 +15,7 @@ public interface serverInterface  {
     void searchAFriend(String name, JSONConnection.Listener listener);
     void searchPodcasts(int page,String title, JSONConnection.Listener listener );
     void registUser(String username, String email, String password1, String password2, JSONConnection.Listener listener);
+    void getUserById(int userId, JSONConnection.Listener listener);
     void getUserData(JSONConnection.Listener listener);
     void getPlaylistData(int idPlaylist, JSONConnection.Listener listener);
     void getSongData(int idSong, JSONConnection.Listener listener);

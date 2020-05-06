@@ -70,7 +70,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
                         JSONArray friends=data.getJSONArray("friends");
-                        ArrayList<Friend> newSongs = Friend.fromJson(friends);
+                        ArrayList<Friend> newSongs = Friend.fromJson(friends,false);
                         adapterFriends.addAll(newSongs);
                         resList.setVisibility(View.VISIBLE);
                         user.setText(data.getString("username"));
@@ -175,10 +175,10 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
     }
 
-    private void Friend(Friend song) {
+    private void Friend(Friend friend) {
         Intent i=new Intent(this,FriendsActivity.class);
-        i.putExtra("friend",song.username);
-        i.putExtra("id",song.id);
+        i.putExtra("friend",friend.username);
+        i.putExtra("id",friend.id);
         this.startActivity(i);
     }
 
@@ -206,7 +206,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
             if (!ultima) {
                 resList.setAdapter(adapterFriends);
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Friend> newSongs = Friend.fromJson(results);
+                ArrayList<Friend> newSongs = Friend.fromJson(results,false);
                 adapterFriends.addAll(newSongs);
             }
             if (data.isNull("next")) {

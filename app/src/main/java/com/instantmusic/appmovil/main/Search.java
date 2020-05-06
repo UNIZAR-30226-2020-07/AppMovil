@@ -420,7 +420,7 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
             if (searchType == 4 && !ultima) {
                 resList.setAdapter(adapterAlbum);
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Album> newAlbums = Album.fromJson(results, false, null);
+                ArrayList<Album> newAlbums = Album.fromJson(results, false, null, false);
                 adapterAlbum.addAll(newAlbums);
             } else if (searchType == 3 && !ultima) {
                 resList.setAdapter(adapterArtist);

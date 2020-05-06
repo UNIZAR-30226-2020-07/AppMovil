@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.adapter.HorizontalListView;
+import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
@@ -38,10 +40,10 @@ import java.util.Collections;
 
 public class Login extends AppCompatActivity {
     private ArrayList<Playlist> arrayOfPlaylist = new ArrayList<>();
-    private ArrayList<Podcast> arrayOfPodcast = new ArrayList<>();
-    private PlaylistAdapter adapterPlaylist;
-    private PodcastAdapter adapterPodcast;
+    private ArrayList<Album> arrayOfPodcast = new ArrayList<>();
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
+    private PlaylistAdapter adapterPlaylist;
+    private AlbumsAdapter adapterPodcast;
     private SongsAdapter adapterSongs;
     private serverInterface server;
     private HorizontalListView myPlaylist;
@@ -73,10 +75,10 @@ public class Login extends AppCompatActivity {
         pausedSong2.setEnabled(false);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist, 0);
         adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
-        adapterPodcast = new PodcastAdapter(this, arrayOfPodcast, 2);
+        adapterPodcast = new AlbumsAdapter(this, arrayOfPodcast, 2);
         myPlaylist.setAdapter(adapterPlaylist);
         mySongs.setAdapter(adapterSongs);
-        mySongs.setAdapter(adapterPodcast);
+        myPodcast.setAdapter(adapterPodcast);
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
@@ -86,8 +88,16 @@ public class Login extends AppCompatActivity {
                         JSONArray playlistsUser = data.getJSONArray("playlists");
                         ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
+
+                        ArrayList<Album> newPodcasts = Album.fromJson(data.getJSONArray("albums"), false, null, true);
+                        for ( int i = 0; i < newPodcasts.size(); i++ ) {
+                            if ( newPodcasts.get(i).esPodcast ) {
+                                adapterPodcast.add(newPodcasts.get(i));
+                            }
+                        }
+
                         String text = "Continue playback: ";
-                        if (data.getJSONObject("pause_song") != null) {
+                        if ( !data.isNull("pause_song") ) {
                             paused_song = new Song(data.getJSONObject("pause_song"));
                             text = text + paused_song.songName;
                             pause_seconds = data.optInt("pause_second", 0);
@@ -99,7 +109,8 @@ public class Login extends AppCompatActivity {
                             pausedSong.setText(text);
                         }
                     }
-                } catch (JSONException e) {
+                }
+                catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -117,7 +128,8 @@ public class Login extends AppCompatActivity {
                         JSONArray songsRecommended = data.getJSONArray("results");
                         ArrayList<Song> newSongs = Song.fromJson(songsRecommended, true, null);
                         adapterSongs.addAll(newSongs);
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
@@ -227,11 +239,20 @@ public class Login extends AppCompatActivity {
                 try {
                     if (responseCode == 200) {
                         username = data.getString("username");
+
                         JSONArray playlistsUser = data.getJSONArray("playlists");
                         ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
+
+                        ArrayList<Album> newPodcasts = Album.fromJson(data.getJSONArray("albums"), false, null, true);
+                        for ( int i = 0; i < newPodcasts.size(); i++ ) {
+                            if ( newPodcasts.get(i).esPodcast ) {
+                                adapterPodcast.add(newPodcasts.get(i));
+                            }
+                        }
+
                         String text = "Continue playback: ";
-                        if (data.getJSONObject("pause_song") != null) {
+                        if (!data.isNull("pause_song")) {
                             paused_song = new Song(data.getJSONObject("pause_song"));
                             text = text + paused_song.songName;
                             pause_seconds = data.optInt("pause_second", 0);

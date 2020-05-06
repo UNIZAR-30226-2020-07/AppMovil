@@ -48,26 +48,29 @@ public class FriendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instant_music_app_friends);
         resList = findViewById(R.id.searchRes);
         server = new remoteServer();
+        TextView name=findViewById(R.id.username);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
             username= extras.getString("friend");
             id = extras.getInt("id");
+            name.setText(username);
         }
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylists,0);
         resList.setAdapter(adapterPlaylist);
-        server.searchAFriend(username, new JSONConnection.Listener() {
+        server.getUserById(id, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
-                    Friend playlistSelected = new Friend(data);
-                    adapterPlaylist.addAll(playlistSelected.playlists);
+                    Friend playlistSelected = new Friend(data,true);
+                    if ( playlistSelected.playlists != null ) {
+                        adapterPlaylist.addAll(playlistSelected.playlists);
+                    }
                 }
             }
             @Override
             public void onErrorResponse(Throwable throwable) {
             }
         });
-        TextView name=findViewById(R.id.username);
         name.setText(username);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

@@ -15,19 +15,40 @@ public class Album {
     public String name;
     public String artistName;
     public int artistId;
+    public boolean esPodcast;
     public ArrayList<Song> songs = new ArrayList<>();
 
     // Constructor to convert JSON object into a Java class instance
-    public Album(JSONObject object){
+    public Album(JSONObject object, boolean podcast){
         try {
             this.id = object.getInt("id");
             this.name = object.getString("name");
             this.artistName = object.getJSONObject("artist").getString("name");
             this.artistId=object.getJSONObject("artist").getInt("id");
-            JSONArray canciones = object.getJSONArray("songs");
-            for ( int i = 0; i < canciones.length(); i++ ) {
-                Song cancion = new Song(canciones.getJSONObject(i), this.artistName);
-                this.songs.add(cancion);
+            this.esPodcast=object.getBoolean("podcast");
+
+            if ( podcast ) {
+                serverInterface server = new remoteServer();
+                server.getAlbumData(this.id, new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) {
+                        if ( responseCode == 200 ) {
+                            Album album = new Album(data,false);
+                            Album.this.songs = album.songs;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
+            }
+            else {
+                JSONArray canciones = object.getJSONArray("songs");
+                for ( int i = 0; i < canciones.length(); i++ ) {
+                    Song cancion = new Song(canciones.getJSONObject(i), this.artistName);
+                    this.songs.add(cancion);
+                }
             }
         }
         catch (JSONException e) {
@@ -40,12 +61,13 @@ public class Album {
             this.id = object.getInt("id");
             this.name = object.getString("name");
             this.artistName = artista.name;
+            this.esPodcast=object.getBoolean("podcast");
             serverInterface server = new remoteServer();
             server.getAlbumData(this.id, new JSONConnection.Listener() {
                 @Override
                 public void onValidResponse(int responseCode, JSONObject data) {
                     if ( responseCode == 200 ) {
-                        Album album = new Album(data);
+                        Album album = new Album(data,false);
                         Album.this.songs = album.songs;
                     }
                 }
@@ -66,12 +88,13 @@ public class Album {
             this.id = object.getInt("id");
             this.name = object.getString("name");
             this.artistName = artist;
+            this.esPodcast=object.getBoolean("podcast");
             serverInterface server = new remoteServer();
             server.getAlbumData(this.id, new JSONConnection.Listener() {
                 @Override
                 public void onValidResponse(int responseCode, JSONObject data) {
                     if ( responseCode == 200 ) {
-                        Album album = new Album(data);
+                        Album album = new Album(data,false);
                         Album.this.songs = album.songs;
                     }
                 }
@@ -87,7 +110,7 @@ public class Album {
     }
 
     // Factory method to convert an array of JSON objects into a list of objects
-    public static ArrayList<Album> fromJson(JSONArray jsonObjects, boolean tieneObjeto, Artist artista) {
+    public static ArrayList<Album> fromJson(JSONArray jsonObjects, boolean tieneObjeto, Artist artista, boolean podcast) {
         ArrayList<Album> albums = new ArrayList<>();
         for (int i = 0; i < jsonObjects.length(); i++) {
             try {
@@ -95,7 +118,7 @@ public class Album {
                     albums.add(new Album(jsonObjects.getJSONObject(i), artista));
                 }
                 else {
-                    albums.add(new Album(jsonObjects.getJSONObject(i)));
+                    albums.add(new Album(jsonObjects.getJSONObject(i), podcast));
                 }
             }
             catch (JSONException e) {
