@@ -40,7 +40,6 @@
         <activity android:name=".friends.FriendsActivity" />
         <activity android:name=".podcast.PodcastSearch" />
         <activity android:name=".podcast.PodcastActivity" />
-        <activity android:name=".podcast.PodcastSongs" />
         <activity android:name=".main.Settings" />
         <activity android:name=".song.SongActivity" />
         <activity android:name=".playlist.PlaylistActivity" />

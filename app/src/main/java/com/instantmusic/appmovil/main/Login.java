@@ -21,8 +21,6 @@ import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
-import com.instantmusic.appmovil.podcast.Podcast;
-import com.instantmusic.appmovil.podcast.PodcastAdapter;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -204,10 +202,9 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Podcast> search = (ArrayAdapter<Podcast>) parent.getAdapter();
-                Podcast playlist = (Podcast) search.getItem(position);
-                String creador = username;
-                openPlaylist(playlist.playlistName, creador, playlist.id);
+                ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
+                Album podcast = search.getItem(position);
+                openPlaylist(podcast.name, podcast.artistName, podcast.id);
             }
         });
 

@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.podcast.Podcast;
 
 import java.util.ArrayList;
 

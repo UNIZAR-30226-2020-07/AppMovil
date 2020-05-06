@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.album.AlbumsAdapter;
 import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.main.Login;
 import com.instantmusic.appmovil.main.Search;
@@ -44,8 +46,8 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     private int idPlaylist;
     private ArrayList<Integer> songs;
     private serverInterface server;
-    private ArrayList<Podcast> arrayOfSongs = new ArrayList<>();
-    private PodcastAdapter adapterSong;
+    private ArrayList<Album> arrayOfPodcasts = new ArrayList<>();
+    private AlbumsAdapter adapterPodcast;
     private Button changeMenu2;
     private Button orderName;
     private Button orderCategory;
@@ -74,17 +76,17 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
             songs = extras.getIntegerArrayList("canciones");
             idPlaylist = extras.getInt("idPlaylist");
         }
-        adapterSong = new PodcastAdapter(this, arrayOfSongs, 0);
+        adapterPodcast = new AlbumsAdapter(this, arrayOfPodcasts, 2);
         searchMenu = findViewById(R.id.searchMenu);
-        resList.setAdapter(adapterSong);
+        resList.setAdapter(adapterPodcast);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Podcast> search = (ArrayAdapter<Podcast>) parent.getAdapter();
-                Podcast cancion = search.getItem(position);
-                if (cancion != null) {
-                    Podcast(cancion.playlistName, cancion.user, cancion.id, cancion.songs);
+                ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
+                Album podcast = search.getItem(position);
+                if (podcast != null) {
+                    Podcast(podcast.id);
                 }
             }
         });
@@ -248,12 +250,9 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         cruz = 0;
     }
 
-    private void Podcast(String songName, String autorName, int idSong, ArrayList<Song> songs) {
+    private void Podcast(int idSong) {
         Intent i = new Intent(this, PodcastActivity.class);
-        i.putExtra(this.getPackageName() + ".name", songName);
-        i.putExtra(this.getPackageName() + ".user", autorName);
         i.putExtra(this.getPackageName() + ".id", idSong);
-        i.putExtra(this.getPackageName() + ".songs", songs);
         this.startActivity(i);
     }
 
@@ -274,11 +273,11 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     }
 
     private void search() {
-        adapterSong.clear();
+        adapterPodcast.clear();
         shit = findViewById(R.id.searchbar2);
         cruz = 1;
         if (page == 1) {
-            adapterSong.clear();
+            adapterPodcast.clear();
         }
         Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
@@ -328,10 +327,10 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
-            resList.setAdapter(adapterSong);
+            resList.setAdapter(adapterPodcast);
             JSONArray results = data.getJSONArray("results");
-            ArrayList<Podcast> newSongs = Podcast.fromJson(results, true);
-            adapterSong.addAll(newSongs);
+            ArrayList<Album> newPodcasts = Album.fromJson(results, false, null, false);
+            adapterPodcast.addAll(newPodcasts);
 
         } catch (JSONException e) {
             onErrorResponse(e);

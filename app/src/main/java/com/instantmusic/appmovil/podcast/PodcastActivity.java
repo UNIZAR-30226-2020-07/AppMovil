@@ -32,10 +32,9 @@ import java.util.Comparator;
 
 public class PodcastActivity extends AppCompatActivity {
     private ListView resList;
-    private String playList;
+    private String podcastName;
     private String creador;
-    private int idPlaylist;
-    private ArrayList<Integer> songs;
+    private int idPodcast;
     private serverInterface server;
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
@@ -56,11 +55,28 @@ public class PodcastActivity extends AppCompatActivity {
         server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
         Bundle extras = getIntent().getExtras();
+        final TextView name=findViewById(R.id.albumName);
+        final TextView creator=findViewById(R.id.albumCreator);
         if ( extras != null ) {
-            playList= extras.getString(this.getPackageName() + ".name");
-            creador= extras.getString(this.getPackageName() + ".user");
-            songs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
-            idPlaylist = extras.getInt(this.getPackageName() + ".id");
+            idPodcast = extras.getInt(this.getPackageName() + ".id");
+            server.getAlbumData(idPodcast, new JSONConnection.Listener() {
+                @Override
+                public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
+                    if ( responseCode == 200 ) {
+                        Album playlistSelected = new Album(data, false);
+                        artist=data.getInt("id");
+                        creador = data.getJSONObject("artist").getString("name");
+                        podcastName = data.getString("name");
+                        name.setText(podcastName);
+                        creator.setText(creador);
+                        adapterSong.addAll(playlistSelected.songs);
+                        sortBy("titulo");
+                    }
+                }
+                @Override
+                public void onErrorResponse(Throwable throwable) {
+                }
+            });
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
@@ -70,24 +86,6 @@ public class PodcastActivity extends AppCompatActivity {
         orderName=findViewById(R.id.orderName);
         orderCategory=findViewById(R.id.orderCategory);
         orderArtist=findViewById(R.id.orderArtist);
-        server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
-            @Override
-            public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
-                if ( responseCode == 200 ) {
-                    Album playlistSelected = new Album(data, false);
-                    artist=data.getInt("id");
-                    adapterSong.addAll(playlistSelected.songs);
-                    sortBy("titulo");
-                }
-            }
-            @Override
-            public void onErrorResponse(Throwable throwable) {
-            }
-        });
-        TextView name=findViewById(R.id.albumName);
-        TextView creator=findViewById(R.id.albumCreator);
-        name.setText(playList);
-        creator.setText(creador);
         Button Button1 = findViewById(R.id.backButton);
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,17 +148,13 @@ public class PodcastActivity extends AppCompatActivity {
         seeArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    seeArtist();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                seeArtist();
                 searchMenu.setVisibility(View.INVISIBLE);
             }
         });
 
     }
-    private void seeArtist() throws JSONException {
+    private void seeArtist() {
         Intent i = new Intent(this, ArtistActivity.class);
         i.putExtra("idArtist",artist);
         startActivityForResult(i, 1);
@@ -190,7 +184,7 @@ public class PodcastActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         adapterSong.clear();
-        server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
+        server.getAlbumData(idPodcast, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if ( responseCode == 200 ) {
