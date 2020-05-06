@@ -24,6 +24,8 @@ public class Friend {
     public Friend(JSONObject object) {
         try {
             JSONArray playlistsUser = object.getJSONArray("playlists");
+            this.mail=object.getString("email");
+            this.username=object.getString("username");
             this.playlists = Playlist.fromJson(playlistsUser, true);
             this.id = object.getInt("id");
         } catch (JSONException e) {

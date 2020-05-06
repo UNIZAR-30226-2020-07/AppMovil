@@ -39,6 +39,7 @@ import com.instantmusic.appmovil.song.SongsAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +51,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
     private serverInterface server;
     private ArrayList<Friend> arrayOfFriends = new ArrayList<>();
     private FriendsAdapter adapterFriends;
-
+    private TextView user;
 
     private boolean ultima = false;
 
@@ -61,15 +62,18 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         setContentView(R.layout.activity_instant_music_app_friends_search);
         resList = findViewById(R.id.searchRes);
         resList.setVisibility(View.INVISIBLE);
+        user=findViewById(R.id.username);
         adapterFriends =new FriendsAdapter(this, arrayOfFriends,0);
         resList.setAdapter(adapterFriends);
-        server.searchAFriend(" ", new JSONConnection.Listener() {
+        server.getUserData( new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
-                        JSONArray results = data.getJSONArray("results");
-                        ArrayList<Friend> newSongs = Friend.fromJson(results);
+                        JSONArray friends=data.getJSONArray("friends");
+                        ArrayList<Friend> newSongs = Friend.fromJson(friends);
                         adapterFriends.addAll(newSongs);
+                        resList.setVisibility(View.VISIBLE);
+                        user.setText(data.getString("username"));
                 }
             }
             @Override
@@ -80,10 +84,10 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
-                Playlist cancion = search.getItem(position);
+                ArrayAdapter<Friend> search = (ArrayAdapter<Friend>) parent.getAdapter();
+                Friend cancion = search.getItem(position);
                 if (cancion != null) {
-                    Playlist(cancion);
+                    Friend(cancion);
                 }
             }
         });
@@ -133,28 +137,11 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
                 Settings();
             }
         });
-        resList.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (resList.getLastVisiblePosition() == resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
-                    searchNextPage();
-                }
-            }
-        });
     }
     private void addFriend(){
         Intent i = new Intent(this, FriendsActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
-    }
-    private void searchNextPage() {
-
-            server.searchAFriend(shit.getText().toString(), this);
-
     }
     private void Home() {
 
@@ -188,24 +175,10 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
     }
 
-    private void Playlist(Playlist song) {
-        Intent i=new Intent(this,PlaylistActivity.class);
-        Bundle extra=new Bundle();
-        extra.putString("playlist",song.playlistName);
-        extra.putString("creador",song.user);
-        extra.putInt("idPlaylist",song.id);
-        this.startActivity(new Intent(this, PlaylistActivity.class));
-    }
-
-    private void Album(int idAlbum) {
-        Intent i = new Intent(FriendsSearch.this, AlbumActivity.class);
-        i.putExtra("idAlbum", idAlbum);
-        this.startActivity(i);
-    }
-
-    private void Artist(int idArtist) {
-        Intent i = new Intent(FriendsSearch.this, ArtistActivity.class);
-        i.putExtra("idArtist", idArtist);
+    private void Friend(Friend song) {
+        Intent i=new Intent(this,FriendsActivity.class);
+        i.putExtra("friend",song.username);
+        i.putExtra("id",song.id);
         this.startActivity(i);
     }
 

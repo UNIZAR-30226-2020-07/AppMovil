@@ -1,5 +1,6 @@
 package com.instantmusic.appmovil.friends;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.artist.ArtistActivity;
+import com.instantmusic.appmovil.playlist.Playlist;
+import com.instantmusic.appmovil.playlist.PlaylistActivity;
+import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
@@ -32,176 +36,61 @@ import java.util.Comparator;
 
 public class FriendsActivity extends AppCompatActivity {
     private ListView resList;
-    private String playList;
-    private String creador;
-    private int idPlaylist;
-    private ArrayList<Integer> songs;
+    private String username;
+    private int id;
     private serverInterface server;
-    private ArrayList<Song> arrayOfSongs = new ArrayList<>();
-    private SongsAdapter adapterSong;
-    private LinearLayout searchMenu;
-    private Button changeMenu2;
-    private Button orderName;
-    private Button orderCategory;
-    private Button orderArtist;
-    int searchType = 1;
-    private EditText changeMenu;
-    private int page=1;
-    private int artist;
+    private ArrayList<Playlist> arrayOfPlaylists = new ArrayList<>();
+    private PlaylistAdapter adapterPlaylist;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_friends);
-        resList = findViewById(R.id.cancionesAlbum);
+        resList = findViewById(R.id.searchRes);
         server = new remoteServer();
-        Button playB = findViewById(R.id.playButton);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
-            playList= extras.getString(this.getPackageName() + ".name");
-            creador= extras.getString(this.getPackageName() + ".user");
-            songs = extras.getIntegerArrayList(this.getPackageName() + ".songs");
-            idPlaylist = extras.getInt(this.getPackageName() + ".id");
+            username= extras.getString("friend");
+            id = extras.getInt("id");
         }
-        adapterSong = new SongsAdapter(this, arrayOfSongs,0);
-        searchMenu=findViewById(R.id.searchMenu);
-        changeMenu2=findViewById(R.id.changeName2);
-        changeMenu=findViewById(R.id.change);
-        resList.setAdapter(adapterSong);
-        orderName=findViewById(R.id.orderName);
-        orderCategory=findViewById(R.id.orderCategory);
-        orderArtist=findViewById(R.id.orderArtist);
-        server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
+        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylists,0);
+        resList.setAdapter(adapterPlaylist);
+        server.searchAFriend(username, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
-                    Album playlistSelected = new Album(data);
-                    artist=data.getInt("id");
-                    adapterSong.addAll(playlistSelected.songs);
-                    sortBy("titulo");
+                    Friend playlistSelected = new Friend(data);
+                    adapterPlaylist.addAll(playlistSelected.playlists);
                 }
             }
             @Override
             public void onErrorResponse(Throwable throwable) {
             }
         });
-        TextView name=findViewById(R.id.albumName);
-        TextView creator=findViewById(R.id.albumCreator);
-        name.setText(playList);
-        creator.setText(creador);
-        Button Button1 = findViewById(R.id.backButton);
-        Button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                backScreen();
-            }
-        });
-        playB.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if ( !resList.getAdapter().isEmpty() ) {
-                    ArrayAdapter<Song> search = (ArrayAdapter<Song>) resList.getAdapter();
-                    Song cancion = search.getItem(0);
-                    Song(0, true);
-                }
-            }
-        });
+        TextView name=findViewById(R.id.username);
+        name.setText(username);
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
-                Song cancion = search.getItem(position);
+                ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
+                Playlist cancion = search.getItem(position);
                 if ( cancion != null ) {
-                    Song(position, false);
+                    Playlist(cancion);
                 }
             }
         });
-        Button Button6 = findViewById(R.id.optionSong);
-        Button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (searchMenu.getVisibility() == View.VISIBLE) {
-                    searchMenu.setVisibility(View.INVISIBLE);
-                } else {
-                    searchMenu.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        orderName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
-
-                orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-                searchType = 1;
-                sortBy("titulo");
-            }
-        });
-        orderArtist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orderName.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_off_background));
-
-                orderArtist.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.checkbox_on_background));
-                searchType = 3;
-                sortBy("date");
-            }
-        });
-        Button seeArtist=findViewById(R.id.seeArtist2);
-        seeArtist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    seeArtist();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                searchMenu.setVisibility(View.INVISIBLE);
-            }
-        });
-
     }
-    private void seeArtist() throws JSONException {
-        Intent i = new Intent(this, ArtistActivity.class);
-        i.putExtra("idArtist",artist);
-        startActivityForResult(i, 1);
-    }
-    private void sortBy(String comp) {
-        switch (comp) {
-            case "date":
-                adapterSong.sort(new Comparator<Song>() {
-                    @Override
-                    public int compare(Song o1, Song o2) {
-                        return o1.fecha.compareTo(o2.fecha);
-                    }
-                });
-                break;
-            case "titulo":
-                adapterSong.sort(new Comparator<Song>() {
-                    @Override
-                    public int compare(Song o1, Song o2) {
-                        return o1.songName.compareTo(o2.songName);
-                    }
-                });
-                break;
-        }
-    }
-
     @Override
     protected void onRestart() {
         super.onRestart();
-        adapterSong.clear();
-        server.getAlbumData(idPlaylist, new JSONConnection.Listener() {
+        adapterPlaylist.clear();
+        server.searchAFriend(username, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if ( responseCode == 200 ) {
-                    Album playlistSelected = new Album(data);
-                    adapterSong.addAll(playlistSelected.songs);
-                    if ( searchType == 1 ) {
-                        sortBy("titulo");
-                    }
-                    else if ( searchType == 3 ) {
-                        sortBy("artista");
-                    }
+                    Playlist playlistSelected = new Playlist(data,true);
+                    adapterPlaylist.addAll(playlistSelected);
                 }
             }
             @Override
@@ -216,11 +105,12 @@ public class FriendsActivity extends AppCompatActivity {
         finish();
     }
 
-    private void Song(int position, boolean botonPlay) {
-        IntentTransfer.setData("songs", adapterSong.getSongs());
-        IntentTransfer.setData("positionId", position);
-        IntentTransfer.setData("botonPlay", botonPlay);
+    private void Playlist(Playlist playlist) {
 
-        this.startActivity(new Intent(this, SongActivity.class));
+        IntentTransfer.setData("playlist", playlist.playlistName);
+        IntentTransfer.setData("creador", playlist.user);
+        IntentTransfer.setData("idPlaylist", playlist.id);
+
+        this.startActivity(new Intent(this, PlaylistActivity.class));
     }
 }

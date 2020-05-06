@@ -26,7 +26,7 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             if ( this.tipoLayout == 0 ) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row2, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row3, parent, false);
             }
             else if ( this.tipoLayout == 1 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists2_row, parent, false);
@@ -34,7 +34,7 @@ public class FriendsAdapter extends ArrayAdapter<Friend> {
         }
         // Lookup view for data population
         TextView podcastName = (TextView) convertView.findViewById(R.id.text1);
-
+        String test=playlist.username;
         // Populate the data into the template view using the data object
         podcastName.setText(playlist.username);
         // Return the completed view to render on screen
