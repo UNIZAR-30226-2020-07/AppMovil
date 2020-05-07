@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.adapter.HorizontalListView;
 import com.instantmusic.appmovil.album.Album;
@@ -20,11 +22,13 @@ import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ArtistActivity extends AppCompatActivity {
     private ArrayList<Album> arrayOfAlbums = new ArrayList<>();
@@ -106,6 +110,17 @@ public class ArtistActivity extends AppCompatActivity {
             }
         });
 
+        songs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ArrayAdapter<Song> search = (ArrayAdapter<Song>) parent.getAdapter();
+                Song song =  search.getItem(position);
+                assert song != null;
+                openSong(song);
+            }
+        });
+
         Button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +133,13 @@ public class ArtistActivity extends AppCompatActivity {
         Intent i = new Intent(ArtistActivity.this, AlbumActivity.class);
         i.putExtra("idAlbum", idAlbum);
         this.startActivity(i);
+    }
+
+    private void openSong(Song song) {
+        IntentTransfer.setData("songs", Collections.singletonList(song));
+        IntentTransfer.setData("positionId", 0);
+        IntentTransfer.setData("botonPlay", false);
+        this.startActivity(new Intent(this, SongActivity.class));
     }
 
     private void backScreen(){

@@ -27,16 +27,16 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
         Album album = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            if ( this.tipoLayout == 0 || this.tipoLayout == 2 ) {
+            if ( this.tipoLayout == 0 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_album_row, parent, false);
             }
-            else if ( this.tipoLayout == 1 ) {
+            else if ( this.tipoLayout == 1 || this.tipoLayout == 2 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists_row, parent, false);
             }
         }
         ImageView iconImage = convertView.findViewById(R.id.iconoSong);
         TextView albumName = (TextView) convertView.findViewById(R.id.text1);
-        if ( this.tipoLayout == 0 || this.tipoLayout == 2 ) {
+        if ( this.tipoLayout == 0 ) {
             // Lookup view for data population
             TextView artistAlbum = (TextView) convertView.findViewById(R.id.text2);
             // Populate the data into the template view using the data object
@@ -51,7 +51,7 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
             texto.setCharAt(14, '.');
             albumName.setText(texto);
         }
-        else if ( this.tipoLayout == 1 ) {
+        else if ( this.tipoLayout == 1 || this.tipoLayout == 2 ) {
             albumName.setText(album.name);
         }
 
