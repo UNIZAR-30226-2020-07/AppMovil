@@ -257,18 +257,20 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     }
 
     private void searchNextPage() {
-        page = page + 1;
-        switch (searchType) {
-            case 1:
-                if (!(shit.getText().toString().equals(""))) {
-                    server.searchPodcasts(page, shit.getText().toString(), this);
-                }
-                break;
-            case 3:
-                if (!(shit.getText().toString().equals(""))) {
-                    server.searchArtistsPodcasts(page, shit.getText().toString(), this);
-                }
-                break;
+        if (!ultima) {
+            page = page + 1;
+            switch (searchType) {
+                case 1:
+                    if (!(shit.getText().toString().equals(""))) {
+                        server.searchPodcasts(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 3:
+                    if (!(shit.getText().toString().equals(""))) {
+                        server.searchArtistsPodcasts(page, shit.getText().toString(), this);
+                    }
+                    break;
+            }
         }
     }
 
@@ -281,57 +283,63 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
         }
         Button cruzButton = findViewById(R.id.optionSearch);
         cruzButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.close));
+        if (!ultima) {
+            switch (searchType) {
+                case 1:
+                    if (!(shit.getText().toString().equals(""))) {
+                        resList.setVisibility(View.VISIBLE);
+                        page = 1;
+                        server.searchPodcasts(page, shit.getText().toString(), this);
+                    }
+                    break;
+                case 3:
+                    if (!(shit.getText().toString().equals(""))) {
+                        resList.setVisibility(View.VISIBLE);
+                        page = 1;
+                        server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
+                            @Override
+                            public void onValidResponse(int responseCode, JSONObject data) {
+                                if (responseCode == 200) {
 
-        switch (searchType) {
-            case 1:
-                if (!(shit.getText().toString().equals(""))) {
-                    resList.setVisibility(View.VISIBLE);
-                    page = 1;
-                    server.searchPodcasts(page, shit.getText().toString(), this);
-                }
-                break;
-            case 3:
-                if (!(shit.getText().toString().equals(""))) {
-                    resList.setVisibility(View.VISIBLE);
-                    page = 1;
-                    server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
-                        @Override
-                        public void onValidResponse(int responseCode, JSONObject data) {
-                            if (responseCode == 200) {
+                                }
+                            }
+
+                            @Override
+                            public void onErrorResponse(Throwable throwable) {
 
                             }
-                        }
+                        });
+                    }
+                    break;
 
-                        @Override
-                        public void onErrorResponse(Throwable throwable) {
-
-                        }
-                    });
+            }
+            resList.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
                 }
-                break;
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    if (resList.getLastVisiblePosition() == resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
+                        searchNextPage();
+                    }
+                }
+            });
         }
-        resList.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (resList.getLastVisiblePosition() == resList.getAdapter().getCount() - 1 && totalItemCount != 0) {
-                    searchNextPage();
-                }
-            }
-        });
     }
 
     @Override
     public void onValidResponse(int responseCode, JSONObject data) {
         try {
-            resList.setAdapter(adapterPodcast);
-            JSONArray results = data.getJSONArray("results");
-            ArrayList<Album> newPodcasts = Album.fromJson(results, false, null, false);
-            adapterPodcast.addAll(newPodcasts);
-
+            if (!ultima) {
+                resList.setAdapter(adapterPodcast);
+                JSONArray results = data.getJSONArray("results");
+                ArrayList<Album> newPodcasts = Album.fromJson(results, false, null, false);
+                adapterPodcast.addAll(newPodcasts);
+                if (data.isNull("next")) {
+                    ultima = true;
+                }
+            }
         } catch (JSONException e) {
             onErrorResponse(e);
         }
