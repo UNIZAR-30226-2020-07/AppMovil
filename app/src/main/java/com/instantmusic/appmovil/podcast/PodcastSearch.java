@@ -110,11 +110,11 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 Home();
             }
         });
-        Button Button3 = findViewById(R.id.menuButton3);
-        Button3.setOnClickListener(new View.OnClickListener() {
+        Button Button2 = findViewById(R.id.menuButton2);
+        Button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Podcasts();
+                Search();
             }
         });
         Button Button4 = findViewById(R.id.menuButton4);
@@ -217,7 +217,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
 
     }
 
-    private void Podcasts() {
+    private void Search() {
         Intent i = new Intent(this, Search.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
