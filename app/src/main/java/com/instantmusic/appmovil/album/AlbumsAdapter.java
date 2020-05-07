@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.instantmusic.appmovil.R;
 
 import java.util.ArrayList;
@@ -27,31 +28,23 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
         Album album = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            if ( this.tipoLayout == 0 || this.tipoLayout == 2 ) {
+            if ( this.tipoLayout == 0 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_album_row, parent, false);
             }
-            else if ( this.tipoLayout == 1 ) {
+            else if ( this.tipoLayout == 1 || this.tipoLayout == 2 ) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists_row, parent, false);
             }
         }
         ImageView iconImage = convertView.findViewById(R.id.iconoSong);
         TextView albumName = (TextView) convertView.findViewById(R.id.text1);
-        if ( this.tipoLayout == 0 || this.tipoLayout == 2 ) {
+        if ( this.tipoLayout == 0 ) {
             // Lookup view for data population
             TextView artistAlbum = (TextView) convertView.findViewById(R.id.text2);
             // Populate the data into the template view using the data object
             artistAlbum.setText(album.artistName);
             albumName.setText(album.name);
         }
-        if ( album.name.length() > 15 && this.tipoLayout == 1) {
-            String aux = album.name;
-            StringBuilder texto = new StringBuilder(aux);
-            texto.setCharAt(12, '.');
-            texto.setCharAt(13, '.');
-            texto.setCharAt(14, '.');
-            albumName.setText(texto);
-        }
-        else if ( this.tipoLayout == 1 ) {
+        if (this.tipoLayout == 1 || this.tipoLayout == 2) {
             albumName.setText(album.name);
         }
 

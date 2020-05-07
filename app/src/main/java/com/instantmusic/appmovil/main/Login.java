@@ -21,6 +21,7 @@ import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
+import com.instantmusic.appmovil.podcast.PodcastActivity;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -198,13 +199,15 @@ public class Login extends AppCompatActivity {
                 String creador = username;
                 openPlaylist(playlist.playlistName, creador, playlist.id);
             }
-        });myPodcast.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        });
+
+        myPodcast.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
                 Album podcast = search.getItem(position);
-                openPlaylist(podcast.name, podcast.artistName, podcast.id);
+                openPodcast(podcast.id);
             }
         });
 
@@ -230,6 +233,7 @@ public class Login extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();  // Always call the superclass method first
         adapterPlaylist.clear();
+        adapterPodcast.clear();
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
@@ -241,13 +245,14 @@ public class Login extends AppCompatActivity {
                         ArrayList<Playlist> newPlaylists = Playlist.fromJson(playlistsUser, true);
                         adapterPlaylist.addAll(newPlaylists);
 
-                        ArrayList<Album> newPodcasts = Album.fromJson(data.getJSONArray("albums"), false, null, true);
-                        for ( int i = 0; i < newPodcasts.size(); i++ ) {
-                            if ( newPodcasts.get(i).esPodcast ) {
-                                adapterPodcast.add(newPodcasts.get(i));
+                        ArrayList<Album> newAlbums = Album.fromJson(data.getJSONArray("albums"), false, null, true);
+                        ArrayList<Album> podcasts = new ArrayList<>();
+                        for ( int i = 0; i < newAlbums.size(); i++ ) {
+                            if ( newAlbums.get(i).esPodcast ) {
+                                podcasts.add(newAlbums.get(i));
                             }
                         }
-
+                        adapterPodcast.addAll(podcasts);
                         String text = "Continue playback: ";
                         if (!data.isNull("pause_song")) {
                             paused_song = new Song(data.getJSONObject("pause_song"));
@@ -312,6 +317,12 @@ public class Login extends AppCompatActivity {
         i.putExtra("creador", creador);
         i.putExtra("idPlaylist", idPlaylist);
         startActivityForResult(i, 1);
+    }
+
+    private void openPodcast(int idPodcast ) {
+        Intent i = new Intent(this, PodcastActivity.class);
+        i.putExtra(this.getPackageName() + ".id", idPodcast);
+        this.startActivity(i);
     }
 
     private void openSong(Song song, boolean seguirReproduccion) {
