@@ -2,6 +2,8 @@ package com.instantmusic.appmovil.friends;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AbsListView;
@@ -93,11 +95,20 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         });
 
         EditText search = findViewById(R.id.searchbar2);
-        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 search();
-                return true;
             }
         });
         shit = search;
@@ -202,7 +213,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
                                 JSONObject obj = friends.getJSONObject(i);
                                 String id = obj.getString("username");
                                 if (id.equals(busqueda)) {
-                                    filterFriends.put(obj.getString("tienda"));
+                                    filterFriends.put(obj);
                                 }
                             }
                             ArrayList<Friend> newSongs = Friend.fromJson(filterFriends,false);
