@@ -85,17 +85,26 @@ public class FriendsActivity extends AppCompatActivity {
                 }
             }
         });
+        Button back=findViewById(R.id.backButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backScreen();
+            }
+        });
     }
     @Override
     protected void onRestart() {
         super.onRestart();
         adapterPlaylist.clear();
-        server.searchAFriend(username, new JSONConnection.Listener() {
+        server.getUserById(id, new JSONConnection.Listener() {
             @Override
-            public void onValidResponse(int responseCode, JSONObject data) {
+            public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if ( responseCode == 200 ) {
-                    Playlist playlistSelected = new Playlist(data,true);
-                    adapterPlaylist.addAll(playlistSelected);
+                    Friend playlistSelected = new Friend(data,true);
+                    if ( playlistSelected.playlists != null ) {
+                        adapterPlaylist.addAll(playlistSelected.playlists);
+                    }
                 }
             }
             @Override

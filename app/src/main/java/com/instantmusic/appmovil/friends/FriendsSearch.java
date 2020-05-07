@@ -96,8 +96,6 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                registerForContextMenu(resList);
-                ultima = false;
                 search();
                 return true;
             }
@@ -190,12 +188,33 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
     private void search() {
         shit = findViewById(R.id.searchbar2);
-        String busqueda=shit.getText().toString();
         adapterFriends.clear();
         if (!ultima) {
             if (!(shit.getText().toString().equals(""))) {
-                resList.setVisibility(View.VISIBLE);
-                server.searchAFriend(busqueda,this);
+                server.getUserData( new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
+                        if ( responseCode == 200 ) {
+                            JSONArray friends=data.getJSONArray("friends");
+                            String busqueda=shit.getText().toString();
+                            JSONArray filterFriends=new JSONArray();
+                            for (int i = 0; i < friends.length(); ++i) {
+                                JSONObject obj = friends.getJSONObject(i);
+                                String id = obj.getString("username");
+                                if (id.equals(busqueda)) {
+                                    filterFriends.put(obj.getString("tienda"));
+                                }
+                            }
+                            ArrayList<Friend> newSongs = Friend.fromJson(filterFriends,false);
+                            adapterFriends.addAll(newSongs);
+                            resList.setVisibility(View.VISIBLE);
+                            user.setText(data.getString("username"));
+                        }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
             }
         }
     }
