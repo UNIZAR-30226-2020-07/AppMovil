@@ -52,6 +52,13 @@ public class MusicApp extends AppCompatActivity {
         });
 
         Button confirmButton2 = findViewById(R.id.forget);
+        confirmButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recoverInScreen();
+            }
+        });
+
         Button confirmButton3 = findViewById(R.id.accept);
         confirmButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -124,6 +131,12 @@ public class MusicApp extends AppCompatActivity {
         Intent i = new Intent(this, Regist.class);
         startActivityForResult(i, ACTIVITY_CREATE);
     }
+
+    private void recoverInScreen() {
+        Intent i = new Intent(this, Recover.class);
+        startActivityForResult(i, ACTIVITY_CREATE);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {

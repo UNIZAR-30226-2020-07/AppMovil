@@ -6,7 +6,144 @@
     android:layout_height="match_parent"
     tools:context=".main.MusicApp">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/grade"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        app:layout_anchorGravity="center|center_horizontal|center_vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/backButton1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="0"
+                android:background="@drawable/flecha"
+                android:shadowColor="#00FFFFFF"
+                android:textColor="#00FFFFFF"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorHint="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
+
+            <TextView
+                android:id="@+id/Accion"
+                android:layout_width="365dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="@string/Accion3"
+                android:textColor="#F8EBF0"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:layout_weight="0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="Enter your email address below, and we´ll email instructions for setting a new one"
+                android:textColor="#F8EBF0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="11dp"
+                android:layout_weight="0" />
+
+            <LinearLayout
+                android:layout_width="308dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="117dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
+                    android:text="Email:"
+                    android:textColor="#F8EBF0"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/emailRecover"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="262dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:autoLink="email"
+                    android:autofillHints=""
+                    android:background="@drawable/edit_round"
+                    android:ems="10"
+                    android:hapticFeedbackEnabled="true"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="10dp"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/backColor"
+                    android:textColorHint="@color/backColor"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="if the email is a valid one you will recieve an email"
+                android:textColor="#F8EBF0"
+                android:textSize="14sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/create2"
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/edit_round"
+                android:text="SEND ME INSTRUCTIONS!"
+                android:textColor="#F8EBF0"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
