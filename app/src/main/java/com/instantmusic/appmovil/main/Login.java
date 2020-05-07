@@ -21,7 +21,7 @@ import com.instantmusic.appmovil.friends.FriendsSearch;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
-import com.instantmusic.appmovil.podcast.PodcastActivity;
+import com.instantmusic.appmovil.podcast.MyPodcastActivity;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
         pausedSong2.setEnabled(false);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist, 0);
         adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
-        adapterPodcast = new AlbumsAdapter(this, arrayOfPodcast, 2);
+        adapterPodcast = new AlbumsAdapter(this, arrayOfPodcast, 3);
         myPlaylist.setAdapter(adapterPlaylist);
         mySongs.setAdapter(adapterSongs);
         myPodcast.setAdapter(adapterPodcast);
@@ -320,7 +320,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void openPodcast(int idPodcast ) {
-        Intent i = new Intent(this, PodcastActivity.class);
+        Intent i = new Intent(this, MyPodcastActivity.class);
         i.putExtra(this.getPackageName() + ".id", idPodcast);
         this.startActivity(i);
     }

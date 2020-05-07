@@ -67,6 +67,8 @@
     <string name="createPlaylist">Create new playlist</string>
     <string name="insertName">Insert title</string>
     <string name="playlistMenu1">Delete playlist</string>
+    <string name="podcastMenu1">Delete podcast</string>
+    <string name="podcastMenu2">Add podcast</string>
     <string name="confirm">CONFIRM</string>
     <string name="orderPlaylist">Order by: </string>
     <string name="orderPlaylist1">Name</string>
