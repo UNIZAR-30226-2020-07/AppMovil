@@ -48,7 +48,7 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
             albumName.setText(album.name);
         }
 
-        if ( this.tipoLayout == 3 || this.tipoLayout == 2) {
+        if ( album.esPodcast ) {
             iconImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.podcasticon));
         }
         else {

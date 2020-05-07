@@ -421,13 +421,19 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                 resList.setAdapter(adapterAlbum);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Album> newAlbums = Album.fromJson(results, false, null, false);
-                adapterAlbum.addAll(newAlbums);
-            } else if (searchType == 3 && !ultima) {
+                for ( int i = 0; i < newAlbums.size(); i++ ) {
+                    if ( !newAlbums.get(i).esPodcast ) {
+                        adapterAlbum.add(newAlbums.get(i));
+                    }
+                }
+            }
+            else if (searchType == 3 && !ultima) {
                 resList.setAdapter(adapterArtist);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Artist> newArtists = Artist.fromJson(results);
                 adapterArtist.addAll(newArtists);
-            } else if (!ultima) {
+            }
+            else if (!ultima) {
                 resList.setAdapter(adapterSong);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Song> newSongs = Song.fromJson(results, true, null);

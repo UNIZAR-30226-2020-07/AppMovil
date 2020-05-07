@@ -278,6 +278,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
+
     private void createPlaylist() {
         LinearLayout panel = findViewById(R.id.panelPlaylist);
         EditText insert = findViewById(R.id.insertTitle);

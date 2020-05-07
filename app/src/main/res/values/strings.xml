@@ -51,7 +51,7 @@
     <string name="song1">Title</string>
     <string name="album">Album</string>
     <string name="vacio"></string>
-    <string name="artistAlbums">Albums</string>
+    <string name="artistAlbums">Albums &amp; Podcasts</string>
     <string name="artistSongs">Songs</string>
     <string name="myplaylist">My playlists</string>
     <string name="mypodcast">My Podcasts</string>
