@@ -2,6 +2,8 @@ package com.instantmusic.appmovil.friends;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AbsListView;
@@ -93,13 +95,20 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         });
 
         EditText search = findViewById(R.id.searchbar2);
-        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                registerForContextMenu(resList);
-                ultima = false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 search();
-                return true;
             }
         });
         shit = search;
@@ -190,12 +199,33 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
     private void search() {
         shit = findViewById(R.id.searchbar2);
-        String busqueda=shit.getText().toString();
         adapterFriends.clear();
         if (!ultima) {
             if (!(shit.getText().toString().equals(""))) {
-                resList.setVisibility(View.VISIBLE);
-                server.searchAFriend(busqueda,this);
+                server.getUserData( new JSONConnection.Listener() {
+                    @Override
+                    public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
+                        if ( responseCode == 200 ) {
+                            JSONArray friends=data.getJSONArray("friends");
+                            String busqueda=shit.getText().toString();
+                            JSONArray filterFriends=new JSONArray();
+                            for (int i = 0; i < friends.length(); ++i) {
+                                JSONObject obj = friends.getJSONObject(i);
+                                String id = obj.getString("username");
+                                if (id.equals(busqueda)) {
+                                    filterFriends.put(obj);
+                                }
+                            }
+                            ArrayList<Friend> newSongs = Friend.fromJson(filterFriends,false);
+                            adapterFriends.addAll(newSongs);
+                            resList.setVisibility(View.VISIBLE);
+                            user.setText(data.getString("username"));
+                        }
+                    }
+                    @Override
+                    public void onErrorResponse(Throwable throwable) {
+                    }
+                });
             }
         }
     }

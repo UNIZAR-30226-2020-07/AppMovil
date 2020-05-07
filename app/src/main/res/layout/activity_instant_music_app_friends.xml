@@ -8,256 +8,41 @@
     tools:context=".main.MusicApp">
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout13"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/menuButton"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton11"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton12"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton13"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/menuButton14"
-            style="@android:style/ButtonBar"
-            android:layout_width="80sp"
-            android:layout_height="70sp"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="2sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondaryColor" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        app:layout_anchor="@+id/linearLayout6"
-        app:layout_anchorGravity="center">
-
-        <LinearLayout
-            android:id="@+id/linearLayout5"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <Space
-                android:layout_width="17dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton1"
-                style="@android:style/ButtonBar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/home480" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton2"
-                style="@android:style/ButtonBar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/lupagrande" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/microphone100" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/friends100_2" />
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/menuButton5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="0"
-                android:background="@drawable/settings100" />
-
-        </LinearLayout>
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="13dp"
-                android:layout_height="match_parent"
+                android:layout_width="14dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
                 android:layout_weight="0" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_weight="0"
-                android:text="@string/home"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Home" />
+                android:background="@drawable/flecha"
+                android:shadowColor="#00FFFFFF"
+                android:textColor="#00FFFFFF"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorHint="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
 
-            <Space
-                android:layout_width="33dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/searchButton"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Search" />
-
-            <Space
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/podcasts"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp" />
-
-            <Space
-                android:layout_width="33dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/friends"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Friends" />
-
-            <Space
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="62dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/settings"
-                android:textAlignment="center"
-                android:textColor="@color/color2"
-                android:textSize="14dp"
-                tools:text="Settings" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -270,7 +55,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="45dp" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -329,13 +114,18 @@
                 tools:text="@string/friendPlaylist" />
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@android:color/darker_gray" />
+
         <ListView
             android:id="@+id/searchRes"
             android:layout_width="400dp"
-            android:layout_height="417dp"
+            android:layout_height="442dp"
             android:layout_gravity="center"
             android:background="@color/secondaryColor"
-            android:visibility="invisible">
+            android:visibility="visible">
 
         </ListView>
 
