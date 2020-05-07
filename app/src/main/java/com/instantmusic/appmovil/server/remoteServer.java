@@ -218,6 +218,17 @@ public class remoteServer implements serverInterface {
     }
 
 
+    public void addOrRemovePodcast(ArrayList<Integer> albums, JSONConnection.Listener listener) {
+        String url = "rest-auth/user";
+        initialize()
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.PATCH)
+                .putData("albums",albums)
+                .setListener(listener)
+                .execute();
+    }
+
+
     public void rateASong(int idSong, int rate, JSONConnection.Listener listener) {
         String url = "songs/";
         url = url + idSong;

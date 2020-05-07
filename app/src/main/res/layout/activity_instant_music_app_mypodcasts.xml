@@ -36,12 +36,11 @@
             android:layout_height="3dp" />
 
         <Button
-            android:id="@+id/addPodcast"
+            android:id="@+id/deletePodcast"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:background="@drawable/edit_round2"
-            android:onClick="onButtonClick"
-            android:text="@string/podcastMenu2"
+            android:text="@string/podcastMenu1"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/backColor"

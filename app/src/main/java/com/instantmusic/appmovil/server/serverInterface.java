@@ -27,6 +27,7 @@ public interface serverInterface  {
     void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener);
     void addPlaylist(String playlist, JSONConnection.Listener listener);
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);
+    void addOrRemovePodcast(ArrayList<Integer> albums, JSONConnection.Listener listener);
     void rateASong(int idSong, int rate, JSONConnection.Listener listener);
     void songsRecommended(JSONConnection.Listener listener);
     void saveMinutesSong(int seconds, int idSong, JSONConnection.Listener listener);

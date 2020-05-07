@@ -17,6 +17,7 @@ import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.album.Album;
 import com.instantmusic.appmovil.artist.ArtistActivity;
+import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
@@ -24,13 +25,14 @@ import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class PodcastActivity extends AppCompatActivity {
+public class MyPodcastActivity extends AppCompatActivity {
     private ListView resList;
     private String podcastName;
     private String creador;
@@ -50,7 +52,7 @@ public class PodcastActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instant_music_app_podcasts);
+        setContentView(R.layout.activity_instant_music_app_mypodcasts);
         resList = findViewById(R.id.cancionesAlbum);
         server = new remoteServer();
         Button playB = findViewById(R.id.playButton);
@@ -144,6 +146,7 @@ public class PodcastActivity extends AppCompatActivity {
                 sortBy("date");
             }
         });
+
         Button seeArtist=findViewById(R.id.seeArtist2);
         seeArtist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,18 +156,24 @@ public class PodcastActivity extends AppCompatActivity {
             }
         });
 
-        final Button addPodcast=findViewById(R.id.addPodcast);
-        addPodcast.setOnClickListener(new View.OnClickListener() {
+        Button deletePodcast = findViewById(R.id.deletePodcast);
+        deletePodcast.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchMenu.setVisibility(View.INVISIBLE);
-                addPodcast();
+                deletePodcast();
             }
         });
 
     }
 
-    private void addPodcast() {
+    private void seeArtist() {
+        Intent i = new Intent(this, ArtistActivity.class);
+        i.putExtra("idArtist",artist);
+        startActivityForResult(i, 1);
+    }
+
+    private void deletePodcast() {
         server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
@@ -173,13 +182,16 @@ public class PodcastActivity extends AppCompatActivity {
                         ArrayList<Album> albums = Album.fromJson(data.getJSONArray("albums"), false, null, true);
                         ArrayList<Integer> newAlbums = new ArrayList<>();
                         for ( int i = 0; i < albums.size(); i++ ) {
-                            newAlbums.add(albums.get(i).id);
+                            if ( !(albums.get(i).id == idPodcast) ) {
+                                newAlbums.add(albums.get(i).id);
+                            }
                         }
-                        newAlbums.add(idPodcast);
                         server.addOrRemovePodcast(newAlbums, new JSONConnection.Listener() {
                             @Override
                             public void onValidResponse(int responseCode, JSONObject data) {
-                                if ( responseCode == 200 ) { }
+                                if ( responseCode == 200 ) {
+                                    backScreen();
+                                }
                             }
                             @Override
                             public void onErrorResponse(Throwable throwable) {
@@ -196,13 +208,9 @@ public class PodcastActivity extends AppCompatActivity {
                 setTitle("Unknown user");
             }
         });
+
     }
 
-    private void seeArtist() {
-        Intent i = new Intent(this, ArtistActivity.class);
-        i.putExtra("idArtist",artist);
-        startActivityForResult(i, 1);
-    }
     private void sortBy(String comp) {
         switch (comp) {
             case "date":
