@@ -57,6 +57,7 @@
     <string name="mypodcast">My Podcasts</string>
     <string name="mysong">Recommendations</string>
     <string name="addPlaylist">Create playlist</string>
+    <string name="friendPlaylist">playlists</string>
     <string name="rateSong">Rate this song</string>
     <string name="homeTitle">Your home</string>
     <string name="songMenu1">Add to playlist</string>

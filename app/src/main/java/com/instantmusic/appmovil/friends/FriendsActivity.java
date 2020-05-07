@@ -49,11 +49,13 @@ public class FriendsActivity extends AppCompatActivity {
         resList = findViewById(R.id.searchRes);
         server = new remoteServer();
         TextView name=findViewById(R.id.username);
+        TextView friendPlaylist=findViewById(R.id.friendPlaylist);
         Bundle extras = getIntent().getExtras();
         if ( extras != null ) {
             username= extras.getString("friend");
             id = extras.getInt("id");
             name.setText(username);
+            friendPlaylist.setText(username+"'s");
         }
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylists,0);
         resList.setAdapter(adapterPlaylist);
