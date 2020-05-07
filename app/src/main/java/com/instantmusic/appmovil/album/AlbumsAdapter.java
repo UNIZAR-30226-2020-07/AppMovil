@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.instantmusic.appmovil.R;
 
 import java.util.ArrayList;
@@ -43,15 +44,7 @@ public class AlbumsAdapter extends ArrayAdapter<Album> {
             artistAlbum.setText(album.artistName);
             albumName.setText(album.name);
         }
-        if ( album.name.length() > 15 && this.tipoLayout == 1) {
-            String aux = album.name;
-            StringBuilder texto = new StringBuilder(aux);
-            texto.setCharAt(12, '.');
-            texto.setCharAt(13, '.');
-            texto.setCharAt(14, '.');
-            albumName.setText(texto);
-        }
-        else if ( this.tipoLayout == 1 || this.tipoLayout == 2 ) {
+        if (this.tipoLayout == 1 || this.tipoLayout == 2) {
             albumName.setText(album.name);
         }
 

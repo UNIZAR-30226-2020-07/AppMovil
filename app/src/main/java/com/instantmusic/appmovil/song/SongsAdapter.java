@@ -56,27 +56,9 @@ public class SongsAdapter extends ArrayAdapter<Song> {
                 rate = rate + formato.format(song.rate_average) + "☆";
                 rateAverage.setText(rate);
             }
-            if (song.songName.length() > 22 && this.tipoLayout == 0) {
-                String aux = song.songName;
-                StringBuilder texto = new StringBuilder(aux);
-                texto.setCharAt(19, '.');
-                texto.setCharAt(20, '.');
-                texto.setCharAt(21, '.');
-                songName.setText(texto);
-            } else {
-                songName.setText(song.songName);
-            }
+            songName.setText(song.songName);
         } else if (this.tipoLayout == 2) {
-            if (song.songName.length() > 15) {
-                String aux = song.songName;
-                StringBuilder texto = new StringBuilder(aux);
-                texto.setCharAt(12, '.');
-                texto.setCharAt(13, '.');
-                texto.setCharAt(14, '.');
-                songName.setText(texto);
-            } else {
-                songName.setText(song.songName);
-            }
+            songName.setText(song.songName);
         }
 
         if (categoriesMap.containsKey(song.category))
