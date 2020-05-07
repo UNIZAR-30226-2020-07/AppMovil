@@ -1,5 +1,7 @@
 package com.instantmusic.appmovil.song;
 
+import android.annotation.SuppressLint;
+
 import com.instantmusic.appmovil.album.Album;
 
 import org.json.JSONArray;
@@ -21,9 +23,10 @@ public class Song {
     public int rate;
     public double rate_average;
     public JSONObject album;
-    public Date fecha;
+    public String fecha;
 
     // Constructor to convert JSON object into a Java class instance
+    @SuppressLint("SimpleDateFormat")
     public Song(JSONObject object) {
         try {
             album = object.getJSONObject("album");
@@ -35,8 +38,9 @@ public class Song {
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration", 0);
             this.rate_average = object.optDouble("avg_valoration", 0);
-            this.fecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'").parse(object.getString("created_at"));
-        } catch (JSONException | ParseException e) {
+            this.fecha = object.getString("created_at");
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -51,6 +55,7 @@ public class Song {
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration", 0);
             this.rate_average = object.optDouble("avg_valoration", 0);
+            this.fecha = object.getString("created_at");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -178,12 +178,9 @@ public class PodcastActivity extends AppCompatActivity {
                         newAlbums.add(idPodcast);
                         server.addOrRemovePodcast(newAlbums, new JSONConnection.Listener() {
                             @Override
-                            public void onValidResponse(int responseCode, JSONObject data) {
-                                if ( responseCode == 200 ) { }
-                            }
+                            public void onValidResponse(int responseCode, JSONObject data) { }
                             @Override
-                            public void onErrorResponse(Throwable throwable) {
-                            }
+                            public void onErrorResponse(Throwable throwable) { }
                         });
                     }
                 }
