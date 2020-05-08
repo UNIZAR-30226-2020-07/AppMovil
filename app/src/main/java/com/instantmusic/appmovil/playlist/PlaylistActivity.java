@@ -54,26 +54,25 @@ public class PlaylistActivity extends AppCompatActivity {
         Button playB = findViewById(R.id.playButton);
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
+        Button Button6 = findViewById(R.id.optionSong);
+        Button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchMenu.getVisibility() == View.VISIBLE) {
+                    searchMenu.setVisibility(View.INVISIBLE);
+                } else {
+                    searchMenu.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         if ( extras != null ) {
             playList= extras.getString("playlist");
             creador= extras.getString("creador");
             idPlaylist = extras.getInt("idPlaylist");
             String friends=extras.getString("friends");
             if(friends!=null){
-                setContentView(R.layout.activity_instant_music_app_playlists2);
-                resList.setVisibility(View.VISIBLE);
-            }else{
-                Button Button6 = findViewById(R.id.optionSong);
-                Button6.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (searchMenu.getVisibility() == View.VISIBLE) {
-                            searchMenu.setVisibility(View.INVISIBLE);
-                        } else {
-                            searchMenu.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                Button6.setVisibility(View.INVISIBLE);
+                Button6.setClickable(false);
             }
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);

@@ -16,7 +16,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="50dp" />
 
         <com.instantmusic.appmovil.adapter.HorizontalListView
             android:id="@+id/mySongs"
@@ -35,7 +35,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -77,7 +77,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="190dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="260dp" />
+            android:layout_height="230dp" />
 
         <com.instantmusic.appmovil.adapter.HorizontalListView
             android:id="@+id/myPodcasts"
@@ -139,7 +139,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="440dp" />
+            android:layout_height="410dp" />
 
         <com.instantmusic.appmovil.adapter.HorizontalListView
             android:id="@+id/myPlayLists"
@@ -152,7 +152,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="5.5dp" />
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:id="@+id/layout"
@@ -456,7 +456,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="370dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
