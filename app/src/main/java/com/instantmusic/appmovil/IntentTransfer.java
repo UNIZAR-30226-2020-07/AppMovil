@@ -29,4 +29,14 @@ public class IntentTransfer {
     public static <T> T getData(String key) {
         return (T) data.remove(key);
     }
+
+    /**
+     * Checks data, call before getData if needed
+     *
+     * @param key same key used in setData
+     * @return true iff there is saved data
+     */
+    public static boolean hasData(String key) {
+        return data.containsKey(key);
+    }
 }

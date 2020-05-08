@@ -144,20 +144,32 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         startActivityForResult(i, 1);
     }
 
+
     /**
      * The activity ends
      */
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!isOnline()) {
-            // offline mode, can't save
-        } else if (mediaPlayer.isPlaying() || mediaPlayer.getCurrentPosition() > 0) {
-            server.saveMinutesSong(mediaPlayer.getCurrentPosition() / 1000, getCurrentSong().id, null);
-        } else if (mediaPlayer.getCurrentPosition() == 0) {
-            server.saveMinutesSong(-1, -1, null);
-        }
         stopSong();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (!isOnline()) return; // offline mode, can't save
+
+        if (mediaPlayer.isPlaying() || mediaPlayer.getCurrentPosition() > 0) {
+            // playing or paused not at start, save
+            int seconds = mediaPlayer.getCurrentPosition() / 1000;
+            server.saveMinutesSong(seconds, getCurrentSong().id, null);
+            IntentTransfer.setData("continueSong", getCurrentSong());
+            IntentTransfer.setData("continueSeconds", seconds);
+        } else {
+            // paused at start, remove
+            server.saveMinutesSong(-1, -1, null);
+            IntentTransfer.setData("continueSong", null);
+        }
     }
 
     // ------------------- listeners -------------------

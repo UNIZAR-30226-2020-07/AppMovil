@@ -85,5 +85,6 @@
     <string name="friendsTitle">Friends</string>
     <string name="email_sent">Email sent, check your inbox</string>
     <string name="email_wrong">Enter a valid email address</string>
+    <string name="continue_playback">Continue playback: %s</string>
 
 </resources>
