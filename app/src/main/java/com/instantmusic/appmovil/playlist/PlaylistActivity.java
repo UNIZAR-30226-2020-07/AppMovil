@@ -55,6 +55,7 @@ public class PlaylistActivity extends AppCompatActivity {
         resList = findViewById(R.id.playlist);
         Bundle extras = getIntent().getExtras();
         Button Button6 = findViewById(R.id.optionSong);
+        Button Button7 = findViewById(R.id.changeName);
         Button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +74,9 @@ public class PlaylistActivity extends AppCompatActivity {
             if(friends!=null){
                 Button6.setVisibility(View.INVISIBLE);
                 Button6.setClickable(false);
+                Button7.setVisibility(View.INVISIBLE);
+                Button7.setClickable(false);
+
             }
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
@@ -131,7 +135,6 @@ public class PlaylistActivity extends AppCompatActivity {
 
         Button delete = findViewById(R.id.addPlaylist);
         Button removeSong = findViewById(R.id.removeSong);
-        Button Button7 = findViewById(R.id.changeName);
         Button Button8 =findViewById(R.id.changeName2);
         Button7.setOnClickListener(new View.OnClickListener() {
             @Override
