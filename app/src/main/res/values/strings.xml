@@ -83,5 +83,7 @@
     <string name="off_downloaded">Downloaded</string>
     <string name="off_error">Can\'t download, try again later</string>
     <string name="friendsTitle">Friends</string>
+    <string name="email_sent">Email sent, check your inbox</string>
+    <string name="email_wrong">Enter a valid email address</string>
 
 </resources>
