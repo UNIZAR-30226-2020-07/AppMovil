@@ -275,6 +275,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
     }
 
     private void search() {
+        searchMenu.setVisibility(View.INVISIBLE);
         adapterPodcast.clear();
         shit = findViewById(R.id.searchbar2);
         cruz = 1;
