@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.instantmusic.appmovil.R;
@@ -27,8 +28,12 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         if (convertView == null) {
             if (this.tipoLayout == 0) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists_row, parent, false);
-            } else if (this.tipoLayout == 1) {
+            }
+            else if (this.tipoLayout == 1) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.myplaylists2_row, parent, false);
+            }
+            else if (this.tipoLayout == 2 ) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_row3, parent, false);
             }
         }
         // Lookup view for data population
@@ -36,6 +41,11 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         // Populate the data into the template view using the data object
 
         playlistName.setText(playlist.playlistName);
+
+        if ( this.tipoLayout == 2 ) {
+            ImageView categoryImage = convertView.findViewById(R.id.iconoSong);
+            categoryImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.rufio));
+        }
 
         // Return the completed view to render on screen
         return convertView;

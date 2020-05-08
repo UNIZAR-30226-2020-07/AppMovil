@@ -107,6 +107,7 @@
                     android:importantForAutofill="no"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:textAllCaps="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/backColor"

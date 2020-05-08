@@ -46,7 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0"
-            android:textColor="@color/backColor" />
+            android:textColor="@color/backColor"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
