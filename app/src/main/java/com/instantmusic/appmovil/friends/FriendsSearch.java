@@ -98,7 +98,9 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if(count==1){
+                    search();
+                }
             }
 
             @Override
@@ -193,8 +195,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
     @Override
     public void onBackPressed() {
-        ListView search = findViewById(R.id.searchRes);
-        search.setVisibility(View.INVISIBLE);
+
     }
 
     private void search() {
@@ -216,10 +217,17 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
                                     filterFriends.put(obj);
                                 }
                             }
-                            ArrayList<Friend> newSongs = Friend.fromJson(filterFriends,false);
-                            adapterFriends.addAll(newSongs);
-                            resList.setVisibility(View.VISIBLE);
-                            user.setText(data.getString("username"));
+                            if(busqueda.length()==0) {
+                                ArrayList<Friend> newSongs = Friend.fromJson(friends, false);
+                                adapterFriends.addAll(newSongs);
+                                resList.setVisibility(View.VISIBLE);
+                                user.setText(data.getString("username"));
+                            }else{
+                                ArrayList<Friend> newSongs = Friend.fromJson(filterFriends, false);
+                                adapterFriends.addAll(newSongs);
+                                resList.setVisibility(View.VISIBLE);
+                                user.setText(data.getString("username"));
+                            }
                         }
                     }
                     @Override

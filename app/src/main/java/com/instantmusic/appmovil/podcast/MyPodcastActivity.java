@@ -220,6 +220,7 @@ public class MyPodcastActivity extends AppCompatActivity {
                         return o1.fecha.compareTo(o2.fecha);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
             case "titulo":
                 adapterSong.sort(new Comparator<Song>() {
@@ -228,6 +229,7 @@ public class MyPodcastActivity extends AppCompatActivity {
                         return o1.songName.compareTo(o2.songName);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
         }
     }

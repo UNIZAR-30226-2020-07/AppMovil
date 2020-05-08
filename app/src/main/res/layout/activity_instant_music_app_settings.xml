@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/grade"
     tools:context=".main.MusicApp">
+
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
@@ -175,6 +176,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_gravity="bottom"
+            android:background="#00FFFFFF"
             android:orientation="horizontal">
 
             <Space
@@ -247,7 +249,7 @@
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="62dp"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/settings"
@@ -258,6 +260,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"

@@ -71,6 +71,7 @@ public class Song {
             this.id = object.getInt("id");
             this.rate = object.optInt("user_valoration", 0);
             this.rate_average = object.optDouble("avg_valoration", 0);
+            this.fecha = object.getString("created_at");
         } catch (JSONException e) {
             e.printStackTrace();
         }

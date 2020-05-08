@@ -255,7 +255,6 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
         s4.setBackgroundColor(getResources().getColor(R.color.secondaryColor));
         EditText barra = findViewById(R.id.searchbar2);
         barra.setHint(getResources().getString(R.string.search1));
-
     }
 
     private void categoryActivated() {
@@ -369,8 +368,10 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
     }
 
     private void search() {
+        searchMenu.setVisibility(View.INVISIBLE);
         shit = findViewById(R.id.searchbar2);
         String busqueda=shit.getText().toString();
+
         if (page == 1) {
             adapterSong.clear();
             adapterAlbum.clear();

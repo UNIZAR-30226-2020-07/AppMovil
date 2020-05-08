@@ -110,7 +110,7 @@ public class FriendsActivity extends AppCompatActivity {
     private void Playlist(Playlist playlist) {
         Intent i=new Intent(this, PlaylistActivity.class);
         i.putExtra("playlist", playlist.playlistName);
-        i.putExtra("creador", playlist.user);
+        i.putExtra("creador", username);
         i.putExtra("idPlaylist", playlist.id);
         i.putExtra("friends","f");
         this.startActivity(i);

@@ -206,9 +206,12 @@ public class PodcastActivity extends AppCompatActivity {
                 adapterSong.sort(new Comparator<Song>() {
                     @Override
                     public int compare(Song o1, Song o2) {
+                        String fecha1=o1.fecha;
+                        String fecha2=o2.fecha;
                         return o1.fecha.compareTo(o2.fecha);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
             case "titulo":
                 adapterSong.sort(new Comparator<Song>() {
@@ -217,6 +220,7 @@ public class PodcastActivity extends AppCompatActivity {
                         return o1.songName.compareTo(o2.songName);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
         }
     }

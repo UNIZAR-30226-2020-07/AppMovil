@@ -254,6 +254,7 @@ public class PlaylistActivity extends AppCompatActivity {
                         return o1.artist.compareTo(o2.artist);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
             case "titulo":
                 adapterSong.sort(new Comparator<Song>() {
@@ -262,6 +263,7 @@ public class PlaylistActivity extends AppCompatActivity {
                         return o1.songName.compareTo(o2.songName);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
             case "categoria":
                 adapterSong.sort(new Comparator<Song>() {
@@ -270,6 +272,7 @@ public class PlaylistActivity extends AppCompatActivity {
                         return o1.category.compareTo(o2.category);
                     }
                 });
+                resList.smoothScrollToPosition(0);
             break;
         }
     }
