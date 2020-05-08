@@ -57,7 +57,7 @@ public class FriendsActivity extends AppCompatActivity {
             name.setText(username);
             friendPlaylist.setText(username+"'s");
         }
-        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylists,0);
+        adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylists,1);
         resList.setAdapter(adapterPlaylist);
         server.getUserById(id, new JSONConnection.Listener() {
             @Override
@@ -120,11 +120,11 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     private void Playlist(Playlist playlist) {
-
-        IntentTransfer.setData("playlist", playlist.playlistName);
-        IntentTransfer.setData("creador", playlist.user);
-        IntentTransfer.setData("idPlaylist", playlist.id);
-
-        this.startActivity(new Intent(this, PlaylistActivity.class));
+        Intent i=new Intent(this, PlaylistActivity.class);
+        i.putExtra("playlist", playlist.playlistName);
+        i.putExtra("creador", playlist.user);
+        i.putExtra("idPlaylist", playlist.id);
+        i.putExtra("friends","f");
+        this.startActivity(i);
     }
 }

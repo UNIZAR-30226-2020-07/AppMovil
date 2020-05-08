@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grade"
+    tools:context=".main.MusicApp">
+
+    <LinearLayout
+        android:id="@+id/changeMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="153dp"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="51dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
+            <EditText
+                android:id="@+id/change"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:linksClickable="true"
+                android:longClickable="true"
+                android:textAlignment="center"
+                android:textColor="@color/backColor"
+                android:textSize="25sp"
+                android:visibility="invisible"
+                tools:text="Nombre de playlist" />
+
+            <Button
+                android:id="@+id/changeName"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/lapiz" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/changeName2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="0"
+                android:background="@drawable/tick512_2"
+                android:textColor="@color/backColor"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/searchMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#007E7A80"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/addPlaylist"
+            android:layout_width="130dp"
+            android:layout_height="25dp"
+            android:background="@drawable/edit_round2"
+            android:text="@string/playlistMenu1"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/backColor"
+            android:textSize="14sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+
+        <Button
+            android:id="@+id/removeSong"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@drawable/edit_round2"
+            android:text="@string/removeSong_"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/backColor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="14dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:background="@drawable/flecha"
+                android:shadowColor="#00FFFFFF"
+                android:textColor="#00FFFFFF"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorHint="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
+
+            <Space
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/rufio2" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/playlistName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:minLines="1"
+                android:textAlignment="center"
+                android:textColor="@color/backColor"
+                android:textSize="25sp"
+                tools:text="Nombre de playlist" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/playlistCreator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:minLines="1"
+            android:textColor="@color/backColor"
+            android:textSize="15sp"
+            tools:text="Creador de la playlist" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/playButton"
+            android:layout_width="127dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_round"
+            android:text="@string/play"
+            android:textColor="@color/backColor" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_round"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="@string/orderPlaylist"
+                android:textColor="@color/backColor"
+                android:textSize="14dp"
+                tools:text="@string/orderPlaylist" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:text="@string/orderPlaylist1"
+                    android:textColor="@color/backColor"
+                    android:textSize="14dp"
+                    tools:text="@string/orderPlaylist1" />
+
+                <Button
+                    android:id="@+id/orderName"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0"
+                    android:background="@android:drawable/checkbox_on_background"
+                    android:textSize="14dp" />
+
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:text="@string/orderPlaylist2"
+                    android:textColor="@color/backColor"
+                    android:textSize="14dp"
+                    tools:text="@string/orderPlaylist2" />
+
+                <Button
+                    android:id="@+id/orderCategory"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0"
+                    android:background="@android:drawable/checkbox_off_background" />
+
+                <Space
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:text="@string/orderPlaylist3"
+                    android:textColor="@color/backColor"
+                    android:textSize="14dp"
+                    tools:text="@string/orderPlaylist3" />
+
+                <Button
+                    android:id="@+id/orderArtist"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0"
+                    android:background="@android:drawable/checkbox_off_background" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="10dp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/playlist"
+            android:layout_width="match_parent"
+            android:layout_height="348dp"
+            android:transcriptMode="alwaysScroll">
+
+        </ListView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
