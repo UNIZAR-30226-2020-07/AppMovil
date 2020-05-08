@@ -264,91 +264,96 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="585dp"
         android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="220sp" />
+            android:layout_height="10dp" />
 
         <ImageView
-            android:id="@+id/lupaGrande"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="center"
-            app:srcCompat="@drawable/lupagrande2" />
-
-        <TextView
-            android:id="@+id/searchTip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/searchTip1"
-            android:textColor="@color/secondaryColor"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/searchTip2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/searchTip2"
-            android:textAlignment="center"
-            android:textColor="@color/secondaryColor"
-            android:textSize="21sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_vertical"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/backColor"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/searchbar2"
-                android:layout_width="341dp"
-                android:layout_height="56dp"
-                android:layout_weight="0"
-                android:background="#F8EBF0"
-                android:hint="@string/search1"
-                android:imeOptions="actionSearch"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/search"
-                android:layout_width="53dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:background="@drawable/searchicon"
-                android:backgroundTint="#000000"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/searchRes"
+            android:id="@+id/imageSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/secondaryColor"
-            android:visibility="visible">
+            app:srcCompat="@drawable/accountdos" />
 
-        </ListView>
+        <TextView
+            android:id="@+id/usernameSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Username"
+            android:textColor="@color/backColor"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:gravity="center"
+                android:text="Username: "
+                android:textColor="@color/color2"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/change"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:linksClickable="true"
+                android:longClickable="true"
+                android:textAlignment="center"
+                android:textColor="@color/backColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                tools:text="ghghg" />
+
+            <Button
+                android:id="@+id/changeName"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/lapiz" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/changeName2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="0"
+                android:background="@drawable/tick512_2"
+                android:textColor="@color/backColor"
+                android:visibility="invisible" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

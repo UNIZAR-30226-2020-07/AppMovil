@@ -110,6 +110,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 Home();
             }
         });
+
         Button Button2 = findViewById(R.id.menuButton2);
         Button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +118,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 Search();
             }
         });
+
         Button Button4 = findViewById(R.id.menuButton4);
         Button4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +126,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 Friends();
             }
         });
+
         Button Button5 = findViewById(R.id.menuButton5);
         Button5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +134,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 Settings();
             }
         });
+
         Button Button6 = findViewById(R.id.optionSearch);
 
         Button6.setOnClickListener(new View.OnClickListener() {

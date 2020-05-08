@@ -102,14 +102,15 @@
                 android:hapticFeedbackEnabled="true"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#F8EBF0"
                 android:textColorHighlight="#F8EBF0"
                 android:textColorHint="#7E7A80"
                 android:textColorLink="#7E7A80"
-                android:textSize="20sp"
-                android:paddingLeft="10dp"/>
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="match_parent"

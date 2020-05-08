@@ -152,19 +152,19 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="16dp" />
 
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="35dp"
             android:background="@color/secondaryColor"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="382dp"
-                android:layout_height="26dp"
+                android:layout_height="match_parent"
                 android:background="@color/secondaryColor"
                 android:gravity="center|start"
                 android:maxLength="45"

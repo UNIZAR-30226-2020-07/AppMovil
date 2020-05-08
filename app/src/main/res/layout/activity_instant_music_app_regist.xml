@@ -90,6 +90,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <EditText
                 android:id="@+id/emailSign"
                 style="@style/Widget.AppCompat.EditText"
@@ -104,6 +105,7 @@
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/backColor"
@@ -163,6 +165,7 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:singleLine="true"
                 android:textAllCaps="false"
                 android:textColor="#F8EBF0"
