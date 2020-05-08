@@ -1,26 +1,38 @@
 package com.instantmusic.appmovil.friends;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
+import com.instantmusic.appmovil.album.Album;
+import com.instantmusic.appmovil.artist.ArtistActivity;
 import com.instantmusic.appmovil.playlist.Playlist;
 import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.playlist.PlaylistAdapter;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
+import com.instantmusic.appmovil.song.Song;
+import com.instantmusic.appmovil.song.SongActivity;
+import com.instantmusic.appmovil.song.SongsAdapter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class FriendsActivity extends AppCompatActivity {
     private ListView resList;
@@ -109,11 +121,11 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     private void Playlist(Playlist playlist) {
-
-        IntentTransfer.setData("playlist", playlist.playlistName);
-        IntentTransfer.setData("creador", playlist.user);
-        IntentTransfer.setData("idPlaylist", playlist.id);
-
-        this.startActivity(new Intent(this, PlaylistActivity.class));
+        Intent i=new Intent(this, PlaylistActivity.class);
+        i.putExtra("playlist", playlist.playlistName);
+        i.putExtra("creador", playlist.user);
+        i.putExtra("idPlaylist", playlist.id);
+        i.putExtra("friends","f");
+        this.startActivity(i);
     }
 }
