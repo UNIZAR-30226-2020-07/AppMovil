@@ -228,6 +228,14 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
+    public void recoverPassword(String email, JSONConnection.Listener listener) {
+        String url = "rest-auth/password/reset";
+        initialize()
+                .setUrl(url)
+                .putData("email",email)
+                .setListener(listener)
+                .execute();
+    }
 
     public void rateASong(int idSong, int rate, JSONConnection.Listener listener) {
         String url = "songs/";
