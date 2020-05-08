@@ -67,11 +67,7 @@ public class Login extends AppCompatActivity {
         pausedSong = findViewById(R.id.button);
         pausedSong2 = findViewById(R.id.button3);
         layoutPaused = findViewById(R.id.layout);
-        layoutPaused.setVisibility(View.INVISIBLE);
-        pausedSong.setVisibility(View.INVISIBLE);
-        pausedSong.setEnabled(false);
-        pausedSong2.setVisibility(View.INVISIBLE);
-        pausedSong2.setEnabled(false);
+        layoutPaused.setVisibility(View.GONE);
         adapterPlaylist = new PlaylistAdapter(this, arrayOfPlaylist, 0);
         adapterSongs = new SongsAdapter(this, arrayOfSongs, 2);
         adapterPodcast = new AlbumsAdapter(this, arrayOfPodcast, 3);
@@ -89,27 +85,20 @@ public class Login extends AppCompatActivity {
                         adapterPlaylist.addAll(newPlaylists);
 
                         ArrayList<Album> newPodcasts = Album.fromJson(data.getJSONArray("albums"), false, null, true);
-                        for ( int i = 0; i < newPodcasts.size(); i++ ) {
-                            if ( newPodcasts.get(i).esPodcast ) {
+                        for (int i = 0; i < newPodcasts.size(); i++) {
+                            if (newPodcasts.get(i).esPodcast) {
                                 adapterPodcast.add(newPodcasts.get(i));
                             }
                         }
 
-                        String text = "Continue playback: ";
-                        if ( !data.isNull("pause_song") ) {
+                        if (!data.isNull("pause_song")) {
                             paused_song = new Song(data.getJSONObject("pause_song"));
-                            text = text + paused_song.songName;
                             pause_seconds = data.optInt("pause_second", 0);
                             layoutPaused.setVisibility(View.VISIBLE);
-                            pausedSong.setVisibility(View.VISIBLE);
-                            pausedSong.setEnabled(true);
-                            pausedSong2.setVisibility(View.VISIBLE);
-                            pausedSong2.setEnabled(true);
-                            pausedSong.setText(text);
+                            pausedSong.setText(String.format(getString(R.string.continue_playback), paused_song.songName));
                         }
                     }
-                }
-                catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -127,8 +116,7 @@ public class Login extends AppCompatActivity {
                         JSONArray songsRecommended = data.getJSONArray("results");
                         ArrayList<Song> newSongs = Song.fromJson(songsRecommended, true, null);
                         adapterSongs.addAll(newSongs);
-                    }
-                    catch (JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
@@ -253,18 +241,35 @@ public class Login extends AppCompatActivity {
                             }
                         }
                         adapterPodcast.addAll(podcasts);
-                        String text = "Continue playback: ";
-                        if (!data.isNull("pause_song")) {
-                            paused_song = new Song(data.getJSONObject("pause_song"));
-                            text = text + paused_song.songName;
-                            pause_seconds = data.optInt("pause_second", 0);
-                            layoutPaused.setVisibility(View.VISIBLE);
-                            pausedSong.setVisibility(View.VISIBLE);
-                            pausedSong.setEnabled(true);
-                            pausedSong2.setVisibility(View.VISIBLE);
-                            pausedSong2.setEnabled(true);
-                            pausedSong.setText(text);
+
+                        if (IntentTransfer.hasData("continueSong")) {
+                            // data from SongActivity return
+                            paused_song = IntentTransfer.getData("continueSong");
+                            if (paused_song != null) {
+                                // saved song
+                                pause_seconds = IntentTransfer.getData("continueSeconds");
+                                layoutPaused.setVisibility(View.VISIBLE);
+                                pausedSong.setText(String.format(getString(R.string.continue_playback), paused_song.songName));
+                            } else {
+                                // no saved song
+                                layoutPaused.setVisibility(View.GONE);
+                            }
+                        } else {
+                            // no data from songActivity return, check server
+                            String text = "Continue playback: ";
+                            if (!data.isNull("pause_song")) {
+                                paused_song = new Song(data.getJSONObject("pause_song"));
+                                text = text + paused_song.songName;
+                                pause_seconds = data.optInt("pause_second", 0);
+                                layoutPaused.setVisibility(View.VISIBLE);
+                                pausedSong.setVisibility(View.VISIBLE);
+                                pausedSong.setEnabled(true);
+                                pausedSong2.setVisibility(View.VISIBLE);
+                                pausedSong2.setEnabled(true);
+                                pausedSong.setText(text);
+                            }
                         }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -320,7 +325,7 @@ public class Login extends AppCompatActivity {
         startActivityForResult(i, 1);
     }
 
-    private void openPodcast(int idPodcast ) {
+    private void openPodcast(int idPodcast) {
         Intent i = new Intent(this, MyPodcastActivity.class);
         i.putExtra(this.getPackageName() + ".id", idPodcast);
         this.startActivity(i);
