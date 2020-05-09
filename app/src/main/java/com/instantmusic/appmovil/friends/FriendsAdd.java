@@ -65,6 +65,7 @@ public class FriendsAdd extends AppCompatActivity {
                 try {
                     Friend f=(Friend)resList.getItemAtPosition(position);
                     addFriend(f.id);
+                    backScreen();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

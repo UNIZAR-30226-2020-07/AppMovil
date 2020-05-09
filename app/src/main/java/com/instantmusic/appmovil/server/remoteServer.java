@@ -215,7 +215,6 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
-
     public void deletePlaylist(int idPlaylist, JSONConnection.Listener listener) {
         String url = "playlists/";
         url = url + idPlaylist;

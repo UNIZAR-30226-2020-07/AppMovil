@@ -64,6 +64,7 @@
     <string name="homeTitle">Your home</string>
     <string name="songMenu1">Add to playlist</string>
     <string name="songMenu2">See artist</string>
+    <string name="friendMenu">Remove friend</string>
     <string name="addPlaylist_">Add to playlist</string>
     <string name="addFriend_">Add new friend</string>
     <string name="removeSong_">Remove a song</string>

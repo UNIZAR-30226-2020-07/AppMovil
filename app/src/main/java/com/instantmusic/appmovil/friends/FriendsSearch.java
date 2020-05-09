@@ -3,6 +3,7 @@ package com.instantmusic.appmovil.friends;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.IntentTransfer;
@@ -54,8 +56,8 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
     private ArrayList<Friend> arrayOfFriends = new ArrayList<>();
     private FriendsAdapter adapterFriends;
     private TextView user;
-
     private boolean ultima = false;
+    private int nFriends = 0;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -64,20 +66,22 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         setContentView(R.layout.activity_instant_music_app_friends_search);
         resList = findViewById(R.id.searchRes);
         resList.setVisibility(View.INVISIBLE);
-        user=findViewById(R.id.username);
-        adapterFriends =new FriendsAdapter(this, arrayOfFriends,0);
+        user = findViewById(R.id.username);
+        adapterFriends = new FriendsAdapter(this, arrayOfFriends, 0);
         resList.setAdapter(adapterFriends);
-        server.getUserData( new JSONConnection.Listener() {
+        server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
-                if ( responseCode == 200 ) {
-                        JSONArray friends=data.getJSONArray("friends");
-                        ArrayList<Friend> newSongs = Friend.fromJson(friends,false);
-                        adapterFriends.addAll(newSongs);
-                        resList.setVisibility(View.VISIBLE);
-                        user.setText(data.getString("username"));
+                if (responseCode == 200) {
+                    JSONArray friends = data.getJSONArray("friends");
+                    ArrayList<Friend> newSongs = Friend.fromJson(friends, false);
+                    nFriends = newSongs.size();
+                    adapterFriends.addAll(newSongs);
+                    resList.setVisibility(View.VISIBLE);
+                    user.setText(data.getString("username"));
                 }
             }
+
             @Override
             public void onErrorResponse(Throwable throwable) {
             }
@@ -96,9 +100,11 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
         EditText search = findViewById(R.id.searchbar2);
         search.addTextChangedListener(new TextWatcher() {
+
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(count==1){
+                if (count == 1) {
                     search();
                 }
             }
@@ -110,7 +116,9 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
             @Override
             public void afterTextChanged(Editable s) {
-                search();
+                if (s.length() > 1) {
+                    search();
+                }
             }
         });
         shit = search;
@@ -149,11 +157,13 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
             }
         });
     }
-    private void addFriend(){
+
+    private void addFriend() {
         Intent i = new Intent(this, FriendsAdd.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }
+
     private void Home() {
 
         Intent i = new Intent(this, Login.class);
@@ -187,9 +197,9 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
     }
 
     private void Friend(Friend friend) {
-        Intent i=new Intent(this,FriendsActivity.class);
-        i.putExtra("friend",friend.username);
-        i.putExtra("id",friend.id);
+        Intent i = new Intent(this, FriendsActivity.class);
+        i.putExtra("friend", friend.username);
+        i.putExtra("id", friend.id);
         this.startActivity(i);
     }
 
@@ -197,38 +207,42 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
     public void onBackPressed() {
 
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();
         adapterFriends.clear();
-        server.getUserData( new JSONConnection.Listener() {
+        server.getUserData(new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
-                if ( responseCode == 200 ) {
-                    JSONArray friends=data.getJSONArray("friends");
-                    ArrayList<Friend> newSongs = Friend.fromJson(friends,false);
+                if (responseCode == 200) {
+                    JSONArray friends = data.getJSONArray("friends");
+                    ArrayList<Friend> newSongs = Friend.fromJson(friends, false);
+                    nFriends = newSongs.size();
                     adapterFriends.addAll(newSongs);
                     resList.setVisibility(View.VISIBLE);
                     user.setText(data.getString("username"));
                 }
             }
+
             @Override
             public void onErrorResponse(Throwable throwable) {
             }
         });
     }
+
     private void search() {
         shit = findViewById(R.id.searchbar2);
         adapterFriends.clear();
         if (!ultima) {
             if (!(shit.getText().toString().equals(""))) {
-                server.getUserData( new JSONConnection.Listener() {
+                server.getUserData(new JSONConnection.Listener() {
                     @Override
                     public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
-                        if ( responseCode == 200 ) {
-                            JSONArray friends=data.getJSONArray("friends");
-                            String busqueda=shit.getText().toString();
-                            JSONArray filterFriends=new JSONArray();
+                        if (responseCode == 200) {
+                            JSONArray friends = data.getJSONArray("friends");
+                            String busqueda = shit.getText().toString();
+                            JSONArray filterFriends = new JSONArray();
                             for (int i = 0; i < friends.length(); ++i) {
                                 JSONObject obj = friends.getJSONObject(i);
                                 String id = obj.getString("username");
@@ -236,12 +250,12 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
                                     filterFriends.put(obj);
                                 }
                             }
-                            if(busqueda.length()==0) {
+                            if (busqueda.length() == 0) {
                                 ArrayList<Friend> newSongs = Friend.fromJson(friends, false);
                                 adapterFriends.addAll(newSongs);
                                 resList.setVisibility(View.VISIBLE);
                                 user.setText(data.getString("username"));
-                            }else{
+                            } else {
                                 ArrayList<Friend> newSongs = Friend.fromJson(filterFriends, false);
                                 adapterFriends.addAll(newSongs);
                                 resList.setVisibility(View.VISIBLE);
@@ -249,6 +263,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
                             }
                         }
                     }
+
                     @Override
                     public void onErrorResponse(Throwable throwable) {
                     }
@@ -263,7 +278,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
             if (!ultima) {
                 resList.setAdapter(adapterFriends);
                 JSONArray results = data.getJSONArray("results");
-                ArrayList<Friend> newSongs = Friend.fromJson(results,false);
+                ArrayList<Friend> newSongs = Friend.fromJson(results, false);
                 adapterFriends.addAll(newSongs);
             }
             if (data.isNull("next")) {

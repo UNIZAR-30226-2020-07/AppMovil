@@ -8,6 +8,32 @@
     tools:context=".main.MusicApp">
 
     <LinearLayout
+        android:id="@+id/searchMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#007E7A80"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/deleteFriend"
+            android:layout_width="130dp"
+            android:layout_height="25dp"
+            android:background="@drawable/edit_round2"
+            android:text="@string/friendMenu"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/backColor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +68,22 @@
                 android:textColorHint="#00FFFFFF"
                 android:textColorLink="#00FFFFFF" />
 
+            <Space
+                android:layout_width="315dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/optionSong3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:background="@drawable/points"
+                android:scaleType="center"
+                app:srcCompat="@drawable/points" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -52,10 +94,6 @@
         android:layout_gravity="center|top"
         android:orientation="vertical"
         android:visibility="visible">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="45dp" />
 
         <ImageView
             android:id="@+id/imageView4"
