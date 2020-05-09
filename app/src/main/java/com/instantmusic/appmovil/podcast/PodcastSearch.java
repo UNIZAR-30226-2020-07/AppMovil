@@ -328,7 +328,13 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                 resList.setAdapter(adapterPodcast);
                 JSONArray results = data.getJSONArray("results");
                 ArrayList<Album> newPodcasts = Album.fromJson(results, false, null, true);
-                adapterPodcast.addAll(newPodcasts);
+                ArrayList<Album> podcasts = new ArrayList<>();
+                for ( int i = 0; i < newPodcasts.size(); i++ ) {
+                    if ( newPodcasts.get(i).esPodcast ) {
+                        podcasts.add(newPodcasts.get(i));
+                    }
+                }
+                adapterPodcast.addAll(podcasts);
                 if (data.isNull("next")) {
                     ultima = true;
                 }
