@@ -225,7 +225,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
                 }
                 break;
             case R.id.nextSong:
-                nextSong();
+                nextSong(false);
                 break;
             case R.id.loop:
                 // loop button
@@ -324,10 +324,14 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
 
     /**
      * Puts the next song
+     * @param forceAuto if true, next song will autoplay (if false only if currently playing)
      */
-    private void nextSong() {
+    private void nextSong(boolean forceAuto) {
+
+        // save auto setting
+        boolean auto = forceAuto || mediaPlayer.isPlaying();
+
         // stop
-        boolean auto = mediaPlayer.isPlaying();
         stopSong();
 
         // go next
@@ -337,7 +341,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
 
         // load next
         loadSong(auto, -1);
-        }
+    }
 
     private void updateNextUI() {
         if (currentPos == (songs_list.size() - 1)) {
@@ -464,7 +468,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
     @Override
     public void onCompletion(MediaPlayer mp) {
         if ((currentPos + 1) < songs_list.size()) {
-            nextSong();
+            nextSong(true);
         } else {
             stopSong();
         }
