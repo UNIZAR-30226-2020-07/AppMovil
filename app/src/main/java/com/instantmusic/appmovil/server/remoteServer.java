@@ -288,7 +288,7 @@ public class remoteServer implements serverInterface {
     @Override
     public void searchArtistsPodcasts(int page, String toString, JSONConnection.Listener listener) {
         initialize()
-                .setUrl("albums")
+                .setUrl("artists")
                 .putParameter("page",Integer.toString(page))
                 .putParameter("search", toString)
                 .putParameter("podcast",Boolean.toString(true))
