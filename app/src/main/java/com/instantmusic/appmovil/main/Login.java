@@ -304,6 +304,7 @@ public class Login extends AppCompatActivity {
                 setTitle("Unknown user");
             }
         });
+        insert.setText(null);
     }
 
     private void openCreate() {
