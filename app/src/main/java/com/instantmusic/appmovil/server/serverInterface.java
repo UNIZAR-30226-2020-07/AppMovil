@@ -4,6 +4,8 @@ import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.song.Song;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public interface serverInterface  {
@@ -25,6 +27,7 @@ public interface serverInterface  {
     void addOrRemoveSong(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener);
     void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener);
     void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener);
+    void addFriend(JSONArray friends, int idUser, JSONConnection.Listener listener);
     void addPlaylist(String playlist, JSONConnection.Listener listener);
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);
     void addOrRemovePodcast(ArrayList<Integer> albums, JSONConnection.Listener listener);

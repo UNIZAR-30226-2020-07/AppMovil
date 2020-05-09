@@ -34,6 +34,7 @@
     <string name="search4">Search album</string>
     <string name="search5">Search by title</string>
     <string name="search6">Filter by username</string>
+    <string name="search7">Search by username</string>
     <string name="searchTip1">Find your favourite music</string>
     <string name="searchTip2">Search by artist, songs, albums or genre</string>
     <string name="searchTip3">Find your favourite podcasts</string>
@@ -64,6 +65,7 @@
     <string name="songMenu1">Add to playlist</string>
     <string name="songMenu2">See artist</string>
     <string name="addPlaylist_">Add to playlist</string>
+    <string name="addFriend_">Add new friend</string>
     <string name="removeSong_">Remove a song</string>
     <string name="createPlaylist">Create new playlist</string>
     <string name="insertName">Insert title</string>
@@ -82,6 +84,7 @@
     <string name="off_downloading">Downloading \"%s\"</string>
     <string name="off_downloaded">Downloaded</string>
     <string name="off_error">Can\'t download, try again later</string>
+    <string name="notFriend">User not found</string>
     <string name="friendsTitle">Friends</string>
     <string name="email_sent">Email sent, check your inbox</string>
     <string name="email_wrong">Enter a valid email address</string>

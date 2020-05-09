@@ -205,7 +205,16 @@ public class remoteServer implements serverInterface {
     public void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener) {
 
     }
-
+    public void addFriend(JSONArray friends,int idUser, JSONConnection.Listener listener){
+        String url = "users/";
+        url = url + idUser;
+        initialize()
+                .setUrl(url)
+                .setMethod(JSONConnection.METHOD.PATCH)
+                ._putData("friends",friends)
+                .setListener(listener)
+                .execute();
+    }
 
     public void deletePlaylist(int idPlaylist, JSONConnection.Listener listener) {
         String url = "playlists/";

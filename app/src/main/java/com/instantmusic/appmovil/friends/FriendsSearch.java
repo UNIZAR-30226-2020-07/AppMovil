@@ -150,7 +150,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
         });
     }
     private void addFriend(){
-        Intent i = new Intent(this, FriendsActivity.class);
+        Intent i = new Intent(this, FriendsAdd.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(i, 1);
     }
@@ -197,7 +197,26 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
     public void onBackPressed() {
 
     }
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapterFriends.clear();
+        server.getUserData( new JSONConnection.Listener() {
+            @Override
+            public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
+                if ( responseCode == 200 ) {
+                    JSONArray friends=data.getJSONArray("friends");
+                    ArrayList<Friend> newSongs = Friend.fromJson(friends,false);
+                    adapterFriends.addAll(newSongs);
+                    resList.setVisibility(View.VISIBLE);
+                    user.setText(data.getString("username"));
+                }
+            }
+            @Override
+            public void onErrorResponse(Throwable throwable) {
+            }
+        });
+    }
     private void search() {
         shit = findViewById(R.id.searchbar2);
         adapterFriends.clear();
