@@ -116,9 +116,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 1) {
                     search();
-                }
             }
         });
         shit = search;
@@ -211,6 +209,11 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
     @Override
     protected void onRestart() {
         super.onRestart();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         adapterFriends.clear();
         server.getUserData(new JSONConnection.Listener() {
             @Override
