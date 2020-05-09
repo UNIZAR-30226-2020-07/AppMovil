@@ -301,19 +301,7 @@ public class PodcastSearch extends AppCompatActivity implements JSONConnection.L
                     if (!(shit.getText().toString().equals(""))) {
                         resList.setVisibility(View.VISIBLE);
                         page = 1;
-                        server.searchArtists(page, shit.getText().toString(), new JSONConnection.Listener() {
-                            @Override
-                            public void onValidResponse(int responseCode, JSONObject data) {
-                                if (responseCode == 200) {
-
-                                }
-                            }
-
-                            @Override
-                            public void onErrorResponse(Throwable throwable) {
-
-                            }
-                        });
+                        server.searchArtistsPodcasts(page, shit.getText().toString(), this);
                     }
                     break;
 

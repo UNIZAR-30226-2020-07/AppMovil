@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.instantmusic.appmovil.R;
@@ -28,6 +30,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class FriendsAdd extends AppCompatActivity {
     private ListView resList;
@@ -56,7 +62,12 @@ public class FriendsAdd extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                addFriend((Friend)resList.getAdapter().getItem(position));
+                try {
+                    Friend f=(Friend)resList.getItemAtPosition(position);
+                    addFriend(f.id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         server.getUserData(new JSONConnection.Listener() {
@@ -121,9 +132,14 @@ public class FriendsAdd extends AppCompatActivity {
             }
         });
     }
-    private void addFriend(Friend friend){
-        JSONArray newFriends=friends.put(friend);
-        server.addFriend(newFriends,idUser, new JSONConnection.Listener() {
+    private void addFriend(int id) throws JSONException {
+        List<Integer> nfriends=new ArrayList<>();
+        for(int i=0;i<friends.length();i++){
+            JSONObject f=friends.getJSONObject(i);
+            nfriends.add(f.getInt("id"));
+        }
+        nfriends.add(id);
+        server.addFriend(nfriends,idUser, new JSONConnection.Listener() {
             @Override
             public void onValidResponse(int responseCode, JSONObject data) {
                 if ( responseCode != 200 ) {

@@ -205,13 +205,13 @@ public class remoteServer implements serverInterface {
     public void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener) {
 
     }
-    public void addFriend(JSONArray friends,int idUser, JSONConnection.Listener listener){
+    public void addFriend(List<Integer> friends,int idUser, JSONConnection.Listener listener){
         String url = "users/";
         url = url + idUser;
         initialize()
                 .setUrl(url)
                 .setMethod(JSONConnection.METHOD.PATCH)
-                ._putData("friends",friends)
+                .putData("friends",friends)
                 .setListener(listener)
                 .execute();
     }
