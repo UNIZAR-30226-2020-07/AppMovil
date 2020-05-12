@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.MusicApp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grade"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        app:layout_anchorGravity="center|center_horizontal|center_vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/backButton1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/flecha"
+                android:shadowColor="#00FFFFFF"
+                android:textColor="#00FFFFFF"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorHint="#00FFFFFF"
+                android:textColorLink="#00FFFFFF" />
+
+            <Space
+                android:layout_width="67dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+
+            <TextView
+                android:id="@+id/Accion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/changeP"
+                android:textColor="#F8EBF0"
+                android:textSize="23dp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="110sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="11dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/Enunciado2"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:text="@string/CreateAccount2"
+                    android:textColor="#F8EBF0"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/passwordSign"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="375dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:background="@drawable/edit_round"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textAllCaps="false"
+                android:textColor="#F8EBF0"
+                android:textColorHighlight="#F8EBF0"
+                android:textColorHint="#7E7A80"
+                android:textColorLink="#7E7A80"
+                android:textSize="20sp"
+                tools:targetApi="o" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/passwordTip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PasswordAdvise"
+                    android:textColor="#F8EBF0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/Enunciado3"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:text="@string/CreateAccount5"
+                    android:textColor="#F8EBF0"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/passwordSign4"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="380dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:autofillHints=""
+                android:background="@drawable/edit_round"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textAllCaps="false"
+                android:textColor="#F8EBF0"
+                android:textColorHighlight="#F8EBF0"
+                android:textColorHint="#7E7A80"
+                android:textColorLink="#7E7A80"
+                android:textSize="20sp"
+                tools:targetApi="o" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/passwordTip3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ConfirmPassword"
+                    android:textColor="#FA3021"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/create"
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/edit_round"
+                android:text="@string/confirm"
+                android:textColor="#F8EBF0"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

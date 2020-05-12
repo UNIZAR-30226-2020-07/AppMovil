@@ -43,6 +43,7 @@
         <activity android:name=".podcast.PodcastActivity" />
         <activity android:name=".podcast.MyPodcastActivity" />
         <activity android:name=".main.Settings" />
+        <activity android:name=".main.SettingsPassword" />
         <activity android:name=".song.SongActivity" />
         <activity android:name=".playlist.PlaylistActivity" />
         <activity android:name=".server.remoteServer" />

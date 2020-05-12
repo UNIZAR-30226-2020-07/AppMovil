@@ -25,9 +25,10 @@ public interface serverInterface  {
     void getAlbumData(int idAlbum, JSONConnection.Listener listener);
     void getArtistData(int idArtist, JSONConnection.Listener listener);
     void login(String username_email, String password, JSONConnection.Listener listener);
+    void logOut(JSONConnection.Listener listener);
     void addOrRemoveSong(int idPlaylist, ArrayList<Integer> songs, JSONConnection.Listener listener);
     void changeNamePlaylist(String namePlaylist, int idPlaylist, JSONConnection.Listener listener);
-    void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener);
+    void changeDataUser(String nameUser, String password, String email, JSONConnection.Listener listener);
     void addFriend(List<Integer> friends, int idUser, JSONConnection.Listener listener);
     void addPlaylist(String playlist, JSONConnection.Listener listener);
     void deletePlaylist(int idPlaylist, JSONConnection.Listener listener);

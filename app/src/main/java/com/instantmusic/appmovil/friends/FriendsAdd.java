@@ -124,8 +124,14 @@ public class FriendsAdd extends AppCompatActivity {
                 if ( responseCode == 200 ) {
                     JSONArray results=data.getJSONArray("results");
                     ArrayList<Friend> newSongs = Friend.fromJson(results, false);
-                    adapterFriend.addAll(newSongs);
-                    resList.setVisibility(View.VISIBLE);
+                    ArrayList<Friend> nfriends=new ArrayList<>();
+                    for(int i=0;i<newSongs.size();i++){
+                        if(newSongs.get(i).id!=idUser){
+                            nfriends.add(newSongs.get(i));
+                        }
+
+                    }
+                    adapterFriend.addAll(nfriends);
                 }
             }
             @Override

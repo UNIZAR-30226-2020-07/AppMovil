@@ -47,7 +47,12 @@ public class remoteServer implements serverInterface {
                 .setListener(listener)
                 .execute();
     }
-
+    public void logOut(JSONConnection.Listener listener){
+        initialize()
+                .setUrl("rest-auth/logout")
+                .setListener(listener)
+                .execute();
+    }
     public void searchSongs(int page, String title, JSONConnection.Listener listener) {
         initialize()
                 .setUrl("songs")
@@ -202,7 +207,26 @@ public class remoteServer implements serverInterface {
                 .execute();
     }
 
-    public void changeDataUser(String nameUser, String password, int idPlaylist, JSONConnection.Listener listener) {
+    public void changeDataUser(String nameUser, String password, String email, JSONConnection.Listener listener) {
+        String url = "";
+        if(password.isEmpty()){
+            url="rest-auth/user";
+            initialize()
+                    .setUrl(url)
+                    .setMethod(JSONConnection.METHOD.PATCH)
+                    .putData("username",nameUser)
+                    .putData("email",email)
+                    .setListener(listener)
+                    .execute();
+        }else{
+            url="rest-auth/password/change";
+            initialize()
+                    .setUrl(url)
+                    .putData("new_password1",password)
+                    .putData("new_password2",password)
+                    .setListener(listener)
+                    .execute();
+        }
 
     }
     public void addFriend(List<Integer> friends,int idUser, JSONConnection.Listener listener){
