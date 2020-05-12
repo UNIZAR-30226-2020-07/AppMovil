@@ -50,6 +50,8 @@ public class remoteServer implements serverInterface {
     public void logOut(JSONConnection.Listener listener){
         initialize()
                 .setUrl("rest-auth/logout")
+                .setMethod(JSONConnection.METHOD.POST)
+                .putNullData("")
                 .setListener(listener)
                 .execute();
     }
