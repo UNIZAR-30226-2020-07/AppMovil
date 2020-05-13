@@ -524,6 +524,12 @@ public class remoteServer implements serverInterface {
                 }
             }
 
+            // remove key for autologout
+            // this may be problematic, consider change
+            if ("Successfully logged out.".equals(data.optString("detail")) && data.length() == 1) {
+                key = null;
+            }
+
             if (listener != null)
                 listener.onValidResponse(responseCode, data);
         }
