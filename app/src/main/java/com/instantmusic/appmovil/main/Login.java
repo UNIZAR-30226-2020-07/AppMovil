@@ -9,9 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.adapter.HorizontalListView;
@@ -29,11 +27,9 @@ import com.instantmusic.appmovil.server.serverInterface;
 import com.instantmusic.appmovil.song.Song;
 import com.instantmusic.appmovil.song.SongActivity;
 import com.instantmusic.appmovil.song.SongsAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -45,9 +41,6 @@ public class Login extends AppCompatActivity {
     private AlbumsAdapter adapterPodcast;
     private SongsAdapter adapterSongs;
     private serverInterface server;
-    private HorizontalListView myPlaylist;
-    private HorizontalListView mySongs;
-    private HorizontalListView myPodcast;
     private String username;
     private Button pausedSong;
     private Button pausedSong2;
@@ -61,9 +54,9 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant_music_app_login);
         server = new remoteServer();
-        myPlaylist = findViewById(R.id.myPlayLists);
-        mySongs = findViewById(R.id.mySongs);
-        myPodcast = findViewById(R.id.myPodcasts);
+        HorizontalListView myPlaylist = findViewById(R.id.myPlayLists);
+        HorizontalListView mySongs = findViewById(R.id.mySongs);
+        HorizontalListView myPodcast = findViewById(R.id.myPodcasts);
         pausedSong = findViewById(R.id.button);
         pausedSong2 = findViewById(R.id.button3);
         layoutPaused = findViewById(R.id.layout);
@@ -183,8 +176,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Playlist> search = (ArrayAdapter<Playlist>) parent.getAdapter();
-                Playlist playlist = (Playlist) search.getItem(position);
+                Playlist playlist = search.getItem(position);
                 String creador = username;
+                assert playlist != null;
                 openPlaylist(playlist.playlistName, creador, playlist.id);
             }
         });
@@ -195,6 +189,7 @@ public class Login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayAdapter<Album> search = (ArrayAdapter<Album>) parent.getAdapter();
                 Album podcast = search.getItem(position);
+                assert podcast != null;
                 openPodcast(podcast.id);
             }
         });

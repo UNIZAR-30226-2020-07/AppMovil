@@ -554,6 +554,10 @@
                                 android:background="@color/backColor"
                                 android:editable="true"
                                 android:ems="10"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:textColor="#000000"
+                                android:textCursorDrawable="@null"
                                 android:textSize="16dp" />
 
                             <Space

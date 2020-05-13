@@ -152,7 +152,8 @@ public class Search extends AppCompatActivity implements JSONConnection.Listener
                         searchMenu.setVisibility(View.VISIBLE);
                     }
 
-                } else {
+                }
+                else {
                     ListView search = findViewById(R.id.searchRes);
                     search.setVisibility(View.INVISIBLE);
                     searchTip1.setVisibility(View.VISIBLE);

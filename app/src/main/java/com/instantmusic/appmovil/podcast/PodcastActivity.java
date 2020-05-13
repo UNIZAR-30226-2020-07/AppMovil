@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,13 +38,9 @@ public class PodcastActivity extends AppCompatActivity {
     private ArrayList<Song> arrayOfSongs = new ArrayList<>();
     private SongsAdapter adapterSong;
     private LinearLayout searchMenu;
-    private Button changeMenu2;
     private Button orderName;
-    private Button orderCategory;
     private Button orderArtist;
     int searchType = 1;
-    private EditText changeMenu;
-    private int page=1;
     private int artist;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -80,11 +75,8 @@ public class PodcastActivity extends AppCompatActivity {
         }
         adapterSong = new SongsAdapter(this, arrayOfSongs,0);
         searchMenu=findViewById(R.id.searchMenu);
-        changeMenu2=findViewById(R.id.changeName2);
-        changeMenu=findViewById(R.id.change);
         resList.setAdapter(adapterSong);
         orderName=findViewById(R.id.orderName);
-        orderCategory=findViewById(R.id.orderCategory);
         orderArtist=findViewById(R.id.orderArtist);
         Button Button1 = findViewById(R.id.backButton);
         Button1.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +89,6 @@ public class PodcastActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if ( !resList.getAdapter().isEmpty() ) {
                     ArrayAdapter<Song> search = (ArrayAdapter<Song>) resList.getAdapter();
-                    Song cancion = search.getItem(0);
                     Song(0, true);
                 }
             }
@@ -206,8 +197,6 @@ public class PodcastActivity extends AppCompatActivity {
                 adapterSong.sort(new Comparator<Song>() {
                     @Override
                     public int compare(Song o1, Song o2) {
-                        String fecha1=o1.fecha;
-                        String fecha2=o2.fecha;
                         return o1.fecha.compareTo(o2.fecha);
                     }
                 });

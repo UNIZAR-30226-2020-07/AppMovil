@@ -3,54 +3,30 @@ package com.instantmusic.appmovil.friends;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.instantmusic.appmovil.IntentTransfer;
 import com.instantmusic.appmovil.R;
-import com.instantmusic.appmovil.album.Album;
-import com.instantmusic.appmovil.album.AlbumActivity;
-import com.instantmusic.appmovil.album.AlbumsAdapter;
-import com.instantmusic.appmovil.artist.Artist;
-import com.instantmusic.appmovil.artist.ArtistActivity;
-import com.instantmusic.appmovil.artist.ArtistsAdapter;
 import com.instantmusic.appmovil.main.Login;
 import com.instantmusic.appmovil.main.Search;
 import com.instantmusic.appmovil.main.Settings;
-import com.instantmusic.appmovil.playlist.Playlist;
-import com.instantmusic.appmovil.playlist.PlaylistActivity;
 import com.instantmusic.appmovil.podcast.PodcastSearch;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-import com.instantmusic.appmovil.song.Song;
-import com.instantmusic.appmovil.song.SongActivity;
-import com.instantmusic.appmovil.song.SongsAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class FriendsSearch extends AppCompatActivity implements JSONConnection.Listener {
     private ListView resList;
-    private int searchType = 1;
     private EditText shit;
     private serverInterface server;
     private ArrayList<Friend> arrayOfFriends = new ArrayList<>();
@@ -73,6 +49,7 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
             @Override
             public void onValidResponse(int responseCode, JSONObject data) throws JSONException {
                 if (responseCode == 200) {
+                    adapterFriends.clear();
                     JSONArray friends = data.getJSONArray("friends");
                     ArrayList<Friend> newSongs = Friend.fromJson(friends, false);
                     nFriends = newSongs.size();
@@ -258,7 +235,8 @@ public class FriendsSearch extends AppCompatActivity implements JSONConnection.L
                                 adapterFriends.addAll(newSongs);
                                 resList.setVisibility(View.VISIBLE);
                                 user.setText(data.getString("username"));
-                            } else {
+                            }
+                            else {
                                 ArrayList<Friend> newSongs = Friend.fromJson(filterFriends, false);
                                 adapterFriends.addAll(newSongs);
                                 resList.setVisibility(View.VISIBLE);

@@ -11,7 +11,6 @@ import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Recover extends AppCompatActivity {

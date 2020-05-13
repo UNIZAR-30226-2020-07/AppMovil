@@ -8,24 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.instantmusic.appmovil.server.connect.JSONConnection;
 import com.instantmusic.appmovil.R;
 import com.instantmusic.appmovil.server.connect.Utils;
 import com.instantmusic.appmovil.server.remoteServer;
 import com.instantmusic.appmovil.server.serverInterface;
-
 import org.json.JSONObject;
 
 public class Regist extends AppCompatActivity {
     private EditText mail;
-    private EditText username;
     private EditText pass;
     private EditText passConfirm;
-    private TextView passAux;
-    private TextView passConfirmAux;
     private TextView emailAux;
     private TextView userAux;
     private boolean emailRegistered = false;
@@ -109,8 +103,8 @@ public class Regist extends AppCompatActivity {
         password = pass.getText().toString();
         passwordConfirm = passConfirm.getText().toString();
         emailAux = findViewById(R.id.emailTip);
-        passAux = findViewById(R.id.passwordTip);
-        passConfirmAux = findViewById(R.id.passwordTip3);
+        TextView passAux = findViewById(R.id.passwordTip);
+        TextView passConfirmAux = findViewById(R.id.passwordTip3);
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         if ( password.length() < 8 ) { // Caso en el que la longitud de la contrasenya no sea correcto
             texto = "Invalid password. Use at least 8 characters";
@@ -167,7 +161,7 @@ public class Regist extends AppCompatActivity {
 
     private void confirmSignUp2() {
         boolean seguir = true;
-        username = findViewById(R.id.usernameSign);
+        EditText username = findViewById(R.id.usernameSign);
         String texto;
         String user = username.getText().toString();
         userAux = findViewById(R.id.usernameTip);

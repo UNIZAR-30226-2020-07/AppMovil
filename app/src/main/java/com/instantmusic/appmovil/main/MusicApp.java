@@ -144,10 +144,8 @@ public class MusicApp extends AppCompatActivity {
     }
 
     public void onButtonClick(View view) {
-        switch (view.getId()) {
-            case R.id.offline:
-                startActivity(new Intent(getApplicationContext(), OfflineActivity.class));
-                break;
+        if (view.getId() == R.id.offline) {
+            startActivity(new Intent(getApplicationContext(), OfflineActivity.class));
         }
     }
 }
