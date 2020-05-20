@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -57,6 +58,10 @@ public class AlbumActivity extends AppCompatActivity {
                     TextView creator = findViewById(R.id.albumCreator);
                     name.setText(albumSelected.name);
                     creator.setText(albumSelected.artistName);
+                    if ( albumSelected.esPodcast ) {
+                        ImageView iconImage = findViewById(R.id.imageView3);
+                        iconImage.setImageDrawable(getResources().getDrawable(R.drawable.podcasticon2));
+                    }
                 }
             }
 
