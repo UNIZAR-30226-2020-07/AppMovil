@@ -111,13 +111,9 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
         boolean botonPlay = IntentTransfer.getData("botonPlay");
         Integer pauseSecond = IntentTransfer.getData("pauseSecond");
 
-        // set data
-        if (songs_list.size() > 1) {
-            next.setImageDrawable(ContextCompat.getDrawable(SongActivity.this, android.R.drawable.ic_media_next));
-        } else {
-            next.setEnabled(false);
-            shuffle.setEnabled(false);
-        }
+        // update UI
+        shuffle.setEnabled(songs_list.size() > 1);
+        updateNextUI();
 
         // load the song
         loadSong(botonPlay, pauseSecond == null ? -1 : pauseSecond);
@@ -324,6 +320,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
 
     /**
      * Puts the next song
+     *
      * @param forceAuto if true, next song will autoplay (if false only if currently playing)
      */
     private void nextSong(boolean forceAuto) {
@@ -493,7 +490,7 @@ public class SongActivity extends AppCompatActivity implements RatingBar.OnRatin
      */
     private void reloadRating() {
         ratingBar.setRating(getCurrentSong().rate);
-        ratingBar.setEnabled(isOnline());
+        ratingBar.setIsIndicator(!isOnline());
     }
 
     /**
